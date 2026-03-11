@@ -11,6 +11,10 @@ import {
   resolveAnthropicBetas,
   resolveCacheRetention,
 } from "./anthropic-stream-wrappers.js";
+import {
+  createAnthropicExtendedThinkingWrapper,
+  supportsExtendedThinking,
+} from "./anthropic-extra-params.js";
 import { log } from "./logger.js";
 import {
   createMoonshotThinkingWrapper,
@@ -364,6 +368,14 @@ export function applyExtraParamsToAgent(
       `applying Anthropic beta header for ${provider}/${modelId}: ${anthropicBetas.join(",")}`,
     );
     agent.streamFn = createAnthropicBetaHeadersWrapper(agent.streamFn, anthropicBetas);
+  }
+
+  // Apply Anthropic extended thinking for Claude 3.7+ models
+  if (provider === "anthropic" && supportsExtendedThinking(modelId)) {
+    log.debug(
+      `applying Anthropic extended thinking wrapper for ${provider}/${modelId}`,
+    );
+    agent.streamFn = createAnthropicExtendedThinkingWrapper(agent.streamFn, merged);
   }
 
   if (shouldApplySiliconFlowThinkingOffCompat({ provider, modelId, thinkingLevel })) {

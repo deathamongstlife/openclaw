@@ -81,9 +81,16 @@ export function resolveSandboxDockerConfig(params: {
   const agentDocker = params.scope === "shared" ? undefined : params.agentDocker;
   const globalDocker = params.globalDocker;
 
+  // Default PATH includes standard system binaries and common user install locations
+  // Fixes #43238: Exec sandbox PATH missing user binaries
+  const defaultEnv = {
+    LANG: "C.UTF-8",
+    PATH: "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:$HOME/.local/bin",
+  };
+
   const env = agentDocker?.env
-    ? { ...(globalDocker?.env ?? { LANG: "C.UTF-8" }), ...agentDocker.env }
-    : (globalDocker?.env ?? { LANG: "C.UTF-8" });
+    ? { ...defaultEnv, ...(globalDocker?.env ?? {}), ...agentDocker.env }
+    : (globalDocker?.env ? { ...defaultEnv, ...globalDocker.env } : defaultEnv);
 
   const ulimits = agentDocker?.ulimits
     ? { ...globalDocker?.ulimits, ...agentDocker.ulimits }
