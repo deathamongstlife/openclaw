@@ -32,7 +32,12 @@ import {
 } from "./normalize.js";
 import type { CronServiceState } from "./state.js";
 
-const STUCK_RUN_MS = 2 * 60 * 60 * 1000;
+// CRITICAL FIX #43255, #42997: Reduced from 2 hours to 5 minutes.
+// 2 hours is far too long - jobs stuck for 2 hours prevent the entire scheduler
+// from operating. 5 minutes is generous for any reasonable job timeout (even
+// long-running jobs have explicit timeouts configured), while being short enough
+// to recover quickly from crashed executions.
+const STUCK_RUN_MS = 5 * 60 * 1000;
 const STAGGER_OFFSET_CACHE_MAX = 4096;
 const staggerOffsetCache = new Map<string, number>();
 

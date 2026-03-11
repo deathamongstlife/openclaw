@@ -1,6 +1,7 @@
 import { getMSTeamsRuntime } from "../runtime.js";
 import { downloadAndStoreMSTeamsRemoteMedia } from "./remote-media.js";
 import {
+  decodeHtmlEntities,
   extractInlineImageCandidates,
   inferPlaceholder,
   isDownloadableAttachment,
@@ -34,11 +35,14 @@ function resolveDownloadCandidate(att: MSTeamsAttachmentLike): DownloadCandidate
     if (!isRecord(att.content)) {
       return null;
     }
-    const downloadUrl =
+    const rawDownloadUrl =
       typeof att.content.downloadUrl === "string" ? att.content.downloadUrl.trim() : "";
-    if (!downloadUrl) {
+    if (!rawDownloadUrl) {
       return null;
     }
+
+    // Decode HTML entities in download URL (#43220)
+    const downloadUrl = decodeHtmlEntities(rawDownloadUrl);
 
     const fileType = typeof att.content.fileType === "string" ? att.content.fileType.trim() : "";
     const uniqueId = typeof att.content.uniqueId === "string" ? att.content.uniqueId.trim() : "";
@@ -57,10 +61,13 @@ function resolveDownloadCandidate(att: MSTeamsAttachmentLike): DownloadCandidate
     };
   }
 
-  const contentUrl = typeof att.contentUrl === "string" ? att.contentUrl.trim() : "";
-  if (!contentUrl) {
+  const rawContentUrl = typeof att.contentUrl === "string" ? att.contentUrl.trim() : "";
+  if (!rawContentUrl) {
     return null;
   }
+
+  // Decode HTML entities in content URL (#43220)
+  const contentUrl = decodeHtmlEntities(rawContentUrl);
 
   return {
     url: contentUrl,

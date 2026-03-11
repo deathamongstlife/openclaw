@@ -13,6 +13,7 @@ import type { CliDeps } from "../cli/deps.js";
 import type { loadConfig } from "../config/config.js";
 import { resolveStateDir } from "../config/paths.js";
 import { startGmailWatcherWithLogs } from "../hooks/gmail-watcher-lifecycle.js";
+import { startAutomatedSessionCleanup } from "./session-auto-cleanup.js";
 import {
   clearInternalHooks,
   createInternalHookEvent,
@@ -187,5 +188,10 @@ export async function startGatewaySidecars(params: {
     }, 750);
   }
 
-  return { browserControl, pluginServices };
+  // Start automated session cleanup for cron/hook/subagent sessions
+  const stopSessionCleanup = startAutomatedSessionCleanup({
+    intervalMs: 60 * 60 * 1000, // Run cleanup every hour
+  });
+
+  return { browserControl, pluginServices, stopSessionCleanup };
 }

@@ -90,6 +90,11 @@ async function ensureLoadedForRead(state: CronServiceState) {
 }
 
 export async function start(state: CronServiceState) {
+  state.deps.log.info(
+    { cronEnabled: state.deps.cronEnabled, storePath: state.deps.storePath },
+    "cron: starting service",
+  );
+
   if (!state.deps.cronEnabled) {
     state.deps.log.info({ enabled: false }, "cron: disabled");
     return;
@@ -97,8 +102,10 @@ export async function start(state: CronServiceState) {
 
   const startupInterruptedJobIds = new Set<string>();
   await locked(state, async () => {
+    state.deps.log.debug({}, "cron: loading store and checking for stale markers");
     await ensureLoaded(state, { skipRecompute: true });
     const jobs = state.store?.jobs ?? [];
+    state.deps.log.debug({ jobCount: jobs.length }, "cron: loaded jobs from store");
     for (const job of jobs) {
       if (typeof job.state.runningAtMs === "number") {
         state.deps.log.warn(
@@ -109,21 +116,33 @@ export async function start(state: CronServiceState) {
         startupInterruptedJobIds.add(job.id);
       }
     }
-    await persist(state);
+    if (startupInterruptedJobIds.size > 0) {
+      await persist(state);
+    }
   });
 
+  state.deps.log.debug(
+    { interruptedCount: startupInterruptedJobIds.size },
+    "cron: checking for missed jobs",
+  );
   await runMissedJobs(state, { skipJobIds: startupInterruptedJobIds });
 
   await locked(state, async () => {
     await ensureLoaded(state, { forceReload: true, skipRecompute: true });
+    state.deps.log.debug({}, "cron: recomputing job schedules");
     recomputeNextRuns(state);
     await persist(state);
+    state.deps.log.debug({}, "cron: arming timer");
     armTimer(state);
+    const timerArmed = state.timer !== null;
     state.deps.log.info(
       {
         enabled: true,
         jobs: state.store?.jobs.length ?? 0,
+        enabledJobs:
+          state.store?.jobs.filter((j) => j.enabled).length ?? 0,
         nextWakeAtMs: nextWakeAtMs(state) ?? null,
+        timerArmed,
       },
       "cron: started",
     );
@@ -531,33 +550,29 @@ export async function enqueueRun(state: CronServiceState, id: string, mode?: "du
   }
 
   const runId = `manual:${id}:${state.deps.nowMs()}:${nextManualRunId++}`;
-  void enqueueCommandInLane(
-    CommandLane.Cron,
-    async () => {
+
+  // CRITICAL FIX #43008: Avoid nested lane deadlock by executing manual runs
+  // directly instead of enqueueing in the Cron lane. The timer-driven execution
+  // already happens outside the lane system, so manual runs should too.
+  // This prevents deadlock when maxConcurrentRuns=1 and a job tries to trigger
+  // another job or when manual triggers are issued during timer execution.
+  void (async () => {
+    try {
       const result = await run(state, id, mode);
       if (result.ok && "ran" in result && !result.ran) {
         state.deps.log.info(
           { jobId: id, runId, reason: result.reason },
-          "cron: queued manual run skipped before execution",
+          "cron: manual run skipped before execution",
         );
       }
-      return result;
-    },
-    {
-      warnAfterMs: 5_000,
-      onWait: (waitMs, queuedAhead) => {
-        state.deps.log.warn(
-          { jobId: id, runId, waitMs, queuedAhead },
-          "cron: queued manual run waiting for an execution slot",
-        );
-      },
-    },
-  ).catch((err) => {
-    state.deps.log.error(
-      { jobId: id, runId, err: String(err) },
-      "cron: queued manual run background execution failed",
-    );
-  });
+    } catch (err) {
+      state.deps.log.error(
+        { jobId: id, runId, err: String(err) },
+        "cron: manual run execution failed",
+      );
+    }
+  })();
+
   return { ok: true, enqueued: true, runId } as const;
 }
 

@@ -513,19 +513,49 @@ export function armTimer(state: CronServiceState) {
     state.deps.log.debug({}, "cron: armTimer skipped - scheduler disabled");
     return;
   }
+
+  // CRITICAL FIX #43255, #42997: Check for stuck running markers first
+  const jobCount = state.store?.jobs.length ?? 0;
+  const enabledCount = state.store?.jobs.filter((j) => j.enabled).length ?? 0;
+  const withNextRun =
+    state.store?.jobs.filter(
+      (j) =>
+        j.enabled &&
+        typeof j.state.nextRunAtMs === "number" &&
+        Number.isFinite(j.state.nextRunAtMs),
+    ).length ?? 0;
+  const withRunningMarkers =
+    state.store?.jobs.filter(
+      (j) =>
+        j.enabled &&
+        typeof j.state.runningAtMs === "number" &&
+        Number.isFinite(j.state.runningAtMs),
+    ).length ?? 0;
+
   const nextAt = nextWakeAtMs(state);
+
+  // If there are stuck running markers but jobs with nextRunAtMs, we still need
+  // to arm the timer. The stuck markers will be cleared by maintenance recompute
+  // on the next timer tick. Without this, the scheduler dies permanently.
+  if (!nextAt && withRunningMarkers > 0 && withNextRun > 0) {
+    // Arm timer to wake up soon and clear stuck markers via maintenance recompute
+    const stuckRecoveryDelay = Math.min(MAX_TIMER_DELAY_MS, 10_000); // Wake in 10s to recover
+    state.timer = setTimeout(() => {
+      state.deps.log.debug({}, "cron: stuck marker recovery timer firing");
+      void onTimer(state).catch((err) => {
+        state.deps.log.error({ err: String(err) }, "cron: stuck marker recovery tick failed");
+      });
+    }, stuckRecoveryDelay);
+    state.deps.log.warn(
+      { jobCount, enabledCount, withNextRun, withRunningMarkers, recoveryDelayMs: stuckRecoveryDelay },
+      "cron: timer armed for stuck marker recovery",
+    );
+    return;
+  }
+
   if (!nextAt) {
-    const jobCount = state.store?.jobs.length ?? 0;
-    const enabledCount = state.store?.jobs.filter((j) => j.enabled).length ?? 0;
-    const withNextRun =
-      state.store?.jobs.filter(
-        (j) =>
-          j.enabled &&
-          typeof j.state.nextRunAtMs === "number" &&
-          Number.isFinite(j.state.nextRunAtMs),
-      ).length ?? 0;
     state.deps.log.debug(
-      { jobCount, enabledCount, withNextRun },
+      { jobCount, enabledCount, withNextRun, withRunningMarkers },
       "cron: armTimer skipped - no jobs with nextRunAtMs",
     );
     return;
@@ -548,12 +578,14 @@ export function armTimer(state: CronServiceState) {
   // Vitest's fake-timer helpers can await async callbacks, which would block
   // tests that simulate long-running jobs. Runtime behavior is unchanged.
   state.timer = setTimeout(() => {
+    state.deps.log.debug({}, "cron: timer tick firing");
     void onTimer(state).catch((err) => {
       state.deps.log.error({ err: String(err) }, "cron: timer tick failed");
     });
   }, clampedDelay);
-  state.deps.log.debug(
-    { nextAt, delayMs: clampedDelay, clamped: delay > MAX_TIMER_DELAY_MS },
+  const isPastDue = delay === 0;
+  state.deps.log.info(
+    { nextAt, delayMs: clampedDelay, clamped: delay > MAX_TIMER_DELAY_MS, isPastDue },
     "cron: timer armed",
   );
 }
@@ -581,9 +613,11 @@ export async function onTimer(state: CronServiceState) {
     // zero-delay hot-loop when past-due jobs are waiting for the current
     // execution to finish.
     // See: https://github.com/openclaw/openclaw/issues/12025
+    state.deps.log.debug({}, "cron: timer tick skipped - already running, rearming recheck timer");
     armRunningRecheckTimer(state);
     return;
   }
+  state.deps.log.debug({}, "cron: timer tick starting execution");
   state.running = true;
   // Keep a watchdog timer armed while a tick is executing. If execution hangs
   // (for example in a provider call), the scheduler still wakes to re-check.
@@ -594,6 +628,11 @@ export async function onTimer(state: CronServiceState) {
       const dueCheckNow = state.deps.nowMs();
       const due = collectRunnableJobs(state, dueCheckNow);
 
+      state.deps.log.debug(
+        { dueCount: due.length, checkTime: dueCheckNow },
+        "cron: checked for due jobs",
+      );
+
       if (due.length === 0) {
         // Use maintenance-only recompute to avoid advancing past-due nextRunAtMs
         // values without execution. This prevents jobs from being silently skipped
@@ -603,10 +642,19 @@ export async function onTimer(state: CronServiceState) {
           nowMs: dueCheckNow,
         });
         if (changed) {
+          state.deps.log.debug({}, "cron: no due jobs found, persisted maintenance updates");
           await persist(state);
         }
         return [];
       }
+
+      state.deps.log.info(
+        {
+          dueJobIds: due.map((j) => j.id),
+          dueJobNames: due.map((j) => j.name),
+        },
+        "cron: found due jobs, marking as running",
+      );
 
       const now = state.deps.nowMs();
       for (const job of due) {
@@ -631,8 +679,17 @@ export async function onTimer(state: CronServiceState) {
       emit(state, { jobId: job.id, action: "started", runAtMs: startedAt });
       const jobTimeoutMs = resolveCronJobTimeoutMs(job);
 
+      state.deps.log.debug(
+        { jobId: id, jobName: job.name, timeoutMs: jobTimeoutMs ?? null },
+        "cron: executing due job",
+      );
+
       try {
         const result = await executeJobCoreWithTimeout(state, job);
+        state.deps.log.debug(
+          { jobId: id, status: result.status, durationMs: state.deps.nowMs() - startedAt },
+          "cron: job completed successfully",
+        );
         return { jobId: id, ...result, startedAt, endedAt: state.deps.nowMs() };
       } catch (err) {
         const errorText = isAbortError(err) ? timeoutErrorMessage() : String(err);
@@ -651,6 +708,10 @@ export async function onTimer(state: CronServiceState) {
     };
 
     const concurrency = Math.min(resolveRunConcurrency(state), Math.max(1, dueJobs.length));
+    state.deps.log.debug(
+      { dueCount: dueJobs.length, concurrency },
+      "cron: processing due jobs with concurrency",
+    );
     const results: (TimedCronRunOutcome | undefined)[] = Array.from({ length: dueJobs.length });
     let cursor = 0;
     const workers = Array.from({ length: concurrency }, async () => {
@@ -726,6 +787,7 @@ export async function onTimer(state: CronServiceState) {
     }
 
     state.running = false;
+    state.deps.log.debug({}, "cron: timer tick finished, rearming timer");
     armTimer(state);
   }
 }

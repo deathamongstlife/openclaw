@@ -72,6 +72,15 @@ export async function runGatewayLoop(params: {
           ? `spawned pid ${respawn.pid ?? "unknown"}`
           : "supervisor restart";
       gatewayLog.info(`restart mode: full process restart (${modeLabel})`);
+
+      // CRITICAL FIX (#43311, #43035, #42918): For launchd, delay exit to allow
+      // service registration to complete. Without this, the process may exit before
+      // launchd completes bootstrap, causing gateway self-decapitation.
+      if (respawn.mode === "supervised" && respawn.detail?.includes("launchd")) {
+        gatewayLog.info("delaying exit for launchd service registration (2s)");
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
+
       exitProcess(0);
       return;
     }

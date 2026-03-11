@@ -110,6 +110,9 @@ export function setPreRestartDeferralCheck(fn: () => number): void {
 export function emitGatewayRestart(): boolean {
   if (hasUnconsumedRestartSignal()) {
     clearPendingScheduledRestart();
+    restartLog.warn(
+      "Gateway restart signal already emitted and not consumed; skipping duplicate emission",
+    );
     return false;
   }
   clearPendingScheduledRestart();
@@ -119,12 +122,15 @@ export function emitGatewayRestart(): boolean {
   try {
     if (process.listenerCount("SIGUSR1") > 0) {
       process.emit("SIGUSR1");
+      restartLog.info(`Gateway restart signal emitted (cycle=${cycleToken}, via emit)`);
     } else {
       process.kill(process.pid, "SIGUSR1");
+      restartLog.info(`Gateway restart signal emitted (cycle=${cycleToken}, via kill)`);
     }
-  } catch {
+  } catch (err) {
     // Roll back the cycle marker so future restart requests can still proceed.
     emittedRestartToken = consumedRestartToken;
+    restartLog.error(`Failed to emit gateway restart signal: ${String(err)}`);
     return false;
   }
   lastRestartEmittedAt = Date.now();

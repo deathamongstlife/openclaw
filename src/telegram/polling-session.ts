@@ -15,6 +15,13 @@ const TELEGRAM_POLL_RESTART_POLICY = {
 
 const POLL_STALL_THRESHOLD_MS = 90_000;
 const POLL_WATCHDOG_INTERVAL_MS = 30_000;
+// Hard timeout for getUpdates call - if no response after this, force restart
+const GET_UPDATES_HARD_TIMEOUT_MS = 120_000;
+
+// Circuit breaker: after this many consecutive stalls, increase backoff dramatically
+const CIRCUIT_BREAKER_THRESHOLD = 3;
+// Circuit breaker backoff multiplier
+const CIRCUIT_BREAKER_BACKOFF_MULTIPLIER = 3;
 
 type TelegramBot = ReturnType<typeof createTelegramBot>;
 
@@ -37,6 +44,8 @@ export class TelegramPollingSession {
   #forceRestarted = false;
   #activeRunner: ReturnType<typeof run> | undefined;
   #activeFetchAbort: AbortController | undefined;
+  #consecutiveStalls = 0;
+  #circuitBreakerTripped = false;
 
   constructor(private readonly opts: TelegramPollingSessionOpts) {}
 
@@ -76,7 +85,18 @@ export class TelegramPollingSession {
 
   async #waitBeforeRestart(buildLine: (delay: string) => string): Promise<boolean> {
     this.#restartAttempts += 1;
-    const delayMs = computeBackoff(TELEGRAM_POLL_RESTART_POLICY, this.#restartAttempts);
+    let delayMs = computeBackoff(TELEGRAM_POLL_RESTART_POLICY, this.#restartAttempts);
+
+    // CRITICAL FIX (#43187, #43233, #43178): Circuit breaker for repeated stalls.
+    // If we've had multiple consecutive stalls, apply exponential backoff to prevent
+    // cascade failures and give the Telegram API time to recover.
+    if (this.#circuitBreakerTripped) {
+      delayMs *= CIRCUIT_BREAKER_BACKOFF_MULTIPLIER;
+      this.opts.log(
+        `[circuit-breaker] applied ${CIRCUIT_BREAKER_BACKOFF_MULTIPLIER}x backoff multiplier`,
+      );
+    }
+
     const delay = formatDurationPrecise(delayMs);
     this.opts.log(buildLine(delay));
     try {
@@ -164,9 +184,18 @@ export class TelegramPollingSession {
     await this.#confirmPersistedOffset(bot);
 
     let lastGetUpdatesAt = Date.now();
+    let getUpdatesInFlight = false;
+    let consecutiveStalls = 0;
+
     bot.api.config.use((prev, method, payload, signal) => {
       if (method === "getUpdates") {
         lastGetUpdatesAt = Date.now();
+        getUpdatesInFlight = true;
+
+        // Wrap the call with hard timeout detection
+        return prev(method, payload, signal).finally(() => {
+          getUpdatesInFlight = false;
+        });
       }
       return prev(method, payload, signal);
     });
@@ -203,12 +232,61 @@ export class TelegramPollingSession {
         return;
       }
       const elapsed = Date.now() - lastGetUpdatesAt;
-      if (elapsed > POLL_STALL_THRESHOLD_MS && runner.isRunning()) {
+
+      // Check for hard timeout on in-flight getUpdates
+      if (getUpdatesInFlight && elapsed > GET_UPDATES_HARD_TIMEOUT_MS && runner.isRunning()) {
+        consecutiveStalls++;
+        this.#consecutiveStalls++;
         stalledRestart = true;
+
+        // CRITICAL FIX (#43187, #43233, #43178): Circuit breaker activation
+        if (this.#consecutiveStalls >= CIRCUIT_BREAKER_THRESHOLD) {
+          this.#circuitBreakerTripped = true;
+          this.opts.log(
+            `[telegram] Circuit breaker TRIPPED after ${this.#consecutiveStalls} consecutive stalls`,
+          );
+        }
+
         this.opts.log(
-          `[telegram] Polling stall detected (no getUpdates for ${formatDurationPrecise(elapsed)}); forcing restart.`,
+          `[telegram] getUpdates hard timeout detected (${formatDurationPrecise(elapsed)} in flight, attempt ${consecutiveStalls}/${this.#consecutiveStalls} total); forcing restart.`,
+        );
+        fetchAbortController?.abort();
+        void stopRunner();
+        return;
+      }
+
+      // Check for polling stall (no getUpdates started)
+      if (elapsed > POLL_STALL_THRESHOLD_MS && runner.isRunning()) {
+        consecutiveStalls++;
+        this.#consecutiveStalls++;
+        stalledRestart = true;
+
+        // CRITICAL FIX (#43187, #43233, #43178): Circuit breaker activation
+        if (this.#consecutiveStalls >= CIRCUIT_BREAKER_THRESHOLD) {
+          this.#circuitBreakerTripped = true;
+          this.opts.log(
+            `[telegram] Circuit breaker TRIPPED after ${this.#consecutiveStalls} consecutive stalls`,
+          );
+        }
+
+        this.opts.log(
+          `[telegram] Polling stall detected (no getUpdates for ${formatDurationPrecise(elapsed)}, attempt ${consecutiveStalls}/${this.#consecutiveStalls} total); forcing restart.`,
         );
         void stopRunner();
+        return;
+      }
+
+      // Reset stall counter on successful activity
+      if (elapsed < POLL_WATCHDOG_INTERVAL_MS) {
+        consecutiveStalls = 0;
+        // Also reset global stall tracking and circuit breaker
+        if (this.#consecutiveStalls > 0) {
+          this.opts.log(
+            `[telegram] Polling recovered; resetting circuit breaker (was ${this.#consecutiveStalls} stalls)`,
+          );
+          this.#consecutiveStalls = 0;
+          this.#circuitBreakerTripped = false;
+        }
       }
     }, POLL_WATCHDOG_INTERVAL_MS);
 

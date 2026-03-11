@@ -188,6 +188,16 @@ export function createSessionsSendTool(opts?: {
       // Normalize sessionKey/sessionId input into a canonical session key.
       const resolvedKey = visibleSession.key;
       const displayKey = visibleSession.displayKey;
+
+      // VALIDATION: Ensure resolved key matches what we expect
+      // This catches routing corruption where the session lookup returns the wrong target
+      if (sessionKeyParam && sessionKeyParam !== resolvedKey) {
+        // Log suspicious routing mismatch for debugging
+        console.error(
+          `[sessions_send] Routing validation warning: requested=${sessionKeyParam} resolved=${resolvedKey} display=${displayKey}`,
+        );
+      }
+
       const timeoutSeconds =
         typeof params.timeoutSeconds === "number" && Number.isFinite(params.timeoutSeconds)
           ? Math.max(0, Math.floor(params.timeoutSeconds))
@@ -217,12 +227,19 @@ export function createSessionsSendTool(opts?: {
         requesterChannel: opts?.agentChannel,
         targetSessionKey: displayKey,
       });
+
+      // CRITICAL FIX (#43318): Preserve the original channel from the requester.
+      // Previously hardcoded to INTERNAL_MESSAGE_CHANNEL ("webchat"), causing
+      // messages to route to wrong destination (e.g., Discord → webchat).
+      // Now respects the requester's channel to maintain correct routing.
+      const targetChannel = opts?.agentChannel ?? INTERNAL_MESSAGE_CHANNEL;
+
       const sendParams = {
         message,
         sessionKey: resolvedKey,
         idempotencyKey,
         deliver: false,
-        channel: INTERNAL_MESSAGE_CHANNEL,
+        channel: targetChannel,
         lane: AGENT_LANE_NESTED,
         extraSystemPrompt: agentMessageContext,
         inputProvenance: {

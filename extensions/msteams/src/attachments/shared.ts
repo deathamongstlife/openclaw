@@ -228,8 +228,11 @@ export function extractInlineImageCandidates(
     IMG_SRC_RE.lastIndex = 0;
     let match: RegExpExecArray | null = IMG_SRC_RE.exec(html);
     while (match) {
-      const src = match[1]?.trim();
+      let src = match[1]?.trim();
       if (src && !src.startsWith("cid:")) {
+        // Decode HTML entities in URLs (#43220)
+        src = decodeHtmlEntities(src);
+
         if (src.startsWith("data:")) {
           const decoded = decodeDataImage(src);
           if (decoded) {
@@ -248,6 +251,25 @@ export function extractInlineImageCandidates(
     }
   }
   return out;
+}
+
+/**
+ * Decode HTML entities in a string.
+ * Handles common entities like &amp;, &lt;, &gt;, &quot;, &#39; and numeric entities.
+ */
+export function decodeHtmlEntities(text: string): string {
+  if (!text || typeof text !== "string") {
+    return text;
+  }
+
+  return text
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&#x([0-9A-Fa-f]+);/g, (_match, hex) => String.fromCharCode(parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_match, dec) => String.fromCharCode(parseInt(dec, 10)));
 }
 
 export function safeHostForUrl(url: string): string {

@@ -182,6 +182,11 @@ export function createEventHandlers(context: EventHandlerContext) {
     }
     const evt = payload as ChatEvent;
     syncSessionKey();
+
+    // CRITICAL: Filter events by session key to ensure TUI only displays
+    // messages for the currently active session. This prevents message
+    // routing issues (issue #43341) where events from other sessions
+    // could incorrectly appear in the TUI.
     if (!isSameSessionKey(evt.sessionKey, state.currentSessionKey)) {
       return;
     }

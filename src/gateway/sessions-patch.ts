@@ -119,12 +119,20 @@ export async function applySessionsPatchToStore(params: {
         return invalid("invalid spawnedBy: empty");
       }
       if (!supportsSpawnLineage(storeKey)) {
-        return invalid("spawnedBy is only supported for subagent:* or acp:* sessions");
+        return invalid(
+          `spawnedBy is only supported for subagent:* or acp:* sessions (got: ${storeKey})`,
+        );
       }
-      if (existing?.spawnedBy && existing.spawnedBy !== trimmed) {
-        return invalid("spawnedBy cannot be changed once set");
+      // Canonicalize spawnedBy to lowercase for consistent comparison
+      const normalizedSpawnedBy = trimmed.toLowerCase();
+      const existingSpawnedBy = existing?.spawnedBy?.toLowerCase();
+      if (existingSpawnedBy && existingSpawnedBy !== normalizedSpawnedBy) {
+        return invalid(
+          `spawnedBy cannot be changed once set (existing: ${existingSpawnedBy}, attempted: ${normalizedSpawnedBy})`,
+        );
       }
-      next.spawnedBy = trimmed;
+      // Store in lowercase form for consistency
+      next.spawnedBy = normalizedSpawnedBy;
     }
   }
 

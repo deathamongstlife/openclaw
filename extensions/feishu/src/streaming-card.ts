@@ -7,7 +7,19 @@ import { fetchWithSsrFGuard } from "openclaw/plugin-sdk/feishu";
 import type { FeishuDomain } from "./types.js";
 
 type Credentials = { appId: string; appSecret: string; domain?: FeishuDomain };
-type CardState = { cardId: string; messageId: string; sequence: number; currentText: string };
+type CardState = {
+  cardId: string;
+  messageId: string;
+  sequence: number;
+  currentText: string;
+  failureCount: number;
+  lastFailureTime: number;
+};
+
+// Circuit breaker configuration
+const CIRCUIT_BREAKER_THRESHOLD = 3; // failures before opening circuit
+const CIRCUIT_BREAKER_RESET_MS = 60000; // 1 minute before retrying
+const CARD_API_TIMEOUT_MS = 30000; // 30 second timeout for card operations
 
 /** Optional header for streaming cards (title bar with color template) */
 export type StreamingCardHeader = {
@@ -153,11 +165,53 @@ export class FeishuStreamingSession {
   private lastUpdateTime = 0;
   private pendingText: string | null = null;
   private updateThrottleMs = 100; // Throttle updates to max 10/sec
+  private circuitBreakerOpen = false;
+  private fallbackToRegularMessages = false;
 
   constructor(client: Client, creds: Credentials, log?: (msg: string) => void) {
     this.client = client;
     this.creds = creds;
     this.log = log;
+  }
+
+  private withTimeout<T>(promise: Promise<T>, timeoutMs: number, operation: string): Promise<T> {
+    return Promise.race([
+      promise,
+      new Promise<T>((_, reject) =>
+        setTimeout(() => reject(new Error(`${operation} timed out after ${timeoutMs}ms`)), timeoutMs)
+      ),
+    ]);
+  }
+
+  private checkCircuitBreaker(): void {
+    if (!this.state) {
+      return;
+    }
+    const now = Date.now();
+    if (
+      this.state.failureCount >= CIRCUIT_BREAKER_THRESHOLD &&
+      now - this.state.lastFailureTime < CIRCUIT_BREAKER_RESET_MS
+    ) {
+      this.circuitBreakerOpen = true;
+      this.fallbackToRegularMessages = true;
+      this.log?.(
+        `Circuit breaker OPEN after ${this.state.failureCount} failures - falling back to regular messages`
+      );
+    } else if (now - this.state.lastFailureTime >= CIRCUIT_BREAKER_RESET_MS) {
+      this.circuitBreakerOpen = false;
+      this.state.failureCount = 0;
+      this.log?.("Circuit breaker RESET - retrying streaming");
+    }
+  }
+
+  private recordFailure(error: unknown): void {
+    if (!this.state) {
+      return;
+    }
+    this.state.failureCount += 1;
+    this.state.lastFailureTime = Date.now();
+    this.log?.(`Streaming failure ${this.state.failureCount}/${CIRCUIT_BREAKER_THRESHOLD}: ${String(error)}`);
+    this.checkCircuitBreaker();
   }
 
   async start(
@@ -167,6 +221,10 @@ export class FeishuStreamingSession {
   ): Promise<void> {
     if (this.state) {
       return;
+    }
+
+    if (this.circuitBreakerOpen) {
+      throw new Error("Circuit breaker is OPEN - streaming card creation blocked");
     }
 
     const apiBase = resolveApiBase(this.creds.domain);
@@ -188,8 +246,8 @@ export class FeishuStreamingSession {
       };
     }
 
-    // Create card entity
-    const { response: createRes, release: releaseCreate } = await fetchWithSsrFGuard({
+    // Create card entity with timeout
+    const createCardPromise = fetchWithSsrFGuard({
       url: `${apiBase}/cardkit/v1/cards`,
       init: {
         method: "POST",
@@ -202,9 +260,21 @@ export class FeishuStreamingSession {
       policy: { allowedHostnames: resolveAllowedHostnames(this.creds.domain) },
       auditContext: "feishu.streaming-card.create",
     });
+
+    const { response: createRes, release: releaseCreate } = await this.withTimeout(
+      createCardPromise,
+      CARD_API_TIMEOUT_MS,
+      "Card creation"
+    ).catch((error) => {
+      this.recordFailure(error);
+      throw error;
+    });
+
     if (!createRes.ok) {
       await releaseCreate();
-      throw new Error(`Create card request failed with HTTP ${createRes.status}`);
+      const error = new Error(`Create card request failed with HTTP ${createRes.status}`);
+      this.recordFailure(error);
+      throw error;
     }
     const createData = (await createRes.json()) as {
       code: number;
@@ -213,7 +283,9 @@ export class FeishuStreamingSession {
     };
     await releaseCreate();
     if (createData.code !== 0 || !createData.data?.card_id) {
-      throw new Error(`Create card failed: ${createData.msg}`);
+      const error = new Error(`Create card failed: ${createData.msg}`);
+      this.recordFailure(error);
+      throw error;
     }
     const cardId = createData.data.card_id;
     const cardContent = JSON.stringify({ type: "card", data: { card_id: cardId } });
@@ -254,20 +326,31 @@ export class FeishuStreamingSession {
       });
     }
     if (sendRes.code !== 0 || !sendRes.data?.message_id) {
-      throw new Error(`Send card failed: ${sendRes.msg}`);
+      const error = new Error(`Send card failed: ${sendRes.msg}`);
+      this.recordFailure(error);
+      throw error;
     }
 
-    this.state = { cardId, messageId: sendRes.data.message_id, sequence: 1, currentText: "" };
+    this.state = {
+      cardId,
+      messageId: sendRes.data.message_id,
+      sequence: 1,
+      currentText: "",
+      failureCount: 0,
+      lastFailureTime: 0,
+    };
     this.log?.(`Started streaming: cardId=${cardId}, messageId=${sendRes.data.message_id}`);
   }
 
   private async updateCardContent(text: string, onError?: (error: unknown) => void): Promise<void> {
-    if (!this.state) {
+    if (!this.state || this.circuitBreakerOpen) {
       return;
     }
+
     const apiBase = resolveApiBase(this.creds.domain);
     this.state.sequence += 1;
-    await fetchWithSsrFGuard({
+
+    const updatePromise = fetchWithSsrFGuard({
       url: `${apiBase}/cardkit/v1/cards/${this.state.cardId}/elements/content/content`,
       init: {
         method: "PUT",
@@ -283,11 +366,20 @@ export class FeishuStreamingSession {
       },
       policy: { allowedHostnames: resolveAllowedHostnames(this.creds.domain) },
       auditContext: "feishu.streaming-card.update",
-    })
+    });
+
+    await this.withTimeout(updatePromise, CARD_API_TIMEOUT_MS, "Card update")
       .then(async ({ release }) => {
         await release();
+        // Reset failure count on success
+        if (this.state) {
+          this.state.failureCount = 0;
+        }
       })
-      .catch((error) => onError?.(error));
+      .catch((error) => {
+        this.recordFailure(error);
+        onError?.(error);
+      });
   }
 
   async update(text: string): Promise<void> {

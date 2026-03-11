@@ -30,20 +30,34 @@ export function restartGatewayProcessWithFreshPid(): GatewayRespawnResult {
   }
   const supervisor = detectRespawnSupervisor(process.env);
   if (supervisor) {
-    // launchd: exit(0) is sufficient — KeepAlive=true restarts the service.
-    // Self-issued `kickstart -k` races with launchd's bootout state machine
-    // and can leave the LaunchAgent permanently unloaded.
-    // See: https://github.com/openclaw/openclaw/issues/39760
-    if (supervisor === "schtasks") {
-      const restart = triggerOpenClawRestart();
-      if (!restart.ok) {
-        return {
-          mode: "failed",
-          detail: restart.detail ?? `${restart.method} restart failed`,
-        };
+    // For all supervised environments, attempt an explicit restart trigger
+    // before falling back to exit(0).
+    // macOS launchd: Use explicit restart to avoid bootout race conditions.
+    // Windows schtasks: Must use explicit restart.
+    // Linux systemd: Explicit restart is more reliable than exit(0).
+    const restart = triggerOpenClawRestart();
+    if (!restart.ok) {
+      // If explicit restart failed but we're supervised, fall back to exit(0)
+      // for launchd/systemd (they will restart us via KeepAlive/Restart=always)
+      if (supervisor === "launchd" || supervisor === "systemd") {
+        return { mode: "supervised", detail: `fallback after ${restart.method} failure` };
       }
+      // For schtasks, explicit restart is required
+      return {
+        mode: "failed",
+        detail: restart.detail ?? `${restart.method} restart failed`,
+      };
     }
-    return { mode: "supervised" };
+    // CRITICAL FIX: For launchd, give the service time to register before exiting.
+    // Without this delay, the process may exit before launchd completes bootstrap,
+    // causing the gateway to never restart (self-decapitation).
+    if (supervisor === "launchd") {
+      return {
+        mode: "supervised",
+        detail: `via ${restart.method} (will delay exit for launchd registration)`,
+      };
+    }
+    return { mode: "supervised", detail: `via ${restart.method}` };
   }
   if (process.platform === "win32") {
     // Detached respawn is unsafe on Windows without an identified Scheduled Task:

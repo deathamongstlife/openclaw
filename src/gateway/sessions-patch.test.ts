@@ -265,6 +265,48 @@ describe("gateway sessions patch", () => {
     expect(entry.spawnedBy).toBe("agent:main:main");
   });
 
+  test("normalizes spawnedBy to lowercase for ACP sessions", async () => {
+    const entry = expectPatchOk(
+      await runPatch({
+        storeKey: "agent:main:acp:child",
+        patch: {
+          key: "agent:main:acp:child",
+          spawnedBy: "agent:Main:MAIN",
+        },
+      }),
+    );
+    expect(entry.spawnedBy).toBe("agent:main:main");
+  });
+
+  test("allows idempotent spawnedBy updates with case differences", async () => {
+    // First patch sets spawnedBy
+    const store: Record<string, SessionEntry> = {};
+    const first = expectPatchOk(
+      await runPatch({
+        storeKey: "agent:main:acp:child",
+        store,
+        patch: {
+          key: "agent:main:acp:child",
+          spawnedBy: "agent:main:main",
+        },
+      }),
+    );
+    expect(first.spawnedBy).toBe("agent:main:main");
+
+    // Second patch with different case should succeed (idempotent)
+    const second = expectPatchOk(
+      await runPatch({
+        storeKey: "agent:main:acp:child",
+        store,
+        patch: {
+          key: "agent:main:acp:child",
+          spawnedBy: "agent:Main:MAIN",
+        },
+      }),
+    );
+    expect(second.spawnedBy).toBe("agent:main:main");
+  });
+
   test("sets spawnDepth for ACP sessions", async () => {
     const entry = expectPatchOk(
       await runPatch({

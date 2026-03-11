@@ -544,7 +544,7 @@ export async function spawnAcpDirect(
       method: "sessions.patch",
       params: {
         key: sessionKey,
-        spawnedBy: requesterInternalKey,
+        spawnedBy: requesterInternalKey.toLowerCase(),
         ...(params.label ? { label: params.label } : {}),
       },
       timeoutMs: 10_000,

@@ -922,8 +922,9 @@ export async function startGatewayServer(
       });
 
   let browserControl: Awaited<ReturnType<typeof startBrowserControlServerIfEnabled>> = null;
+  let stopSessionCleanup: (() => void) | undefined;
   if (!minimalTestGateway) {
-    ({ browserControl, pluginServices } = await startGatewaySidecars({
+    const sidecars = await startGatewaySidecars({
       cfg: cfgAtStart,
       pluginRegistry,
       defaultWorkspaceDir,
@@ -933,7 +934,10 @@ export async function startGatewayServer(
       logHooks,
       logChannels,
       logBrowser,
-    }));
+    });
+    browserControl = sidecars.browserControl;
+    pluginServices = sidecars.pluginServices;
+    stopSessionCleanup = sidecars.stopSessionCleanup;
   }
 
   // Run gateway_start plugin hook (fire-and-forget)
@@ -1034,6 +1038,7 @@ export async function startGatewayServer(
     clients,
     configReloader,
     browserControl,
+    stopSessionCleanup,
     wss,
     httpServer,
     httpServers,
