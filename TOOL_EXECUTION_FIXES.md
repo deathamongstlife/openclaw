@@ -1,7 +1,7 @@
 # Tool Execution and Sandbox Fixes - Implementation Summary
 
 ## Overview
-This document outlines comprehensive fixes for tool execution and sandbox issues in OpenClaw, addressing 18 critical bugs across browser tools, exec tools, memory/RAG, file operations, and sandbox infrastructure.
+This document outlines comprehensive fixes for tool execution and sandbox issues in Jarvis, addressing 18 critical bugs across browser tools, exec tools, memory/RAG, file operations, and sandbox infrastructure.
 
 ## Issues Fixed
 

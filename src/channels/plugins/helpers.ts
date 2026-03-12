@@ -1,5 +1,5 @@
 import { formatCliCommand } from "../../cli/command-format.js";
-import type { OpenClawConfig } from "../../config/config.js";
+import type { JarvisConfig } from "../../config/config.js";
 import { DEFAULT_ACCOUNT_ID } from "../../routing/session-key.js";
 import type { ChannelSecurityDmPolicy } from "./types.core.js";
 import type { ChannelPlugin } from "./types.js";
@@ -7,7 +7,7 @@ import type { ChannelPlugin } from "./types.js";
 // Channel docking helper: use this when selecting the default account for a plugin.
 export function resolveChannelDefaultAccountId<ResolvedAccount>(params: {
   plugin: ChannelPlugin<ResolvedAccount>;
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   accountIds?: string[];
 }): string {
   const accountIds = params.accountIds ?? params.plugin.config.listAccountIds(params.cfg);
@@ -15,13 +15,13 @@ export function resolveChannelDefaultAccountId<ResolvedAccount>(params: {
 }
 
 export function formatPairingApproveHint(channelId: string): string {
-  const listCmd = formatCliCommand(`openclaw pairing list ${channelId}`);
-  const approveCmd = formatCliCommand(`openclaw pairing approve ${channelId} <code>`);
+  const listCmd = formatCliCommand(`jarvis pairing list ${channelId}`);
+  const approveCmd = formatCliCommand(`jarvis pairing approve ${channelId} <code>`);
   return `Approve via: ${listCmd} / ${approveCmd}`;
 }
 
 export function buildAccountScopedDmSecurityPolicy(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   channelKey: string;
   accountId?: string | null;
   fallbackAccountId?: string | null;

@@ -28,7 +28,7 @@ describe("browser server-context remote profile tab operations", () => {
     };
 
     const reachableMock = vi.mocked(chromeModule.isChromeReachable).mockResolvedValueOnce(false);
-    const launchMock = vi.mocked(chromeModule.launchOpenClawChrome);
+    const launchMock = vi.mocked(chromeModule.launchJarvisChrome);
     const ctx = createBrowserRouteContext({ getState: () => state });
 
     await expect(ctx.forProfile("openclaw").ensureBrowserAvailable()).rejects.toThrow(
@@ -49,7 +49,7 @@ describe("browser server-context remote profile tab operations", () => {
 
     const httpReachableMock = vi.mocked(chromeModule.isChromeReachable).mockResolvedValueOnce(true);
     const wsReachableMock = vi.mocked(chromeModule.isChromeCdpReady).mockResolvedValueOnce(false);
-    const launchMock = vi.mocked(chromeModule.launchOpenClawChrome);
+    const launchMock = vi.mocked(chromeModule.launchJarvisChrome);
     const ctx = createBrowserRouteContext({ getState: () => state });
 
     await expect(ctx.forProfile("openclaw").ensureBrowserAvailable()).rejects.toThrow(
@@ -242,7 +242,7 @@ describe("browser server-context remote profile tab operations", () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it("does not enforce managed tab cap for remote openclaw profiles", async () => {
+  it("does not enforce managed tab cap for remote jarvis profiles", async () => {
     const listPagesViaPlaywright = vi
       .fn()
       .mockResolvedValueOnce([

@@ -10,7 +10,7 @@ import type {
   ChannelAccountSnapshot,
   ChannelDock,
   ChannelPlugin,
-  OpenClawConfig,
+  JarvisConfig,
 } from "openclaw/plugin-sdk/zalo";
 import {
   applyAccountNameToChannelSection,

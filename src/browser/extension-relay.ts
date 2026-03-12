@@ -6,7 +6,7 @@ import WebSocket, { WebSocketServer } from "ws";
 import { isLoopbackAddress, isLoopbackHost } from "../gateway/net.js";
 import { rawDataToString } from "../infra/ws.js";
 import {
-  probeAuthenticatedOpenClawRelay,
+  probeAuthenticatedJarvisRelay,
   resolveRelayAcceptedTokensForPort,
   resolveRelayAuthTokenForPort,
 } from "./extension-relay-auth.js";
@@ -471,9 +471,9 @@ export async function ensureChromeExtensionRelayServer(opts: {
         case "Browser.getVersion":
           return {
             protocolVersion: "1.3",
-            product: "Chrome/OpenClaw-Extension-Relay",
+            product: "Chrome/Jarvis-Extension-Relay",
             revision: "0",
-            userAgent: "OpenClaw-Extension-Relay",
+            userAgent: "Jarvis-Extension-Relay",
             jsVersion: "V8",
           };
         case "Browser.setDownloadBehavior":
@@ -607,7 +607,7 @@ export async function ensureChromeExtensionRelayServer(opts: {
         (req.method === "GET" || req.method === "PUT")
       ) {
         const payload: Record<string, unknown> = {
-          Browser: "OpenClaw/extension-relay",
+          Browser: "Jarvis/extension-relay",
           "Protocol-Version": "1.3",
         };
         // Keep reporting CDP WS while attached targets are cached, so callers can
@@ -981,7 +981,7 @@ export async function ensureChromeExtensionRelayServer(opts: {
     } catch (err) {
       if (
         isAddrInUseError(err) &&
-        (await probeAuthenticatedOpenClawRelay({
+        (await probeAuthenticatedJarvisRelay({
           baseUrl: info.baseUrl,
           relayAuthHeader: RELAY_AUTH_HEADER,
           relayAuthToken,

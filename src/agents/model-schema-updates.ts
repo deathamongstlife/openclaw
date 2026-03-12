@@ -2,7 +2,7 @@
  * Model schema updates for new provider models.
  *
  * This file contains model definitions for newly released models that need
- * to be recognized by OpenClaw's model catalog and validation systems.
+ * to be recognized by Jarvis's model catalog and validation systems.
  */
 
 export type NewModelDefinition = {

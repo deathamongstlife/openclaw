@@ -8,7 +8,7 @@ metadata:
       {
         "emoji": "📝",
         "events": ["command"],
-        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with OpenClaw" }],
+        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with Jarvis" }],
       },
   }
 ---
@@ -62,7 +62,7 @@ No configuration needed. The hook automatically:
 To disable this hook:
 
 ```bash
-openclaw hooks disable command-logger
+jarvis hooks disable command-logger
 ```
 
 Or via config:

@@ -236,7 +236,7 @@ configure_openclaw() {
   if ! command -v openclaw &> /dev/null; then
     log_warning "OpenClaw CLI not found"
     log_info "Install OpenClaw first: npm install -g openclaw"
-    log_info "Then configure manually with: openclaw config set agents.defaults.model ollama/$model"
+    log_info "Then configure manually with: jarvis config set agents.defaults.model ollama/$model"
     return 0
   fi
 
@@ -244,11 +244,11 @@ configure_openclaw() {
   mkdir -p "$(dirname "$OPENCLAW_CONFIG")"
 
   # Set default model
-  if openclaw config set agents.defaults.model "ollama/$model" 2>/dev/null; then
+  if jarvis config set agents.defaults.model "ollama/$model" 2>/dev/null; then
     log_success "OpenClaw configured to use $model"
   else
     log_warning "Failed to configure OpenClaw automatically"
-    log_info "Configure manually with: openclaw config set agents.defaults.model ollama/$model"
+    log_info "Configure manually with: jarvis config set agents.defaults.model ollama/$model"
   fi
 }
 
@@ -379,7 +379,7 @@ main() {
   log_success "Local models are ready to use!"
   echo ""
   log_info "Quick Start:"
-  echo "  • Use OpenClaw CLI: openclaw message send 'Hello!'"
+  echo "  • Use OpenClaw CLI: jarvis message send 'Hello!'"
   echo "  • Pull more models: ollama pull llama3.3:70b"
   echo "  • List models: ollama list"
   echo "  • Start Ollama: ollama serve"

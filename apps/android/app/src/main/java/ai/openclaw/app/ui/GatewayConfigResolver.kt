@@ -1,4 +1,4 @@
-package ai.openclaw.app.ui
+package ai.jarvis.app.ui
 
 import androidx.core.net.toUri
 import java.util.Base64

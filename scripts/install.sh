@@ -518,7 +518,7 @@ cleanup_openclaw_bin_conflict() {
         target="$(readlink "$bin_path" 2>/dev/null || true)"
         if [[ "$target" == *"/node_modules/openclaw/"* ]]; then
             rm -f "$bin_path"
-            ui_info "Removed stale openclaw symlink at ${bin_path}"
+            ui_info "Removed stale jarvis symlink at ${bin_path}"
             return 0
         fi
         return 1
@@ -526,7 +526,7 @@ cleanup_openclaw_bin_conflict() {
     local backup=""
     backup="${bin_path}.bak-$(date +%Y%m%d-%H%M%S)"
     if mv "$bin_path" "$backup"; then
-        ui_info "Moved existing openclaw binary to ${backup}"
+        ui_info "Moved existing jarvis binary to ${backup}"
         return 0
     fi
     return 1
@@ -826,7 +826,7 @@ install_openclaw_npm() {
                 fi
                 return 1
             fi
-            ui_error "npm failed because an openclaw binary already exists"
+            ui_error "npm failed because an jarvis binary already exists"
             if [[ -n "$conflict" ]]; then
                 ui_info "Remove or move ${conflict}, then retry"
             fi
@@ -1616,7 +1616,7 @@ ensure_openclaw_bin_link() {
     mkdir -p "$npm_bin"
     if [[ ! -x "${npm_bin}/openclaw" ]]; then
         ln -sf "$npm_root/openclaw/dist/entry.js" "${npm_bin}/openclaw"
-        ui_info "Created openclaw bin link at ${npm_bin}/openclaw"
+        ui_info "Created jarvis bin link at ${npm_bin}/openclaw"
     fi
     return 0
 }
@@ -1809,7 +1809,7 @@ warn_shell_path_missing_dir() {
 
     echo ""
     ui_warn "PATH missing ${label}: ${dir}"
-    echo "  This can make openclaw show as \"command not found\" in new terminals."
+    echo "  This can make jarvis show as \"command not found\" in new terminals."
     echo "  Fix (zsh: ~/.zshrc, bash: ~/.bashrc):"
     echo "    export PATH=\"${dir}:\$PATH\""
 }
@@ -1829,7 +1829,7 @@ maybe_nodenv_rehash() {
 }
 
 warn_openclaw_not_found() {
-    ui_warn "Installed, but openclaw is not discoverable on PATH in this shell"
+    ui_warn "Installed, but jarvis is not discoverable on PATH in this shell"
     echo "  Try: hash -r (bash) or rehash (zsh), then retry."
     local t=""
     t="$(type -t openclaw 2>/dev/null || true)"
@@ -1947,7 +1947,7 @@ EOF
 # Install OpenClaw
 resolve_beta_version() {
     local beta=""
-    beta="$(npm view openclaw dist-tags.beta 2>/dev/null || true)"
+    beta="$(npm view jarvis dist-tags.beta 2>/dev/null || true)"
     if [[ -z "$beta" || "$beta" == "undefined" || "$beta" == "null" ]]; then
         return 1
     fi
@@ -2014,7 +2014,7 @@ run_doctor() {
         claw="$(resolve_openclaw_bin || true)"
     fi
     if [[ -z "$claw" ]]; then
-        ui_info "Skipping doctor (openclaw not on PATH yet)"
+        ui_info "Skipping doctor (jarvis not on PATH yet)"
         warn_openclaw_not_found
         return 0
     fi
@@ -2064,7 +2064,7 @@ run_bootstrap_onboarding_if_needed() {
     fi
 
     if [[ ! -r /dev/tty || ! -w /dev/tty ]]; then
-        ui_info "BOOTSTRAP.md found but no TTY; run openclaw onboard to finish setup"
+        ui_info "BOOTSTRAP.md found but no TTY; run jarvis onboard to finish setup"
         return
     fi
 
@@ -2074,13 +2074,13 @@ run_bootstrap_onboarding_if_needed() {
         claw="$(resolve_openclaw_bin || true)"
     fi
     if [[ -z "$claw" ]]; then
-        ui_info "BOOTSTRAP.md found but openclaw not on PATH; skipping onboarding"
+        ui_info "BOOTSTRAP.md found but jarvis not on PATH; skipping onboarding"
         warn_openclaw_not_found
         return
     fi
 
     "$claw" onboard || {
-        ui_error "Onboarding failed; run openclaw onboard to retry"
+        ui_error "Onboarding failed; run jarvis onboard to retry"
         return
     }
 }
@@ -2397,7 +2397,7 @@ main() {
         ui_section "Source install details"
         ui_kv "Checkout" "$final_git_dir"
         ui_kv "Wrapper" "$HOME/.local/bin/openclaw"
-        ui_kv "Update command" "openclaw update --restart"
+        ui_kv "Update command" "jarvis update --restart"
         ui_kv "Switch to npm" "curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --install-method npm"
     elif [[ "$is_upgrade" == "true" ]]; then
         ui_info "Upgrade complete"
@@ -2407,7 +2407,7 @@ main() {
                 claw="$(resolve_openclaw_bin || true)"
             fi
             if [[ -z "$claw" ]]; then
-                ui_info "Skipping doctor (openclaw not on PATH yet)"
+                ui_info "Skipping doctor (jarvis not on PATH yet)"
                 warn_openclaw_not_found
                 return 0
             fi
@@ -2417,7 +2417,7 @@ main() {
                     doctor_args+=("--non-interactive")
                 fi
             fi
-            ui_info "Running openclaw doctor"
+            ui_info "Running jarvis doctor"
             local doctor_ok=0
             if (( ${#doctor_args[@]} )); then
                 OPENCLAW_UPDATE_IN_PROGRESS=1 "$claw" doctor "${doctor_args[@]}" </dev/tty && doctor_ok=1
@@ -2431,11 +2431,11 @@ main() {
                 ui_warn "Doctor failed; skipping plugin updates"
             fi
         else
-            ui_info "No TTY; run openclaw doctor and openclaw plugins update --all manually"
+            ui_info "No TTY; run jarvis doctor and jarvis plugins update --all manually"
         fi
     else
         if [[ "$NO_ONBOARD" == "1" || "$skip_onboard" == "true" ]]; then
-            ui_info "Skipping onboard (requested); run openclaw onboard later"
+            ui_info "Skipping onboard (requested); run jarvis onboard later"
         else
             local config_path="${OPENCLAW_CONFIG_PATH:-$HOME/.openclaw/openclaw.json}"
             if [[ -f "${config_path}" || -f "$HOME/.clawdbot/clawdbot.json" || -f "$HOME/.moltbot/moltbot.json" || -f "$HOME/.moldbot/moldbot.json" ]]; then
@@ -2453,14 +2453,14 @@ main() {
                     claw="$(resolve_openclaw_bin || true)"
                 fi
                 if [[ -z "$claw" ]]; then
-                    ui_info "Skipping onboarding (openclaw not on PATH yet)"
+                    ui_info "Skipping onboarding (jarvis not on PATH yet)"
                     warn_openclaw_not_found
                     return 0
                 fi
                 exec </dev/tty
                 exec "$claw" onboard
             fi
-            ui_info "No TTY; run openclaw onboard to finish setup"
+            ui_info "No TTY; run jarvis onboard to finish setup"
             return 0
         fi
     fi
@@ -2472,13 +2472,13 @@ main() {
         fi
         if [[ -n "$claw" ]] && is_gateway_daemon_loaded "$claw"; then
             if [[ "$DRY_RUN" == "1" ]]; then
-                ui_info "Gateway daemon detected; would restart (openclaw daemon restart)"
+                ui_info "Gateway daemon detected; would restart (jarvis daemon restart)"
             else
                 ui_info "Gateway daemon detected; restarting"
                 if OPENCLAW_UPDATE_IN_PROGRESS=1 "$claw" daemon restart >/dev/null 2>&1; then
                     ui_success "Gateway restarted"
                 else
-                    ui_warn "Gateway restart failed; try: openclaw daemon restart"
+                    ui_warn "Gateway restart failed; try: jarvis daemon restart"
                 fi
             fi
         fi

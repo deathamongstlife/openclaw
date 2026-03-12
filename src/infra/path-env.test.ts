@@ -33,9 +33,9 @@ vi.mock("node:fs", async (importOriginal) => {
   return { ...wrapped, default: wrapped };
 });
 
-let ensureOpenClawCliOnPath: typeof import("./path-env.js").ensureOpenClawCliOnPath;
+let ensureJarvisCliOnPath: typeof import("./path-env.js").ensureJarvisCliOnPath;
 
-describe("ensureOpenClawCliOnPath", () => {
+describe("ensureJarvisCliOnPath", () => {
   const envKeys = [
     "PATH",
     "OPENCLAW_PATH_BOOTSTRAPPED",
@@ -48,7 +48,7 @@ describe("ensureOpenClawCliOnPath", () => {
   let envSnapshot: Record<(typeof envKeys)[number], string | undefined>;
 
   beforeAll(async () => {
-    ({ ensureOpenClawCliOnPath } = await import("./path-env.js"));
+    ({ ensureJarvisCliOnPath } = await import("./path-env.js"));
   });
 
   beforeEach(() => {
@@ -72,7 +72,7 @@ describe("ensureOpenClawCliOnPath", () => {
     }
   });
 
-  it("prepends the bundled app bin dir when a sibling openclaw exists", () => {
+  it("prepends the bundled app bin dir when a sibling jarvis exists", () => {
     const tmp = abs("/tmp/openclaw-path/case-bundled");
     const appBinDir = path.join(tmp, "AppBin");
     const cliPath = path.join(appBinDir, "openclaw");
@@ -83,7 +83,7 @@ describe("ensureOpenClawCliOnPath", () => {
     process.env.PATH = "/usr/bin";
     delete process.env.OPENCLAW_PATH_BOOTSTRAPPED;
 
-    ensureOpenClawCliOnPath({
+    ensureJarvisCliOnPath({
       execPath: cliPath,
       cwd: tmp,
       homeDir: tmp,
@@ -97,7 +97,7 @@ describe("ensureOpenClawCliOnPath", () => {
   it("is idempotent", () => {
     process.env.PATH = "/bin";
     process.env.OPENCLAW_PATH_BOOTSTRAPPED = "1";
-    ensureOpenClawCliOnPath({
+    ensureJarvisCliOnPath({
       execPath: "/tmp/does-not-matter",
       cwd: "/tmp",
       homeDir: "/tmp",
@@ -123,7 +123,7 @@ describe("ensureOpenClawCliOnPath", () => {
     process.env.PATH = "/usr/bin";
     delete process.env.OPENCLAW_PATH_BOOTSTRAPPED;
 
-    ensureOpenClawCliOnPath({
+    ensureJarvisCliOnPath({
       execPath: appCli,
       cwd: tmp,
       homeDir: tmp,
@@ -155,7 +155,7 @@ describe("ensureOpenClawCliOnPath", () => {
     process.env.PATH = "/usr/bin";
     delete process.env.OPENCLAW_PATH_BOOTSTRAPPED;
 
-    ensureOpenClawCliOnPath({
+    ensureJarvisCliOnPath({
       execPath: appCli,
       cwd: tmp,
       homeDir: tmp,
@@ -167,7 +167,7 @@ describe("ensureOpenClawCliOnPath", () => {
     process.env.PATH = "/usr/bin";
     delete process.env.OPENCLAW_PATH_BOOTSTRAPPED;
 
-    ensureOpenClawCliOnPath({
+    ensureJarvisCliOnPath({
       execPath: appCli,
       cwd: tmp,
       homeDir: tmp,
@@ -200,7 +200,7 @@ describe("ensureOpenClawCliOnPath", () => {
     delete process.env.HOMEBREW_BREW_FILE;
     delete process.env.XDG_BIN_HOME;
 
-    ensureOpenClawCliOnPath({
+    ensureJarvisCliOnPath({
       execPath: path.join(execDir, "node"),
       cwd: tmp,
       homeDir: tmp,

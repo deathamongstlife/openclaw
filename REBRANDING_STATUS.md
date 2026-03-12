@@ -2,39 +2,39 @@
 
 ## ✅ Completed
 - ✅ README.md fully rebranded (command examples changed to `jarvis`)
-- ✅ README.md credits preserved (references to upstream OpenClaw kept)
+- ✅ README.md credits preserved (references to upstream Jarvis kept)
 - ✅ Discord skill documentation updated
 - ✅ Discord implementation with dual permission checking
 - ✅ GitLab CI/CD configuration migrated
 - ✅ Installation guide created (INSTALL_FROM_SOURCE.md)
-- ✅ Binary renamed: openclaw.mjs → jarvis.mjs
-- ✅ Podman env renamed: openclaw.podman.env → jarvis.podman.env
+- ✅ Binary renamed: jarvis.mjs → jarvis.mjs
+- ✅ Podman env renamed: jarvis.podman.env → jarvis.podman.env
 - ✅ package.json fully rebranded (name, bin, URLs)
-- ✅ Android package name: ai.openclaw.app → ai.jarvis.app
-- ✅ iOS bundle ID prefix: ai.openclaw → ai.jarvis
+- ✅ Android package name: ai.jarvis.app → ai.jarvis.app
+- ✅ iOS bundle ID prefix: ai.jarvis → ai.jarvis
 - ✅ .pre-commit-config.yaml updated (cache paths and header)
 - ✅ Quick-start installation script created (install-jarvis.sh)
 
-## ⚠️ Still References "openclaw"
+## ⚠️ Still References "jarvis"
 
-These files still contain `openclaw` references and should be updated for complete rebranding:
+These files still contain `jarvis` references and should be updated for complete rebranding:
 
 ### Critical Files (Core Functionality)
 
 1. **package.json**
-   - `name`: "openclaw" → Should be "jarvis"
+   - `name`: "jarvis" → Should be "jarvis"
    - `homepage`: GitHub URLs → GitLab URLs
    - `repository.url`: GitHub → GitLab
-   - Binary name: `"jarvis": "jarvis.mjs"` (rename from openclaw.mjs)
+   - Binary name: `"jarvis": "jarvis.mjs"` (rename from jarvis.mjs)
 
 2. **AGENTS.md** (Agent Guidelines)
-   - Contains many CLI examples with `openclaw` commands
-   - Documentation URLs reference docs.openclaw.ai
+   - Contains many CLI examples with `jarvis` commands
+   - Documentation URLs reference docs.jarvis.ai
    - Should update to `jarvis` command and jarvis-ai.dev URLs
 
 3. **CHANGELOG.md**
    - Historically accurate, could stay as-is OR
-   - Add note at top: "Historical entries preserved from OpenClaw upstream"
+   - Add note at top: "Historical entries preserved from Jarvis upstream"
 
 4. **CAMPAIGN_SUMMARY.md**
    - Contains old repository reference
@@ -44,28 +44,28 @@ These files still contain `openclaw` references and should be updated for comple
 
 5. **.pre-commit-config.yaml**
    - Header comment and cache paths
-   - Path: `/var/tmp/openclaw-compile-cache` → `/var/tmp/jarvis-compile-cache`
+   - Path: `/var/tmp/jarvis-compile-cache` → `/var/tmp/jarvis-compile-cache`
 
 6. **.gitlab-ci.yml**
-   - Already migrated but contains some env var names with OPENCLAW prefix
-   - Variables like `OPENCLAW_TEST_WORKERS` → Could stay or rebrand to `JARVIS_*`
+   - Already migrated but contains some env var names with JARVIS prefix
+   - Variables like `JARVIS_TEST_WORKERS` → Could stay or rebrand to `JARVIS_*`
 
 ### iOS/macOS/Android Apps
 
 7. **package.json scripts**
-   - `android:run`: Uses `ai.openclaw.app` package name
-   - `ios:*` scripts: Reference "OpenClaw" project names
-   - `mac:open`: Opens `OpenClaw.app`
+   - `android:run`: Uses `ai.jarvis.app` package name
+   - `ios:*` scripts: Reference "Jarvis" project names
+   - `mac:open`: Opens `Jarvis.app`
 
 8. **Android Package Name**
-   - Current: `ai.openclaw.app`
+   - Current: `ai.jarvis.app`
    - Should be: `ai.jarvis.app` OR `cc.allyapp.jarvis`
    - Files to update:
      - `apps/android/app/build.gradle.kts`
      - `apps/android/app/src/main/AndroidManifest.xml`
 
 9. **iOS Bundle Identifier**
-   - Current: Likely `ai.openclaw.ios`
+   - Current: Likely `ai.jarvis.ios`
    - Should be: `ai.jarvis.ios` OR `cc.allyapp.jarvis`
    - Files to update:
      - `apps/ios/project.yml`
@@ -74,7 +74,7 @@ These files still contain `openclaw` references and should be updated for comple
 ### Binary/Executable Names
 
 10. **CLI Entry Point**
-    - Current: `openclaw.mjs`
+    - Current: `jarvis.mjs`
     - Should rename to: `jarvis.mjs`
     - Update all references in package.json
 
@@ -83,7 +83,7 @@ These files still contain `openclaw` references and should be updated for comple
 ### Phase 1: Core CLI (Highest Priority)
 ```bash
 # 1. Rename main executable
-mv openclaw.mjs jarvis.mjs
+mv jarvis.mjs jarvis.mjs
 
 # 2. Update package.json
 - name: "jarvis"
@@ -91,7 +91,7 @@ mv openclaw.mjs jarvis.mjs
 - Update all script commands
 
 # 3. Update AGENTS.md examples
-Replace all `openclaw` CLI commands with `jarvis`
+Replace all `jarvis` CLI commands with `jarvis`
 ```
 
 ### Phase 2: Mobile Apps
@@ -99,7 +99,7 @@ Replace all `openclaw` CLI commands with `jarvis`
 # Android
 1. Change package name in build.gradle.kts
 2. Update AndroidManifest.xml
-3. Rename directory structure: com/openclaw/app → ai/jarvis/app
+3. Rename directory structure: com/jarvis/app → ai/jarvis/app
 4. Update all imports
 
 # iOS
@@ -116,8 +116,8 @@ Replace all `openclaw` CLI commands with `jarvis`
 3. .pre-commit-config.yaml - Update paths
 
 # Update URLs
-- docs.openclaw.ai → docs.jarvis-ai.dev
-- openclaw.ai → jarvis-ai.cc (or equivalent)
+- docs.jarvis.ai → docs.jarvis-ai.dev
+- jarvis.ai → jarvis-ai.cc (or equivalent)
 ```
 
 ## 📋 Quick Rebrand Script
@@ -129,7 +129,7 @@ Here's what needs to be run for complete rebranding:
 # Complete J.A.R.V.I.S. Rebranding
 
 # 1. Rename main executable
-git mv openclaw.mjs jarvis.mjs
+git mv jarvis.mjs jarvis.mjs
 
 # 2. Update package.json (manual editing required)
 # - name: "jarvis"
@@ -138,10 +138,10 @@ git mv openclaw.mjs jarvis.mjs
 # - repository.url: GitLab URL
 
 # 3. Update AGENTS.md
-sed -i 's/openclaw /jarvis /g' AGENTS.md
-sed -i 's/`openclaw /`jarvis /g' AGENTS.md
-sed -i 's/docs.openclaw.ai/docs.jarvis-ai.dev/g' AGENTS.md
-sed -i 's/openclaw.ai/jarvis-ai.cc/g' AGENTS.md
+sed -i 's/jarvis /jarvis /g' AGENTS.md
+sed -i 's/`jarvis /`jarvis /g' AGENTS.md
+sed -i 's/docs.jarvis.ai/docs.jarvis-ai.dev/g' AGENTS.md
+sed -i 's/jarvis.ai/jarvis-ai.cc/g' AGENTS.md
 
 # 4. Android package rename (requires more complex refactoring)
 # This should be done carefully with IDE refactoring tools
@@ -150,7 +150,7 @@ sed -i 's/openclaw.ai/jarvis-ai.cc/g' AGENTS.md
 # Update in project.yml and regenerate Xcode project
 
 # 6. Update cache paths
-sed -i 's/openclaw-compile-cache/jarvis-compile-cache/g' .pre-commit-config.yaml
+sed -i 's/jarvis-compile-cache/jarvis-compile-cache/g' .pre-commit-config.yaml
 
 # 7. Commit changes
 git add -A
@@ -159,21 +159,21 @@ git commit -m "feat: Complete rebranding to J.A.R.V.I.S."
 
 ## ⚠️ Important Notes
 
-### What to Keep as "openclaw"
+### What to Keep as "jarvis"
 
 These should **NOT** be changed:
 
 1. **README.md Credits Section**
-   - "Built on OpenClaw" (upstream acknowledgment)
-   - "fork of OpenClaw" (factually accurate)
-   - GitHub links to `openclaw/openclaw` (upstream reference)
+   - "Built on Jarvis" (upstream acknowledgment)
+   - "fork of Jarvis" (factually accurate)
+   - GitHub links to `jarvis/jarvis` (upstream reference)
 
 2. **Git History**
    - Historical commit messages
    - Old branch names (already merged)
 
 3. **External References**
-   - Any hardcoded references to the upstream OpenClaw project
+   - Any hardcoded references to the upstream Jarvis project
    - Historical changelog entries (unless you add a header note)
 
 ### Breaking Changes
@@ -181,11 +181,11 @@ These should **NOT** be changed:
 Rebranding these will cause breaking changes:
 
 1. **Package Name Change**
-   - Users who installed `npm install -g openclaw` won't get updates
-   - Need migration path: deprecate `openclaw` package, publish as `jarvis`
+   - Users who installed `npm install -g jarvis` won't get updates
+   - Need migration path: deprecate `jarvis` package, publish as `jarvis`
 
 2. **Config File Location**
-   - Current: `~/.openclaw/`
+   - Current: `~/.jarvis/`
    - New: `~/.jarvis/`
    - Need migration tool: `jarvis migrate-config`
 
@@ -209,16 +209,16 @@ For your first complete build from source:
 - Users install fresh
 
 ### Option B: Gradual Rebrand (Safer)
-- Keep binary name `openclaw` initially
+- Keep binary name `jarvis` initially
 - Rebrand UI/docs/branding only
 - Allows testing before breaking changes
 - Migrate in v2.0
 
 ### Option C: Fork Identity (Recommended for Now)
-- Keep `openclaw` as CLI name internally
+- Keep `jarvis` as CLI name internally
 - Brand as "JARVIS" in UI/docs/apps
-- Document as "J.A.R.V.I.S. (powered by OpenClaw)"
-- Easier for users who know OpenClaw
+- Document as "J.A.R.V.I.S. (powered by Jarvis)"
+- Easier for users who know Jarvis
 
 ## 📊 Current Status Summary
 
@@ -234,7 +234,7 @@ For your first complete build from source:
 | AGENTS.md | ⚠️ Not done | 🟡 Medium |
 | Android package | ✅ Complete | - |
 | iOS bundle ID | ✅ Complete | - |
-| Config paths | ⚠️ ~/.openclaw/ | 🟢 Low |
+| Config paths | ⚠️ ~/.jarvis/ | 🟢 Low |
 | Cache paths | ✅ Complete | - |
 
 ---

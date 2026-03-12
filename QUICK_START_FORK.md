@@ -9,7 +9,7 @@
 ### 1. Create New Repository (GitHub Web UI)
 ```
 Repository name: jarvis
-Description: J.A.R.V.I.S. - Just A Rather Very Intelligent System (Enhanced OpenClaw fork)
+Description: J.A.R.V.I.S. - Just A Rather Very Intelligent System (Enhanced Jarvis fork)
 Visibility: Public or Private
 Initialize: Empty (no README, no .gitignore, no license)
 ```
@@ -20,14 +20,14 @@ Initialize: Empty (no README, no .gitignore, no license)
 git clone git@github.com:deathamongstlife/jarvis.git
 cd jarvis
 
-# Add OpenClaw as remote
-git remote add openclaw /__modal/volumes/vo-pkwyL871BwojYJgLZ0F1rM/claude-workspace/r79767525_gmail.com/deathamongstlife/openclaw
+# Add Jarvis as remote
+git remote add jarvis /__modal/volumes/vo-pkwyL871BwojYJgLZ0F1rM/claude-workspace/r79767525_gmail.com/deathamongstlife/jarvis
 
 # Fetch the feature branch
-git fetch openclaw feature/jarvis-upgrade-complete
+git fetch jarvis feature/jarvis-upgrade-complete
 
 # Create main from feature branch
-git checkout -b main openclaw/feature/jarvis-upgrade-complete
+git checkout -b main jarvis/feature/jarvis-upgrade-complete
 
 # Push to new repository
 git push -u origin main
@@ -42,24 +42,24 @@ set -euo pipefail
 
 echo "Starting J.A.R.V.I.S. rebranding..."
 
-# Package name: openclaw -> jarvis
+# Package name: jarvis -> jarvis
 find . -name "package.json" -type f -not -path "*/node_modules/*" \
-  -exec sed -i 's/"openclaw"/"jarvis"/g' {} \;
+  -exec sed -i 's/"jarvis"/"jarvis"/g' {} \;
 
-# Display name: OpenClaw -> J.A.R.V.I.S.
+# Display name: Jarvis -> J.A.R.V.I.S.
 find . -type f \( -name "*.ts" -o -name "*.js" -o -name "*.md" \) \
   -not -path "*/node_modules/*" -not -path "*/.git/*" \
-  -exec sed -i 's/OpenClaw/J.A.R.V.I.S./g' {} \;
+  -exec sed -i 's/Jarvis/J.A.R.V.I.S./g' {} \;
 
-# Env vars: OPENCLAW_ -> JARVIS_
+# Env vars: JARVIS_ -> JARVIS_
 find . -type f \( -name "*.ts" -o -name "*.js" -o -name "*.sh" \) \
   -not -path "*/node_modules/*" -not -path "*/.git/*" \
-  -exec sed -i 's/OPENCLAW_/JARVIS_/g' {} \;
+  -exec sed -i 's/JARVIS_/JARVIS_/g' {} \;
 
-# URLs: openclaw/openclaw -> deathamongstlife/jarvis
+# URLs: jarvis/jarvis -> deathamongstlife/jarvis
 find . -type f \( -name "*.ts" -o -name "*.js" -o -name "*.json" -o -name "*.md" \) \
   -not -path "*/node_modules/*" -not -path "*/.git/*" \
-  -exec sed -i 's|openclaw/openclaw|deathamongstlife/jarvis|g' {} \;
+  -exec sed -i 's|jarvis/jarvis|deathamongstlife/jarvis|g' {} \;
 
 echo "Rebranding complete! Review changes before committing."
 SCRIPT
@@ -71,8 +71,8 @@ chmod +x rebrand.sh
 ### 4. Verify Changes
 ```bash
 # Check for remaining references
-echo "Checking for remaining 'openclaw' references (excluding node_modules)..."
-grep -r "openclaw" . \
+echo "Checking for remaining 'jarvis' references (excluding node_modules)..."
+grep -r "jarvis" . \
   --exclude-dir=node_modules \
   --exclude-dir=.git \
   --exclude="*.md" \
@@ -91,20 +91,20 @@ sed -i 's/"version": ".*"/"version": "1.0.0-jarvis.1"/' package.json
 
 # Commit all rebranding changes
 git add -A
-git commit -m "rebrand: OpenClaw → J.A.R.V.I.S. v1.0.0-jarvis.1
+git commit -m "rebrand: Jarvis → J.A.R.V.I.S. v1.0.0-jarvis.1
 
-Complete rebranding of OpenClaw fork to J.A.R.V.I.S.
+Complete rebranding of Jarvis fork to J.A.R.V.I.S.
 
 Changes:
-- Package names: openclaw → jarvis
-- Display names: OpenClaw → J.A.R.V.I.S.
-- Environment variables: OPENCLAW_ → JARVIS_
-- Repository URLs: openclaw/openclaw → deathamongstlife/jarvis
+- Package names: jarvis → jarvis
+- Display names: Jarvis → J.A.R.V.I.S.
+- Environment variables: JARVIS_ → JARVIS_
+- Repository URLs: jarvis/jarvis → deathamongstlife/jarvis
 - Version: 1.0.0-jarvis.1
 
-Based on OpenClaw with 102+ stability improvements.
+Based on Jarvis with 102+ stability improvements.
 
-Attribution: Original work by OpenClaw team
+Attribution: Original work by Jarvis team
 Fork improvements: J.A.R.V.I.S. team"
 
 # Tag release
@@ -149,7 +149,7 @@ gh release create v1.0.0-jarvis.1 \
 - [ ] Create initial release tag
 - [ ] Publish GitHub release
 
-## Key Improvements Over OpenClaw
+## Key Improvements Over Jarvis
 
 ### Gateway (5 Critical Fixes)
 - ✅ macOS self-decapitation fixed
@@ -193,16 +193,16 @@ Reliability:        99% success rate
 
 ## Attribution
 
-J.A.R.V.I.S. is a hard fork of OpenClaw by the OpenClaw team.
-All original work maintains OpenClaw's license and attribution.
+J.A.R.V.I.S. is a hard fork of Jarvis by the Jarvis team.
+All original work maintains Jarvis's license and attribution.
 Stability improvements contributed by the J.A.R.V.I.S. team.
 
-Original: https://github.com/openclaw/openclaw
+Original: https://github.com/deathamongstlife/jarvis
 Fork: https://github.com/deathamongstlife/jarvis
 
 ## License
 
-Maintains the same license as OpenClaw.
+Maintains the same license as Jarvis.
 See LICENSE file for details.
 
 ---

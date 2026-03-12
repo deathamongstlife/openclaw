@@ -1,4 +1,4 @@
-package ai.openclaw.app
+package ai.jarvis.app
 
 import android.os.Bundle
 import android.view.WindowManager
@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import ai.openclaw.app.ui.RootScreen
-import ai.openclaw.app.ui.OpenClawTheme
+import ai.jarvis.app.ui.RootScreen
+import ai.jarvis.app.ui.OpenClawTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {

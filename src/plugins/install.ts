@@ -97,7 +97,7 @@ function validatePluginId(pluginId: string): string | null {
   return null;
 }
 
-function ensureOpenClawExtensions(params: { manifest: PackageManifest }):
+function ensureJarvisExtensions(params: { manifest: PackageManifest }):
   | {
       ok: true;
       entries: string[];
@@ -221,7 +221,7 @@ async function installPluginFromPackageDir(
     return { ok: false, error: `invalid package.json: ${String(err)}` };
   }
 
-  const extensionsResult = ensureOpenClawExtensions({
+  const extensionsResult = ensureJarvisExtensions({
     manifest,
   });
   if (!extensionsResult.ok) {
@@ -296,12 +296,12 @@ async function installPluginFromPackageDir(
       );
     } else if (scanSummary.warn > 0) {
       logger.warn?.(
-        `Plugin "${pluginId}" has ${scanSummary.warn} suspicious code pattern(s). Run "openclaw security audit --deep" for details.`,
+        `Plugin "${pluginId}" has ${scanSummary.warn} suspicious code pattern(s). Run "jarvis security audit --deep" for details.`,
       );
     }
   } catch (err) {
     logger.warn?.(
-      `Plugin "${pluginId}" code safety scan failed (${String(err)}). Installation continues; run "openclaw security audit --deep" after install.`,
+      `Plugin "${pluginId}" code safety scan failed (${String(err)}). Installation continues; run "jarvis security audit --deep" after install.`,
     );
   }
 

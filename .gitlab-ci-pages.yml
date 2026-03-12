@@ -1,0 +1,222 @@
+# GitLab Pages CI/CD Configuration for Jarvis
+# Deploys documentation and install script to GitLab Pages
+#
+# To use this file, either:
+# 1. Replace your existing .gitlab-ci.yml with this file
+# 2. Or merge the 'pages' job into your existing .gitlab-ci.yml
+
+image: node:latest
+
+# Cache for faster builds
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .pnpm-store/
+
+# Pipeline stages
+stages:
+  - test
+  - deploy
+
+# Variables
+variables:
+  PNPM_VERSION: "latest"
+  NODE_ENV: "production"
+
+# Install dependencies (reusable)
+.install_deps: &install_deps
+  - corepack enable
+  - corepack prepare pnpm@${PNPM_VERSION} --activate
+  - pnpm config set store-dir .pnpm-store
+  - pnpm install --frozen-lockfile || pnpm install
+
+# Run tests (optional, can be disabled)
+test:
+  stage: test
+  script:
+    - *install_deps
+    - pnpm test || echo "⚠️  Tests skipped or failed - deployment will continue"
+  only:
+    - main
+    - merge_requests
+  allow_failure: true
+
+# Build check for non-main branches
+build:check:
+  stage: test
+  script:
+    - echo "✓ Checking build configuration"
+    - test -d docs || (echo "❌ docs/ directory not found" && exit 1)
+    - test -f install.sh || (echo "❌ install.sh not found" && exit 1)
+    - test -f docs/CNAME || echo "⚠️  docs/CNAME not found - custom domain may not work"
+    - echo "✓ Build configuration looks good"
+  except:
+    - main
+
+# Deploy to GitLab Pages
+pages:
+  stage: deploy
+  script:
+    - echo "📦 Preparing Jarvis deployment..."
+
+    # Create public directory
+    - mkdir -p public
+
+    # Copy documentation
+    - echo "📚 Copying documentation..."
+    - cp -r docs/* public/
+
+    # Copy install script to root
+    - echo "📥 Adding install script..."
+    - cp install.sh public/install.sh
+    - chmod +x public/install.sh
+
+    # Create index.html with install instructions
+    - |
+      echo "🏠 Creating landing page..."
+      cat > public/index.html <<'EOF'
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Jarvis - Your Personal AI Assistant</title>
+        <meta name="description" content="Jarvis - Your own personal AI assistant. Any OS. Any Platform.">
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+          }
+          .container {
+            max-width: 800px;
+            text-align: center;
+          }
+          h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+          }
+          .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+          }
+          .install-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+          }
+          .install-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+          }
+          pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 1rem;
+            text-align: left;
+          }
+          code {
+            color: #00e5cc;
+            font-family: 'Monaco', 'Menlo', monospace;
+          }
+          .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+          }
+          .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+          }
+          .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+          }
+          .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+          }
+          footer {
+            margin-top: 3rem;
+            opacity: 0.8;
+            font-size: 0.9rem;
+          }
+          @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .tagline { font-size: 1.25rem; }
+            pre { font-size: 0.875rem; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>🤖 Jarvis</h1>
+          <p class="tagline">Your own personal AI assistant. Any OS. Any Platform.</p>
+
+          <div class="install-section">
+            <div class="install-title">Quick Install</div>
+            <pre><code>curl -fsSL https://jarvis.allyapp.cc/install.sh | bash</code></pre>
+          </div>
+
+          <div class="buttons">
+            <a href="https://docs.jarvis.allyapp.cc" class="btn">📚 Documentation</a>
+            <a href="https://github.com/deathamongstlife/jarvis" class="btn btn-secondary">⭐ GitHub</a>
+          </div>
+
+          <footer>
+            <p>Built with ❤️ by the Jarvis team</p>
+          </footer>
+        </div>
+      </body>
+      </html>
+      EOF
+
+    # Create robots.txt
+    - |
+      cat > public/robots.txt <<'EOF'
+      User-agent: *
+      Allow: /
+      Sitemap: https://docs.jarvis.allyapp.cc/sitemap.xml
+      EOF
+
+    # Verify deployment
+    - echo "✅ Deployment contents:"
+    - ls -lah public/
+    - echo ""
+    - echo "📄 Sample files:"
+    - find public -type f | head -20
+    - echo ""
+    - echo "✅ Ready for deployment!"
+
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+
+  only:
+    - main
+
+  environment:
+    name: production
+    url: https://docs.jarvis.allyapp.cc

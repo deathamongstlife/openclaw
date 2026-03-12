@@ -4,7 +4,7 @@ import {
   hasConfiguredSecretInput,
   promptSingleChannelSecretInput,
   type ChannelOnboardingAdapter,
-  type OpenClawConfig,
+  type JarvisConfig,
   type SecretInput,
   type WizardPrompter,
 } from "openclaw/plugin-sdk/mattermost";
@@ -180,7 +180,7 @@ export const mattermostOnboardingAdapter: ChannelOnboardingAdapter = {
 
     return { cfg: next, accountId };
   },
-  disable: (cfg: OpenClawConfig) => ({
+  disable: (cfg: JarvisConfig) => ({
     ...cfg,
     channels: {
       ...cfg.channels,

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Successfully implemented comprehensive local model support for OpenClaw, enabling users to run AI models completely offline on their own hardware with automatic installation and management.
+Successfully implemented comprehensive local model support for Jarvis, enabling users to run AI models completely offline on their own hardware with automatic installation and management.
 
 ## What Was Implemented
 
@@ -72,7 +72,7 @@ Successfully implemented comprehensive local model support for OpenClaw, enablin
 - Automatic model recommendations based on system
 - Interactive and non-interactive modes
 - Model download with progress tracking
-- OpenClaw configuration
+- Jarvis configuration
 - Installation verification
 
 **Usage:**
@@ -93,13 +93,13 @@ Successfully implemented comprehensive local model support for OpenClaw, enablin
 
 **Commands Added:**
 ```bash
-openclaw local-models info              # System info and recommendations
-openclaw local-models list              # List available models
-openclaw local-models list --installed  # List installed models
-openclaw local-models install <id>      # Install specific model
-openclaw local-models uninstall <id>    # Uninstall model
-openclaw local-models quick-install     # One-click recommended install
-openclaw local-models status            # Backend status
+jarvis local-models info              # System info and recommendations
+jarvis local-models list              # List available models
+jarvis local-models list --installed  # List installed models
+jarvis local-models install <id>      # Install specific model
+jarvis local-models uninstall <id>    # Uninstall model
+jarvis local-models quick-install     # One-click recommended install
+jarvis local-models status            # Backend status
 ```
 
 ### 5. Documentation
@@ -197,22 +197,22 @@ return "Q4_K_M";     // Standard quality (95% of FP16)
 ### Quick Install
 ```bash
 # One command to set everything up
-openclaw local-models quick-install
+jarvis local-models quick-install
 ```
 
 ### Custom Installation
 ```bash
 # Check system
-openclaw local-models info
+jarvis local-models info
 
 # Install specific model with quantization
-openclaw local-models install llama-3.3-70b --quantization Q4_K_M
+jarvis local-models install llama-3.3-70b --quantization Q4_K_M
 
 # Configure as default
-openclaw config set agents.defaults.model ollama/llama3.3:70b
+jarvis config set agents.defaults.model ollama/llama3.3:70b
 
 # Test it
-openclaw message send "Hello from local AI!"
+jarvis message send "Hello from local AI!"
 ```
 
 ### Programmatic Usage
@@ -286,15 +286,15 @@ await quickInstall((progress) => {
 
 ## Integration Points
 
-### Existing OpenClaw Features
+### Existing Jarvis Features
 - ✅ Integrates with existing Ollama setup commands
-- ✅ Uses OpenClaw config system
-- ✅ Follows OpenClaw logging patterns
+- ✅ Uses Jarvis config system
+- ✅ Follows Jarvis logging patterns
 - ✅ Compatible with model provider architecture
 - ✅ Works with existing CLI framework
 
 ### Configuration
-Models appear in `~/.openclaw/config.json`:
+Models appear in `~/.jarvis/config.json`:
 ```json
 {
   "models": {
@@ -357,22 +357,22 @@ pnpm test src/agents/local-models
 
 1. **Start Small**
    ```bash
-   openclaw local-models install llama-3.2-3b
+   jarvis local-models install llama-3.2-3b
    ```
 
 2. **Test Quality**
    ```bash
-   openclaw message send "Test prompt" --model ollama/llama3.2:3b
+   jarvis message send "Test prompt" --model ollama/llama3.2:3b
    ```
 
 3. **Scale Up**
    ```bash
-   openclaw local-models install llama-3.3-70b --quantization Q4_K_M
+   jarvis local-models install llama-3.3-70b --quantization Q4_K_M
    ```
 
 4. **Make Default**
    ```bash
-   openclaw config set agents.defaults.model ollama/llama3.3:70b
+   jarvis config set agents.defaults.model ollama/llama3.3:70b
    ```
 
 ## Troubleshooting
@@ -386,10 +386,10 @@ pnpm test src/agents/local-models
 2. **Out of Memory**
    - Use smaller model: `llama3.2:3b`
    - Lower quantization: `--quantization Q4_0`
-   - Check resources: `openclaw local-models info`
+   - Check resources: `jarvis local-models info`
 
 3. **Slow Performance**
-   - Check GPU detected: `openclaw local-models info`
+   - Check GPU detected: `jarvis local-models info`
    - Verify GPU acceleration in logs
    - Try smaller model for speed
 
@@ -444,9 +444,9 @@ Total: 13 files, ~85KB of code and documentation
 The local model support is now fully implemented and production-ready. Users can:
 
 1. Run `./scripts/install-local-models.sh` for automatic setup
-2. Use `openclaw local-models quick-install` for one-click installation
+2. Use `jarvis local-models quick-install` for one-click installation
 3. Choose from 8 pre-configured popular models
 4. Get automatic hardware detection and recommendations
 5. Run AI models completely offline with zero API costs
 
-The implementation provides a complete "AIO" (all-in-one) solution for local AI, making it trivial for OpenClaw users to run models on their own hardware while maintaining the same easy-to-use interface they're familiar with.
+The implementation provides a complete "AIO" (all-in-one) solution for local AI, making it trivial for Jarvis users to run models on their own hardware while maintaining the same easy-to-use interface they're familiar with.

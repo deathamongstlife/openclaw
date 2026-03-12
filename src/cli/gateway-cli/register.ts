@@ -95,10 +95,10 @@ export function registerGatewayCli(program: Command) {
         "after",
         () =>
           `\n${theme.heading("Examples:")}\n${formatHelpExamples([
-            ["openclaw gateway run", "Run the gateway in the foreground."],
-            ["openclaw gateway status", "Show service status and probe reachability."],
-            ["openclaw gateway discover", "Find local and wide-area gateway beacons."],
-            ["openclaw gateway call health", "Call a gateway RPC method directly."],
+            ["jarvis gateway run", "Run the gateway in the foreground."],
+            ["jarvis gateway status", "Show service status and probe reachability."],
+            ["jarvis gateway discover", "Find local and wide-area gateway beacons."],
+            ["jarvis gateway call health", "Call a gateway RPC method directly."],
           ])}\n\n${theme.muted("Docs:")} ${formatDocsLink("/cli/gateway", "docs.openclaw.ai/cli/gateway")}\n`,
       ),
   );

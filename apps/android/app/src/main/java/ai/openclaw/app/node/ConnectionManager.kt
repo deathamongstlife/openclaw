@@ -1,14 +1,14 @@
-package ai.openclaw.app.node
+package ai.jarvis.app.node
 
 import android.os.Build
-import ai.openclaw.app.BuildConfig
-import ai.openclaw.app.SecurePrefs
-import ai.openclaw.app.gateway.GatewayClientInfo
-import ai.openclaw.app.gateway.GatewayConnectOptions
-import ai.openclaw.app.gateway.GatewayEndpoint
-import ai.openclaw.app.gateway.GatewayTlsParams
-import ai.openclaw.app.LocationMode
-import ai.openclaw.app.VoiceWakeMode
+import ai.jarvis.app.BuildConfig
+import ai.jarvis.app.SecurePrefs
+import ai.jarvis.app.gateway.GatewayClientInfo
+import ai.jarvis.app.gateway.GatewayConnectOptions
+import ai.jarvis.app.gateway.GatewayEndpoint
+import ai.jarvis.app.gateway.GatewayTlsParams
+import ai.jarvis.app.LocationMode
+import ai.jarvis.app.VoiceWakeMode
 
 class ConnectionManager(
   private val prefs: SecurePrefs,
@@ -132,7 +132,7 @@ class ConnectionManager(
       caps = buildCapabilities(),
       commands = buildInvokeCommands(),
       permissions = emptyMap(),
-      client = buildClientInfo(clientId = "openclaw-android", clientMode = "node"),
+      client = buildClientInfo(clientId = "jarvis-android", clientMode = "node"),
       userAgent = buildUserAgent(),
     )
   }
@@ -144,7 +144,7 @@ class ConnectionManager(
       caps = emptyList(),
       commands = emptyList(),
       permissions = emptyMap(),
-      client = buildClientInfo(clientId = "openclaw-android", clientMode = "ui"),
+      client = buildClientInfo(clientId = "jarvis-android", clientMode = "ui"),
       userAgent = buildUserAgent(),
     )
   }

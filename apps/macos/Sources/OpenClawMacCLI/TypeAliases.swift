@@ -1,5 +1,5 @@
-import OpenClawKit
+import JarvisKit
 import OpenClawProtocol
 
 typealias ProtoAnyCodable = OpenClawProtocol.AnyCodable
-typealias KitAnyCodable = OpenClawKit.AnyCodable
+typealias KitAnyCodable = JarvisKit.AnyCodable

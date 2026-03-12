@@ -1,10 +1,10 @@
-import type { OpenClawConfig } from "../../../config/config.js";
+import type { JarvisConfig } from "../../../config/config.js";
 import { resolveUserPath } from "../../../utils.js";
 import type { OnboardOptions } from "../../onboard-types.js";
 
 export function resolveNonInteractiveWorkspaceDir(params: {
   opts: OnboardOptions;
-  baseConfig: OpenClawConfig;
+  baseConfig: JarvisConfig;
   defaultWorkspaceDir: string;
 }) {
   const raw = (

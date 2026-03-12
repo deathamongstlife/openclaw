@@ -1,12 +1,12 @@
 ---
-summary: "CLI reference for `openclaw plugins` (list, install, uninstall, enable/disable, doctor)"
+summary: "CLI reference for `jarvis plugins` (list, install, uninstall, enable/disable, doctor)"
 read_when:
   - You want to install or manage in-process Gateway plugins
   - You want to debug plugin load failures
 title: "plugins"
 ---
 
-# `openclaw plugins`
+# `jarvis plugins`
 
 Manage Gateway plugins/extensions (loaded in-process).
 
@@ -19,17 +19,17 @@ Related:
 ## Commands
 
 ```bash
-openclaw plugins list
-openclaw plugins info <id>
-openclaw plugins enable <id>
-openclaw plugins disable <id>
-openclaw plugins uninstall <id>
-openclaw plugins doctor
-openclaw plugins update <id>
-openclaw plugins update --all
+jarvis plugins list
+jarvis plugins info <id>
+jarvis plugins enable <id>
+jarvis plugins disable <id>
+jarvis plugins uninstall <id>
+jarvis plugins doctor
+jarvis plugins update <id>
+jarvis plugins update --all
 ```
 
-Bundled plugins ship with OpenClaw but start disabled. Use `plugins enable` to
+Bundled plugins ship with Jarvis but start disabled. Use `plugins enable` to
 activate them.
 
 All plugins must ship a `openclaw.plugin.json` file with an inline JSON Schema
@@ -39,8 +39,8 @@ the plugin from loading and fail config validation.
 ### Install
 
 ```bash
-openclaw plugins install <path-or-spec>
-openclaw plugins install <npm-spec> --pin
+jarvis plugins install <path-or-spec>
+jarvis plugins install <npm-spec> --pin
 ```
 
 Security note: treat plugin installs like running code. Prefer pinned versions.
@@ -50,11 +50,11 @@ Npm specs are **registry-only** (package name + optional **exact version** or
 installs run with `--ignore-scripts` for safety.
 
 Bare specs and `@latest` stay on the stable track. If npm resolves either of
-those to a prerelease, OpenClaw stops and asks you to opt in explicitly with a
+those to a prerelease, Jarvis stops and asks you to opt in explicitly with a
 prerelease tag such as `@beta`/`@rc` or an exact prerelease version such as
 `@1.2.3-beta.4`.
 
-If a bare install spec matches a bundled plugin id (for example `diffs`), OpenClaw
+If a bare install spec matches a bundled plugin id (for example `diffs`), Jarvis
 installs the bundled plugin directly. To install an npm package with the same
 name, use an explicit scoped spec (for example `@scope/diffs`).
 
@@ -63,7 +63,7 @@ Supported archives: `.zip`, `.tgz`, `.tar.gz`, `.tar`.
 Use `--link` to avoid copying a local directory (adds to `plugins.load.paths`):
 
 ```bash
-openclaw plugins install -l ./my-plugin
+jarvis plugins install -l ./my-plugin
 ```
 
 Use `--pin` on npm installs to save the resolved exact spec (`name@version`) in
@@ -72,9 +72,9 @@ Use `--pin` on npm installs to save the resolved exact spec (`name@version`) in
 ### Uninstall
 
 ```bash
-openclaw plugins uninstall <id>
-openclaw plugins uninstall <id> --dry-run
-openclaw plugins uninstall <id> --keep-files
+jarvis plugins uninstall <id>
+jarvis plugins uninstall <id> --dry-run
+jarvis plugins uninstall <id> --keep-files
 ```
 
 `uninstall` removes plugin records from `plugins.entries`, `plugins.installs`,
@@ -90,13 +90,13 @@ state dir extensions root (`$OPENCLAW_STATE_DIR/extensions/<id>`). Use
 ### Update
 
 ```bash
-openclaw plugins update <id>
-openclaw plugins update --all
-openclaw plugins update <id> --dry-run
+jarvis plugins update <id>
+jarvis plugins update --all
+jarvis plugins update <id> --dry-run
 ```
 
 Updates only apply to plugins installed from npm (tracked in `plugins.installs`).
 
 When a stored integrity hash exists and the fetched artifact hash changes,
-OpenClaw prints a warning and asks for confirmation before proceeding. Use
+Jarvis prints a warning and asks for confirmation before proceeding. Use
 global `--yes` to bypass prompts in CI/non-interactive runs.

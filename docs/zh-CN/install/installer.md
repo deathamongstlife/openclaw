@@ -16,7 +16,7 @@ x-i18n:
 
 # 安装器内部机制
 
-OpenClaw 提供两个安装器脚本（托管在 `openclaw.ai`）：
+Jarvis 提供两个安装器脚本（托管在 `openclaw.ai`）：
 
 - `https://openclaw.ai/install.sh` — "推荐"安装器（默认全局 npm 安装；也可从 GitHub 检出安装）
 - `https://openclaw.ai/install-cli.sh` — 无需 root 权限的 CLI 安装器（安装到带有独立 Node 的前缀目录）
@@ -46,8 +46,8 @@ Windows (PowerShell) 帮助：
   - `npm`（默认）：`npm install -g openclaw@latest`
   - `git`：克隆/构建源码检出并安装包装脚本
 - 在 Linux 上：必要时将 npm 前缀切换到 `~/.npm-global`，以避免全局 npm 权限错误。
-- 如果是升级现有安装：运行 `openclaw doctor --non-interactive`（尽力执行）。
-- 对于 git 安装：安装/更新后运行 `openclaw doctor --non-interactive`（尽力执行）。
+- 如果是升级现有安装：运行 `jarvis doctor --non-interactive`（尽力执行）。
+- 对于 git 安装：安装/更新后运行 `jarvis doctor --non-interactive`（尽力执行）。
 - 通过默认设置 `SHARP_IGNORE_GLOBAL_LIBVIPS=1` 来缓解 `sharp` 原生安装问题（避免使用系统 libvips 编译）。
 
 如果你*希望* `sharp` 链接到全局安装的 libvips（或你正在调试），请设置：
@@ -58,7 +58,7 @@ SHARP_IGNORE_GLOBAL_LIBVIPS=0 curl -fsSL https://openclaw.ai/install.sh | bash
 
 ### 可发现性 / "git 安装"提示
 
-如果你在**已有的 OpenClaw 源码检出目录中**运行安装器（通过 `package.json` + `pnpm-workspace.yaml` 检测），它会提示：
+如果你在**已有的 Jarvis 源码检出目录中**运行安装器（通过 `package.json` + `pnpm-workspace.yaml` 检测），它会提示：
 
 - 更新并使用此检出（`git`）
 - 或迁移到全局 npm 安装（`npm`）
@@ -97,7 +97,7 @@ curl -fsSL https://openclaw.ai/install-cli.sh | bash -s -- --help
 - 选择安装方式：
   - `npm`（默认）：`npm install -g openclaw@latest`
   - `git`：克隆/构建源码检出并安装包装脚本
-- 在升级和 git 安装时运行 `openclaw doctor --non-interactive`（尽力执行）。
+- 在升级和 git 安装时运行 `jarvis doctor --non-interactive`（尽力执行）。
 
 示例：
 

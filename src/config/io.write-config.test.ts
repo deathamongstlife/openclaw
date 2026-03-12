@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { createConfigIO } from "./io.js";
-import type { OpenClawConfig } from "./types.js";
+import type { JarvisConfig } from "./types.js";
 
 describe("config io write", () => {
   let fixtureRoot = "";
@@ -150,20 +150,20 @@ describe("config io write", () => {
         logger: silentLogger,
       });
 
-      const invalidConfig: OpenClawConfig = {
+      const invalidConfig: JarvisConfig = {
         channels: {
           telegram: {
             dmPolicy: "open",
             allowFrom: [],
           },
         },
-      } satisfies OpenClawConfig;
+      } satisfies JarvisConfig;
 
       await expect(io.writeConfigFile(invalidConfig)).rejects.toThrow(
-        "openclaw config set channels.telegram.allowFrom '[\"*\"]'",
+        "jarvis config set channels.telegram.allowFrom '[\"*\"]'",
       );
       await expect(io.writeConfigFile(invalidConfig)).rejects.toThrow(
-        'openclaw config set channels.telegram.dmPolicy "pairing"',
+        'jarvis config set channels.telegram.dmPolicy "pairing"',
       );
     });
   });

@@ -2,7 +2,7 @@
   "name": "@openclaw/whatsapp",
   "version": "2026.3.9",
   "private": true,
-  "description": "OpenClaw WhatsApp channel plugin",
+  "description": "Jarvis WhatsApp channel plugin",
   "type": "module",
   "openclaw": {
     "extensions": [

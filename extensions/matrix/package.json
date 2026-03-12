@@ -1,7 +1,7 @@
 {
   "name": "@openclaw/matrix",
   "version": "2026.3.9",
-  "description": "OpenClaw Matrix channel plugin",
+  "description": "Jarvis Matrix channel plugin",
   "type": "module",
   "dependencies": {
     "@mariozechner/pi-agent-core": "0.57.1",

@@ -137,7 +137,7 @@ export function collectReleasePackageMetadataErrors(pkg: PackageJson): string[] 
   }
   if (pkg.bin?.openclaw !== "openclaw.mjs") {
     errors.push(
-      `package.json bin.openclaw must be "openclaw.mjs"; found "${pkg.bin?.openclaw ?? ""}".`,
+      `package.json bin.jarvis must be "openclaw.mjs"; found "${pkg.bin?.openclaw ?? ""}".`,
     );
   }
 

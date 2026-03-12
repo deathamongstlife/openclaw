@@ -1,4 +1,4 @@
-import OpenClawKit
+import JarvisKit
 import Observation
 import UIKit
 import WebKit
@@ -226,7 +226,7 @@ final class ScreenController {
         subdirectory: String)
         -> URL?
     {
-        let bundle = OpenClawKitResources.bundle
+        let bundle = JarvisKitResources.bundle
         return bundle.url(forResource: name, withExtension: ext, subdirectory: subdirectory)
             ?? bundle.url(forResource: name, withExtension: ext)
     }

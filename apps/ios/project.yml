@@ -1,4 +1,4 @@
-name: OpenClaw
+name: Jarvis
 options:
   bundleIdPrefix: ai.jarvis
   deploymentTarget:
@@ -11,32 +11,32 @@ settings:
     ENABLE_APP_INTENTS_METADATA_GENERATION: NO
 
 packages:
-  OpenClawKit:
-    path: ../shared/OpenClawKit
+  JarvisKit:
+    path: ../shared/JarvisKit
   Swabble:
     path: ../../Swabble
 
 schemes:
-  OpenClaw:
+  Jarvis:
     shared: true
     build:
       targets:
-        OpenClaw: all
+        Jarvis: all
     test:
       targets:
-        - OpenClawTests
-        - OpenClawLogicTests
-  OpenClawLogicTests:
+        - JarvisTests
+        - JarvisLogicTests
+  JarvisLogicTests:
     shared: true
     build:
       targets:
-        OpenClawLogicTests: all
+        JarvisLogicTests: all
     test:
       targets:
-        - OpenClawLogicTests
+        - JarvisLogicTests
 
 targets:
-  OpenClaw:
+  Jarvis:
     type: application
     platform: iOS
     configFiles:
@@ -45,16 +45,16 @@ targets:
     sources:
       - path: Sources
     dependencies:
-      - target: OpenClawShareExtension
+      - target: JarvisShareExtension
         embed: true
-      - target: OpenClawActivityWidget
+      - target: JarvisActivityWidget
         embed: true
-      - target: OpenClawWatchApp
-      - package: OpenClawKit
-      - package: OpenClawKit
-        product: OpenClawChatUI
-      - package: OpenClawKit
-        product: OpenClawProtocol
+      - target: JarvisWatchApp
+      - package: JarvisKit
+      - package: JarvisKit
+        product: JarvisChatUI
+      - package: JarvisKit
+        product: JarvisProtocol
       - package: Swabble
         product: SwabbleKit
       - sdk: AppIntents.framework
@@ -87,7 +87,7 @@ targets:
     settings:
       base:
         CODE_SIGN_IDENTITY: "Apple Development"
-        CODE_SIGN_ENTITLEMENTS: Sources/OpenClaw.entitlements
+        CODE_SIGN_ENTITLEMENTS: Sources/Jarvis.entitlements
         CODE_SIGN_STYLE: "$(OPENCLAW_CODE_SIGN_STYLE)"
         DEVELOPMENT_TEAM: "$(OPENCLAW_DEVELOPMENT_TEAM)"
         PRODUCT_BUNDLE_IDENTIFIER: "$(OPENCLAW_APP_BUNDLE_ID)"
@@ -101,7 +101,7 @@ targets:
     info:
       path: Sources/Info.plist
       properties:
-        CFBundleDisplayName: OpenClaw
+        CFBundleDisplayName: Jarvis
         CFBundleIconName: AppIcon
         CFBundleURLTypes:
           - CFBundleURLName: ai.openclaw.ios
@@ -117,18 +117,18 @@ targets:
           - remote-notification
         BGTaskSchedulerPermittedIdentifiers:
           - ai.openclaw.ios.bgrefresh
-        NSLocalNetworkUsageDescription: OpenClaw discovers and connects to your OpenClaw gateway on the local network.
+        NSLocalNetworkUsageDescription: Jarvis discovers and connects to your Jarvis gateway on the local network.
         NSAppTransportSecurity:
           NSAllowsArbitraryLoadsInWebContent: true
         NSBonjourServices:
           - _openclaw-gw._tcp
-        NSCameraUsageDescription: OpenClaw can capture photos or short video clips when requested via the gateway.
-        NSLocationWhenInUseUsageDescription: OpenClaw uses your location when you allow location sharing.
-        NSLocationAlwaysAndWhenInUseUsageDescription: OpenClaw can share your location in the background when you enable Always.
-        NSMicrophoneUsageDescription: OpenClaw needs microphone access for voice wake.
-        NSMotionUsageDescription: OpenClaw may use motion data to support device-aware interactions and automations.
-        NSPhotoLibraryUsageDescription: OpenClaw needs photo library access when you choose existing photos to share with your assistant.
-        NSSpeechRecognitionUsageDescription: OpenClaw uses on-device speech recognition for voice wake.
+        NSCameraUsageDescription: Jarvis can capture photos or short video clips when requested via the gateway.
+        NSLocationWhenInUseUsageDescription: Jarvis uses your location when you allow location sharing.
+        NSLocationAlwaysAndWhenInUseUsageDescription: Jarvis can share your location in the background when you enable Always.
+        NSMicrophoneUsageDescription: Jarvis needs microphone access for voice wake.
+        NSMotionUsageDescription: Jarvis may use motion data to support device-aware interactions and automations.
+        NSPhotoLibraryUsageDescription: Jarvis needs photo library access when you choose existing photos to share with your assistant.
+        NSSpeechRecognitionUsageDescription: Jarvis uses on-device speech recognition for voice wake.
         NSSupportsLiveActivities: true
         ITSAppUsesNonExemptEncryption: false
         UISupportedInterfaceOrientations:
@@ -142,7 +142,7 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
 
-  OpenClawShareExtension:
+  JarvisShareExtension:
     type: app-extension
     platform: iOS
     configFiles:
@@ -151,7 +151,7 @@ targets:
     sources:
       - path: ShareExtension
     dependencies:
-      - package: OpenClawKit
+      - package: JarvisKit
       - sdk: AppIntents.framework
     settings:
       base:
@@ -167,7 +167,7 @@ targets:
     info:
       path: ShareExtension/Info.plist
       properties:
-        CFBundleDisplayName: OpenClaw Share
+        CFBundleDisplayName: Jarvis Share
         CFBundleShortVersionString: "$(OPENCLAW_MARKETING_VERSION)"
         CFBundleVersion: "$(OPENCLAW_BUILD_VERSION)"
         NSExtension:
@@ -180,7 +180,7 @@ targets:
               NSExtensionActivationSupportsImageWithMaxCount: 10
               NSExtensionActivationSupportsMovieWithMaxCount: 1
 
-  OpenClawActivityWidget:
+  JarvisActivityWidget:
     type: app-extension
     platform: iOS
     configFiles:
@@ -188,7 +188,7 @@ targets:
       Release: Signing.xcconfig
     sources:
       - path: ActivityWidget
-      - path: Sources/LiveActivity/OpenClawActivityAttributes.swift
+      - path: Sources/LiveActivity/JarvisActivityAttributes.swift
     dependencies:
       - sdk: WidgetKit.framework
       - sdk: ActivityKit.framework
@@ -204,21 +204,21 @@ targets:
     info:
       path: ActivityWidget/Info.plist
       properties:
-        CFBundleDisplayName: OpenClaw Activity
+        CFBundleDisplayName: Jarvis Activity
         CFBundleShortVersionString: "$(OPENCLAW_MARKETING_VERSION)"
         CFBundleVersion: "$(OPENCLAW_BUILD_VERSION)"
         NSSupportsLiveActivities: true
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
 
-  OpenClawWatchApp:
+  JarvisWatchApp:
     type: application.watchapp2
     platform: watchOS
     deploymentTarget: "11.0"
     sources:
       - path: WatchApp
     dependencies:
-      - target: OpenClawWatchExtension
+      - target: JarvisWatchExtension
     configFiles:
       Debug: Config/Signing.xcconfig
       Release: Config/Signing.xcconfig
@@ -231,13 +231,13 @@ targets:
     info:
       path: WatchApp/Info.plist
       properties:
-        CFBundleDisplayName: OpenClaw
+        CFBundleDisplayName: Jarvis
         CFBundleShortVersionString: "$(OPENCLAW_MARKETING_VERSION)"
         CFBundleVersion: "$(OPENCLAW_BUILD_VERSION)"
         WKCompanionAppBundleIdentifier: "$(OPENCLAW_APP_BUNDLE_ID)"
         WKWatchKitApp: true
 
-  OpenClawWatchExtension:
+  JarvisWatchExtension:
     type: watchkit2-extension
     platform: watchOS
     deploymentTarget: "11.0"
@@ -256,7 +256,7 @@ targets:
     info:
       path: WatchExtension/Info.plist
       properties:
-        CFBundleDisplayName: OpenClaw
+        CFBundleDisplayName: Jarvis
         CFBundleShortVersionString: "$(OPENCLAW_MARKETING_VERSION)"
         CFBundleVersion: "$(OPENCLAW_BUILD_VERSION)"
         NSExtension:
@@ -264,7 +264,7 @@ targets:
             WKAppBundleIdentifier: "$(OPENCLAW_WATCH_APP_BUNDLE_ID)"
           NSExtensionPointIdentifier: com.apple.watchkit
 
-  OpenClawTests:
+  JarvisTests:
     type: bundle.unit-test
     platform: iOS
     configFiles:
@@ -275,7 +275,7 @@ targets:
         excludes:
           - Logic
     dependencies:
-      - target: OpenClaw
+      - target: Jarvis
       - package: Swabble
         product: SwabbleKit
       - sdk: AppIntents.framework
@@ -288,16 +288,16 @@ targets:
         ENABLE_APP_INTENTS_METADATA_GENERATION: NO
         SWIFT_VERSION: "6.0"
         SWIFT_STRICT_CONCURRENCY: complete
-        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/OpenClaw.app/OpenClaw"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Jarvis.app/Jarvis"
         BUNDLE_LOADER: "$(TEST_HOST)"
     info:
       path: Tests/Info.plist
       properties:
-        CFBundleDisplayName: OpenClawTests
+        CFBundleDisplayName: JarvisTests
         CFBundleShortVersionString: "$(OPENCLAW_MARKETING_VERSION)"
         CFBundleVersion: "$(OPENCLAW_BUILD_VERSION)"
 
-  OpenClawLogicTests:
+  JarvisLogicTests:
     type: bundle.unit-test
     platform: iOS
     configFiles:
@@ -306,7 +306,7 @@ targets:
     sources:
       - path: Tests/Logic
     dependencies:
-      - package: OpenClawKit
+      - package: JarvisKit
     settings:
       base:
         CODE_SIGN_IDENTITY: "Apple Development"
@@ -319,6 +319,6 @@ targets:
     info:
       path: Tests/Info.plist
       properties:
-        CFBundleDisplayName: OpenClawLogicTests
+        CFBundleDisplayName: JarvisLogicTests
         CFBundleShortVersionString: "$(OPENCLAW_MARKETING_VERSION)"
         CFBundleVersion: "$(OPENCLAW_BUILD_VERSION)"

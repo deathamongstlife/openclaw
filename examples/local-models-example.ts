@@ -2,7 +2,7 @@
 /**
  * Local Models Example
  *
- * This example demonstrates how to use OpenClaw's local model support
+ * This example demonstrates how to use Jarvis's local model support
  * to install and run AI models completely offline.
  */
 
@@ -16,7 +16,7 @@ import {
 } from "../src/agents/local-models/index.js";
 
 async function main() {
-  console.log("🚀 OpenClaw Local Models Example\n");
+  console.log("🚀 Jarvis Local Models Example\n");
 
   // Step 1: Check system resources
   console.log("📊 Step 1: Detecting system resources...\n");
@@ -74,10 +74,10 @@ async function main() {
   // Step 5: Quick install example (commented out to avoid accidental downloads)
   console.log("🎯 Step 5: Quick Install Example\n");
   console.log("To automatically install the recommended model, run:");
-  console.log("  openclaw local-models quick-install");
+  console.log("  jarvis local-models quick-install");
   console.log();
   console.log("Or install a specific model:");
-  console.log(`  openclaw local-models install ${recommendations[0]?.model.id}`);
+  console.log(`  jarvis local-models install ${recommendations[0]?.model.id}`);
   console.log();
 
   /*
@@ -99,7 +99,7 @@ async function main() {
   console.log();
   if (result.success) {
     console.log("✅ Installation complete!");
-    console.log(`Use with: openclaw config set agents.defaults.model ollama/${result.model?.modelId}`);
+    console.log(`Use with: jarvis config set agents.defaults.model ollama/${result.model?.modelId}`);
   } else {
     console.log("❌ Installation failed:", result.message);
   }
@@ -107,22 +107,22 @@ async function main() {
 
   // Step 6: Usage instructions
   console.log("📚 Step 6: Using Local Models\n");
-  console.log("After installing a model, configure OpenClaw:");
-  console.log(`  openclaw config set agents.defaults.model ollama/${recommendations[0]?.model.ollamaModelName}`);
+  console.log("After installing a model, configure Jarvis:");
+  console.log(`  jarvis config set agents.defaults.model ollama/${recommendations[0]?.model.ollamaModelName}`);
   console.log();
   console.log("Then use it:");
-  console.log('  openclaw message send "Hello from local AI!"');
+  console.log('  jarvis message send "Hello from local AI!"');
   console.log();
   console.log("Or specify the model directly:");
-  console.log(`  openclaw message send "Hello!" --model ollama/${recommendations[0]?.model.ollamaModelName}`);
+  console.log(`  jarvis message send "Hello!" --model ollama/${recommendations[0]?.model.ollamaModelName}`);
   console.log();
 
   // Additional commands
   console.log("🛠️  Useful Commands:\n");
-  console.log("  openclaw local-models info         - Show system info");
-  console.log("  openclaw local-models list         - List available models");
-  console.log("  openclaw local-models list -i      - List installed models");
-  console.log("  openclaw local-models status       - Check backend status");
+  console.log("  jarvis local-models info         - Show system info");
+  console.log("  jarvis local-models list         - List available models");
+  console.log("  jarvis local-models list -i      - List installed models");
+  console.log("  jarvis local-models status       - Check backend status");
   console.log("  ollama list                        - List Ollama models");
   console.log("  ollama pull <model>                - Download a model");
   console.log("  ollama rm <model>                  - Remove a model");

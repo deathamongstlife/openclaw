@@ -5,7 +5,7 @@ vi.mock("../pi-model-discovery.js", () => ({
   discoverModels: vi.fn(() => ({ find: vi.fn(() => null) })),
 }));
 
-import type { OpenClawConfig } from "../../config/config.js";
+import type { JarvisConfig } from "../../config/config.js";
 import { buildInlineProviderModels, resolveModel } from "./model.js";
 import {
   buildOpenAICodexForwardCompatExpectation,
@@ -48,7 +48,7 @@ function expectResolvedForwardCompatFallback(params: {
   provider: string;
   id: string;
   expectedModel: Record<string, unknown>;
-  cfg?: OpenClawConfig;
+  cfg?: JarvisConfig;
 }) {
   const result = resolveModel(params.provider, params.id, "/tmp/agent", params.cfg);
   expect(result.error).toBeUndefined();
@@ -231,7 +231,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as unknown as OpenClawConfig);
+    } as unknown as JarvisConfig);
 
     expect(result.error).toBeUndefined();
     expect(Array.isArray(result.model?.input)).toBe(true);
@@ -248,7 +248,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
 
     const result = resolveModel("custom", "missing-model", "/tmp/agent", cfg);
 
@@ -268,7 +268,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
 
     // Requesting a non-listed model forces the providerCfg fallback branch.
     const result = resolveModel("custom", "missing-model", "/tmp/agent", cfg);
@@ -294,7 +294,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
 
     const result = resolveModel("custom", "missing-model", "/tmp/agent", cfg);
 
@@ -348,7 +348,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
 
     const result = resolveModel("custom", "model-b", "/tmp/agent", cfg);
 
@@ -375,7 +375,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
 
     const result = resolveModel("custom", "model-b", "/tmp/agent", cfg);
 
@@ -418,7 +418,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
 
     const result = resolveModel("onehub", "glm-5", "/tmp/agent", cfg);
 
@@ -477,7 +477,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
 
     const result = resolveModel("qwen", "qwen3-coder-plus", "/tmp/agent", cfg);
 
@@ -534,7 +534,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as unknown as OpenClawConfig;
+    } as unknown as JarvisConfig;
 
     const result = resolveModel("openai", "gpt-5.4", "/tmp/agent", cfg);
 
@@ -695,7 +695,7 @@ describe("resolveModel", () => {
     // This test verifies the ordering: codex fallback must fire BEFORE the generic providerCfg fallback.
     // If ordering is wrong, the generic fallback would use api: "openai-responses" (the default)
     // instead of "openai-codex-responses".
-    const cfg: OpenClawConfig = {
+    const cfg: JarvisConfig = {
       models: {
         providers: {
           "openai-codex": {
@@ -704,7 +704,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as unknown as OpenClawConfig;
+    } as unknown as JarvisConfig;
 
     expectResolvedForwardCompatFallback({
       provider: "openai-codex",
@@ -721,7 +721,7 @@ describe("resolveModel", () => {
   it("uses codex fallback when inline model omits api (#39682)", () => {
     mockOpenAICodexTemplateModel();
 
-    const cfg: OpenClawConfig = {
+    const cfg: JarvisConfig = {
       models: {
         providers: {
           "openai-codex": {
@@ -731,7 +731,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as unknown as OpenClawConfig;
+    } as unknown as JarvisConfig;
 
     const result = resolveModel("openai-codex", "gpt-5.4", "/tmp/agent", cfg);
     expect(result.error).toBeUndefined();
@@ -747,7 +747,7 @@ describe("resolveModel", () => {
   it("normalizes openai-codex gpt-5.4 overrides away from /v1/responses", () => {
     mockOpenAICodexTemplateModel();
 
-    const cfg: OpenClawConfig = {
+    const cfg: JarvisConfig = {
       models: {
         providers: {
           "openai-codex": {
@@ -756,7 +756,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as unknown as OpenClawConfig;
+    } as unknown as JarvisConfig;
 
     expectResolvedForwardCompatFallback({
       provider: "openai-codex",
@@ -774,7 +774,7 @@ describe("resolveModel", () => {
   it("does not rewrite openai baseUrl when openai-codex api stays non-codex", () => {
     mockOpenAICodexTemplateModel();
 
-    const cfg: OpenClawConfig = {
+    const cfg: JarvisConfig = {
       models: {
         providers: {
           "openai-codex": {
@@ -783,7 +783,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as unknown as OpenClawConfig;
+    } as unknown as JarvisConfig;
 
     expectResolvedForwardCompatFallback({
       provider: "openai-codex",
@@ -844,7 +844,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as unknown as OpenClawConfig;
+    } as unknown as JarvisConfig;
 
     const result = resolveModel("anthropic", "claude-sonnet-4-5", "/tmp/agent", cfg);
     expect(result.error).toBeUndefined();
@@ -872,7 +872,7 @@ describe("resolveModel", () => {
           },
         },
       },
-    } as unknown as OpenClawConfig;
+    } as unknown as JarvisConfig;
 
     const result = resolveModel("anthropic", "claude-sonnet-4-5", "/tmp/agent", cfg);
     expect(result.error).toBeUndefined();

@@ -1,5 +1,5 @@
 /**
- * Local model support for OpenClaw.
+ * Local model support for Jarvis.
  * Provides automatic installation and management of local AI models.
  */
 

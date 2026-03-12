@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 import OpenClawIPC
-import OpenClawKit
+import JarvisKit
 
 actor MacNodeRuntime {
     private let cameraCapture = CameraCaptureService()
@@ -375,7 +375,7 @@ actor MacNodeRuntime {
 
     private func handleA2UIPush(_ req: BridgeInvokeRequest) async throws -> BridgeInvokeResponse {
         let command = req.command
-        let messages: [OpenClawKit.AnyCodable]
+        let messages: [JarvisKit.AnyCodable]
         if command == OpenClawCanvasA2UICommand.pushJSONL.rawValue {
             let params = try Self.decodeParams(OpenClawCanvasA2UIPushJSONLParams.self, from: req.paramsJSON)
             messages = try OpenClawCanvasA2UIJSONL.decodeMessagesFromJSONL(params.jsonl)

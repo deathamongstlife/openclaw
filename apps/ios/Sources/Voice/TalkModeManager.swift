@@ -1,6 +1,6 @@
 import AVFAudio
 import OpenClawChatUI
-import OpenClawKit
+import JarvisKit
 import OpenClawProtocol
 import Foundation
 import Observation

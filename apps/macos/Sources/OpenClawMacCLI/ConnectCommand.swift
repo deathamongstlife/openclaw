@@ -1,6 +1,6 @@
 import Foundation
 import OpenClawDiscovery
-import OpenClawKit
+import JarvisKit
 import OpenClawProtocol
 
 struct ConnectOptions {

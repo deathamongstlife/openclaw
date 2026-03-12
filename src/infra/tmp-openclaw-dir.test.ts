@@ -1,8 +1,8 @@
 import path from "node:path";
 import { describe, expect, it, vi } from "vitest";
-import { POSIX_OPENCLAW_TMP_DIR, resolvePreferredOpenClawTmpDir } from "./tmp-openclaw-dir.js";
+import { POSIX_OPENCLAW_TMP_DIR, resolvePreferredJarvisTmpDir } from "./tmp-openclaw-dir.js";
 
-type TmpDirOptions = NonNullable<Parameters<typeof resolvePreferredOpenClawTmpDir>[0]>;
+type TmpDirOptions = NonNullable<Parameters<typeof resolvePreferredJarvisTmpDir>[0]>;
 
 function fallbackTmp(uid = 501) {
   return path.join("/var/fallback", `openclaw-${uid}`);
@@ -51,7 +51,7 @@ function resolveWithReadOnlyTmpFallback(params: {
   chmodSync?: NonNullable<TmpDirOptions["chmodSync"]>;
   warn?: NonNullable<TmpDirOptions["warn"]>;
 }) {
-  return resolvePreferredOpenClawTmpDir({
+  return resolvePreferredJarvisTmpDir({
     accessSync: readOnlyTmpAccessSync(),
     lstatSync: vi.fn((target: string) => {
       if (target === POSIX_OPENCLAW_TMP_DIR) {
@@ -118,7 +118,7 @@ function resolveWithMocks(params: {
   const mkdirSync = vi.fn();
   const getuid = vi.fn(() => uid);
   const tmpdir = vi.fn(() => params.tmpdirPath ?? "/var/fallback");
-  const resolved = resolvePreferredOpenClawTmpDir({
+  const resolved = resolvePreferredJarvisTmpDir({
     accessSync,
     chmodSync,
     lstatSync: wrappedLstatSync,
@@ -130,8 +130,8 @@ function resolveWithMocks(params: {
   return { resolved, accessSync, lstatSync: wrappedLstatSync, mkdirSync, tmpdir };
 }
 
-describe("resolvePreferredOpenClawTmpDir", () => {
-  it("prefers /tmp/openclaw when it already exists and is writable", () => {
+describe("resolvePreferredJarvisTmpDir", () => {
+  it("prefers /tmp/jarvis when it already exists and is writable", () => {
     const lstatSync: NonNullable<TmpDirOptions["lstatSync"]> = vi.fn(() => ({
       isDirectory: () => true,
       isSymbolicLink: () => false,
@@ -146,7 +146,7 @@ describe("resolvePreferredOpenClawTmpDir", () => {
     expect(tmpdir).not.toHaveBeenCalled();
   });
 
-  it("prefers /tmp/openclaw when it does not exist but /tmp is writable", () => {
+  it("prefers /tmp/jarvis when it does not exist but /tmp is writable", () => {
     const lstatSyncMock = missingThenSecureLstat();
 
     const { resolved, accessSync, mkdirSync, tmpdir } = resolveWithMocks({
@@ -159,7 +159,7 @@ describe("resolvePreferredOpenClawTmpDir", () => {
     expect(tmpdir).not.toHaveBeenCalled();
   });
 
-  it("falls back to os.tmpdir()/openclaw when /tmp/openclaw is not a directory", () => {
+  it("falls back to os.tmpdir()/jarvis when /tmp/jarvis is not a directory", () => {
     const lstatSync = vi.fn(() => makeDirStat({ isDirectory: false, mode: 0o100644 }));
     const { resolved, tmpdir } = resolveWithMocks({ lstatSync });
 
@@ -167,7 +167,7 @@ describe("resolvePreferredOpenClawTmpDir", () => {
     expect(tmpdir).toHaveBeenCalled();
   });
 
-  it("falls back to os.tmpdir()/openclaw when /tmp is not writable", () => {
+  it("falls back to os.tmpdir()/jarvis when /tmp is not writable", () => {
     const accessSync = vi.fn((target: string) => {
       if (target === "/tmp") {
         throw new Error("read-only");
@@ -185,15 +185,15 @@ describe("resolvePreferredOpenClawTmpDir", () => {
     expect(tmpdir).toHaveBeenCalled();
   });
 
-  it("falls back when /tmp/openclaw is a symlink", () => {
+  it("falls back when /tmp/jarvis is a symlink", () => {
     expectFallsBackToOsTmpDir({ lstatSync: symlinkTmpDirLstat() });
   });
 
-  it("falls back when /tmp/openclaw is not owned by the current user", () => {
+  it("falls back when /tmp/jarvis is not owned by the current user", () => {
     expectFallsBackToOsTmpDir({ lstatSync: vi.fn(() => makeDirStat({ uid: 0 })) });
   });
 
-  it("falls back when /tmp/openclaw is group/other writable", () => {
+  it("falls back when /tmp/jarvis is group/other writable", () => {
     expectFallsBackToOsTmpDir({ lstatSync: vi.fn(() => makeDirStat({ mode: 0o40777 })) });
   });
 
@@ -206,7 +206,7 @@ describe("resolvePreferredOpenClawTmpDir", () => {
         lstatSync,
         fallbackLstatSync,
       }),
-    ).toThrow(/Unsafe fallback OpenClaw temp dir/);
+    ).toThrow(/Unsafe fallback Jarvis temp dir/);
   });
 
   it("creates fallback directory when missing, then validates ownership and mode", () => {

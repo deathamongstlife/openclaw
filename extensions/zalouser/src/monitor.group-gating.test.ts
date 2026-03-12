@@ -1,4 +1,4 @@
-import type { OpenClawConfig, PluginRuntime, RuntimeEnv } from "openclaw/plugin-sdk/zalouser";
+import type { JarvisConfig, PluginRuntime, RuntimeEnv } from "openclaw/plugin-sdk/zalouser";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import "./monitor.send-mocks.js";
 import { __testing } from "./monitor.js";
@@ -26,7 +26,7 @@ function createAccount(): ResolvedZalouserAccount {
   };
 }
 
-function createConfig(): OpenClawConfig {
+function createConfig(): JarvisConfig {
   return {
     channels: {
       zalouser: {
@@ -135,7 +135,7 @@ function installRuntime(params: {
       },
       groups: {
         resolveRequireMention: vi.fn((input) => {
-          const cfg = input.cfg as OpenClawConfig;
+          const cfg = input.cfg as JarvisConfig;
           const groupCfg = cfg.channels?.zalouser?.groups ?? {};
           const groupEntry = input.groupId ? groupCfg[input.groupId] : undefined;
           const defaultEntry = groupCfg["*"];

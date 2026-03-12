@@ -1,5 +1,5 @@
 import OpenClawChatUI
-import OpenClawKit
+import JarvisKit
 import SwiftUI
 
 struct ChatSheet: View {

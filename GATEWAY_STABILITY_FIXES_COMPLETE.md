@@ -1,7 +1,7 @@
 # Gateway Stability Fixes - Complete Implementation Summary
 
 ## Overview
-This document details all fixes applied to resolve critical gateway stability issues in OpenClaw.
+This document details all fixes applied to resolve critical gateway stability issues in Jarvis.
 
 ## Fixed Issues
 
@@ -148,19 +148,19 @@ channel: targetChannel,
 ### Test #1: macOS Gateway Restart Cycles
 ```bash
 # On macOS with launchd
-launchctl list | grep openclaw
-openclaw gateway restart
+launchctl list | grep jarvis
+jarvis gateway restart
 # Wait 5 seconds
-launchctl list | grep openclaw  # Should show gateway running with new PID
+launchctl list | grep jarvis  # Should show gateway running with new PID
 # Check logs
-tail -f /tmp/openclaw-gateway.log  # Should show restart sequence without errors
+tail -f /tmp/jarvis-gateway.log  # Should show restart sequence without errors
 ```
 
 ### Test #2: Telegram Polling Under Network Stress
 ```bash
 # Simulate network issues with iptables or proxy
 # Watch logs for circuit breaker activation
-grep "circuit-breaker" /tmp/openclaw-gateway.log
+grep "circuit-breaker" /tmp/jarvis-gateway.log
 # Verify gateway stays stable (doesn't crash)
 # Verify other channels continue working
 ```
@@ -168,7 +168,7 @@ grep "circuit-breaker" /tmp/openclaw-gateway.log
 ### Test #3: Inter-Session Message Routing
 ```bash
 # From Discord:
-!openclaw send a message to @telegram-user
+!jarvis send a message to @telegram-user
 # Verify message routes to Telegram, not webchat
 # Check gateway logs for routing validation
 ```
@@ -176,20 +176,20 @@ grep "circuit-breaker" /tmp/openclaw-gateway.log
 ### Test #4: Session Cleanup
 ```bash
 # Create test automated sessions
-openclaw cron add "test-job" "echo test" "*/5 * * * *"
+jarvis cron add "test-job" "echo test" "*/5 * * * *"
 # Wait 24+ hours
 # Check logs for cleanup activity
-grep "Cleaned up automated session" /tmp/openclaw-gateway.log
+grep "Cleaned up automated session" /tmp/jarvis-gateway.log
 # Verify old sessions are removed
-openclaw sessions list
+jarvis sessions list
 ```
 
 ### Test #5: TUI Real-Time Updates
 ```bash
 # Start TUI
-openclaw chat
+jarvis chat
 # In another terminal, send a message to the session
-openclaw message send "test message" --session agent:main:main
+jarvis message send "test message" --session agent:main:main
 # Verify message appears in TUI immediately
 # Verify no events from other sessions appear
 ```
@@ -234,16 +234,16 @@ Key log patterns to monitor:
 
 ```bash
 # Gateway restart success
-grep "delaying exit for launchd" /tmp/openclaw-gateway.log
+grep "delaying exit for launchd" /tmp/jarvis-gateway.log
 
 # Telegram circuit breaker
-grep "Circuit breaker" /tmp/openclaw-gateway.log
+grep "Circuit breaker" /tmp/jarvis-gateway.log
 
 # Session routing validation
-grep "Routing validation" /tmp/openclaw-gateway.log
+grep "Routing validation" /tmp/jarvis-gateway.log
 
 # Session cleanup
-grep "Cleaned up automated session" /tmp/openclaw-gateway.log
+grep "Cleaned up automated session" /tmp/jarvis-gateway.log
 ```
 
 ---

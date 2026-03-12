@@ -1,4 +1,4 @@
-package ai.openclaw.app.node
+package ai.jarvis.app.node
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -20,7 +20,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
-import ai.openclaw.app.BuildConfig
+import ai.jarvis.app.BuildConfig
 import kotlin.coroutines.resume
 
 class CanvasController {

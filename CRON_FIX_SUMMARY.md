@@ -1,8 +1,8 @@
-# OpenClaw Cron System - Fix Summary
+# Jarvis Cron System - Fix Summary
 
 ## Overview
 
-I have identified and fixed the CRITICAL bugs that were causing the OpenClaw cron system to be completely broken. Jobs were enqueueing but never executing due to three interconnected issues.
+I have identified and fixed the CRITICAL bugs that were causing the Jarvis cron system to be completely broken. Jobs were enqueueing but never executing due to three interconnected issues.
 
 ## What Was Fixed
 
@@ -94,17 +94,17 @@ I have identified and fixed the CRITICAL bugs that were causing the OpenClaw cro
 
 ```bash
 # 1. Start gateway with a cron job
-openclaw cron add --every 1h "Test job" "echo 'test'"
+jarvis cron add --every 1h "Test job" "echo 'test'"
 
 # 2. Kill gateway while job is "running" (simulates crash)
-kill -9 $(pgrep -f openclaw-gateway)
+kill -9 $(pgrep -f jarvis-gateway)
 
 # 3. Restart gateway
-openclaw gateway run
+jarvis gateway run
 
 # 4. Check logs for recovery
-grep "stuck marker recovery" ~/.openclaw/logs/gateway.log
-grep "clearing stuck running marker" ~/.openclaw/logs/gateway.log
+grep "stuck marker recovery" ~/.jarvis/logs/gateway.log
+grep "clearing stuck running marker" ~/.jarvis/logs/gateway.log
 
 # Expected: Recovery timer fires within 10 seconds, marker cleared within 5 minutes
 ```
@@ -113,31 +113,31 @@ grep "clearing stuck running marker" ~/.openclaw/logs/gateway.log
 
 ```bash
 # 1. Create a long-running job
-openclaw cron add --id slow-job --every 1h "Slow test" "sleep 60"
+jarvis cron add --id slow-job --every 1h "Slow test" "sleep 60"
 
 # 2. Manually trigger it
-openclaw cron run slow-job &
+jarvis cron run slow-job &
 
 # 3. While it's running, trigger again
 sleep 2
-openclaw cron run slow-job
+jarvis cron run slow-job
 
 # Expected: Second trigger executes immediately, no deadlock
 # Verify: Both should complete (check logs)
-grep "manual run execution" ~/.openclaw/logs/gateway.log
+grep "manual run execution" ~/.jarvis/logs/gateway.log
 ```
 
 ### Verify Fix #3: Gateway Restart
 
 ```bash
 # 1. Create some cron jobs
-openclaw cron add --every 5m "Restart test" "echo 'test'"
+jarvis cron add --every 5m "Restart test" "echo 'test'"
 
 # 2. Reload config
-kill -USR1 $(pgrep -f openclaw-gateway)
+kill -USR1 $(pgrep -f jarvis-gateway)
 
 # 3. Check logs
-grep "cron: starting service\|cron: started" ~/.openclaw/logs/gateway.log
+grep "cron: starting service\|cron: started" ~/.jarvis/logs/gateway.log
 
 # Expected: See "cron: started (timerArmed: true)" after restart
 ```

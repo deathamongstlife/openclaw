@@ -3,8 +3,8 @@
 
 set -euo pipefail
 
-OUTPUT_DIR="/tmp/claude/---modal-volumes-vo-pkwyL871BwojYJgLZ0F1rM-claude-workspace-r79767525-gmail-com-deathamongstlife-openclaw/tasks"
-RESULTS_DIR="/workspace/claude-workspace/r79767525_gmail.com/deathamongstlife/openclaw/bugfix-results"
+OUTPUT_DIR="/tmp/claude/---modal-volumes-vo-pkwyL871BwojYJgLZ0F1rM-claude-workspace-r79767525-gmail-com-deathamongstlife-jarvis/tasks"
+RESULTS_DIR="/workspace/claude-workspace/r79767525_gmail.com/deathamongstlife/jarvis/bugfix-results"
 TIMESTAMP=$(date '+%Y%m%d-%H%M%S')
 
 mkdir -p "$RESULTS_DIR"
@@ -126,7 +126,7 @@ cat >> "${RESULTS_DIR}/MASTER_SUMMARY.md" <<EOF
 1. Review individual category summaries in \`$RESULTS_DIR/\`
 2. Apply file modifications listed in each \`modified-files.txt\`
 3. Test changes comprehensively
-4. Build OpenClaw with all fixes
+4. Build Jarvis with all fixes
 5. Create comprehensive changelog
 6. Fork to J.A.R.V.I.S.
 

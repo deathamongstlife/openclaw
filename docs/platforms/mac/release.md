@@ -1,12 +1,12 @@
 ---
-summary: "OpenClaw macOS release checklist (Sparkle feed, packaging, signing)"
+summary: "Jarvis macOS release checklist (Sparkle feed, packaging, signing)"
 read_when:
-  - Cutting or validating a OpenClaw macOS release
+  - Cutting or validating a Jarvis macOS release
   - Updating the Sparkle appcast or feed assets
 title: "macOS Release"
 ---
 
-# OpenClaw macOS release (Sparkle)
+# Jarvis macOS release (Sparkle)
 
 This app now ships Sparkle auto-updates. Release builds must be Developer ID–signed, zipped, and published with a signed appcast entry.
 
@@ -47,10 +47,10 @@ scripts/package-mac-dist.sh
 # `package-mac-dist.sh` already creates the zip + DMG.
 # If you used `package-mac-app.sh` directly instead, create them manually:
 # If you want notarization/stapling in this step, use the NOTARIZE command below.
-ditto -c -k --sequesterRsrc --keepParent dist/OpenClaw.app dist/OpenClaw-2026.3.9.zip
+ditto -c -k --sequesterRsrc --keepParent dist/Jarvis.app dist/Jarvis-2026.3.9.zip
 
 # Optional: build a styled DMG for humans (drag to /Applications)
-scripts/create-dmg.sh dist/OpenClaw.app dist/OpenClaw-2026.3.9.dmg
+scripts/create-dmg.sh dist/Jarvis.app dist/Jarvis-2026.3.9.dmg
 
 # Recommended: build + notarize/staple zip + DMG
 # First, create a keychain profile once:
@@ -64,7 +64,7 @@ SIGN_IDENTITY="Developer ID Application: <Developer Name> (<TEAMID>)" \
 scripts/package-mac-dist.sh
 
 # Optional: ship dSYM alongside the release
-ditto -c -k --keepParent apps/macos/.build/release/OpenClaw.app.dSYM dist/OpenClaw-2026.3.9.dSYM.zip
+ditto -c -k --keepParent apps/macos/.build/release/Jarvis.app.dSYM dist/Jarvis-2026.3.9.dSYM.zip
 ```
 
 ## Appcast entry
@@ -72,7 +72,7 @@ ditto -c -k --keepParent apps/macos/.build/release/OpenClaw.app.dSYM dist/OpenCl
 Use the release note generator so Sparkle renders formatted HTML notes:
 
 ```bash
-SPARKLE_PRIVATE_KEY_FILE=/path/to/ed25519-private-key scripts/make_appcast.sh dist/OpenClaw-2026.3.9.zip https://raw.githubusercontent.com/openclaw/openclaw/main/appcast.xml
+SPARKLE_PRIVATE_KEY_FILE=/path/to/ed25519-private-key scripts/make_appcast.sh dist/Jarvis-2026.3.9.zip https://raw.githubusercontent.com/openclaw/openclaw/main/appcast.xml
 ```
 
 Generates HTML release notes from `CHANGELOG.md` (via [`scripts/changelog-to-html.sh`](https://github.com/openclaw/openclaw/blob/main/scripts/changelog-to-html.sh)) and embeds them in the appcast entry.
@@ -80,7 +80,7 @@ Commit the updated `appcast.xml` alongside the release assets (zip + dSYM) when 
 
 ## Publish & verify
 
-- Upload `OpenClaw-2026.3.9.zip` (and `OpenClaw-2026.3.9.dSYM.zip`) to the GitHub release for tag `v2026.3.9`.
+- Upload `Jarvis-2026.3.9.zip` (and `Jarvis-2026.3.9.dSYM.zip`) to the GitHub release for tag `v2026.3.9`.
 - Ensure the raw appcast URL matches the baked feed: `https://raw.githubusercontent.com/openclaw/openclaw/main/appcast.xml`.
 - Sanity checks:
   - `curl -I https://raw.githubusercontent.com/openclaw/openclaw/main/appcast.xml` returns 200.

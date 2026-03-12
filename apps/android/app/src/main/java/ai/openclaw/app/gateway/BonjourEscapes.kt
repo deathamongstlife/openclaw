@@ -1,4 +1,4 @@
-package ai.openclaw.app.gateway
+package ai.jarvis.app.gateway
 
 object BonjourEscapes {
   fun decode(input: String): String {

@@ -1,7 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import type {
   GatewayRequestHandlerOptions,
-  OpenClawPluginApi,
+  JarvisPluginApi,
 } from "openclaw/plugin-sdk/voice-call";
 import { registerVoiceCallCli } from "./src/cli.js";
 import {
@@ -148,7 +148,7 @@ const voiceCallPlugin = {
   name: "Voice Call",
   description: "Voice-call plugin with Telnyx/Twilio/Plivo providers",
   configSchema: voiceCallConfigSchema,
-  register(api: OpenClawPluginApi) {
+  register(api: JarvisPluginApi) {
     const config = resolveVoiceCallConfig(voiceCallConfigSchema.parse(api.pluginConfig));
     const validation = validateProviderConfig(config);
 

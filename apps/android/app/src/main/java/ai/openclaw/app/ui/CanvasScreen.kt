@@ -1,4 +1,4 @@
-package ai.openclaw.app.ui
+package ai.jarvis.app.ui
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
-import ai.openclaw.app.MainViewModel
+import ai.jarvis.app.MainViewModel
 
 @SuppressLint("SetJavaScriptEnabled")
 @Composable

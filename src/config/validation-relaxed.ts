@@ -3,7 +3,7 @@
  * Addresses issue #43320 - Config validation rejects valid nested objects
  */
 
-import type { OpenClawConfig } from "./types.js";
+import type { JarvisConfig } from "./types.js";
 
 export type ValidationResult = {
   valid: boolean;
@@ -99,7 +99,7 @@ export function validateConfigRelaxed(config: unknown): ValidationResult {
     return { valid: false, errors, warnings };
   }
 
-  const cfg = config as Partial<OpenClawConfig>;
+  const cfg = config as Partial<JarvisConfig>;
 
   if (cfg.gateway && isPlainObject(cfg.gateway)) {
     if (cfg.gateway.port !== undefined) {

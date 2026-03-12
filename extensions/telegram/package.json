@@ -2,7 +2,7 @@
   "name": "@openclaw/telegram",
   "version": "2026.3.9",
   "private": true,
-  "description": "OpenClaw Telegram channel plugin",
+  "description": "Jarvis Telegram channel plugin",
   "type": "module",
   "openclaw": {
     "extensions": [

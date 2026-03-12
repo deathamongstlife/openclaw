@@ -1,4 +1,4 @@
-package ai.openclaw.app.protocol
+package ai.jarvis.app.protocol
 
 enum class OpenClawCapability(val rawValue: String) {
   Canvas("canvas"),

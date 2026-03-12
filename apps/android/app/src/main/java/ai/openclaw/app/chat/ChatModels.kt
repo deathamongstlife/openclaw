@@ -1,4 +1,4 @@
-package ai.openclaw.app.chat
+package ai.jarvis.app.chat
 
 data class ChatMessage(
   val id: String,

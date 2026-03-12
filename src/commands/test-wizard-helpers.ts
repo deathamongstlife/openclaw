@@ -74,7 +74,7 @@ export function createAuthTestLifecycle(envKeys: string[]): AuthTestLifecycle {
   };
 }
 
-export function requireOpenClawAgentDir(): string {
+export function requireJarvisAgentDir(): string {
   const agentDir = process.env.OPENCLAW_AGENT_DIR;
   if (!agentDir) {
     throw new Error("OPENCLAW_AGENT_DIR not set");

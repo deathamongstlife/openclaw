@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { captureEnv } from "../test-utils/env.js";
 import {
   clearInternalHooks,
@@ -44,7 +44,7 @@ describe("loader", () => {
 
   function createEnabledHooksConfig(
     handlers?: Array<{ event: string; module: string; export?: string }>,
-  ): OpenClawConfig {
+  ): JarvisConfig {
     return {
       hooks: {
         internal: handlers ? { enabled: true, handlers } : { enabled: true },
@@ -73,14 +73,14 @@ describe("loader", () => {
         },
       ]);
 
-    const expectNoCommandHookRegistration = async (cfg: OpenClawConfig) => {
+    const expectNoCommandHookRegistration = async (cfg: JarvisConfig) => {
       const count = await loadInternalHooks(cfg, tmpDir);
       expect(count).toBe(0);
       expect(getRegisteredEventKeys()).not.toContain("command:new");
     };
 
     it("should return 0 when hooks are not enabled", async () => {
-      const cfg: OpenClawConfig = {
+      const cfg: JarvisConfig = {
         hooks: {
           internal: {
             enabled: false,
@@ -93,7 +93,7 @@ describe("loader", () => {
     });
 
     it("should return 0 when hooks config is missing", async () => {
-      const cfg: OpenClawConfig = {};
+      const cfg: JarvisConfig = {};
       const count = await loadInternalHooks(cfg, tmpDir);
       expect(count).toBe(0);
     });

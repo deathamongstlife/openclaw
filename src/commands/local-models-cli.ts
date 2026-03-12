@@ -124,7 +124,7 @@ async function infoCommand(): Promise<void> {
       console.log(chalk.dim(`  ${rec.reason}`));
 
       if (!isInstalled) {
-        console.log(chalk.dim(`  Install: openclaw local-models install ${rec.model.id}`));
+        console.log(chalk.dim(`  Install: jarvis local-models install ${rec.model.id}`));
       }
       console.log();
     }
@@ -144,7 +144,7 @@ async function listCommand(options: { installed?: boolean }): Promise<void> {
 
     if (installed.length === 0) {
       console.log(chalk.yellow("No models installed yet"));
-      console.log(chalk.dim("Install a model with: openclaw local-models install <model-id>"));
+      console.log(chalk.dim("Install a model with: jarvis local-models install <model-id>"));
       return;
     }
 
@@ -200,7 +200,7 @@ async function installCommand(modelId: string, options: { quantization?: string 
 
   if (result.success) {
     console.log(chalk.green.bold("\n✓ Installation Complete!\n"));
-    console.log(chalk.dim(`Use with: openclaw config set agents.defaults.model ollama/${modelId}`));
+    console.log(chalk.dim(`Use with: jarvis config set agents.defaults.model ollama/${modelId}`));
   } else {
     console.log(chalk.red.bold("\n✗ Installation Failed\n"));
     console.log(chalk.red(result.message));
@@ -241,7 +241,7 @@ async function quickInstallCommand(): Promise<void> {
     if (result.model) {
       console.log(chalk.dim(`Installed: ${result.model.displayName}`));
       console.log(
-        chalk.dim(`Use with: openclaw message send "Hello!" --model ollama/${result.model.id}`),
+        chalk.dim(`Use with: jarvis message send "Hello!" --model ollama/${result.model.id}`),
       );
     }
   } else {

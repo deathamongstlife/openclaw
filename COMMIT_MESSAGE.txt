@@ -1,4 +1,4 @@
-feat: OpenClaw → J.A.R.V.I.S. Complete Upgrade
+feat: Jarvis → J.A.R.V.I.S. Complete Upgrade
 
 Comprehensive stability and reliability improvements addressing 102+ critical bugs across all major components.
 

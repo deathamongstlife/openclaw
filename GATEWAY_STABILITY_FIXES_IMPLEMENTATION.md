@@ -1,13 +1,13 @@
 # Gateway Stability Fixes - Implementation Summary
 
 ## Overview
-This document tracks the implementation of critical gateway stability fixes for OpenClaw issues #43311, #43035, #42918, #43187, #43233, #43178, #43318, #43193, and #43341.
+This document tracks the implementation of critical gateway stability fixes for Jarvis issues #43311, #43035, #42918, #43187, #43233, #43178, #43318, #43193, and #43341.
 
 ## Issue Analysis
 
 ### 1. Gateway Self-Decapitation on macOS (#43311, #43035, #42918)
 **Root Cause**:
-- `restartGatewayProcessWithFreshPid()` calls `triggerOpenClawRestart()` which uses `launchctl kickstart -k`
+- `restartGatewayProcessWithFreshPid()` calls `triggerJarvisRestart()` which uses `launchctl kickstart -k`
 - When kickstart fails (service bootout), falls back to `bootstrap + kickstart`
 - However, the respawn logic exits immediately after triggering restart
 - launchd may not have time to re-register the service before process exits

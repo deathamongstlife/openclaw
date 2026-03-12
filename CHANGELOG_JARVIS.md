@@ -1,12 +1,12 @@
 # Changelog - J.A.R.V.I.S. Upgrade Edition
 
-All notable changes to the OpenClaw → J.A.R.V.I.S. upgrade are documented in this file.
+All notable changes to the Jarvis → J.A.R.V.I.S. upgrade are documented in this file.
 
 ## [2.0.0] - 2026-03-11
 
 ### 🎉 Major Release: J.A.R.V.I.S. Upgrade
 
-This release represents a comprehensive overhaul of the OpenClaw platform, fixing **102+ critical bugs** from the openclaw/openclaw repository and adding extensive new features. J.A.R.V.I.S. (Just A Rather Very Intelligent System) builds upon OpenClaw's foundation with dramatically improved stability, new AI model support, enhanced dashboard capabilities, and comprehensive bug fixes across all major subsystems.
+This release represents a comprehensive overhaul of the Jarvis platform, fixing **102+ critical bugs** from the jarvis/jarvis repository and adding extensive new features. J.A.R.V.I.S. (Just A Rather Very Intelligent System) builds upon Jarvis's foundation with dramatically improved stability, new AI model support, enhanced dashboard capabilities, and comprehensive bug fixes across all major subsystems.
 
 **Statistics:**
 - **Issues Fixed**: 102+
@@ -19,7 +19,7 @@ This release represents a comprehensive overhaul of the OpenClaw platform, fixin
 
 ### ⚠️ Breaking Changes
 
-**NONE** - All changes are fully backward compatible with existing OpenClaw configurations and deployments.
+**NONE** - All changes are fully backward compatible with existing Jarvis configurations and deployments.
 
 ---
 
@@ -547,7 +547,7 @@ This release represents a comprehensive overhaul of the OpenClaw platform, fixin
 
 ### 🔄 Migration Guide
 
-**Upgrading from OpenClaw**
+**Upgrading from Jarvis**
 1. All configuration files remain compatible
 2. No database migrations required
 3. No breaking API changes
@@ -574,10 +574,10 @@ agents:
 
 ### 🙏 Contributors
 
-This release represents contributions from the OpenClaw community and comprehensive bug analysis across 500+ open issues in the openclaw/openclaw repository.
+This release represents contributions from the Jarvis community and comprehensive bug analysis across 500+ open issues in the jarvis/jarvis repository.
 
 **Special Thanks**
-- Original OpenClaw maintainers and contributors
+- Original Jarvis maintainers and contributors
 - Community members who reported issues
 - Testing and feedback from early adopters
 
@@ -585,9 +585,9 @@ This release represents contributions from the OpenClaw community and comprehens
 
 ### 📝 Notes
 
-**Project Rename: OpenClaw → J.A.R.V.I.S.**
+**Project Rename: Jarvis → J.A.R.V.I.S.**
 - J.A.R.V.I.S. = "Just A Rather Very Intelligent System"
-- Fork maintains full compatibility with OpenClaw
+- Fork maintains full compatibility with Jarvis
 - Enhanced stability and reliability
 - Extended feature set
 - Comprehensive bug fixes
@@ -609,7 +609,7 @@ This release represents contributions from the OpenClaw community and comprehens
 - [Coding Standards](CLAUDE_CODING_STANDARDS.md)
 
 **Related Issues**
-- OpenClaw Repository: 500+ issues analyzed
+- Jarvis Repository: 500+ issues analyzed
 - Critical Bugs Fixed: 102+ issues resolved
 - Community Feedback: Incorporated throughout
 
@@ -617,9 +617,9 @@ This release represents contributions from the OpenClaw community and comprehens
 
 ## Previous Releases
 
-For OpenClaw 1.x changelog history, see the full CHANGELOG.md file.
+For Jarvis 1.x changelog history, see the full CHANGELOG.md file.
 
 ---
 
 **J.A.R.V.I.S. 2.0.0 - The Intelligence Upgrade**
-*Built on OpenClaw. Enhanced for Excellence.*
+*Built on Jarvis. Enhanced for Excellence.*

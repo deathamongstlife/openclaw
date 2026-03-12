@@ -82,7 +82,7 @@ export class SandboxCleanupManager {
     logger.info("Starting orphaned container cleanup");
 
     try {
-      // Get all openclaw sandbox containers
+      // Get all jarvis sandbox containers
       const containers = await this.listSandboxContainers();
       logger.info("Found sandbox containers", { count: containers.length });
 

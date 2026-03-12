@@ -1,17 +1,17 @@
 ---
-title: "OpenClaw Architecture Overview"
-summary: "High-level architecture and system design of OpenClaw"
+title: "Jarvis Architecture Overview"
+summary: "High-level architecture and system design of Jarvis"
 ---
 
-# OpenClaw Architecture Overview
+# Jarvis Architecture Overview
 
-This document provides a comprehensive overview of OpenClaw's architecture, components, and design patterns.
+This document provides a comprehensive overview of Jarvis's architecture, components, and design patterns.
 
 ## System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         OpenClaw Gateway                        │
+│                         Jarvis Gateway                        │
 │                                                                 │
 │  ┌─────────────┐  ┌──────────────┐  ┌────────────────────┐   │
 │  │   Control   │  │   Agent      │  │   Session          │   │
@@ -48,7 +48,7 @@ This document provides a comprehensive overview of OpenClaw's architecture, comp
 
 ### 1. Gateway Server
 
-The Gateway is the central control plane for OpenClaw. It manages:
+The Gateway is the central control plane for Jarvis. It manages:
 - **Message routing** between channels and agents
 - **Session lifecycle** management
 - **Authentication and authorization**
@@ -78,7 +78,7 @@ The agent runtime executes AI-powered assistants with access to tools and contex
 
 ### 3. Channel Providers
 
-Channel providers connect OpenClaw to messaging platforms.
+Channel providers connect Jarvis to messaging platforms.
 
 **Supported Channels:**
 - **WhatsApp** (via web provider)
@@ -268,7 +268,7 @@ Background task scheduling and webhook handling.
 
 ### Plugin System
 
-OpenClaw supports extensions via:
+Jarvis supports extensions via:
 - **Channel plugins** (new messaging platforms)
 - **Tool plugins** (custom agent tools)
 - **Model provider plugins** (custom AI backends)
@@ -332,7 +332,7 @@ openclaw/
 ```
 [User Device]
     ↓
-[OpenClaw Gateway]
+[Jarvis Gateway]
     ↓
 [AI Provider APIs]
 ```
@@ -340,7 +340,7 @@ openclaw/
 ### Multi-Channel Remote
 
 ```
-[Channels] → [Reverse Proxy] → [OpenClaw Gateway] → [AI Providers]
+[Channels] → [Reverse Proxy] → [Jarvis Gateway] → [AI Providers]
               (with auth)       (on home server)
 ```
 

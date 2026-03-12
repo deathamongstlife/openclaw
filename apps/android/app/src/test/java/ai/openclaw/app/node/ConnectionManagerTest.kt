@@ -1,6 +1,6 @@
-package ai.openclaw.app.node
+package ai.jarvis.app.node
 
-import ai.openclaw.app.gateway.GatewayEndpoint
+import ai.jarvis.app.gateway.GatewayEndpoint
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test

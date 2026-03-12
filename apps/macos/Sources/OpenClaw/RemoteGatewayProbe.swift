@@ -1,6 +1,6 @@
 import Foundation
 import OpenClawIPC
-import OpenClawKit
+import JarvisKit
 
 enum RemoteGatewayAuthIssue: Equatable {
     case tokenRequired

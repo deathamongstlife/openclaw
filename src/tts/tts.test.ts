@@ -3,7 +3,7 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import { ensureCustomApiRegistered } from "../agents/custom-api-registry.js";
 import { getApiKeyForModel } from "../agents/model-auth.js";
 import { resolveModel } from "../agents/pi-embedded-runner/model.js";
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { withEnv } from "../test-utils/env.js";
 import * as tts from "./tts.js";
 
@@ -220,7 +220,7 @@ describe("tts", () => {
   });
 
   describe("resolveEdgeOutputFormat", () => {
-    const baseCfg: OpenClawConfig = {
+    const baseCfg: JarvisConfig = {
       agents: { defaults: { model: { primary: "openai/gpt-4o-mini" } } },
       messages: { tts: {} },
     };
@@ -241,7 +241,7 @@ describe("tts", () => {
                 edge: { outputFormat: "audio-24khz-96kbitrate-mono-mp3" },
               },
             },
-          } as OpenClawConfig,
+          } as JarvisConfig,
           expected: "audio-24khz-96kbitrate-mono-mp3",
         },
       ] as const;
@@ -319,7 +319,7 @@ describe("tts", () => {
   });
 
   describe("summarizeText", () => {
-    const baseCfg: OpenClawConfig = {
+    const baseCfg: JarvisConfig = {
       agents: { defaults: { model: { primary: "openai/gpt-4o-mini" } } },
       messages: { tts: {} },
     };
@@ -364,7 +364,7 @@ describe("tts", () => {
     });
 
     it("uses summaryModel override when configured", async () => {
-      const cfg: OpenClawConfig = {
+      const cfg: JarvisConfig = {
         agents: { defaults: { model: { primary: "anthropic/claude-opus-4-5" } } },
         messages: { tts: { summaryModel: "openai/gpt-4.1-mini" } },
       };
@@ -459,7 +459,7 @@ describe("tts", () => {
   });
 
   describe("getTtsProvider", () => {
-    const baseCfg: OpenClawConfig = {
+    const baseCfg: JarvisConfig = {
       agents: { defaults: { model: { primary: "openai/gpt-4o-mini" } } },
       messages: { tts: {} },
     };
@@ -506,7 +506,7 @@ describe("tts", () => {
   });
 
   describe("resolveTtsConfig – openai.baseUrl", () => {
-    const baseCfg: OpenClawConfig = {
+    const baseCfg: JarvisConfig = {
       agents: { defaults: { model: { primary: "openai/gpt-4o-mini" } } },
       messages: { tts: {} },
     };
@@ -526,7 +526,7 @@ describe("tts", () => {
     });
 
     it("config baseUrl takes precedence over env var", () => {
-      const cfg: OpenClawConfig = {
+      const cfg: JarvisConfig = {
         ...baseCfg,
         messages: {
           tts: { openai: { baseUrl: "http://my-server:9000/v1" } },
@@ -539,7 +539,7 @@ describe("tts", () => {
     });
 
     it("strips trailing slashes from the resolved baseUrl", () => {
-      const cfg: OpenClawConfig = {
+      const cfg: JarvisConfig = {
         ...baseCfg,
         messages: {
           tts: { openai: { baseUrl: "http://my-server:9000/v1///" } },
@@ -558,7 +558,7 @@ describe("tts", () => {
   });
 
   describe("maybeApplyTtsToPayload", () => {
-    const baseCfg: OpenClawConfig = {
+    const baseCfg: JarvisConfig = {
       agents: { defaults: { model: { primary: "openai/gpt-4o-mini" } } },
       messages: {
         tts: {
@@ -588,7 +588,7 @@ describe("tts", () => {
       }
     };
 
-    const taggedCfg: OpenClawConfig = {
+    const taggedCfg: JarvisConfig = {
       ...baseCfg,
       messages: {
         ...baseCfg.messages!,

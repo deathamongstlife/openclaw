@@ -16,7 +16,7 @@ vi.mock("./node-require.js", () => ({
 }));
 
 let originalTestFileLog: string | undefined;
-let originalOpenClawLogLevel: string | undefined;
+let originalJarvisLogLevel: string | undefined;
 let logging: typeof import("../logging.js");
 
 beforeAll(async () => {
@@ -25,7 +25,7 @@ beforeAll(async () => {
 
 beforeEach(() => {
   originalTestFileLog = process.env.OPENCLAW_TEST_FILE_LOG;
-  originalOpenClawLogLevel = process.env.OPENCLAW_LOG_LEVEL;
+  originalJarvisLogLevel = process.env.OPENCLAW_LOG_LEVEL;
   delete process.env.OPENCLAW_TEST_FILE_LOG;
   delete process.env.OPENCLAW_LOG_LEVEL;
   readLoggingConfigMock.mockClear();
@@ -40,10 +40,10 @@ afterEach(() => {
   } else {
     process.env.OPENCLAW_TEST_FILE_LOG = originalTestFileLog;
   }
-  if (originalOpenClawLogLevel === undefined) {
+  if (originalJarvisLogLevel === undefined) {
     delete process.env.OPENCLAW_LOG_LEVEL;
   } else {
-    process.env.OPENCLAW_LOG_LEVEL = originalOpenClawLogLevel;
+    process.env.OPENCLAW_LOG_LEVEL = originalJarvisLogLevel;
   }
   logging.resetLogger();
   logging.setLoggerOverride(null);

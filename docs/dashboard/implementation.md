@@ -1,4 +1,4 @@
-# OpenClaw Dashboard Enhancement Implementation Summary
+# Jarvis Dashboard Enhancement Implementation Summary
 
 ## ✅ Completed Components
 
@@ -305,7 +305,7 @@ app.ws("/api/v1/metrics/stream", (ws) => {
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     OpenClaw Dashboard UI                   │
+│                     Jarvis Dashboard UI                   │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  │
@@ -429,7 +429,7 @@ Channels health view auto-refreshes every 5 seconds by default.
 
 ## ✨ Features Showcase
 
-The dashboard enhancement brings **professional-grade monitoring and management** to OpenClaw:
+The dashboard enhancement brings **professional-grade monitoring and management** to Jarvis:
 
 - 📊 **Real-time Analytics** - Live metrics with beautiful charts
 - 🔍 **Powerful Search** - Find any session instantly

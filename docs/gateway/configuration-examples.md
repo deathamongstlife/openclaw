@@ -1,9 +1,9 @@
 ---
-summary: "Schema-accurate configuration examples for common OpenClaw setups"
+summary: "Schema-accurate configuration examples for common Jarvis setups"
 read_when:
-  - Learning how to configure OpenClaw
+  - Learning how to configure Jarvis
   - Looking for configuration examples
-  - Setting up OpenClaw for the first time
+  - Setting up Jarvis for the first time
 title: "Configuration Examples"
 ---
 

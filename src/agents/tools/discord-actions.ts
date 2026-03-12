@@ -1,5 +1,5 @@
 import type { AgentToolResult } from "@mariozechner/pi-agent-core";
-import type { OpenClawConfig } from "../../config/config.js";
+import type { JarvisConfig } from "../../config/config.js";
 import { createDiscordActionGate } from "../../discord/accounts.js";
 import { readStringParam } from "./common.js";
 import { handleDiscordAnalyticsAction } from "./discord-actions-analytics.js";
@@ -100,7 +100,7 @@ const presenceActions = new Set(["setPresence"]);
 
 export async function handleDiscordAction(
   params: Record<string, unknown>,
-  cfg: OpenClawConfig,
+  cfg: JarvisConfig,
   options?: {
     mediaLocalRoots?: readonly string[];
   },

@@ -1,6 +1,6 @@
 import Foundation
 import Photos
-import OpenClawKit
+import JarvisKit
 import UIKit
 
 final class PhotoLibraryService: PhotosServicing {

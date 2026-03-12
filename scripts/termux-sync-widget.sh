@@ -17,7 +17,7 @@ if [ $EXIT_CODE -eq 0 ]; then
     termux-vibrate -d 100
     termux-toast "OpenClaw synced! Expires:${EXPIRY}"
 
-    # Optional: restart openclaw service
+    # Optional: restart jarvis service
     ssh "$SERVER" 'systemctl --user restart openclaw' 2>/dev/null
 else
     termux-vibrate -d 300

@@ -1,4 +1,4 @@
-package ai.openclaw.app.node
+package ai.jarvis.app.node
 
 import android.app.Notification
 import android.app.NotificationManager

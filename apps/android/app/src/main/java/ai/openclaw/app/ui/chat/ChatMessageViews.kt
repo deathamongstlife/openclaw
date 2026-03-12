@@ -1,4 +1,4 @@
-package ai.openclaw.app.ui.chat
+package ai.jarvis.app.ui.chat
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -25,24 +25,24 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ai.openclaw.app.chat.ChatMessage
-import ai.openclaw.app.chat.ChatMessageContent
-import ai.openclaw.app.chat.ChatPendingToolCall
-import ai.openclaw.app.tools.ToolDisplayRegistry
-import ai.openclaw.app.ui.mobileAccent
-import ai.openclaw.app.ui.mobileAccentSoft
-import ai.openclaw.app.ui.mobileBorder
-import ai.openclaw.app.ui.mobileBorderStrong
-import ai.openclaw.app.ui.mobileCallout
-import ai.openclaw.app.ui.mobileCaption1
-import ai.openclaw.app.ui.mobileCaption2
-import ai.openclaw.app.ui.mobileCodeBg
-import ai.openclaw.app.ui.mobileCodeText
-import ai.openclaw.app.ui.mobileHeadline
-import ai.openclaw.app.ui.mobileText
-import ai.openclaw.app.ui.mobileTextSecondary
-import ai.openclaw.app.ui.mobileWarning
-import ai.openclaw.app.ui.mobileWarningSoft
+import ai.jarvis.app.chat.ChatMessage
+import ai.jarvis.app.chat.ChatMessageContent
+import ai.jarvis.app.chat.ChatPendingToolCall
+import ai.jarvis.app.tools.ToolDisplayRegistry
+import ai.jarvis.app.ui.mobileAccent
+import ai.jarvis.app.ui.mobileAccentSoft
+import ai.jarvis.app.ui.mobileBorder
+import ai.jarvis.app.ui.mobileBorderStrong
+import ai.jarvis.app.ui.mobileCallout
+import ai.jarvis.app.ui.mobileCaption1
+import ai.jarvis.app.ui.mobileCaption2
+import ai.jarvis.app.ui.mobileCodeBg
+import ai.jarvis.app.ui.mobileCodeText
+import ai.jarvis.app.ui.mobileHeadline
+import ai.jarvis.app.ui.mobileText
+import ai.jarvis.app.ui.mobileTextSecondary
+import ai.jarvis.app.ui.mobileWarning
+import ai.jarvis.app.ui.mobileWarningSoft
 import java.util.Locale
 
 private data class ChatBubbleStyle(

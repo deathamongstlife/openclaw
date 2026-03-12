@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import * as noteModule from "../terminal/note.js";
 import { maybeRepairLegacyCronStore } from "./doctor-cron.js";
 
@@ -59,7 +59,7 @@ describe("maybeRepairLegacyCronStore", () => {
     );
 
     const noteSpy = vi.spyOn(noteModule, "note").mockImplementation(() => {});
-    const cfg: OpenClawConfig = {
+    const cfg: JarvisConfig = {
       cron: {
         store: storePath,
         webhook: "https://example.invalid/cron-finished",

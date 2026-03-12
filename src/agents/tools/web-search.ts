@@ -1,6 +1,6 @@
 import { Type } from "@sinclair/typebox";
 import { formatCliCommand } from "../../cli/command-format.js";
-import type { OpenClawConfig } from "../../config/config.js";
+import type { JarvisConfig } from "../../config/config.js";
 import { normalizeResolvedSecretInputString } from "../../config/types.secrets.js";
 import { logVerbose } from "../../globals.js";
 import type { RuntimeWebSearchMetadata } from "../../secrets/runtime-web-tools.js";
@@ -282,7 +282,7 @@ function createWebSearchSchema(params: {
   });
 }
 
-type WebSearchConfig = NonNullable<OpenClawConfig["tools"]>["web"] extends infer Web
+type WebSearchConfig = NonNullable<JarvisConfig["tools"]>["web"] extends infer Web
   ? Web extends { search?: infer Search }
     ? Search
     : undefined
@@ -530,7 +530,7 @@ type GeminiGroundingResponse = {
 const DEFAULT_GEMINI_MODEL = "gemini-2.5-flash";
 const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta";
 
-function resolveSearchConfig(cfg?: OpenClawConfig): WebSearchConfig {
+function resolveSearchConfig(cfg?: JarvisConfig): WebSearchConfig {
   const search = cfg?.tools?.web?.search;
   if (!search || typeof search !== "object") {
     return undefined;
@@ -565,7 +565,7 @@ function missingSearchKeyPayload(provider: (typeof SEARCH_PROVIDERS)[number]) {
   if (provider === "brave") {
     return {
       error: "missing_brave_api_key",
-      message: `web_search (brave) needs a Brave Search API key. Run \`${formatCliCommand("openclaw configure --section web")}\` to store it, or set BRAVE_API_KEY in the Gateway environment.`,
+      message: `web_search (brave) needs a Brave Search API key. Run \`${formatCliCommand("jarvis configure --section web")}\` to store it, or set BRAVE_API_KEY in the Gateway environment.`,
       docs: "https://docs.openclaw.ai/tools/web",
     };
   }
@@ -1217,7 +1217,7 @@ async function runPerplexitySearchApi(params: {
           Accept: "application/json",
           Authorization: `Bearer ${params.apiKey}`,
           "HTTP-Referer": "https://openclaw.ai",
-          "X-Title": "OpenClaw Web Search",
+          "X-Title": "Jarvis Web Search",
         },
         body: JSON.stringify(body),
       },
@@ -1282,7 +1282,7 @@ async function runPerplexitySearch(params: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${params.apiKey}`,
           "HTTP-Referer": "https://openclaw.ai",
-          "X-Title": "OpenClaw Web Search",
+          "X-Title": "Jarvis Web Search",
         },
         body: JSON.stringify(body),
       },
@@ -1889,7 +1889,7 @@ async function runWebSearch(params: {
 }
 
 export function createWebSearchTool(options?: {
-  config?: OpenClawConfig;
+  config?: JarvisConfig;
   sandboxed?: boolean;
   runtimeWebSearch?: RuntimeWebSearchMetadata;
 }): AnyAgentTool | null {

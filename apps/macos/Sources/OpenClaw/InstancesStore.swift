@@ -1,7 +1,7 @@
 import Cocoa
 import Foundation
 import Observation
-import OpenClawKit
+import JarvisKit
 import OpenClawProtocol
 import OSLog
 

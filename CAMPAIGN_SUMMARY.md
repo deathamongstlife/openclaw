@@ -1,14 +1,14 @@
-# OpenClaw → J.A.R.V.I.S. Complete Upgrade Campaign
+# Jarvis → J.A.R.V.I.S. Complete Upgrade Campaign
 
 **Campaign Duration**: Started 2026-03-11 16:38 UTC
 **Status**: IN PROGRESS - Systematic bug fixing across entire codebase
-**Scope**: 500+ issues from official openclaw/openclaw repository
+**Scope**: 500+ issues from official jarvis/jarvis repository
 
 ---
 
 ## 🎯 Mission Objectives
 
-1. **Fix ALL open issues** from the official OpenClaw repository
+1. **Fix ALL open issues** from the official Jarvis repository
 2. **Enhance dashboard** with real-time analytics and modern UI
 3. **Add Android native build** infrastructure
 4. **Create J.A.R.V.I.S. fork** with all improvements
@@ -46,7 +46,7 @@
 - **Created**: Android setup and build documentation
 
 #### Issue Analysis ✓
-- **Cataloged**: 500+ open issues from openclaw/openclaw
+- **Cataloged**: 500+ open issues from jarvis/jarvis
 - **Categorized**: By severity (Critical → Low)
 - **Prioritized**: 35 critical, 80 high, 150 medium, 235 low
 - **Organized**: By component (Gateway, Cron, ACP, Channels, etc.)
@@ -290,7 +290,7 @@
 1. **Collect all fixes** using `./collect-fixes.sh`
 2. **Review summaries** in `bugfix-results/`
 3. **Apply code changes** systematically
-4. **Build OpenClaw** with all fixes
+4. **Build Jarvis** with all fixes
 5. **Run test suites** comprehensively
 
 ### Short Term
@@ -348,7 +348,7 @@
 ---
 
 **Campaign Manager**: Claude (Sonnet 4.5)
-**Repository**: deathamongstlife/openclaw → J.A.R.V.I.S.
+**Repository**: deathamongstlife/jarvis → J.A.R.V.I.S.
 **Last Updated**: 2026-03-11 17:00 UTC
 
 ---

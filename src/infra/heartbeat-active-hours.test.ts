@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { isWithinActiveHours } from "./heartbeat-active-hours.js";
 
-function cfgWithUserTimezone(userTimezone = "UTC"): OpenClawConfig {
+function cfgWithUserTimezone(userTimezone = "UTC"): JarvisConfig {
   return {
     agents: {
       defaults: {

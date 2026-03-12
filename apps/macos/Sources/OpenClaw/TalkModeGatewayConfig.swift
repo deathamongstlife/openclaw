@@ -1,5 +1,5 @@
 import Foundation
-import OpenClawKit
+import JarvisKit
 
 struct TalkModeGatewayConfigState {
     let activeProvider: String
