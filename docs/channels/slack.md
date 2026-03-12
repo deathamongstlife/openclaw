@@ -221,7 +221,7 @@ For actions/directory reads, user token can be preferred when configured. For wr
 Default slash command settings:
 
 - `enabled: false`
-- `name: "openclaw"`
+- `name: "jarvis"`
 - `sessionPrefix: "slack:slash"`
 - `ephemeral: true`
 
@@ -359,7 +359,7 @@ Notes:
     },
     "slash_commands": [
       {
-        "command": "/openclaw",
+        "command": "/jarvis",
         "description": "Send a message to Jarvis",
         "should_escape": false
       }

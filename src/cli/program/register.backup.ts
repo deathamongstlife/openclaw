@@ -14,7 +14,7 @@ export function registerBackupCommand(program: Command) {
     .addHelpText(
       "after",
       () =>
-        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/backup", "docs.openclaw.ai/cli/backup")}\n`,
+        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/backup", "docs.jarvis.ai/cli/backup")}\n`,
     );
 
   backup
@@ -72,7 +72,7 @@ export function registerBackupCommand(program: Command) {
       () =>
         `\n${theme.heading("Examples:")}\n${formatHelpExamples([
           [
-            "jarvis backup verify ./2026-03-09T00-00-00.000Z-openclaw-backup.tar.gz",
+            "jarvis backup verify ./2026-03-09T00-00-00.000Z-jarvis-backup.tar.gz",
             "Check that the archive structure and manifest are intact.",
           ],
           [

@@ -5,11 +5,11 @@ import { homedir } from "node:os";
 import * as path from "node:path";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
-import { fetchWithSsrFGuard } from "openclaw/plugin-sdk/tlon";
+import { fetchWithSsrFGuard } from "jarvis/plugin-sdk/tlon";
 import { getDefaultSsrFPolicy } from "../urbit/context.js";
 
 // Default to Jarvis workspace media directory
-const DEFAULT_MEDIA_DIR = path.join(homedir(), ".openclaw", "workspace", "media", "inbound");
+const DEFAULT_MEDIA_DIR = path.join(homedir(), ".jarvis", "workspace", "media", "inbound");
 
 export interface ExtractedImage {
   url: string;

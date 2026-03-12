@@ -81,7 +81,7 @@ type ConnectedTarget = {
   targetInfo: TargetInfo;
 };
 
-const RELAY_AUTH_HEADER = "x-openclaw-relay-token";
+const RELAY_AUTH_HEADER = "x-jarvis-relay-token";
 const DEFAULT_EXTENSION_RECONNECT_GRACE_MS = 20_000;
 const DEFAULT_EXTENSION_COMMAND_RECONNECT_WAIT_MS = 3_000;
 
@@ -251,11 +251,11 @@ export async function ensureChromeExtensionRelayServer(opts: {
   }
 
   const extensionReconnectGraceMs = envMsOrDefault(
-    "OPENCLAW_EXTENSION_RELAY_RECONNECT_GRACE_MS",
+    "JARVIS_EXTENSION_RELAY_RECONNECT_GRACE_MS",
     DEFAULT_EXTENSION_RECONNECT_GRACE_MS,
   );
   const extensionCommandReconnectWaitMs = envMsOrDefault(
-    "OPENCLAW_EXTENSION_RELAY_COMMAND_RECONNECT_WAIT_MS",
+    "JARVIS_EXTENSION_RELAY_COMMAND_RECONNECT_WAIT_MS",
     DEFAULT_EXTENSION_COMMAND_RECONNECT_WAIT_MS,
   );
 

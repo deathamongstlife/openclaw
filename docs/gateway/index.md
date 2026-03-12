@@ -61,7 +61,7 @@ jarvis channels status --probe
 </Steps>
 
 <Note>
-Gateway config reload watches the active config file path (resolved from profile/state defaults, or `OPENCLAW_CONFIG_PATH` when set).
+Gateway config reload watches the active config file path (resolved from profile/state defaults, or `JARVIS_CONFIG_PATH` when set).
 Default mode is `gateway.reload.mode="hybrid"`.
 </Note>
 
@@ -73,14 +73,14 @@ Default mode is `gateway.reload.mode="hybrid"`.
   - HTTP APIs (OpenAI-compatible, Responses, tools invoke)
   - Control UI and hooks
 - Default bind mode: `loopback`.
-- Auth is required by default (`gateway.auth.token` / `gateway.auth.password`, or `OPENCLAW_GATEWAY_TOKEN` / `OPENCLAW_GATEWAY_PASSWORD`).
+- Auth is required by default (`gateway.auth.token` / `gateway.auth.password`, or `JARVIS_GATEWAY_TOKEN` / `JARVIS_GATEWAY_PASSWORD`).
 
 ### Port and bind precedence
 
-| Setting      | Resolution order                                              |
-| ------------ | ------------------------------------------------------------- |
-| Gateway port | `--port` → `OPENCLAW_GATEWAY_PORT` → `gateway.port` → `18789` |
-| Bind mode    | CLI/override → `gateway.bind` → `loopback`                    |
+| Setting      | Resolution order                                            |
+| ------------ | ----------------------------------------------------------- |
+| Gateway port | `--port` → `JARVIS_GATEWAY_PORT` → `gateway.port` → `18789` |
+| Bind mode    | CLI/override → `gateway.bind` → `loopback`                  |
 
 ### Hot reload modes
 
@@ -136,7 +136,7 @@ jarvis gateway restart
 jarvis gateway stop
 ```
 
-LaunchAgent labels are `ai.openclaw.gateway` (default) or `ai.openclaw.<profile>` (named profile). `jarvis doctor` audits and repairs service config drift.
+LaunchAgent labels are `ai.jarvis.gateway` (default) or `ai.jarvis.<profile>` (named profile). `jarvis doctor` audits and repairs service config drift.
 
   </Tab>
 
@@ -176,15 +176,15 @@ Use multiple only for strict isolation/redundancy (for example a rescue profile)
 Checklist per instance:
 
 - Unique `gateway.port`
-- Unique `OPENCLAW_CONFIG_PATH`
-- Unique `OPENCLAW_STATE_DIR`
+- Unique `JARVIS_CONFIG_PATH`
+- Unique `JARVIS_STATE_DIR`
 - Unique `agents.defaults.workspace`
 
 Example:
 
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/a.json OPENCLAW_STATE_DIR=~/.openclaw-a jarvis gateway --port 19001
-OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b jarvis gateway --port 19002
+JARVIS_CONFIG_PATH=~/.jarvis/a.json JARVIS_STATE_DIR=~/.jarvis-a jarvis gateway --port 19001
+JARVIS_CONFIG_PATH=~/.jarvis/b.json JARVIS_STATE_DIR=~/.jarvis-b jarvis gateway --port 19002
 ```
 
 See: [Multiple gateways](/gateway/multiple-gateways).
@@ -192,9 +192,9 @@ See: [Multiple gateways](/gateway/multiple-gateways).
 ### Dev profile quick path
 
 ```bash
-openclaw --dev setup
-openclaw --dev gateway --allow-unconfigured
-openclaw --dev status
+jarvis --dev setup
+jarvis --dev gateway --allow-unconfigured
+jarvis --dev status
 ```
 
 Defaults include isolated state/config and base gateway port `19001`.

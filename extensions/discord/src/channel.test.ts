@@ -1,4 +1,4 @@
-import type { JarvisConfig, PluginRuntime } from "openclaw/plugin-sdk/discord";
+import type { JarvisConfig, PluginRuntime } from "jarvis/plugin-sdk/discord";
 import { describe, expect, it, vi } from "vitest";
 import { discordPlugin } from "./channel.js";
 import { setDiscordRuntime } from "./runtime.js";

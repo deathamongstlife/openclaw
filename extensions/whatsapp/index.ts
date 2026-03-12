@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/whatsapp";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/whatsapp";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/whatsapp";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/whatsapp";
 import { whatsappPlugin } from "./src/channel.js";
 import { setWhatsAppRuntime } from "./src/runtime.js";
 

@@ -1,4 +1,4 @@
-# OpenClaw → Jarvis Rebranding Complete ✅
+# Jarvis → Jarvis Rebranding Complete ✅
 
 **Date:** March 12, 2026
 **Status:** Complete
@@ -10,18 +10,18 @@
 
 Ran `rebrand-advanced.py` across the entire repository:
 
-- **OpenClaw** → **Jarvis** (title case)
-- **openclaw** → **jarvis** (lowercase)
-- **OPENCLAW** → **JARVIS** (uppercase)
-- **@openclaw/*** → **@jarvis/*** (npm scoped packages)
-- **openclaw.ai** → **jarvis.ai** (domains)
-- **docs.openclaw.ai** → **docs.jarvis.ai** (subdomains)
-- **github.com/openclaw/openclaw** → **github.com/deathamongstlife/jarvis** (GitHub URLs)
-- **~/.openclaw/** → **~/.jarvis/** (config directories)
-- **OPENCLAW_*** → **JARVIS_*** (environment variables)
-- **openclaw-gateway** → **jarvis-gateway** (binary names)
-- **openclaw-cli** → **jarvis-cli** (CLI binary)
-- **openclaw-mac** → **jarvis-mac** (macOS binary)
+- **Jarvis** → **Jarvis** (title case)
+- **jarvis** → **jarvis** (lowercase)
+- **JARVIS** → **JARVIS** (uppercase)
+- **@jarvis/\*** → **@jarvis/\*** (npm scoped packages)
+- **jarvis.ai** → **jarvis.ai** (domains)
+- **docs.jarvis.ai** → **docs.jarvis.ai** (subdomains)
+- **github.com/jarvis/jarvis** → **github.com/deathamongstlife/jarvis** (GitHub URLs)
+- **~/.jarvis/** → **~/.jarvis/** (config directories)
+- **JARVIS\_\*** → **JARVIS\_\*** (environment variables)
+- **jarvis-gateway** → **jarvis-gateway** (binary names)
+- **jarvis-cli** → **jarvis-cli** (CLI binary)
+- **jarvis-mac** → **jarvis-mac** (macOS binary)
 
 ### 2. Install Script Created ✅
 
@@ -32,6 +32,7 @@ curl -fsSL https://jarvis.ai/install.sh | bash
 ```
 
 **Features:**
+
 - Multi-platform support (macOS/Linux)
 - Secure HTTPS downloads with checksum verification
 - Interactive UI with gum
@@ -45,13 +46,14 @@ Created supporting documentation:
 - ✅ `REBRANDING_GUIDE.md` - Complete step-by-step rebranding guide
 - ✅ `INSTALL_SCRIPT_README.md` - Install script usage and deployment guide
 - ✅ `rebrand-advanced.py` - Python rebranding script
-- ✅ `rebrand-openclaw-to-jarvis.sh` - Bash rebranding script
+- ✅ `rebrand-jarvis-to-jarvis.sh` - Bash rebranding script
 
 ## Files Affected
 
 **Total:** 2,749 files changed
 
 **Categories:**
+
 - Source code (`.ts`, `.tsx`, `.js`, `.jsx`)
 - Configuration files (`.json`, `.yaml`, `.yml`, `.toml`)
 - Documentation (`.md`)
@@ -74,13 +76,13 @@ Created supporting documentation:
 
 ### 2. Package Registry
 
-- [ ] Publish to npm as `jarvis` (not `openclaw`)
+- [ ] Publish to npm as `jarvis` (not `jarvis`)
 - [ ] Update package scope to `@jarvis/*` for extensions
-- [ ] Deprecate old `openclaw` package on npm
+- [ ] Deprecate old `jarvis` package on npm
 
 ### 3. GitHub Repository
 
-- [ ] Rename repository: `openclaw` → `jarvis`
+- [ ] Rename repository: `jarvis` → `jarvis`
 - [ ] Update repository description
 - [ ] Update topics/tags
 - [ ] Update README with new install command
@@ -109,7 +111,7 @@ pnpm test
 - [ ] Update Docker image names in workflows
 - [ ] Update release artifact names
 - [ ] Test all GitHub Actions workflows
-- [ ] Update environment secrets (JARVIS_* instead of OPENCLAW_*)
+- [ ] Update environment secrets (JARVIS*\* instead of JARVIS*\*)
 
 ### 6. Documentation
 
@@ -140,7 +142,7 @@ Some items require manual attention beyond the automated rebranding:
 - [ ] Update homebrew formula (if published)
 - [ ] Update Docker Hub repository name
 - [ ] Update any third-party integrations
-- [ ] Update API keys/tokens if they reference "openclaw"
+- [ ] Update API keys/tokens if they reference "jarvis"
 
 ### 2. Code Signing
 
@@ -157,8 +159,8 @@ Some items require manual attention beyond the automated rebranding:
 ## Verification Commands
 
 ```bash
-# Search for remaining "openclaw" references
-git grep -i "openclaw" | wc -l
+# Search for remaining "jarvis" references
+git grep -i "jarvis" | wc -l
 
 # Should return 0 (or only historical references in CHANGELOG)
 
@@ -166,10 +168,10 @@ git grep -i "openclaw" | wc -l
 cat package.json | grep -E "(name|bin)" | head -10
 
 # Check workspace dependencies
-find . -name "package.json" -exec grep -l "openclaw" {} \;
+find . -name "package.json" -exec grep -l "jarvis" {} \;
 
 # Check environment variables
-git grep "OPENCLAW_" | wc -l
+git grep "JARVIS_" | wc -l
 
 # Should return 0
 ```
@@ -192,6 +194,7 @@ git reset --hard <commit-before-rebranding>
 ### 1. `rebrand-advanced.py`
 
 Advanced Python script with pattern matching for:
+
 - npm packages
 - URLs and domains
 - GitHub paths
@@ -199,19 +202,21 @@ Advanced Python script with pattern matching for:
 - Binary names
 
 **Usage:**
+
 ```bash
 ./rebrand-advanced.py --no-dry-run
 ./rebrand-advanced.py --verbose  # Dry run with details
 ```
 
-### 2. `rebrand-openclaw-to-jarvis.sh`
+### 2. `rebrand-jarvis-to-jarvis.sh`
 
 Simple Bash script for bulk find/replace.
 
 **Usage:**
+
 ```bash
-DRY_RUN=false ./rebrand-openclaw-to-jarvis.sh
-DRY_RUN=true ./rebrand-openclaw-to-jarvis.sh  # Dry run
+DRY_RUN=false ./rebrand-jarvis-to-jarvis.sh
+DRY_RUN=true ./rebrand-jarvis-to-jarvis.sh  # Dry run
 ```
 
 ## Support
@@ -225,7 +230,7 @@ If you encounter issues after deployment:
 
 ## Credits
 
-- Original project: OpenClaw (https://github.com/openclaw/openclaw)
+- Original project: Jarvis (https://github.com/jarvis/jarvis)
 - Rebranded to: Jarvis by @deathamongstlife
 - Tools used: Python, Bash, sed, regex
 

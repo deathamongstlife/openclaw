@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/mattermost";
+import type { JarvisConfig } from "jarvis/plugin-sdk/mattermost";
 import { expect, vi } from "vitest";
 
 export function createMattermostTestConfig(): JarvisConfig {

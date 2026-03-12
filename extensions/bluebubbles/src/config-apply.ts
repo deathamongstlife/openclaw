@@ -1,4 +1,4 @@
-import { DEFAULT_ACCOUNT_ID, type JarvisConfig } from "openclaw/plugin-sdk/bluebubbles";
+import { DEFAULT_ACCOUNT_ID, type JarvisConfig } from "jarvis/plugin-sdk/bluebubbles";
 
 type BlueBubblesConfigPatch = {
   serverUrl?: string;

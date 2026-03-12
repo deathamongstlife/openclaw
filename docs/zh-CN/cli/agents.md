@@ -25,9 +25,9 @@ x-i18n:
 
 ```bash
 jarvis agents list
-jarvis agents add work --workspace ~/.openclaw/workspace-work
-jarvis agents set-identity --workspace ~/.openclaw/workspace --from-identity
-jarvis agents set-identity --agent main --avatar avatars/openclaw.png
+jarvis agents add work --workspace ~/.jarvis/workspace-work
+jarvis agents set-identity --workspace ~/.jarvis/workspace --from-identity
+jarvis agents set-identity --agent main --avatar avatars/jarvis.png
 jarvis agents delete work
 ```
 
@@ -35,7 +35,7 @@ jarvis agents delete work
 
 每个智能体工作区可以在工作区根目录包含一个 `IDENTITY.md`：
 
-- 示例路径：`~/.openclaw/workspace/IDENTITY.md`
+- 示例路径：`~/.jarvis/workspace/IDENTITY.md`
 - `set-identity --from-identity` 从工作区根目录读取（或从显式指定的 `--identity-file` 读取）
 
 头像路径相对于工作区根目录解析。
@@ -52,13 +52,13 @@ jarvis agents delete work
 从 `IDENTITY.md` 加载：
 
 ```bash
-jarvis agents set-identity --workspace ~/.openclaw/workspace --from-identity
+jarvis agents set-identity --workspace ~/.jarvis/workspace --from-identity
 ```
 
 显式覆盖字段：
 
 ```bash
-jarvis agents set-identity --agent main --name "Jarvis" --emoji "🦞" --avatar avatars/openclaw.png
+jarvis agents set-identity --agent main --name "Jarvis" --emoji "🦞" --avatar avatars/jarvis.png
 ```
 
 配置示例：
@@ -73,7 +73,7 @@ jarvis agents set-identity --agent main --name "Jarvis" --emoji "🦞" --avatar 
           name: "Jarvis",
           theme: "space lobster",
           emoji: "🦞",
-          avatar: "avatars/openclaw.png",
+          avatar: "avatars/jarvis.png",
         },
       },
     ],

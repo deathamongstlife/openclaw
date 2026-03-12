@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/msteams";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/msteams";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/msteams";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/msteams";
 import { msteamsPlugin } from "./src/channel.js";
 import { setMSTeamsRuntime } from "./src/runtime.js";
 

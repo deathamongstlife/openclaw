@@ -1,12 +1,12 @@
 import {
   collectAllowlistProviderRestrictSendersWarnings,
   formatAllowFromLowercase,
-} from "openclaw/plugin-sdk/compat";
+} from "jarvis/plugin-sdk/compat";
 import type {
   ChannelMessageActionName,
   ChannelPlugin,
   JarvisConfig,
-} from "openclaw/plugin-sdk/msteams";
+} from "jarvis/plugin-sdk/msteams";
 import {
   buildProbeChannelStatusSummary,
   buildRuntimeAccountStatusSnapshot,
@@ -15,7 +15,7 @@ import {
   DEFAULT_ACCOUNT_ID,
   MSTeamsConfigSchema,
   PAIRING_APPROVED_MESSAGE,
-} from "openclaw/plugin-sdk/msteams";
+} from "jarvis/plugin-sdk/msteams";
 import { listMSTeamsDirectoryGroupsLive, listMSTeamsDirectoryPeersLive } from "./directory-live.js";
 import { msteamsOnboardingAdapter } from "./onboarding.js";
 import { msteamsOutbound } from "./outbound.js";

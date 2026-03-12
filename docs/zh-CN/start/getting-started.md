@@ -37,7 +37,7 @@ x-i18n:
   "routing": {
     "agents": {
       "main": {
-        "workspace": "~/.openclaw/workspace",
+        "workspace": "~/.jarvis/workspace",
         "sandbox": { "mode": "off" }
       }
     }
@@ -57,7 +57,7 @@ Windows：使用 **WSL2**（推荐 Ubuntu）。强烈推荐 WSL2；原生 Window
 ## 1) 安装 CLI（推荐）
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://jarvis.ai/install.sh | bash
 ```
 
 安装程序选项（安装方法、非交互式、从 GitHub）：[安装](/install)。
@@ -65,17 +65,17 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 Windows (PowerShell)：
 
 ```powershell
-iwr -useb https://openclaw.ai/install.ps1 | iex
+iwr -useb https://jarvis.ai/install.ps1 | iex
 ```
 
 替代方案（全局安装）：
 
 ```bash
-npm install -g openclaw@latest
+npm install -g jarvis@latest
 ```
 
 ```bash
-pnpm add -g openclaw@latest
+pnpm add -g jarvis@latest
 ```
 
 ## 2) 运行新手引导向导（并安装服务）
@@ -99,8 +99,8 @@ jarvis onboard --install-daemon
 
 - **推荐的 Anthropic 路径：**设置 API 密钥（向导可以为服务使用存储它）。如果你想复用 Claude Code 凭证，也支持 `claude setup-token`。
 
-- OAuth 凭证（旧版导入）：`~/.openclaw/credentials/oauth.json`
-- 认证配置文件（OAuth + API 密钥）：`~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
+- OAuth 凭证（旧版导入）：`~/.jarvis/credentials/oauth.json`
+- 认证配置文件（OAuth + API 密钥）：`~/.jarvis/agents/<agentId>/agent/auth-profiles.json`
 
 无头/服务器提示：先在普通机器上完成 OAuth，然后将 `oauth.json` 复制到 Gateway 网关主机。
 
@@ -169,20 +169,20 @@ jarvis pairing approve whatsapp <code>
 如果你正在开发 Jarvis 本身，从源代码运行：
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
+git clone https://github.com/jarvis/jarvis.git
+cd jarvis
 pnpm install
 pnpm ui:build # 首次运行时自动安装 UI 依赖
 pnpm build
 jarvis onboard --install-daemon
 ```
 
-如果你还没有全局安装，从仓库通过 `pnpm openclaw ...` 运行新手引导步骤。`pnpm build` 也会打包 A2UI 资源；如果你只需要运行那个步骤，使用 `pnpm canvas:a2ui:bundle`。
+如果你还没有全局安装，从仓库通过 `pnpm jarvis ...` 运行新手引导步骤。`pnpm build` 也会打包 A2UI 资源；如果你只需要运行那个步骤，使用 `pnpm canvas:a2ui:bundle`。
 
 Gateway 网关（从此仓库）：
 
 ```bash
-node openclaw.mjs gateway --port 18789 --verbose
+node jarvis.mjs gateway --port 18789 --verbose
 ```
 
 ## 7) 验证端到端

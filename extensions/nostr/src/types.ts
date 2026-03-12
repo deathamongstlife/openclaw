@@ -2,8 +2,8 @@ import {
   DEFAULT_ACCOUNT_ID,
   normalizeAccountId,
   normalizeOptionalAccountId,
-} from "openclaw/plugin-sdk/account-id";
-import type { JarvisConfig } from "openclaw/plugin-sdk/nostr";
+} from "jarvis/plugin-sdk/account-id";
+import type { JarvisConfig } from "jarvis/plugin-sdk/nostr";
 import type { NostrProfile } from "./config-schema.js";
 import { getPublicKeyFromPrivate } from "./nostr-bus.js";
 import { DEFAULT_RELAYS } from "./nostr-bus.js";

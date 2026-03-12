@@ -1,5 +1,5 @@
 import Foundation
-import OpenClawProtocol
+import JarvisProtocol
 
 public enum GatewayDeviceAuthPayload {
     public static func buildV3(
@@ -58,7 +58,7 @@ public enum GatewayDeviceAuthPayload {
         payload: String,
         identity: DeviceIdentity,
         signedAtMs: Int,
-        nonce: String) -> [String: OpenClawProtocol.AnyCodable]?
+        nonce: String) -> [String: JarvisProtocol.AnyCodable]?
     {
         guard let signature = DeviceIdentityStore.signPayload(payload, identity: identity),
               let publicKey = DeviceIdentityStore.publicKeyBase64Url(identity)
@@ -66,11 +66,11 @@ public enum GatewayDeviceAuthPayload {
             return nil
         }
         return [
-            "id": OpenClawProtocol.AnyCodable(identity.deviceId),
-            "publicKey": OpenClawProtocol.AnyCodable(publicKey),
-            "signature": OpenClawProtocol.AnyCodable(signature),
-            "signedAt": OpenClawProtocol.AnyCodable(signedAtMs),
-            "nonce": OpenClawProtocol.AnyCodable(nonce),
+            "id": JarvisProtocol.AnyCodable(identity.deviceId),
+            "publicKey": JarvisProtocol.AnyCodable(publicKey),
+            "signature": JarvisProtocol.AnyCodable(signature),
+            "signedAt": JarvisProtocol.AnyCodable(signedAtMs),
+            "nonce": JarvisProtocol.AnyCodable(nonce),
         ]
     }
 }

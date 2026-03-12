@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/googlechat";
+import type { JarvisConfig } from "jarvis/plugin-sdk/googlechat";
 import { describe, expect, it } from "vitest";
 import { resolveGoogleChatAccount } from "./accounts.js";
 

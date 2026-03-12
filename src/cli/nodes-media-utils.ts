@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import fs from "node:fs";
-import { resolvePreferredJarvisTmpDir } from "../infra/tmp-openclaw-dir.js";
+import { resolvePreferredJarvisTmpDir } from "../infra/tmp-jarvis-dir.js";
 
 export function asRecord(value: unknown): Record<string, unknown> {
   return typeof value === "object" && value !== null ? (value as Record<string, unknown>) : {};

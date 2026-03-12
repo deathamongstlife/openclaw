@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/matrix",
+  "name": "@jarvis/matrix",
   "version": "2026.3.9",
   "description": "Jarvis Matrix channel plugin",
   "type": "module",
@@ -11,7 +11,7 @@
     "music-metadata": "^11.12.1",
     "zod": "^4.3.6"
   },
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ],
@@ -26,7 +26,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@openclaw/matrix",
+      "npmSpec": "@jarvis/matrix",
       "localPath": "extensions/matrix",
       "defaultChoice": "npm"
     },

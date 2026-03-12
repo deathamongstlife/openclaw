@@ -84,16 +84,16 @@ No writes are committed for an invalid plan.
 ## Runtime and audit scope notes
 
 - Ref-only `auth-profiles.json` entries (`keyRef`/`tokenRef`) are included in runtime resolution and audit coverage.
-- `secrets apply` writes supported `openclaw.json` targets, supported `auth-profiles.json` targets, and optional scrub targets.
+- `secrets apply` writes supported `jarvis.json` targets, supported `auth-profiles.json` targets, and optional scrub targets.
 
 ## Operator checks
 
 ```bash
 # Validate plan without writes
-jarvis secrets apply --from /tmp/openclaw-secrets-plan.json --dry-run
+jarvis secrets apply --from /tmp/jarvis-secrets-plan.json --dry-run
 
 # Then apply for real
-jarvis secrets apply --from /tmp/openclaw-secrets-plan.json
+jarvis secrets apply --from /tmp/jarvis-secrets-plan.json
 ```
 
 If apply fails with an invalid target path message, regenerate the plan with `jarvis secrets configure` or fix the target path to a supported shape above.

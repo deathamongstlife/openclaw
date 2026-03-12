@@ -1,21 +1,21 @@
 {
-  "name": "@openclaw/memory-core",
+  "name": "@jarvis/memory-core",
   "version": "2026.3.9",
   "private": true,
   "description": "Jarvis core memory search plugin",
   "type": "module",
   "devDependencies": {
-    "openclaw": "workspace:*"
+    "jarvis": "workspace:*"
   },
   "peerDependencies": {
-    "openclaw": ">=2026.3.7"
+    "jarvis": ">=2026.3.7"
   },
   "peerDependenciesMeta": {
-    "openclaw": {
+    "jarvis": {
       "optional": true
     }
   },
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ]

@@ -7,10 +7,7 @@ import { resetEmbeddingMocks } from "./embedding.test-mocks.js";
 import type { MemoryIndexManager } from "./index.js";
 import { getRequiredMemoryIndexManager } from "./test-manager-helpers.js";
 
-function createMemorySearchCfg(options: {
-  workspaceDir: string;
-  indexPath: string;
-}): JarvisConfig {
+function createMemorySearchCfg(options: { workspaceDir: string; indexPath: string }): JarvisConfig {
   return {
     agents: {
       defaults: {
@@ -36,7 +33,7 @@ describe("MemoryIndexManager.readFile", () => {
 
   beforeEach(async () => {
     resetEmbeddingMocks();
-    workspaceDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-mem-read-"));
+    workspaceDir = await fs.mkdtemp(path.join(os.tmpdir(), "jarvis-mem-read-"));
     indexPath = path.join(workspaceDir, "index.sqlite");
     await fs.mkdir(path.join(workspaceDir, "memory"), { recursive: true });
   });

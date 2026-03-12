@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/whatsapp";
+import type { JarvisConfig } from "jarvis/plugin-sdk/whatsapp";
 import { describe, expect, it, vi } from "vitest";
 
 const hoisted = vi.hoisted(() => ({

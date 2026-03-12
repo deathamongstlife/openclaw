@@ -19,7 +19,7 @@ title: 飞书
 如果你使用的是较旧版本，或是没有内置 Feishu 的自定义安装，可手动安装：
 
 ```bash
-jarvis plugins install @openclaw/feishu
+jarvis plugins install @jarvis/feishu
 ```
 
 ---
@@ -177,7 +177,7 @@ jarvis channels add
 
 ### 通过配置文件配置
 
-编辑 `~/.openclaw/openclaw.json`：
+编辑 `~/.jarvis/jarvis.json`：
 
 ```json5
 {
@@ -441,8 +441,8 @@ jarvis pairing list feishu
 
 在配置和使用飞书渠道时，您可能需要使用以下网关管理命令：
 
-| 命令                       | 说明              |
-| -------------------------- | ----------------- |
+| 命令                     | 说明              |
+| ------------------------ | ----------------- |
 | `jarvis gateway status`  | 查看网关运行状态  |
 | `jarvis gateway install` | 安装/启动网关服务 |
 | `jarvis gateway stop`    | 停止网关服务      |
@@ -581,12 +581,12 @@ jarvis pairing list feishu
       {
         id: "clawd-fan",
         workspace: "/home/user/clawd-fan",
-        agentDir: "/home/user/.openclaw/agents/clawd-fan/agent",
+        agentDir: "/home/user/.jarvis/agents/clawd-fan/agent",
       },
       {
         id: "clawd-xi",
         workspace: "/home/user/clawd-xi",
-        agentDir: "/home/user/.openclaw/agents/clawd-xi/agent",
+        agentDir: "/home/user/.jarvis/agents/clawd-xi/agent",
       },
     ],
   },

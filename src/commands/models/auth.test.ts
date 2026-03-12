@@ -130,17 +130,15 @@ describe("modelsAuthLoginCommand", () => {
     mocks.upsertAuthProfile.mockReset();
 
     mocks.resolveDefaultAgentId.mockReturnValue("main");
-    mocks.resolveAgentDir.mockReturnValue("/tmp/openclaw/agents/main");
-    mocks.resolveAgentWorkspaceDir.mockReturnValue("/tmp/openclaw/workspace");
-    mocks.resolveDefaultAgentWorkspaceDir.mockReturnValue("/tmp/openclaw/workspace");
+    mocks.resolveAgentDir.mockReturnValue("/tmp/jarvis/agents/main");
+    mocks.resolveAgentWorkspaceDir.mockReturnValue("/tmp/jarvis/workspace");
+    mocks.resolveDefaultAgentWorkspaceDir.mockReturnValue("/tmp/jarvis/workspace");
     mocks.loadValidConfigOrThrow.mockImplementation(async () => currentConfig);
-    mocks.updateConfig.mockImplementation(
-      async (mutator: (cfg: JarvisConfig) => JarvisConfig) => {
-        lastUpdatedConfig = mutator(currentConfig);
-        currentConfig = lastUpdatedConfig;
-        return lastUpdatedConfig;
-      },
-    );
+    mocks.updateConfig.mockImplementation(async (mutator: (cfg: JarvisConfig) => JarvisConfig) => {
+      lastUpdatedConfig = mutator(currentConfig);
+      currentConfig = lastUpdatedConfig;
+      return lastUpdatedConfig;
+    });
     mocks.createClackPrompter.mockReturnValue({
       note: vi.fn(async () => {}),
       select: vi.fn(),
@@ -171,7 +169,7 @@ describe("modelsAuthLoginCommand", () => {
     expect(mocks.writeOAuthCredentials).toHaveBeenCalledWith(
       "openai-codex",
       expect.any(Object),
-      "/tmp/openclaw/agents/main",
+      "/tmp/jarvis/agents/main",
       { syncSiblingAgents: true },
     );
     expect(mocks.resolvePluginProviders).not.toHaveBeenCalled();

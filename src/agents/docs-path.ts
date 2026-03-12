@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { resolveJarvisPackageRoot } from "../infra/openclaw-root.js";
+import { resolveJarvisPackageRoot } from "../infra/jarvis-root.js";
 
 export async function resolveJarvisDocsPath(params: {
   workspaceDir?: string;

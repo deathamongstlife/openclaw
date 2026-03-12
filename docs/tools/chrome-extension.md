@@ -9,7 +9,7 @@ title: "Chrome Extension"
 
 # Chrome extension (browser relay)
 
-The Jarvis Chrome extension lets the agent control your **existing Chrome tabs** (your normal Chrome window) instead of launching a separate openclaw-managed Chrome profile.
+The Jarvis Chrome extension lets the agent control your **existing Chrome tabs** (your normal Chrome window) instead of launching a separate jarvis-managed Chrome profile.
 
 Attach/detach happens via a **single Chrome toolbar button**.
 
@@ -60,7 +60,7 @@ Jarvis ships with a built-in browser profile named `chrome` that targets the ext
 Before first attach, open extension Options and set:
 
 - `Port` (default `18792`)
-- `Gateway token` (must match `gateway.auth.token` / `OPENCLAW_GATEWAY_TOKEN`)
+- `Gateway token` (must match `gateway.auth.token` / `JARVIS_GATEWAY_TOKEN`)
 
 Use it:
 
@@ -179,7 +179,7 @@ This is powerful and risky. Treat it like giving the model “hands on your brow
   - click/type/navigate in that tab
   - read page content
   - access whatever the tab’s logged-in session can access
-- **This is not isolated** like the dedicated openclaw-managed profile.
+- **This is not isolated** like the dedicated jarvis-managed profile.
   - If you attach to your daily-driver profile/tab, you’re granting access to that account state.
 
 Recommendations:

@@ -17,17 +17,17 @@ type NodeListNode = NonNullable<NodeListPayload["nodes"]>[number];
 
 const { get: getArg, has: hasFlag } = createArgReader();
 
-const urlRaw = getArg("--url") ?? process.env.OPENCLAW_GATEWAY_URL;
-const token = getArg("--token") ?? process.env.OPENCLAW_GATEWAY_TOKEN;
+const urlRaw = getArg("--url") ?? process.env.JARVIS_GATEWAY_URL;
+const token = getArg("--token") ?? process.env.JARVIS_GATEWAY_TOKEN;
 const nodeHint = getArg("--node");
-const dangerous = hasFlag("--dangerous") || process.env.OPENCLAW_RUN_DANGEROUS === "1";
+const dangerous = hasFlag("--dangerous") || process.env.JARVIS_RUN_DANGEROUS === "1";
 const jsonOut = hasFlag("--json");
 
 if (!urlRaw || !token) {
   // eslint-disable-next-line no-console
   console.error(
     "Usage: bun scripts/dev/ios-node-e2e.ts --url <wss://host[:port]> --token <gateway.auth.token> [--node <id|name-substring>] [--dangerous] [--json]\n" +
-      "Or set env: OPENCLAW_GATEWAY_URL / OPENCLAW_GATEWAY_TOKEN",
+      "Or set env: JARVIS_GATEWAY_URL / JARVIS_GATEWAY_TOKEN",
   );
   process.exit(1);
 }
@@ -94,7 +94,7 @@ async function main() {
       version: "dev",
       platform: "dev",
       mode: "cli",
-      instanceId: "openclaw-dev-ios-node-e2e",
+      instanceId: "jarvis-dev-ios-node-e2e",
     },
     locale: "en-US",
     userAgent: "ios-node-e2e",

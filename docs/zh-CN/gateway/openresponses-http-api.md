@@ -32,23 +32,23 @@ Jarvis 的 Gateway 网关可以提供兼容 OpenResponses 的 `POST /v1/response
 
 说明：
 
-- 当 `gateway.auth.mode="token"` 时，使用 `gateway.auth.token`（或 `OPENCLAW_GATEWAY_TOKEN`）。
-- 当 `gateway.auth.mode="password"` 时，使用 `gateway.auth.password`（或 `OPENCLAW_GATEWAY_PASSWORD`）。
+- 当 `gateway.auth.mode="token"` 时，使用 `gateway.auth.token`（或 `JARVIS_GATEWAY_TOKEN`）。
+- 当 `gateway.auth.mode="password"` 时，使用 `gateway.auth.password`（或 `JARVIS_GATEWAY_PASSWORD`）。
 
 ## 选择智能体
 
 无需自定义头：在 OpenResponses `model` 字段中编码智能体 id：
 
-- `model: "openclaw:<agentId>"`（示例：`"openclaw:main"`、`"openclaw:beta"`）
+- `model: "jarvis:<agentId>"`（示例：`"jarvis:main"`、`"jarvis:beta"`）
 - `model: "agent:<agentId>"`（别名）
 
 或通过头指定特定的 Jarvis 智能体：
 
-- `x-openclaw-agent-id: <agentId>`（默认：`main`）
+- `x-jarvis-agent-id: <agentId>`（默认：`main`）
 
 高级：
 
-- `x-openclaw-session-key: <sessionKey>` 完全控制会话路由。
+- `x-jarvis-session-key: <sessionKey>` 完全控制会话路由。
 
 ## 启用端点
 
@@ -295,9 +295,9 @@ URL 获取默认值：
 curl -sS http://127.0.0.1:18789/v1/responses \
   -H 'Authorization: Bearer YOUR_TOKEN' \
   -H 'Content-Type: application/json' \
-  -H 'x-openclaw-agent-id: main' \
+  -H 'x-jarvis-agent-id: main' \
   -d '{
-    "model": "openclaw",
+    "model": "jarvis",
     "input": "hi"
   }'
 ```
@@ -308,9 +308,9 @@ curl -sS http://127.0.0.1:18789/v1/responses \
 curl -N http://127.0.0.1:18789/v1/responses \
   -H 'Authorization: Bearer YOUR_TOKEN' \
   -H 'Content-Type: application/json' \
-  -H 'x-openclaw-agent-id: main' \
+  -H 'x-jarvis-agent-id: main' \
   -d '{
-    "model": "openclaw",
+    "model": "jarvis",
     "stream": true,
     "input": "hi"
   }'

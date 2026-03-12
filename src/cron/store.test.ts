@@ -5,7 +5,7 @@ import { createCronStoreHarness } from "./service.test-harness.js";
 import { loadCronStore, resolveCronStorePath, saveCronStore } from "./store.js";
 import type { CronStoreFile } from "./types.js";
 
-const { makeStorePath } = createCronStoreHarness({ prefix: "openclaw-cron-store-" });
+const { makeStorePath } = createCronStoreHarness({ prefix: "jarvis-cron-store-" });
 
 function makeStore(jobId: string, enabled: boolean): CronStoreFile {
   const now = Date.now();
@@ -33,12 +33,12 @@ describe("resolveCronStorePath", () => {
     vi.unstubAllEnvs();
   });
 
-  it("uses OPENCLAW_HOME for tilde expansion", () => {
-    vi.stubEnv("OPENCLAW_HOME", "/srv/openclaw-home");
+  it("uses JARVIS_HOME for tilde expansion", () => {
+    vi.stubEnv("JARVIS_HOME", "/srv/jarvis-home");
     vi.stubEnv("HOME", "/home/other");
 
     const result = resolveCronStorePath("~/cron/jobs.json");
-    expect(result).toBe(path.resolve("/srv/openclaw-home", "cron", "jobs.json"));
+    expect(result).toBe(path.resolve("/srv/jarvis-home", "cron", "jobs.json"));
   });
 });
 

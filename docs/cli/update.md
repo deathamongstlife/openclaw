@@ -24,7 +24,7 @@ jarvis update --tag beta
 jarvis update --dry-run
 jarvis update --no-restart
 jarvis update --json
-openclaw --update
+jarvis --update
 ```
 
 ## Options
@@ -64,7 +64,7 @@ offers to create one.
 When you switch channels explicitly (`--channel ...`), Jarvis also keeps the
 install method aligned:
 
-- `dev` → ensures a git checkout (default: `~/openclaw`, override with `OPENCLAW_GIT_DIR`),
+- `dev` → ensures a git checkout (default: `~/jarvis`, override with `JARVIS_GIT_DIR`),
   updates it, and installs the global CLI from that checkout.
 - `stable`/`beta` → installs from npm using the matching dist-tag.
 
@@ -92,7 +92,7 @@ High-level:
 
 ## `--update` shorthand
 
-`openclaw --update` rewrites to `jarvis update` (useful for shells and launcher scripts).
+`jarvis --update` rewrites to `jarvis update` (useful for shells and launcher scripts).
 
 ## See also
 

@@ -48,7 +48,7 @@ Examples of inactive surfaces:
   - In local mode without those remote surfaces:
     - `gateway.remote.token` is active when token auth can win and no env/auth token is configured.
     - `gateway.remote.password` is active only when password auth can win and no env/auth password is configured.
-- `gateway.auth.token` SecretRef is inactive for startup auth resolution when `OPENCLAW_GATEWAY_TOKEN` (or `CLAWDBOT_GATEWAY_TOKEN`) is set, because env token input wins for that runtime.
+- `gateway.auth.token` SecretRef is inactive for startup auth resolution when `JARVIS_GATEWAY_TOKEN` (or `CLAWDBOT_GATEWAY_TOKEN`) is set, because env token input wins for that runtime.
 
 ## Gateway auth surface diagnostics
 
@@ -127,12 +127,12 @@ Define providers under `secrets.providers`:
       default: { source: "env" },
       filemain: {
         source: "file",
-        path: "~/.openclaw/secrets.json",
+        path: "~/.jarvis/secrets.json",
         mode: "json", // or "singleValue"
       },
       vault: {
         source: "exec",
-        command: "/usr/local/bin/openclaw-vault-resolver",
+        command: "/usr/local/bin/jarvis-vault-resolver",
         args: ["--profile", "prod"],
         passEnv: ["PATH", "VAULT_ADDR"],
         jsonOnly: true,
@@ -238,7 +238,7 @@ Optional per-id errors:
         command: "/opt/homebrew/bin/vault",
         allowSymlinkCommand: true, // required for Homebrew symlinked binaries
         trustedDirs: ["/opt/homebrew"],
-        args: ["kv", "get", "-field=OPENAI_API_KEY", "secret/openclaw"],
+        args: ["kv", "get", "-field=OPENAI_API_KEY", "secret/jarvis"],
         passEnv: ["VAULT_ADDR", "VAULT_TOKEN"],
         jsonOnly: false,
       },
@@ -302,7 +302,7 @@ Runtime-minted or rotating credentials and OAuth refresh material are intentiona
 Warning and audit signals:
 
 - `SECRETS_REF_OVERRIDES_PLAINTEXT` (runtime warning)
-- `REF_SHADOWED` (audit finding when `auth-profiles.json` credentials take precedence over `openclaw.json` refs)
+- `REF_SHADOWED` (audit finding when `auth-profiles.json` credentials take precedence over `jarvis.json` refs)
 
 Google Chat compatibility behavior:
 
@@ -376,10 +376,10 @@ jarvis secrets audit --check
 
 Findings include:
 
-- plaintext values at rest (`openclaw.json`, `auth-profiles.json`, `.env`, and generated `agents/*/agent/models.json`)
+- plaintext values at rest (`jarvis.json`, `auth-profiles.json`, `.env`, and generated `agents/*/agent/models.json`)
 - plaintext sensitive provider header residues in generated `models.json` entries
 - unresolved refs
-- precedence shadowing (`auth-profiles.json` taking priority over `openclaw.json` refs)
+- precedence shadowing (`auth-profiles.json` taking priority over `jarvis.json` refs)
 - legacy residues (`auth.json`, OAuth reminders)
 
 Header residue note:
@@ -391,7 +391,7 @@ Header residue note:
 Interactive helper that:
 
 - configures `secrets.providers` first (`env`/`file`/`exec`, add/edit/remove)
-- lets you select supported secret-bearing fields in `openclaw.json` plus `auth-profiles.json` for one agent scope
+- lets you select supported secret-bearing fields in `jarvis.json` plus `auth-profiles.json` for one agent scope
 - can create a new `auth-profiles.json` mapping directly in the target picker
 - captures SecretRef details (`source`, `provider`, `id`)
 - runs preflight resolution
@@ -414,8 +414,8 @@ Helpful modes:
 Apply a saved plan:
 
 ```bash
-jarvis secrets apply --from /tmp/openclaw-secrets-plan.json
-jarvis secrets apply --from /tmp/openclaw-secrets-plan.json --dry-run
+jarvis secrets apply --from /tmp/jarvis-secrets-plan.json
+jarvis secrets apply --from /tmp/jarvis-secrets-plan.json --dry-run
 ```
 
 For strict target/path contract details and exact rejection rules, see:

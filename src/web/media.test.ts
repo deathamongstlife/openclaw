@@ -5,7 +5,7 @@ import sharp from "sharp";
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { resolveStateDir } from "../config/paths.js";
 import { sendVoiceMessageDiscord } from "../discord/send.js";
-import { resolvePreferredJarvisTmpDir } from "../infra/tmp-openclaw-dir.js";
+import { resolvePreferredJarvisTmpDir } from "../infra/tmp-jarvis-dir.js";
 import { optimizeImageToPng } from "../media/image-ops.js";
 import { mockPinnedHostnameResolution } from "../test-helpers/ssrf.js";
 import { captureEnv } from "../test-utils/env.js";
@@ -67,9 +67,7 @@ function cloneStatWithDev<T extends { dev: number | bigint }>(stat: T, dev: numb
 }
 
 beforeAll(async () => {
-  fixtureRoot = await fs.mkdtemp(
-    path.join(resolvePreferredJarvisTmpDir(), "openclaw-media-test-"),
-  );
+  fixtureRoot = await fs.mkdtemp(path.join(resolvePreferredJarvisTmpDir(), "jarvis-media-test-"));
   largeJpegBuffer = await sharp({
     create: {
       width: 400,
@@ -127,14 +125,14 @@ afterEach(() => {
 
 describe("web media loading", () => {
   beforeAll(() => {
-    // Ensure state dir is stable and not influenced by other tests that stub OPENCLAW_STATE_DIR.
+    // Ensure state dir is stable and not influenced by other tests that stub JARVIS_STATE_DIR.
     // Also keep it outside the Jarvis temp root so default localRoots doesn't accidentally make all state readable.
-    stateDirSnapshot = captureEnv(["OPENCLAW_STATE_DIR"]);
-    process.env.OPENCLAW_STATE_DIR = path.join(
+    stateDirSnapshot = captureEnv(["JARVIS_STATE_DIR"]);
+    process.env.JARVIS_STATE_DIR = path.join(
       path.parse(os.tmpdir()).root,
       "var",
       "lib",
-      "openclaw-media-state-test",
+      "jarvis-media-state-test",
     );
   });
 

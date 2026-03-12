@@ -279,7 +279,7 @@ Extra checks:
 ```bash
 jarvis pairing list signal
 pgrep -af signal-cli
-grep -i "signal" "/tmp/openclaw/openclaw-$(date +%Y-%m-%d).log" | tail -20
+grep -i "signal" "/tmp/jarvis/jarvis-$(date +%Y-%m-%d).log" | tail -20
 ```
 
 For triage flow: [/channels/troubleshooting](/channels/troubleshooting).

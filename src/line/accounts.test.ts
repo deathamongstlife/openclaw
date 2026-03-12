@@ -102,7 +102,7 @@ describe("LINE accounts", () => {
     });
 
     it.runIf(process.platform !== "win32")("rejects symlinked token and secret files", () => {
-      const dir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-line-account-"));
+      const dir = fs.mkdtempSync(path.join(os.tmpdir(), "jarvis-line-account-"));
       const tokenFile = path.join(dir, "token.txt");
       const tokenLink = path.join(dir, "token-link.txt");
       const secretFile = path.join(dir, "secret.txt");

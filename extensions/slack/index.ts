@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/slack";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/slack";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/slack";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/slack";
 import { slackPlugin } from "./src/channel.js";
 import { setSlackRuntime } from "./src/runtime.js";
 

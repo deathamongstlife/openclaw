@@ -1,5 +1,5 @@
-import type { AnyAgentTool, JarvisPluginApi } from "openclaw/plugin-sdk/zalouser";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/zalouser";
+import type { AnyAgentTool, JarvisPluginApi } from "jarvis/plugin-sdk/zalouser";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/zalouser";
 import { zalouserDock, zalouserPlugin } from "./src/channel.js";
 import { setZalouserRuntime } from "./src/runtime.js";
 import { ZalouserToolSchema, executeZalouserTool } from "./src/tool.js";

@@ -28,10 +28,10 @@ function ensureChangelogEntry(changelogPath: string, version: string): boolean {
 
 function stripWorkspaceOpenclawDevDependency(pkg: PackageJson): boolean {
   const devDeps = pkg.devDependencies;
-  if (!devDeps || devDeps.openclaw !== "workspace:*") {
+  if (!devDeps || devDeps.jarvis !== "workspace:*") {
     return false;
   }
-  delete devDeps.openclaw;
+  delete devDeps.jarvis;
   if (Object.keys(devDeps).length === 0) {
     delete pkg.devDependencies;
   }

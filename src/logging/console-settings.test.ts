@@ -32,8 +32,8 @@ beforeEach(() => {
   loadConfigCalls = 0;
   snapshot = captureConsoleSnapshot();
   originalIsTty = process.stdout.isTTY;
-  originalJarvisTestConsole = process.env.OPENCLAW_TEST_CONSOLE;
-  process.env.OPENCLAW_TEST_CONSOLE = "1";
+  originalJarvisTestConsole = process.env.JARVIS_TEST_CONSOLE;
+  process.env.JARVIS_TEST_CONSOLE = "1";
   Object.defineProperty(process.stdout, "isTTY", { value: false, configurable: true });
 });
 
@@ -45,9 +45,9 @@ afterEach(() => {
   console.debug = snapshot.debug;
   console.trace = snapshot.trace;
   if (originalJarvisTestConsole === undefined) {
-    delete process.env.OPENCLAW_TEST_CONSOLE;
+    delete process.env.JARVIS_TEST_CONSOLE;
   } else {
-    process.env.OPENCLAW_TEST_CONSOLE = originalJarvisTestConsole;
+    process.env.JARVIS_TEST_CONSOLE = originalJarvisTestConsole;
   }
   Object.defineProperty(process.stdout, "isTTY", { value: originalIsTty, configurable: true });
   logging.setConsoleConfigLoaderForTests();

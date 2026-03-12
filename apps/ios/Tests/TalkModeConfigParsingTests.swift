@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import OpenClaw
+@testable import Jarvis
 
 @MainActor
 @Suite struct TalkModeManagerTests {

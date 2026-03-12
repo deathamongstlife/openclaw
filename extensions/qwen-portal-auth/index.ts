@@ -3,7 +3,7 @@ import {
   emptyPluginConfigSchema,
   type JarvisPluginApi,
   type ProviderAuthContext,
-} from "openclaw/plugin-sdk/qwen-portal-auth";
+} from "jarvis/plugin-sdk/qwen-portal-auth";
 import { loginQwenPortalOAuth } from "./oauth.js";
 
 const PROVIDER_ID = "qwen-portal";

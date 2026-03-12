@@ -21,16 +21,16 @@ levels and formats.
 
 By default, the Gateway writes a rolling log file under:
 
-`/tmp/openclaw/openclaw-YYYY-MM-DD.log`
+`/tmp/jarvis/jarvis-YYYY-MM-DD.log`
 
 The date uses the gateway host's local timezone.
 
-You can override this in `~/.openclaw/openclaw.json`:
+You can override this in `~/.jarvis/jarvis.json`:
 
 ```json
 {
   "logging": {
-    "file": "/path/to/openclaw.log"
+    "file": "/path/to/jarvis.log"
   }
 }
 ```
@@ -98,13 +98,13 @@ Console formatting is controlled by `logging.consoleStyle`.
 
 ## Configuring logging
 
-All logging configuration lives under `logging` in `~/.openclaw/openclaw.json`.
+All logging configuration lives under `logging` in `~/.jarvis/jarvis.json`.
 
 ```json
 {
   "logging": {
     "level": "info",
-    "file": "/tmp/openclaw/openclaw-YYYY-MM-DD.log",
+    "file": "/tmp/jarvis/jarvis-YYYY-MM-DD.log",
     "consoleLevel": "info",
     "consoleStyle": "pretty",
     "redactSensitive": "tools",
@@ -118,7 +118,7 @@ All logging configuration lives under `logging` in `~/.openclaw/openclaw.json`.
 - `logging.level`: **file logs** (JSONL) level.
 - `logging.consoleLevel`: **console** verbosity level.
 
-You can override both via the **`OPENCLAW_LOG_LEVEL`** environment variable (e.g. `OPENCLAW_LOG_LEVEL=debug`). The env var takes precedence over the config file, so you can raise verbosity for a single run without editing `openclaw.json`. You can also pass the global CLI option **`--log-level <level>`** (for example, `openclaw --log-level debug gateway run`), which overrides the environment variable for that command.
+You can override both via the **`JARVIS_LOG_LEVEL`** environment variable (e.g. `JARVIS_LOG_LEVEL=debug`). The env var takes precedence over the config file, so you can raise verbosity for a single run without editing `jarvis.json`. You can also pass the global CLI option **`--log-level <level>`** (for example, `jarvis --log-level debug gateway run`), which overrides the environment variable for that command.
 
 `--verbose` only affects console output; it does not change file log levels.
 
@@ -212,7 +212,7 @@ Flags are case-insensitive and support wildcards (e.g. `telegram.*` or `*`).
 Env override (one-off):
 
 ```
-OPENCLAW_DIAGNOSTICS=telegram.http,telegram.payload
+JARVIS_DIAGNOSTICS=telegram.http,telegram.payload
 ```
 
 Notes:
@@ -269,60 +269,60 @@ Notes:
 
 Model usage:
 
-- `openclaw.tokens` (counter, attrs: `openclaw.token`, `openclaw.channel`,
-  `openclaw.provider`, `openclaw.model`)
-- `openclaw.cost.usd` (counter, attrs: `openclaw.channel`, `openclaw.provider`,
-  `openclaw.model`)
-- `openclaw.run.duration_ms` (histogram, attrs: `openclaw.channel`,
-  `openclaw.provider`, `openclaw.model`)
-- `openclaw.context.tokens` (histogram, attrs: `openclaw.context`,
-  `openclaw.channel`, `openclaw.provider`, `openclaw.model`)
+- `jarvis.tokens` (counter, attrs: `jarvis.token`, `jarvis.channel`,
+  `jarvis.provider`, `jarvis.model`)
+- `jarvis.cost.usd` (counter, attrs: `jarvis.channel`, `jarvis.provider`,
+  `jarvis.model`)
+- `jarvis.run.duration_ms` (histogram, attrs: `jarvis.channel`,
+  `jarvis.provider`, `jarvis.model`)
+- `jarvis.context.tokens` (histogram, attrs: `jarvis.context`,
+  `jarvis.channel`, `jarvis.provider`, `jarvis.model`)
 
 Message flow:
 
-- `openclaw.webhook.received` (counter, attrs: `openclaw.channel`,
-  `openclaw.webhook`)
-- `openclaw.webhook.error` (counter, attrs: `openclaw.channel`,
-  `openclaw.webhook`)
-- `openclaw.webhook.duration_ms` (histogram, attrs: `openclaw.channel`,
-  `openclaw.webhook`)
-- `openclaw.message.queued` (counter, attrs: `openclaw.channel`,
-  `openclaw.source`)
-- `openclaw.message.processed` (counter, attrs: `openclaw.channel`,
-  `openclaw.outcome`)
-- `openclaw.message.duration_ms` (histogram, attrs: `openclaw.channel`,
-  `openclaw.outcome`)
+- `jarvis.webhook.received` (counter, attrs: `jarvis.channel`,
+  `jarvis.webhook`)
+- `jarvis.webhook.error` (counter, attrs: `jarvis.channel`,
+  `jarvis.webhook`)
+- `jarvis.webhook.duration_ms` (histogram, attrs: `jarvis.channel`,
+  `jarvis.webhook`)
+- `jarvis.message.queued` (counter, attrs: `jarvis.channel`,
+  `jarvis.source`)
+- `jarvis.message.processed` (counter, attrs: `jarvis.channel`,
+  `jarvis.outcome`)
+- `jarvis.message.duration_ms` (histogram, attrs: `jarvis.channel`,
+  `jarvis.outcome`)
 
 Queues + sessions:
 
-- `openclaw.queue.lane.enqueue` (counter, attrs: `openclaw.lane`)
-- `openclaw.queue.lane.dequeue` (counter, attrs: `openclaw.lane`)
-- `openclaw.queue.depth` (histogram, attrs: `openclaw.lane` or
-  `openclaw.channel=heartbeat`)
-- `openclaw.queue.wait_ms` (histogram, attrs: `openclaw.lane`)
-- `openclaw.session.state` (counter, attrs: `openclaw.state`, `openclaw.reason`)
-- `openclaw.session.stuck` (counter, attrs: `openclaw.state`)
-- `openclaw.session.stuck_age_ms` (histogram, attrs: `openclaw.state`)
-- `openclaw.run.attempt` (counter, attrs: `openclaw.attempt`)
+- `jarvis.queue.lane.enqueue` (counter, attrs: `jarvis.lane`)
+- `jarvis.queue.lane.dequeue` (counter, attrs: `jarvis.lane`)
+- `jarvis.queue.depth` (histogram, attrs: `jarvis.lane` or
+  `jarvis.channel=heartbeat`)
+- `jarvis.queue.wait_ms` (histogram, attrs: `jarvis.lane`)
+- `jarvis.session.state` (counter, attrs: `jarvis.state`, `jarvis.reason`)
+- `jarvis.session.stuck` (counter, attrs: `jarvis.state`)
+- `jarvis.session.stuck_age_ms` (histogram, attrs: `jarvis.state`)
+- `jarvis.run.attempt` (counter, attrs: `jarvis.attempt`)
 
 ### Exported spans (names + key attributes)
 
-- `openclaw.model.usage`
-  - `openclaw.channel`, `openclaw.provider`, `openclaw.model`
-  - `openclaw.sessionKey`, `openclaw.sessionId`
-  - `openclaw.tokens.*` (input/output/cache_read/cache_write/total)
-- `openclaw.webhook.processed`
-  - `openclaw.channel`, `openclaw.webhook`, `openclaw.chatId`
-- `openclaw.webhook.error`
-  - `openclaw.channel`, `openclaw.webhook`, `openclaw.chatId`,
-    `openclaw.error`
-- `openclaw.message.processed`
-  - `openclaw.channel`, `openclaw.outcome`, `openclaw.chatId`,
-    `openclaw.messageId`, `openclaw.sessionKey`, `openclaw.sessionId`,
-    `openclaw.reason`
-- `openclaw.session.stuck`
-  - `openclaw.state`, `openclaw.ageMs`, `openclaw.queueDepth`,
-    `openclaw.sessionKey`, `openclaw.sessionId`
+- `jarvis.model.usage`
+  - `jarvis.channel`, `jarvis.provider`, `jarvis.model`
+  - `jarvis.sessionKey`, `jarvis.sessionId`
+  - `jarvis.tokens.*` (input/output/cache_read/cache_write/total)
+- `jarvis.webhook.processed`
+  - `jarvis.channel`, `jarvis.webhook`, `jarvis.chatId`
+- `jarvis.webhook.error`
+  - `jarvis.channel`, `jarvis.webhook`, `jarvis.chatId`,
+    `jarvis.error`
+- `jarvis.message.processed`
+  - `jarvis.channel`, `jarvis.outcome`, `jarvis.chatId`,
+    `jarvis.messageId`, `jarvis.sessionKey`, `jarvis.sessionId`,
+    `jarvis.reason`
+- `jarvis.session.stuck`
+  - `jarvis.state`, `jarvis.ageMs`, `jarvis.queueDepth`,
+    `jarvis.sessionKey`, `jarvis.sessionId`
 
 ### Sampling + flushing
 

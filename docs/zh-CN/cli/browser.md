@@ -44,7 +44,7 @@ jarvis browser --browser-profile jarvis snapshot
 
 配置文件是命名的浏览器路由配置。实际上：
 
-- `openclaw`：启动/附加到专用的 Jarvis 管理的 Chrome 实例（隔离的用户数据目录）。
+- `jarvis`：启动/附加到专用的 Jarvis 管理的 Chrome 实例（隔离的用户数据目录）。
 - `chrome`：通过 Chrome 扩展中继控制你现有的 Chrome 标签页。
 
 ```bash
@@ -63,7 +63,7 @@ jarvis browser --browser-profile work tabs
 
 ```bash
 jarvis browser tabs
-jarvis browser open https://docs.openclaw.ai
+jarvis browser open https://docs.jarvis.ai
 jarvis browser focus <targetId>
 jarvis browser close <targetId>
 ```

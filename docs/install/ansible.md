@@ -9,19 +9,19 @@ title: "Ansible"
 
 # Ansible Installation
 
-The recommended way to deploy Jarvis to production servers is via **[openclaw-ansible](https://github.com/openclaw/openclaw-ansible)** — an automated installer with security-first architecture.
+The recommended way to deploy Jarvis to production servers is via **[jarvis-ansible](https://github.com/jarvis/jarvis-ansible)** — an automated installer with security-first architecture.
 
 ## Quick Start
 
 One-command install:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/openclaw/openclaw-ansible/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/jarvis/jarvis-ansible/main/install.sh | bash
 ```
 
-> **📦 Full guide: [github.com/openclaw/openclaw-ansible](https://github.com/openclaw/openclaw-ansible)**
+> **📦 Full guide: [github.com/jarvis/jarvis-ansible](https://github.com/jarvis/jarvis-ansible)**
 >
-> The openclaw-ansible repo is the source of truth for Ansible deployment. This page is a quick overview.
+> The jarvis-ansible repo is the source of truth for Ansible deployment. This page is a quick overview.
 
 ## What You Get
 
@@ -57,7 +57,7 @@ Note: The gateway runs **directly on the host** (not in Docker), but agent sandb
 After installation completes, switch to the jarvis user:
 
 ```bash
-sudo -i -u openclaw
+sudo -i -u jarvis
 ```
 
 The post-install script will guide you through:
@@ -71,16 +71,16 @@ The post-install script will guide you through:
 
 ```bash
 # Check service status
-sudo systemctl status openclaw
+sudo systemctl status jarvis
 
 # View live logs
-sudo journalctl -u openclaw -f
+sudo journalctl -u jarvis -f
 
 # Restart gateway
-sudo systemctl restart openclaw
+sudo systemctl restart jarvis
 
 # Provider login (run as jarvis user)
-sudo -i -u openclaw
+sudo -i -u jarvis
 jarvis channels login
 ```
 
@@ -118,8 +118,8 @@ If you prefer manual control over the automation:
 sudo apt update && sudo apt install -y ansible git
 
 # 2. Clone repository
-git clone https://github.com/openclaw/openclaw-ansible.git
-cd openclaw-ansible
+git clone https://github.com/jarvis/jarvis-ansible.git
+cd jarvis-ansible
 
 # 3. Install Ansible collections
 ansible-galaxy collection install -r requirements.yml
@@ -127,7 +127,7 @@ ansible-galaxy collection install -r requirements.yml
 # 4. Run playbook
 ./run-playbook.sh
 
-# Or run directly (then manually execute /tmp/openclaw-setup.sh after)
+# Or run directly (then manually execute /tmp/jarvis-setup.sh after)
 # ansible-playbook playbook.yml --ask-become-pass
 ```
 
@@ -138,7 +138,7 @@ The Ansible installer sets up Jarvis for manual updates. See [Updating](/install
 To re-run the Ansible playbook (e.g., for configuration changes):
 
 ```bash
-cd openclaw-ansible
+cd jarvis-ansible
 ./run-playbook.sh
 ```
 
@@ -158,14 +158,14 @@ If you're locked out:
 
 ```bash
 # Check logs
-sudo journalctl -u openclaw -n 100
+sudo journalctl -u jarvis -n 100
 
 # Verify permissions
-sudo ls -la /opt/openclaw
+sudo ls -la /opt/jarvis
 
 # Test manual start
-sudo -i -u openclaw
-cd ~/openclaw
+sudo -i -u jarvis
+cd ~/jarvis
 pnpm start
 ```
 
@@ -176,19 +176,19 @@ pnpm start
 sudo systemctl status docker
 
 # Check sandbox image
-sudo docker images | grep openclaw-sandbox
+sudo docker images | grep jarvis-sandbox
 
 # Build sandbox image if missing
-cd /opt/openclaw/openclaw
-sudo -u openclaw ./scripts/sandbox-setup.sh
+cd /opt/jarvis/jarvis
+sudo -u jarvis ./scripts/sandbox-setup.sh
 ```
 
 ### Provider login fails
 
-Make sure you're running as the `openclaw` user:
+Make sure you're running as the `jarvis` user:
 
 ```bash
-sudo -i -u openclaw
+sudo -i -u jarvis
 jarvis channels login
 ```
 
@@ -196,13 +196,13 @@ jarvis channels login
 
 For detailed security architecture and troubleshooting:
 
-- [Security Architecture](https://github.com/openclaw/openclaw-ansible/blob/main/docs/security.md)
-- [Technical Details](https://github.com/openclaw/openclaw-ansible/blob/main/docs/architecture.md)
-- [Troubleshooting Guide](https://github.com/openclaw/openclaw-ansible/blob/main/docs/troubleshooting.md)
+- [Security Architecture](https://github.com/jarvis/jarvis-ansible/blob/main/docs/security.md)
+- [Technical Details](https://github.com/jarvis/jarvis-ansible/blob/main/docs/architecture.md)
+- [Troubleshooting Guide](https://github.com/jarvis/jarvis-ansible/blob/main/docs/troubleshooting.md)
 
 ## Related
 
-- [openclaw-ansible](https://github.com/openclaw/openclaw-ansible) — full deployment guide
+- [jarvis-ansible](https://github.com/jarvis/jarvis-ansible) — full deployment guide
 - [Docker](/install/docker) — containerized gateway setup
 - [Sandboxing](/gateway/sandboxing) — agent sandbox configuration
 - [Multi-Agent Sandbox & Tools](/tools/multi-agent-sandbox-tools) — per-agent isolation

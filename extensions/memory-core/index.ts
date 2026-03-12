@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/memory-core";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/memory-core";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/memory-core";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/memory-core";
 
 const memoryCorePlugin = {
   id: "memory-core",

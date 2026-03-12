@@ -37,7 +37,7 @@ jarvis browser --browser-profile jarvis snapshot
 
 Profiles are named browser routing configs. In practice:
 
-- `openclaw`: launches/attaches to a dedicated Jarvis-managed Chrome instance (isolated user data dir).
+- `jarvis`: launches/attaches to a dedicated Jarvis-managed Chrome instance (isolated user data dir).
 - `chrome`: controls your existing Chrome tab(s) via the Chrome extension relay.
 
 ```bash
@@ -56,7 +56,7 @@ jarvis browser --browser-profile work tabs
 
 ```bash
 jarvis browser tabs
-jarvis browser open https://docs.openclaw.ai
+jarvis browser open https://docs.jarvis.ai
 jarvis browser focus <targetId>
 jarvis browser close <targetId>
 ```

@@ -76,10 +76,7 @@ export function createConfigRuntimeEnv(
   return env;
 }
 
-export function applyConfigEnvVars(
-  cfg: JarvisConfig,
-  env: NodeJS.ProcessEnv = process.env,
-): void {
+export function applyConfigEnvVars(cfg: JarvisConfig, env: NodeJS.ProcessEnv = process.env): void {
   const entries = collectConfigRuntimeEnvVars(cfg);
   for (const [key, value] of Object.entries(entries)) {
     if (env[key]?.trim()) {
@@ -87,7 +84,7 @@ export function applyConfigEnvVars(
     }
     // Skip values containing unresolved ${VAR} references — applyConfigEnvVars runs
     // before env substitution, so these would pollute process.env with literal placeholders
-    // (e.g. process.env.OPENCLAW_GATEWAY_TOKEN = "${VAULT_TOKEN}") which downstream auth
+    // (e.g. process.env.JARVIS_GATEWAY_TOKEN = "${VAULT_TOKEN}") which downstream auth
     // resolution would accept as valid credentials.
     if (containsEnvVarReference(value)) {
       continue;

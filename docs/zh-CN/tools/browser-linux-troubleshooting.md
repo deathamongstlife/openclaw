@@ -18,7 +18,7 @@ x-i18n:
 Jarvis 的浏览器控制服务器无法启动 Chrome/Brave/Edge/Chromium，出现以下错误：
 
 ```
-{"error":"Error: Failed to start Chrome CDP on port 18800 for profile \"openclaw\"."}
+{"error":"Error: Failed to start Chrome CDP on port 18800 for profile \"jarvis\"."}
 ```
 
 ### 根本原因
@@ -44,7 +44,7 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 sudo apt --fix-broken install -y  # if there are dependency errors
 ```
 
-然后更新你的 Jarvis 配置（`~/.openclaw/openclaw.json`）：
+然后更新你的 Jarvis 配置（`~/.jarvis/jarvis.json`）：
 
 ```json
 {
@@ -79,20 +79,20 @@ sudo apt --fix-broken install -y  # if there are dependency errors
 ```bash
 chromium-browser --headless --no-sandbox --disable-gpu \
   --remote-debugging-port=18800 \
-  --user-data-dir=$HOME/.openclaw/browser/openclaw/user-data \
+  --user-data-dir=$HOME/.jarvis/browser/jarvis/user-data \
   about:blank &
 ```
 
 3. 可选创建 systemd 用户服务以自动启动 Chrome：
 
 ```ini
-# ~/.config/systemd/user/openclaw-browser.service
+# ~/.config/systemd/user/jarvis-browser.service
 [Unit]
 Description=Jarvis Browser (Chrome CDP)
 After=network.target
 
 [Service]
-ExecStart=/snap/bin/chromium --headless --no-sandbox --disable-gpu --remote-debugging-port=18800 --user-data-dir=%h/.openclaw/browser/openclaw/user-data about:blank
+ExecStart=/snap/bin/chromium --headless --no-sandbox --disable-gpu --remote-debugging-port=18800 --user-data-dir=%h/.jarvis/browser/jarvis/user-data about:blank
 Restart=on-failure
 RestartSec=5
 
@@ -100,7 +100,7 @@ RestartSec=5
 WantedBy=default.target
 ```
 
-启用：`systemctl --user enable --now openclaw-browser.service`
+启用：`systemctl --user enable --now jarvis-browser.service`
 
 ### 验证浏览器是否工作
 
@@ -134,11 +134,11 @@ curl -s http://127.0.0.1:18791/tabs
 
 修复选项：
 
-1. **使用托管浏览器：** `jarvis browser start --browser-profile openclaw`
-   （或设置 `browser.defaultProfile: "openclaw"`）。
+1. **使用托管浏览器：** `jarvis browser start --browser-profile jarvis`
+   （或设置 `browser.defaultProfile: "jarvis"`）。
 2. **使用扩展中继：** 安装扩展，打开一个标签页，然后点击 Jarvis 扩展图标来附加它。
 
 注意事项：
 
 - `chrome` 配置文件在可能时使用你的**系统默认 Chromium 浏览器**。
-- 本地 `openclaw` 配置文件自动分配 `cdpPort`/`cdpUrl`；仅为远程 CDP 设置这些。
+- 本地 `jarvis` 配置文件自动分配 `cdpPort`/`cdpUrl`；仅为远程 CDP 设置这些。

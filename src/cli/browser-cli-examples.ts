@@ -24,7 +24,7 @@ export const browserActionExamples = [
   "jarvis browser hover 44",
   "jarvis browser drag 10 11",
   "jarvis browser select 9 OptionA OptionB",
-  "jarvis browser upload /tmp/openclaw/uploads/file.pdf",
+  "jarvis browser upload /tmp/jarvis/uploads/file.pdf",
   'jarvis browser fill --fields \'[{"ref":"1","value":"Ada"}]\'',
   "jarvis browser dialog --accept",
   'jarvis browser wait --text "Done"',

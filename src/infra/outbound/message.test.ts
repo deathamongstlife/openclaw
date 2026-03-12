@@ -15,7 +15,7 @@ vi.mock("../../channels/plugins/index.js", () => ({
 
 vi.mock("../../agents/agent-scope.js", () => ({
   resolveDefaultAgentId: () => "main",
-  resolveAgentWorkspaceDir: () => "/tmp/openclaw-test-workspace",
+  resolveAgentWorkspaceDir: () => "/tmp/jarvis-test-workspace",
 }));
 
 vi.mock("../../config/plugin-auto-enable.js", () => ({

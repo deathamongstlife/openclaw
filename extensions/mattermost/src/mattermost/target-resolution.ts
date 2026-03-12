@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/mattermost";
+import type { JarvisConfig } from "jarvis/plugin-sdk/mattermost";
 import { resolveMattermostAccount } from "./accounts.js";
 import {
   createMattermostClient,

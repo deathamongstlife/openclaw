@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/diagnostics-otel";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/diagnostics-otel";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/diagnostics-otel";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/diagnostics-otel";
 import { createDiagnosticsOtelService } from "./src/service.js";
 
 const plugin = {

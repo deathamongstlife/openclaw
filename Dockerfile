@@ -77,7 +77,7 @@ RUN pnpm canvas:a2ui:bundle || \
      mkdir -p src/canvas-host/a2ui && \
      echo "/* A2UI bundle unavailable in this build */" > src/canvas-host/a2ui/a2ui.bundle.js && \
      echo "stub" > src/canvas-host/a2ui/.bundle.hash && \
-     rm -rf vendor/a2ui apps/shared/OpenClawKit/Tools/CanvasA2UI)
+     rm -rf vendor/a2ui apps/shared/JarvisKit/Tools/CanvasA2UI)
 RUN pnpm build:docker
 # Force pnpm for UI build (Bun may fail on ARM/Synology architectures)
 ENV JARVIS_PREFER_PNPM=1

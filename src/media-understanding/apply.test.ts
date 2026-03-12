@@ -5,7 +5,7 @@ import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vites
 import { resolveApiKeyForProvider } from "../agents/model-auth.js";
 import type { MsgContext } from "../auto-reply/templating.js";
 import type { JarvisConfig } from "../config/config.js";
-import { resolvePreferredJarvisTmpDir } from "../infra/tmp-openclaw-dir.js";
+import { resolvePreferredJarvisTmpDir } from "../infra/tmp-jarvis-dir.js";
 import { fetchRemoteMedia } from "../media/fetch.js";
 import { runExec } from "../process/exec.js";
 import { withEnvAsync } from "../test-utils/env.js";
@@ -37,7 +37,7 @@ vi.mock("../process/exec.js", () => ({
 let applyMediaUnderstanding: typeof import("./apply.js").applyMediaUnderstanding;
 const mockedRunExec = vi.mocked(runExec);
 
-const TEMP_MEDIA_PREFIX = "openclaw-media-";
+const TEMP_MEDIA_PREFIX = "jarvis-media-";
 let suiteTempMediaRootDir = "";
 let tempMediaDirCounter = 0;
 let sharedTempMediaCacheDir = "";
@@ -159,7 +159,7 @@ async function withMediaAutoDetectEnv<T>(
       GROQ_API_KEY: undefined,
       DEEPGRAM_API_KEY: undefined,
       GEMINI_API_KEY: undefined,
-      OPENCLAW_AGENT_DIR: undefined,
+      JARVIS_AGENT_DIR: undefined,
       PI_CODING_AGENT_DIR: undefined,
       ...env,
     },
@@ -664,7 +664,7 @@ describe("applyMediaUnderstanding", () => {
     await withMediaAutoDetectEnv(
       {
         PATH: emptyBinDir,
-        OPENCLAW_AGENT_DIR: isolatedAgentDir,
+        JARVIS_AGENT_DIR: isolatedAgentDir,
         PI_CODING_AGENT_DIR: isolatedAgentDir,
       },
       async () => {

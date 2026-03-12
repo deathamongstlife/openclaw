@@ -1,12 +1,12 @@
 {
-  "name": "@openclaw/acpx",
+  "name": "@jarvis/acpx",
   "version": "2026.3.9",
   "description": "Jarvis ACP runtime backend via acpx",
   "type": "module",
   "dependencies": {
     "acpx": "0.1.16"
   },
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ]

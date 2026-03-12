@@ -160,7 +160,7 @@ Pomerium config snippet:
 
 ```yaml
 routes:
-  - from: https://openclaw.example.com
+  - from: https://jarvis.example.com
     to: http://jarvis-gateway:18789
     policy:
       - allow:
@@ -192,11 +192,11 @@ Caddy with the `caddy-security` plugin can authenticate users and pass identity 
 Caddyfile snippet:
 
 ```
-openclaw.example.com {
+jarvis.example.com {
     authenticate with oauth2_provider
     authorize with policy1
 
-    reverse_proxy openclaw:18789 {
+    reverse_proxy jarvis:18789 {
         header_up X-Forwarded-User {http.auth.user.email}
     }
 }
@@ -228,7 +228,7 @@ location / {
     auth_request /oauth2/auth;
     auth_request_set $user $upstream_http_x_auth_request_email;
 
-    proxy_pass http://openclaw:18789;
+    proxy_pass http://jarvis:18789;
     proxy_set_header X-Auth-Request-Email $user;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;

@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { describe, expect, it } from "vitest";
-import { resolvePreferredJarvisTmpDir } from "../infra/tmp-openclaw-dir.js";
+import { resolvePreferredJarvisTmpDir } from "../infra/tmp-jarvis-dir.js";
 import { resolveSandboxedMediaSource } from "./sandbox-paths.js";
 
 async function withSandboxRoot<T>(run: (sandboxDir: string) => Promise<T>) {
@@ -149,7 +149,7 @@ describe("resolveSandboxedMediaSource", () => {
     },
     {
       name: "absolute paths under host tmp outside jarvis tmp root",
-      media: path.join(os.tmpdir(), "outside-openclaw", "passwd"),
+      media: path.join(os.tmpdir(), "outside-jarvis", "passwd"),
       expected: /sandbox/i,
     },
     {

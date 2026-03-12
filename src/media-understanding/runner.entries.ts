@@ -14,7 +14,7 @@ import type {
 } from "../config/types.tools.js";
 import { logVerbose, shouldLogVerbose } from "../globals.js";
 import { resolveProxyFetchFromEnv } from "../infra/net/proxy-fetch.js";
-import { resolvePreferredJarvisTmpDir } from "../infra/tmp-openclaw-dir.js";
+import { resolvePreferredJarvisTmpDir } from "../infra/tmp-jarvis-dir.js";
 import { runExec } from "../process/exec.js";
 import { MediaAttachmentCache } from "./attachments.js";
 import {
@@ -617,7 +617,7 @@ export async function runCliEntry(params: {
     assertMinAudioSize({ size: stat.size, attachmentIndex: params.attachmentIndex });
   }
   const outputDir = await fs.mkdtemp(
-    path.join(resolvePreferredJarvisTmpDir(), "openclaw-media-cli-"),
+    path.join(resolvePreferredJarvisTmpDir(), "jarvis-media-cli-"),
   );
   const mediaPath = pathResult.path;
   const outputBase = path.join(outputDir, path.parse(mediaPath).name);

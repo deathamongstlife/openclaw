@@ -1,4 +1,4 @@
-import type { JarvisConfig, PluginRuntime } from "openclaw/plugin-sdk/line";
+import type { JarvisConfig, PluginRuntime } from "jarvis/plugin-sdk/line";
 import { describe, expect, it, vi } from "vitest";
 import { linePlugin } from "./channel.js";
 import { setLineRuntime } from "./runtime.js";

@@ -8,7 +8,7 @@ vi.mock("./models-config.js", () => ({
 }));
 
 vi.mock("./agent-paths.js", () => ({
-  resolveJarvisAgentDir: () => "/tmp/openclaw",
+  resolveJarvisAgentDir: () => "/tmp/jarvis",
 }));
 
 export function installModelCatalogTestHooks() {

@@ -4,7 +4,7 @@ import {
   type JarvisPluginApi,
   type ProviderAuthContext,
   type ProviderAuthResult,
-} from "openclaw/plugin-sdk/minimax-portal-auth";
+} from "jarvis/plugin-sdk/minimax-portal-auth";
 import { loginMiniMaxPortalOAuth, type MiniMaxRegion } from "./oauth.js";
 
 const PROVIDER_ID = "minimax-portal";

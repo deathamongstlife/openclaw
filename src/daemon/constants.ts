@@ -1,13 +1,13 @@
 // Default service labels (canonical + legacy compatibility)
-export const GATEWAY_LAUNCH_AGENT_LABEL = "ai.openclaw.gateway";
+export const GATEWAY_LAUNCH_AGENT_LABEL = "ai.jarvis.gateway";
 export const GATEWAY_SYSTEMD_SERVICE_NAME = "jarvis-gateway";
 export const GATEWAY_WINDOWS_TASK_NAME = "Jarvis Gateway";
-export const GATEWAY_SERVICE_MARKER = "openclaw";
+export const GATEWAY_SERVICE_MARKER = "jarvis";
 export const GATEWAY_SERVICE_KIND = "gateway";
-export const NODE_LAUNCH_AGENT_LABEL = "ai.openclaw.node";
-export const NODE_SYSTEMD_SERVICE_NAME = "openclaw-node";
+export const NODE_LAUNCH_AGENT_LABEL = "ai.jarvis.node";
+export const NODE_SYSTEMD_SERVICE_NAME = "jarvis-node";
 export const NODE_WINDOWS_TASK_NAME = "Jarvis Node";
-export const NODE_SERVICE_MARKER = "openclaw";
+export const NODE_SERVICE_MARKER = "jarvis";
 export const NODE_SERVICE_KIND = "node";
 export const NODE_WINDOWS_TASK_SCRIPT_NAME = "node.cmd";
 export const LEGACY_GATEWAY_LAUNCH_AGENT_LABELS: string[] = [];
@@ -35,7 +35,7 @@ export function resolveGatewayLaunchAgentLabel(profile?: string): string {
   if (!normalized) {
     return GATEWAY_LAUNCH_AGENT_LABEL;
   }
-  return `ai.openclaw.${normalized}`;
+  return `ai.jarvis.${normalized}`;
 }
 
 export function resolveLegacyGatewayLaunchAgentLabels(profile?: string): string[] {
@@ -86,8 +86,8 @@ export function resolveGatewayServiceDescription(params: {
   return (
     params.description ??
     formatGatewayServiceDescription({
-      profile: params.env.OPENCLAW_PROFILE,
-      version: params.environment?.OPENCLAW_SERVICE_VERSION ?? params.env.OPENCLAW_SERVICE_VERSION,
+      profile: params.env.JARVIS_PROFILE,
+      version: params.environment?.JARVIS_SERVICE_VERSION ?? params.env.JARVIS_SERVICE_VERSION,
     })
   );
 }

@@ -16,7 +16,7 @@ import {
   type OutboundReplyPayload,
   type JarvisConfig,
   type RuntimeEnv,
-} from "openclaw/plugin-sdk/irc";
+} from "jarvis/plugin-sdk/irc";
 import type { ResolvedIrcAccount } from "./accounts.js";
 import { normalizeIrcAllowlist, resolveIrcAllowlistMatch } from "./normalize.js";
 import {

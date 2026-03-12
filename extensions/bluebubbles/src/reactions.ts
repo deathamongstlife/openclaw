@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/bluebubbles";
+import type { JarvisConfig } from "jarvis/plugin-sdk/bluebubbles";
 import { resolveBlueBubblesServerAccount } from "./account-resolve.js";
 import { getCachedBlueBubblesPrivateApiStatus } from "./probe.js";
 import { blueBubblesFetchWithTimeout, buildBlueBubblesApiUrl } from "./types.js";

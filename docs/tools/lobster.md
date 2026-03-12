@@ -72,7 +72,7 @@ Example: map input items into tool calls:
 
 ```bash
 gog.gmail.search --query 'newer_than:1d' \
-  | openclaw.invoke --tool message --action send --each --item-key message --args-json '{"provider":"telegram","to":"..."}'
+  | jarvis.invoke --tool message --action send --each --item-key message --args-json '{"provider":"telegram","to":"..."}'
 ```
 
 ## JSON-only LLM steps (llm-task)
@@ -104,7 +104,7 @@ Enable the tool:
 Use it in a pipeline:
 
 ```lobster
-openclaw.invoke --tool llm-task --action json --args-json '{
+jarvis.invoke --tool llm-task --action json --args-json '{
   "prompt": "Given the input email, return intent and draft.",
   "input": { "subject": "Hello", "body": "Can you help?" },
   "schema": {
@@ -153,7 +153,7 @@ Notes:
 
 ## Install Lobster
 
-Install the Lobster CLI on the **same host** that runs the Jarvis Gateway (see the [Lobster repo](https://github.com/openclaw/lobster)), and ensure `lobster` is on `PATH`.
+Install the Lobster CLI on the **same host** that runs the Jarvis Gateway (see the [Lobster repo](https://github.com/jarvis/lobster)), and ensure `lobster` is on `PATH`.
 
 ## Enable the tool
 

@@ -49,6 +49,7 @@ This document provides a comprehensive overview of Jarvis's architecture, compon
 ### 1. Gateway Server
 
 The Gateway is the central control plane for Jarvis. It manages:
+
 - **Message routing** between channels and agents
 - **Session lifecycle** management
 - **Authentication and authorization**
@@ -56,6 +57,7 @@ The Gateway is the central control plane for Jarvis. It manages:
 - **Background services** (cron, health monitoring)
 
 **Key Files:**
+
 - `src/gateway/server.impl.ts` - Main gateway implementation
 - `src/gateway/server-startup.ts` - Bootstrap and initialization
 - `src/gateway/server-close.ts` - Graceful shutdown
@@ -65,6 +67,7 @@ The Gateway is the central control plane for Jarvis. It manages:
 The agent runtime executes AI-powered assistants with access to tools and context.
 
 **Features:**
+
 - **Multi-provider model support** (OpenAI, Anthropic, Gemini, etc.)
 - **Tool execution** with sandboxing
 - **Context management** and memory
@@ -72,6 +75,7 @@ The agent runtime executes AI-powered assistants with access to tools and contex
 - **Sub-agent spawning** for parallel tasks
 
 **Key Files:**
+
 - `src/agents/acp-spawn.ts` - Agent Control Protocol spawning
 - `src/agents/agent-loop.ts` - Main agent execution loop
 - `src/agents/tools/` - Built-in tool implementations
@@ -81,6 +85,7 @@ The agent runtime executes AI-powered assistants with access to tools and contex
 Channel providers connect Jarvis to messaging platforms.
 
 **Supported Channels:**
+
 - **WhatsApp** (via web provider)
 - **Telegram** (bot API + polling)
 - **Discord** (bot)
@@ -95,12 +100,14 @@ Channel providers connect Jarvis to messaging platforms.
 - **WebChat** (built-in UI)
 
 **Architecture:**
+
 - Each channel implements a common interface
 - Supports both polling and webhook modes
 - Channel-specific message formatting
 - Media upload/download handling
 
 **Key Files:**
+
 - `src/telegram/` - Telegram provider
 - `src/discord/` - Discord provider
 - `src/slack/` - Slack provider
@@ -111,6 +118,7 @@ Channel providers connect Jarvis to messaging platforms.
 Sessions track conversation state and history.
 
 **Features:**
+
 - **Persistent storage** (JSON files or database)
 - **Session pruning** and compaction
 - **Thread isolation** (for group chats)
@@ -118,6 +126,7 @@ Sessions track conversation state and history.
 - **Export capabilities** (JSON, Markdown, HTML)
 
 **Key Files:**
+
 - `src/gateway/sessions-patch.ts` - Session updates
 - `src/concepts/session.md` - Session design docs
 
@@ -126,6 +135,7 @@ Sessions track conversation state and history.
 Web-based management interface for monitoring and configuration.
 
 **Features:**
+
 - **Real-time metrics** and charts
 - **Session browser** with search
 - **Config editor** with validation
@@ -134,6 +144,7 @@ Web-based management interface for monitoring and configuration.
 - **Agent management**
 
 **Key Files:**
+
 - `ui/src/ui/views/dashboard.ts` - Main dashboard
 - `ui/src/ui/views/session-browser.ts` - Session management
 - `ui/src/controllers/metrics-controller.ts` - Metrics WebSocket
@@ -143,6 +154,7 @@ Web-based management interface for monitoring and configuration.
 Background task scheduling and webhook handling.
 
 **Features:**
+
 - **Cron jobs** with isolated sessions
 - **Webhooks** for external integrations
 - **Heartbeat monitoring**
@@ -150,6 +162,7 @@ Background task scheduling and webhook handling.
 - **Recurring reminders**
 
 **Key Files:**
+
 - `src/cron/service/` - Cron implementation
 - `docs/automation/` - Automation docs
 
@@ -224,21 +237,21 @@ Background task scheduling and webhook handling.
 
 ### Configuration
 
-- **File-based config** (`~/.openclaw/config.json`)
+- **File-based config** (`~/.jarvis/config.json`)
 - **Environment variables** for overrides
 - **Config validation** and migration
 - **Hot reloading** support
 
 ### Sessions
 
-- **Default:** JSON files in `~/.openclaw/sessions/`
+- **Default:** JSON files in `~/.jarvis/sessions/`
 - **Session pruning** to manage disk usage
 - **Compaction** to reduce file size
 - **Export/import** capabilities
 
 ### Secrets
 
-- **Encrypted credential storage** (`~/.openclaw/credentials/`)
+- **Encrypted credential storage** (`~/.jarvis/credentials/`)
 - **1Password integration** (optional)
 - **Environment variable fallback**
 
@@ -269,6 +282,7 @@ Background task scheduling and webhook handling.
 ### Plugin System
 
 Jarvis supports extensions via:
+
 - **Channel plugins** (new messaging platforms)
 - **Tool plugins** (custom agent tools)
 - **Model provider plugins** (custom AI backends)
@@ -279,6 +293,7 @@ Jarvis supports extensions via:
 ### Hooks
 
 Hooks allow custom code to run at key lifecycle points:
+
 - `onMessageReceived`
 - `onMessageSent`
 - `onSessionCreated`
@@ -300,7 +315,7 @@ Hooks allow custom code to run at key lifecycle points:
 ### Code Organization
 
 ```
-openclaw/
+jarvis/
 ├── src/                    # Core TypeScript source
 │   ├── gateway/           # Gateway server
 │   ├── agents/            # Agent runtime
@@ -406,4 +421,4 @@ openclaw/
 
 **Last Updated:** March 2026
 
-For questions or clarifications, see the [Discord community](https://discord.gg/clawd) or [GitHub discussions](https://github.com/openclaw/openclaw/discussions).
+For questions or clarifications, see the [Discord community](https://discord.gg/clawd) or [GitHub discussions](https://github.com/jarvis/jarvis/discussions).

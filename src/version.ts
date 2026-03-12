@@ -1,7 +1,7 @@
 import { createRequire } from "node:module";
 
-declare const __OPENCLAW_VERSION__: string | undefined;
-const CORE_PACKAGE_NAME = "openclaw";
+declare const __JARVIS_VERSION__: string | undefined;
+const CORE_PACKAGE_NAME = "jarvis";
 
 const PACKAGE_JSON_CANDIDATES = [
   "../package.json",
@@ -110,9 +110,9 @@ export function resolveRuntimeServiceVersion(
 
   return (
     firstNonEmpty(
-      env["OPENCLAW_VERSION"],
+      env["JARVIS_VERSION"],
       runtimeVersion,
-      env["OPENCLAW_SERVICE_VERSION"],
+      env["JARVIS_SERVICE_VERSION"],
       env["npm_package_version"],
     ) ?? fallback
   );
@@ -123,6 +123,6 @@ export function resolveRuntimeServiceVersion(
 // - Dev/npm builds: package.json.
 export const VERSION = resolveBinaryVersion({
   moduleUrl: import.meta.url,
-  injectedVersion: typeof __OPENCLAW_VERSION__ === "string" ? __OPENCLAW_VERSION__ : undefined,
-  bundledVersion: process.env.OPENCLAW_BUNDLED_VERSION,
+  injectedVersion: typeof __JARVIS_VERSION__ === "string" ? __JARVIS_VERSION__ : undefined,
+  bundledVersion: process.env.JARVIS_BUNDLED_VERSION,
 });

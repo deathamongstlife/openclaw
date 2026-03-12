@@ -17,7 +17,7 @@ For a high-level overview, see [Onboarding Wizard](/start/wizard).
 
 <Steps>
   <Step title="Existing config detection">
-    - If `~/.openclaw/openclaw.json` exists, choose **Keep / Modify / Reset**.
+    - If `~/.jarvis/jarvis.json` exists, choose **Keep / Modify / Reset**.
     - Re-running the wizard does **not** wipe anything unless you explicitly choose **Reset**
       (or pass `--reset`).
     - CLI `--reset` defaults to `config+creds+sessions`; use `--reset-scope full`
@@ -55,16 +55,16 @@ For a high-level overview, see [Onboarding Wizard](/start/wizard).
     - Pick a default model from detected options (or enter provider/model manually). For best quality and lower prompt-injection risk, choose the strongest latest-generation model available in your provider stack.
     - Wizard runs a model check and warns if the configured model is unknown or missing auth.
     - API key storage mode defaults to plaintext auth-profile values. Use `--secret-input-mode ref` to store env-backed refs instead (for example `keyRef: { source: "env", provider: "default", id: "OPENAI_API_KEY" }`).
-    - OAuth credentials live in `~/.openclaw/credentials/oauth.json`; auth profiles live in `~/.openclaw/agents/<agentId>/agent/auth-profiles.json` (API keys + OAuth).
+    - OAuth credentials live in `~/.jarvis/credentials/oauth.json`; auth profiles live in `~/.jarvis/agents/<agentId>/agent/auth-profiles.json` (API keys + OAuth).
     - More detail: [/concepts/oauth](/concepts/oauth)
     <Note>
     Headless/server tip: complete OAuth on a machine with a browser, then copy
-    `~/.openclaw/credentials/oauth.json` (or `$OPENCLAW_STATE_DIR/credentials/oauth.json`) to the
+    `~/.jarvis/credentials/oauth.json` (or `$JARVIS_STATE_DIR/credentials/oauth.json`) to the
     gateway host.
     </Note>
   </Step>
   <Step title="Workspace">
-    - Default `~/.openclaw/workspace` (configurable).
+    - Default `~/.jarvis/workspace` (configurable).
     - Seeds the workspace files needed for the agent bootstrap ritual.
     - Full workspace layout + backup guide: [Agent workspace](/concepts/agent-workspace)
   </Step>
@@ -151,12 +151,12 @@ Add `--json` for a machine‑readable summary.
 Gateway token SecretRef in non-interactive mode:
 
 ```bash
-export OPENCLAW_GATEWAY_TOKEN="your-token"
+export JARVIS_GATEWAY_TOKEN="your-token"
 jarvis onboard --non-interactive \
   --mode local \
   --auth-choice skip \
   --gateway-auth token \
-  --gateway-token-ref-env OPENCLAW_GATEWAY_TOKEN
+  --gateway-token-ref-env JARVIS_GATEWAY_TOKEN
 ```
 
 `--gateway-token` and `--gateway-token-ref-env` are mutually exclusive.
@@ -245,7 +245,7 @@ jarvis onboard --non-interactive \
 
 ```bash
 jarvis agents add work \
-  --workspace ~/.openclaw/workspace-work \
+  --workspace ~/.jarvis/workspace-work \
   --model openai/gpt-5.2 \
   --bind whatsapp:biz \
   --non-interactive \
@@ -262,7 +262,7 @@ Clients (macOS app, Control UI) can render steps without re‑implementing onboa
 The wizard can install `signal-cli` from GitHub releases:
 
 - Downloads the appropriate release asset.
-- Stores it under `~/.openclaw/tools/signal-cli/<version>/`.
+- Stores it under `~/.jarvis/tools/signal-cli/<version>/`.
 - Writes `channels.signal.cliPath` to your config.
 
 Notes:
@@ -273,7 +273,7 @@ Notes:
 
 ## What the wizard writes
 
-Typical fields in `~/.openclaw/openclaw.json`:
+Typical fields in `~/.jarvis/jarvis.json`:
 
 - `agents.defaults.workspace`
 - `agents.defaults.model` / `models.providers` (if Minimax chosen)
@@ -291,8 +291,8 @@ Typical fields in `~/.openclaw/openclaw.json`:
 
 `jarvis agents add` writes `agents.list[]` and optional `bindings`.
 
-WhatsApp credentials go under `~/.openclaw/credentials/whatsapp/<accountId>/`.
-Sessions are stored under `~/.openclaw/agents/<agentId>/sessions/`.
+WhatsApp credentials go under `~/.jarvis/credentials/whatsapp/<accountId>/`.
+Sessions are stored under `~/.jarvis/agents/<agentId>/sessions/`.
 
 Some channels are delivered as plugins. When you pick one during onboarding, the wizard
 will prompt to install it (npm or a local path) before it can be configured.

@@ -12,7 +12,7 @@ read_when:
 Real projects from the community. See what people are building with Jarvis.
 
 <Info>
-**Want to be featured?** Share your project in [#showcase on Discord](https://discord.gg/clawd) or [tag @jarvis on X](https://x.com/openclaw).
+**Want to be featured?** Share your project in [#showcase on Discord](https://discord.gg/clawd) or [tag @jarvis on X](https://x.com/jarvis).
 </Info>
 
 ## 🎥 Jarvis in Action
@@ -100,7 +100,7 @@ OpenCode finishes the change → opens a PR → Jarvis reviews the diff and repl
 <Card title="Wine Cellar Skill in Minutes" icon="wine-glass" href="https://x.com/i/status/2010916352454791216">
   **@prades_maxime** • `skills` `local` `csv`
 
-Asked “Robby” (@openclaw) for a local wine cellar skill. It requests a sample CSV export + where to store it, then builds/tests the skill fast (962 bottles in the example).
+Asked “Robby” (@jarvis) for a local wine cellar skill. It requests a sample CSV export + where to store it, then builds/tests the skill fast (962 bottles in the example).
 
   <img src="/assets/showcase/wine-cellar-skill.jpg" alt="Jarvis building a local wine cellar skill from CSV" />
 </Card>
@@ -340,7 +340,7 @@ Multi-lingual audio transcription via OpenRouter (Gemini, etc). Available on Cla
 
 <CardGroup cols={2}>
 
-<Card title="Home Assistant Add-on" icon="home" href="https://github.com/ngutman/openclaw-ha-addon">
+<Card title="Home Assistant Add-on" icon="home" href="https://github.com/ngutman/jarvis-ha-addon">
   **@ngutman** • `homeassistant` `docker` `raspberry-pi`
   
   Jarvis gateway running on Home Assistant OS with SSH tunnel support and persistent state.
@@ -352,8 +352,8 @@ Multi-lingual audio transcription via OpenRouter (Gemini, etc). Available on Cla
   Control and automate Home Assistant devices via natural language.
 </Card>
 
-<Card title="Nix Packaging" icon="snowflake" href="https://github.com/openclaw/nix-openclaw">
-  **@openclaw** • `nix` `packaging` `deployment`
+<Card title="Nix Packaging" icon="snowflake" href="https://github.com/jarvis/nix-jarvis">
+  **@jarvis** • `nix` `packaging` `deployment`
   
   Batteries-included nixified Jarvis configuration for reproducible deployments.
 </Card>
@@ -408,7 +408,7 @@ Have something to share? We'd love to feature it!
 
 <Steps>
   <Step title="Share It">
-    Post in [#showcase on Discord](https://discord.gg/clawd) or [tweet @openclaw](https://x.com/openclaw)
+    Post in [#showcase on Discord](https://discord.gg/clawd) or [tweet @jarvis](https://x.com/jarvis)
   </Step>
   <Step title="Include Details">
     Tell us what it does, link to the repo/demo, share a screenshot if you have one

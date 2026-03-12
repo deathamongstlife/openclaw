@@ -1,10 +1,10 @@
 # Local Models Module
 
-Local model support for OpenClaw - run AI models completely offline on your own hardware.
+Local model support for Jarvis - run AI models completely offline on your own hardware.
 
 ## Overview
 
-This module provides comprehensive support for installing, managing, and running local AI models through OpenClaw. It handles:
+This module provides comprehensive support for installing, managing, and running local AI models through Jarvis. It handles:
 
 - **Automatic backend detection and installation** (Ollama, LM Studio, llama.cpp, etc.)
 - **System resource detection** (RAM, VRAM, GPU capabilities)
@@ -34,15 +34,15 @@ local-models/
 Pre-configured models with full metadata:
 
 ```typescript
-import { LOCAL_MODEL_CATALOG, getModelById } from './catalog.js';
+import { LOCAL_MODEL_CATALOG, getModelById } from "./catalog.js";
 
 // Get all models
 console.log(LOCAL_MODEL_CATALOG);
 
 // Get specific model
-const llama = getModelById('llama-3.3-70b');
+const llama = getModelById("llama-3.3-70b");
 console.log(llama.displayName); // "Llama 3.3 70B"
-console.log(llama.minVRAM);     // 24
+console.log(llama.minVRAM); // 24
 console.log(llama.capabilities); // ["text", "reasoning", "code"]
 ```
 
@@ -51,13 +51,13 @@ console.log(llama.capabilities); // ["text", "reasoning", "code"]
 Detect hardware capabilities:
 
 ```typescript
-import { detectSystemResources, canRunModel } from './system-resources.js';
+import { detectSystemResources, canRunModel } from "./system-resources.js";
 
 // Detect hardware
 const resources = await detectSystemResources();
-console.log(resources.totalRAM);   // 64
-console.log(resources.hasGPU);     // true
-console.log(resources.gpuName);    // "NVIDIA RTX 4090"
+console.log(resources.totalRAM); // 64
+console.log(resources.hasGPU); // true
+console.log(resources.gpuName); // "NVIDIA RTX 4090"
 
 // Check if model can run
 const canRun = canRunModel(resources, 24, 48); // 24GB VRAM, 48GB RAM
@@ -73,8 +73,8 @@ import {
   isOllamaInstalled,
   installOllama,
   pullOllamaModel,
-  listOllamaModels
-} from './ollama-backend.js';
+  listOllamaModels,
+} from "./ollama-backend.js";
 
 // Check if installed
 const installed = await isOllamaInstalled();
@@ -85,7 +85,7 @@ if (!installed) {
 }
 
 // Pull a model
-await pullOllamaModel('llama3.2:3b', 'http://localhost:11434', (progress) => {
+await pullOllamaModel("llama3.2:3b", "http://localhost:11434", (progress) => {
   console.log(`${progress.percent}% - ${progress.currentFile}`);
 });
 
@@ -98,12 +98,7 @@ const models = await listOllamaModels();
 High-level management:
 
 ```typescript
-import {
-  getSystemInfo,
-  getModelRecommendations,
-  installModel,
-  quickInstall
-} from './installer.js';
+import { getSystemInfo, getModelRecommendations, installModel, quickInstall } from "./installer.js";
 
 // Get system info + recommendations
 const info = await getSystemInfo();
@@ -111,11 +106,15 @@ console.log(info.formattedResources);
 console.log(info.recommendations[0]); // Top recommendation
 
 // Install a specific model
-await installModel('llama-3.2-3b', {
-  quantization: 'Q4_K_M'
-}, (progress) => {
-  console.log(`${progress.status}: ${progress.percent}%`);
-});
+await installModel(
+  "llama-3.2-3b",
+  {
+    quantization: "Q4_K_M",
+  },
+  (progress) => {
+    console.log(`${progress.status}: ${progress.percent}%`);
+  },
+);
 
 // Quick install (automatic)
 await quickInstall((progress) => {
@@ -129,52 +128,48 @@ await quickInstall((progress) => {
 
 ```bash
 # System info and recommendations
-openclaw local-models info
+jarvis local-models info
 
 # Quick install recommended model
-openclaw local-models quick-install
+jarvis local-models quick-install
 
 # Install specific model
-openclaw local-models install llama-3.3-70b --quantization Q4_K_M
+jarvis local-models install llama-3.3-70b --quantization Q4_K_M
 
 # List available models
-openclaw local-models list
+jarvis local-models list
 
 # List installed models
-openclaw local-models list --installed
+jarvis local-models list --installed
 
 # Uninstall a model
-openclaw local-models uninstall llama-3.2-3b
+jarvis local-models uninstall llama-3.2-3b
 
 # Check backend status
-openclaw local-models status
+jarvis local-models status
 ```
 
 ### Programmatic Usage
 
 ```typescript
-import {
-  getSystemInfo,
-  installModel,
-  getModelRecommendations
-} from '@/agents/local-models';
+import { getSystemInfo, installModel, getModelRecommendations } from "@/agents/local-models";
 
 // Get recommendations
 async function setupLocal() {
   const { resources, recommendations } = await getSystemInfo();
 
-  console.log('System Resources:', resources);
-  console.log('Top Recommendation:', recommendations[0].model.displayName);
+  console.log("System Resources:", resources);
+  console.log("Top Recommendation:", recommendations[0].model.displayName);
 
   // Install top recommendation
   const result = await installModel(
     recommendations[0].model.id,
     { quantization: recommendations[0].quantization },
-    (progress) => console.log(`${progress.percent}%`)
+    (progress) => console.log(`${progress.percent}%`),
   );
 
   if (result.success) {
-    console.log('Model installed:', result.model);
+    console.log("Model installed:", result.model);
   }
 }
 ```
@@ -182,35 +177,40 @@ async function setupLocal() {
 ## Model Selection Guide
 
 ### Small Models (4-8GB RAM)
+
 - **llama-3.2-3b**: Fast, efficient, good for quick tasks
 - **deepseek-r1-8b**: Reasoning-focused
 - **llama-3.1-8b**: Balanced general purpose
 
 ### Medium Models (16-32GB RAM)
+
 - **phi-4**: Microsoft's efficient 14B reasoning model
 - **mistral-small**: 22B balanced model
 - **gemma-2-27b**: Google's instruction-following model
 
 ### Large Models (48GB+ RAM)
+
 - **llama-3.3-70b**: Meta's flagship, best quality
 - **qwen2.5-72b**: Multilingual powerhouse
 
 ## Quantization Levels
 
-| Level | Size | Quality | Use Case |
-|-------|------|---------|----------|
-| FP16 | Baseline | 100% | Research, maximum quality |
-| Q8_0 | 50% | ~99% | High-quality production |
-| Q5_K_M | 65% | ~98% | Balanced |
-| Q4_K_M | 75% | ~95% | Standard (default) |
-| Q4_0 | 75% | ~93% | CPU-friendly |
+| Level  | Size     | Quality | Use Case                  |
+| ------ | -------- | ------- | ------------------------- |
+| FP16   | Baseline | 100%    | Research, maximum quality |
+| Q8_0   | 50%      | ~99%    | High-quality production   |
+| Q5_K_M | 65%      | ~98%    | Balanced                  |
+| Q4_K_M | 75%      | ~95%    | Standard (default)        |
+| Q4_0   | 75%      | ~93%    | CPU-friendly              |
 
 ## Backend Support
 
 ### Currently Supported
+
 - ✅ **Ollama** - Full support with auto-installation
 
 ### Coming Soon
+
 - 🚧 **LM Studio** - GUI-based management
 - 🚧 **llama.cpp** - Direct GGUF support
 - 🚧 **vLLM** - High-throughput inference
@@ -228,7 +228,7 @@ pnpm test src/agents/local-models/system-resources.test.ts
 
 ## Configuration
 
-Models are configured in `~/.openclaw/config.json`:
+Models are configured in `~/.jarvis/config.json`:
 
 ```json
 {
@@ -305,6 +305,7 @@ To add a new model to the catalog:
 ## Troubleshooting
 
 ### Ollama Not Found
+
 ```bash
 # Install Ollama
 curl -fsSL https://ollama.com/install.sh | sh
@@ -314,12 +315,14 @@ curl -fsSL https://ollama.com/install.sh | sh
 ```
 
 ### Out of Memory
+
 - Try a smaller model
 - Use lower quantization (Q4_K_M → Q4_0)
 - Close other applications
-- Check with: `openclaw local-models info`
+- Check with: `jarvis local-models info`
 
 ### Model Won't Download
+
 ```bash
 # Check Ollama is running
 curl http://localhost:11434/api/tags

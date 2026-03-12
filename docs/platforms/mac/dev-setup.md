@@ -35,13 +35,13 @@ To build the macOS app and package it into `dist/Jarvis.app`, run:
 If you don't have an Apple Developer ID certificate, the script will automatically use **ad-hoc signing** (`-`).
 
 For dev run modes, signing flags, and Team ID troubleshooting, see the macOS app README:
-[https://github.com/openclaw/openclaw/blob/main/apps/macos/README.md](https://github.com/openclaw/openclaw/blob/main/apps/macos/README.md)
+[https://github.com/jarvis/jarvis/blob/main/apps/macos/README.md](https://github.com/jarvis/jarvis/blob/main/apps/macos/README.md)
 
 > **Note**: Ad-hoc signed apps may trigger security prompts. If the app crashes immediately with "Abort trap 6", see the [Troubleshooting](#troubleshooting) section.
 
 ## 3. Install the CLI
 
-The macOS app expects a global `openclaw` CLI install to manage background tasks.
+The macOS app expects a global `jarvis` CLI install to manage background tasks.
 
 **To install it (recommended):**
 
@@ -52,7 +52,7 @@ The macOS app expects a global `openclaw` CLI install to manage background tasks
 Alternatively, install it manually:
 
 ```bash
-npm install -g openclaw@<version>
+npm install -g jarvis@<version>
 ```
 
 ## Troubleshooting
@@ -84,10 +84,10 @@ If the app crashes when you try to allow **Speech Recognition** or **Microphone*
 1. Reset the TCC permissions:
 
    ```bash
-   tccutil reset All ai.openclaw.mac.debug
+   tccutil reset All ai.jarvis.mac.debug
    ```
 
-2. If that fails, change the `BUNDLE_ID` temporarily in [`scripts/package-mac-app.sh`](https://github.com/openclaw/openclaw/blob/main/scripts/package-mac-app.sh) to force a "clean slate" from macOS.
+2. If that fails, change the `BUNDLE_ID` temporarily in [`scripts/package-mac-app.sh`](https://github.com/jarvis/jarvis/blob/main/scripts/package-mac-app.sh) to force a "clean slate" from macOS.
 
 ### Gateway "Starting..." indefinitely
 

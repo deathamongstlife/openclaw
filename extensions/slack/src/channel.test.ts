@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/slack";
+import type { JarvisConfig } from "jarvis/plugin-sdk/slack";
 import { describe, expect, it, vi } from "vitest";
 
 const handleSlackActionMock = vi.fn();

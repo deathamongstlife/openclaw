@@ -80,12 +80,12 @@ jarvis nodes rename --node <id|name|ip> --name "Living Room iPad"
 
 ## 存储（本地，私有）
 
-配对状态存储在 Gateway 网关状态目录下（默认 `~/.openclaw`）：
+配对状态存储在 Gateway 网关状态目录下（默认 `~/.jarvis`）：
 
-- `~/.openclaw/nodes/paired.json`
-- `~/.openclaw/nodes/pending.json`
+- `~/.jarvis/nodes/paired.json`
+- `~/.jarvis/nodes/pending.json`
 
-如果你覆盖了 `OPENCLAW_STATE_DIR`，`nodes/` 文件夹会随之移动。
+如果你覆盖了 `JARVIS_STATE_DIR`，`nodes/` 文件夹会随之移动。
 
 安全注意事项：
 

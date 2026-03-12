@@ -1,8 +1,4 @@
-import type {
-  ChannelDirectoryEntry,
-  JarvisConfig,
-  RuntimeEnv,
-} from "openclaw/plugin-sdk/mattermost";
+import type { ChannelDirectoryEntry, JarvisConfig, RuntimeEnv } from "jarvis/plugin-sdk/mattermost";
 import { listMattermostAccountIds, resolveMattermostAccount } from "./accounts.js";
 import {
   createMattermostClient,

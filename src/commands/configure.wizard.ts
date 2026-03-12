@@ -89,9 +89,9 @@ async function runGatewayHealthCheck(params: {
     path: "gateway.auth.password",
   });
   const token =
-    process.env.OPENCLAW_GATEWAY_TOKEN ?? process.env.CLAWDBOT_GATEWAY_TOKEN ?? configuredToken;
+    process.env.JARVIS_GATEWAY_TOKEN ?? process.env.CLAWDBOT_GATEWAY_TOKEN ?? configuredToken;
   const password =
-    process.env.OPENCLAW_GATEWAY_PASSWORD ??
+    process.env.JARVIS_GATEWAY_PASSWORD ??
     process.env.CLAWDBOT_GATEWAY_PASSWORD ??
     configuredPassword;
 
@@ -109,8 +109,8 @@ async function runGatewayHealthCheck(params: {
     note(
       [
         "Docs:",
-        "https://docs.openclaw.ai/gateway/health",
-        "https://docs.openclaw.ai/gateway/troubleshooting",
+        "https://docs.jarvis.ai/gateway/health",
+        "https://docs.jarvis.ai/gateway/troubleshooting",
       ].join("\n"),
       "Health check help",
     );
@@ -151,7 +151,7 @@ async function promptChannelMode(runtime: RuntimeEnv): Promise<ChannelsWizardMod
         {
           value: "remove",
           label: "Remove channel config",
-          hint: "Delete channel tokens/settings from openclaw.json",
+          hint: "Delete channel tokens/settings from jarvis.json",
         },
       ],
       initialValue: "configure",
@@ -198,7 +198,7 @@ async function promptWebToolsConfig(
     [
       "Web search lets your agent look things up online using the `web_search` tool.",
       "Choose a provider and paste your API key.",
-      "Docs: https://docs.openclaw.ai/tools/web",
+      "Docs: https://docs.jarvis.ai/tools/web",
     ].join("\n"),
     "Web search",
   );
@@ -270,7 +270,7 @@ async function promptWebToolsConfig(
           "No key stored yet — web_search won't work until a key is available.",
           `Store a key here or set ${envVarNames} in the Gateway environment.`,
           `Get your API key at: ${entry.signupUrl}`,
-          "Docs: https://docs.openclaw.ai/tools/web",
+          "Docs: https://docs.jarvis.ai/tools/web",
         ].join("\n"),
         "Web search",
       );
@@ -323,7 +323,7 @@ export async function runConfigureWizard(
           [
             ...snapshot.issues.map((iss) => `- ${iss.path}: ${iss.message}`),
             "",
-            "Docs: https://docs.openclaw.ai/gateway/configuration",
+            "Docs: https://docs.jarvis.ai/gateway/configuration",
           ].join("\n"),
           "Config issues",
         );
@@ -351,11 +351,11 @@ export async function runConfigureWizard(
     const localProbe = await probeGatewayReachable({
       url: localUrl,
       token:
-        process.env.OPENCLAW_GATEWAY_TOKEN ??
+        process.env.JARVIS_GATEWAY_TOKEN ??
         process.env.CLAWDBOT_GATEWAY_TOKEN ??
         baseLocalProbeToken,
       password:
-        process.env.OPENCLAW_GATEWAY_PASSWORD ??
+        process.env.JARVIS_GATEWAY_PASSWORD ??
         process.env.CLAWDBOT_GATEWAY_PASSWORD ??
         baseLocalProbePassword,
     });
@@ -643,7 +643,7 @@ export async function runConfigureWizard(
     });
     // Try both new and old passwords since gateway may still have old config.
     const newPassword =
-      process.env.OPENCLAW_GATEWAY_PASSWORD ??
+      process.env.JARVIS_GATEWAY_PASSWORD ??
       process.env.CLAWDBOT_GATEWAY_PASSWORD ??
       (await resolveGatewaySecretInputForWizard({
         cfg: nextConfig,
@@ -651,7 +651,7 @@ export async function runConfigureWizard(
         path: "gateway.auth.password",
       }));
     const oldPassword =
-      process.env.OPENCLAW_GATEWAY_PASSWORD ??
+      process.env.JARVIS_GATEWAY_PASSWORD ??
       process.env.CLAWDBOT_GATEWAY_PASSWORD ??
       (await resolveGatewaySecretInputForWizard({
         cfg: baseConfig,
@@ -659,7 +659,7 @@ export async function runConfigureWizard(
         path: "gateway.auth.password",
       }));
     const token =
-      process.env.OPENCLAW_GATEWAY_TOKEN ??
+      process.env.JARVIS_GATEWAY_TOKEN ??
       process.env.CLAWDBOT_GATEWAY_TOKEN ??
       (await resolveGatewaySecretInputForWizard({
         cfg: nextConfig,
@@ -689,7 +689,7 @@ export async function runConfigureWizard(
         `Web UI: ${links.httpUrl}`,
         `Gateway WS: ${links.wsUrl}`,
         gatewayStatusLine,
-        "Docs: https://docs.openclaw.ai/web/control-ui",
+        "Docs: https://docs.jarvis.ai/web/control-ui",
       ].join("\n"),
       "Control UI",
     );

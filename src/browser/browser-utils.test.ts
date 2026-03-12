@@ -197,25 +197,25 @@ describe("cdp.helpers", () => {
 
   it("does not add relay header for unknown loopback ports", () => {
     const headers = getHeadersWithAuth("http://127.0.0.1:19444/json/version");
-    expect(headers["x-openclaw-relay-token"]).toBeUndefined();
+    expect(headers["x-jarvis-relay-token"]).toBeUndefined();
   });
 
   it("adds relay header for known relay ports", async () => {
     const port = await getFreePort();
     const cdpUrl = `http://127.0.0.1:${port}`;
-    const prev = process.env.OPENCLAW_GATEWAY_TOKEN;
-    process.env.OPENCLAW_GATEWAY_TOKEN = "test-gateway-token";
+    const prev = process.env.JARVIS_GATEWAY_TOKEN;
+    process.env.JARVIS_GATEWAY_TOKEN = "test-gateway-token";
     try {
       await ensureChromeExtensionRelayServer({ cdpUrl });
       const headers = getHeadersWithAuth(`${cdpUrl}/json/version`);
-      expect(headers["x-openclaw-relay-token"]).toBeTruthy();
-      expect(headers["x-openclaw-relay-token"]).not.toBe("test-gateway-token");
+      expect(headers["x-jarvis-relay-token"]).toBeTruthy();
+      expect(headers["x-jarvis-relay-token"]).not.toBe("test-gateway-token");
     } finally {
       await stopChromeExtensionRelayServer({ cdpUrl }).catch(() => {});
       if (prev === undefined) {
-        delete process.env.OPENCLAW_GATEWAY_TOKEN;
+        delete process.env.JARVIS_GATEWAY_TOKEN;
       } else {
-        process.env.OPENCLAW_GATEWAY_TOKEN = prev;
+        process.env.JARVIS_GATEWAY_TOKEN = prev;
       }
     }
   });
@@ -241,13 +241,13 @@ describe("fetchBrowserJson loopback auth (bridge auth registry)", () => {
 describe("browser server-context listKnownProfileNames", () => {
   it("includes configured and runtime-only profile names", () => {
     const resolved = resolveBrowserConfig({
-      defaultProfile: "openclaw",
+      defaultProfile: "jarvis",
       profiles: {
-        openclaw: { cdpPort: 18800, color: "#FF4500" },
+        jarvis: { cdpPort: 18800, color: "#FF4500" },
       },
     });
-    const openclaw = resolveProfile(resolved, "openclaw");
-    if (!openclaw) {
+    const jarvis = resolveProfile(resolved, "jarvis");
+    if (!jarvis) {
       throw new Error("expected jarvis profile");
     }
 
@@ -259,17 +259,13 @@ describe("browser server-context listKnownProfileNames", () => {
         [
           "stale-removed",
           {
-            profile: { ...openclaw, name: "stale-removed" },
+            profile: { ...jarvis, name: "stale-removed" },
             running: null,
           },
         ],
       ]),
     };
 
-    expect(listKnownProfileNames(state).toSorted()).toEqual([
-      "chrome",
-      "openclaw",
-      "stale-removed",
-    ]);
+    expect(listKnownProfileNames(state).toSorted()).toEqual(["chrome", "jarvis", "stale-removed"]);
   });
 });

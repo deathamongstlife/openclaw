@@ -29,7 +29,7 @@ x-i18n:
 - 创建 Compute Engine VM
 - 安装 Docker（隔离的应用运行时）
 - 在 Docker 中启动 Jarvis Gateway 网关
-- 在主机上持久化 `~/.openclaw` + `~/.openclaw/workspace`（重启/重建后仍保留）
+- 在主机上持久化 `~/.jarvis` + `~/.jarvis/workspace`（重启/重建后仍保留）
 - 通过 SSH 隧道从你的笔记本电脑访问控制 UI
 
 Gateway 网关可以通过以下方式访问：
@@ -96,8 +96,8 @@ gcloud auth login
 **CLI：**
 
 ```bash
-gcloud projects create my-openclaw-project --name="Jarvis Gateway"
-gcloud config set project my-openclaw-project
+gcloud projects create my-jarvis-project --name="Jarvis Gateway"
+gcloud config set project my-jarvis-project
 ```
 
 在 https://console.cloud.google.com/billing 启用计费（Compute Engine 必需）。
@@ -197,8 +197,8 @@ docker compose version
 ## 6) 克隆 Jarvis 仓库
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
+git clone https://github.com/jarvis/jarvis.git
+cd jarvis
 ```
 
 本指南假设你将构建自定义镜像以保证二进制文件持久化。
@@ -211,8 +211,8 @@ Docker 容器是临时的。
 所有长期状态必须存在于主机上。
 
 ```bash
-mkdir -p ~/.openclaw
-mkdir -p ~/.openclaw/workspace
+mkdir -p ~/.jarvis
+mkdir -p ~/.jarvis/workspace
 ```
 
 ---
@@ -222,16 +222,16 @@ mkdir -p ~/.openclaw/workspace
 在仓库根目录创建 `.env`。
 
 ```bash
-OPENCLAW_IMAGE=openclaw:latest
-OPENCLAW_GATEWAY_TOKEN=change-me-now
-OPENCLAW_GATEWAY_BIND=lan
-OPENCLAW_GATEWAY_PORT=18789
+JARVIS_IMAGE=jarvis:latest
+JARVIS_GATEWAY_TOKEN=change-me-now
+JARVIS_GATEWAY_BIND=lan
+JARVIS_GATEWAY_PORT=18789
 
-OPENCLAW_CONFIG_DIR=/home/$USER/.openclaw
-OPENCLAW_WORKSPACE_DIR=/home/$USER/.openclaw/workspace
+JARVIS_CONFIG_DIR=/home/$USER/.jarvis
+JARVIS_WORKSPACE_DIR=/home/$USER/.jarvis/workspace
 
 GOG_KEYRING_PASSWORD=change-me-now
-XDG_CONFIG_HOME=/home/node/.openclaw
+XDG_CONFIG_HOME=/home/node/.jarvis
 ```
 
 生成强密钥：
@@ -251,7 +251,7 @@ openssl rand -hex 32
 ```yaml
 services:
   jarvis-gateway:
-    image: ${OPENCLAW_IMAGE}
+    image: ${JARVIS_IMAGE}
     build: .
     restart: unless-stopped
     env_file:
@@ -260,19 +260,19 @@ services:
       - HOME=/home/node
       - NODE_ENV=production
       - TERM=xterm-256color
-      - OPENCLAW_GATEWAY_BIND=${OPENCLAW_GATEWAY_BIND}
-      - OPENCLAW_GATEWAY_PORT=${OPENCLAW_GATEWAY_PORT}
-      - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
+      - JARVIS_GATEWAY_BIND=${JARVIS_GATEWAY_BIND}
+      - JARVIS_GATEWAY_PORT=${JARVIS_GATEWAY_PORT}
+      - JARVIS_GATEWAY_TOKEN=${JARVIS_GATEWAY_TOKEN}
       - GOG_KEYRING_PASSWORD=${GOG_KEYRING_PASSWORD}
       - XDG_CONFIG_HOME=${XDG_CONFIG_HOME}
       - PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     volumes:
-      - ${OPENCLAW_CONFIG_DIR}:/home/node/.openclaw
-      - ${OPENCLAW_WORKSPACE_DIR}:/home/node/.openclaw/workspace
+      - ${JARVIS_CONFIG_DIR}:/home/node/.jarvis
+      - ${JARVIS_WORKSPACE_DIR}:/home/node/.jarvis/workspace
     ports:
       # 推荐：在 VM 上保持 Gateway 网关仅绑定 loopback；通过 SSH 隧道访问。
       # 要公开暴露，移除 `127.0.0.1:` 前缀并相应配置防火墙。
-      - "127.0.0.1:${OPENCLAW_GATEWAY_PORT}:18789"
+      - "127.0.0.1:${JARVIS_GATEWAY_PORT}:18789"
 
       # 可选：仅当你针对此 VM 运行 iOS/Android 节点并需要 Canvas 主机时。
       # 如果你公开暴露此端口，请阅读 /gateway/security 并相应配置防火墙。
@@ -283,9 +283,9 @@ services:
         "dist/index.js",
         "gateway",
         "--bind",
-        "${OPENCLAW_GATEWAY_BIND}",
+        "${JARVIS_GATEWAY_BIND}",
         "--port",
-        "${OPENCLAW_GATEWAY_PORT}",
+        "${JARVIS_GATEWAY_PORT}",
       ]
 ```
 
@@ -414,18 +414,18 @@ gcloud compute ssh jarvis-gateway --zone=us-central1-a -- -L 18789:127.0.0.1:187
 Jarvis 在 Docker 中运行，但 Docker 不是真实来源。
 所有长期状态必须在重启、重建和重启后仍然存在。
 
-| 组件             | 位置                              | 持久化机制    | 说明                        |
-| ---------------- | --------------------------------- | ------------- | --------------------------- |
-| Gateway 网关配置 | `/home/node/.openclaw/`           | 主机卷挂载    | 包括 `openclaw.json`、令牌  |
-| 模型认证配置文件 | `/home/node/.openclaw/`           | 主机卷挂载    | OAuth 令牌、API 密钥        |
-| Skill 配置       | `/home/node/.openclaw/skills/`    | 主机卷挂载    | Skill 级别状态              |
-| 智能体工作区     | `/home/node/.openclaw/workspace/` | 主机卷挂载    | 代码和智能体产物            |
-| WhatsApp 会话    | `/home/node/.openclaw/`           | 主机卷挂载    | 保留 QR 登录                |
-| Gmail 密钥环     | `/home/node/.openclaw/`           | 主机卷 + 密码 | 需要 `GOG_KEYRING_PASSWORD` |
-| 外部二进制文件   | `/usr/local/bin/`                 | Docker 镜像   | 必须在构建时内置            |
-| Node 运行时      | 容器文件系统                      | Docker 镜像   | 每次镜像构建时重建          |
-| OS 包            | 容器文件系统                      | Docker 镜像   | 不要在运行时安装            |
-| Docker 容器      | 临时                              | 可重启        | 可以安全销毁                |
+| 组件             | 位置                            | 持久化机制    | 说明                        |
+| ---------------- | ------------------------------- | ------------- | --------------------------- |
+| Gateway 网关配置 | `/home/node/.jarvis/`           | 主机卷挂载    | 包括 `jarvis.json`、令牌    |
+| 模型认证配置文件 | `/home/node/.jarvis/`           | 主机卷挂载    | OAuth 令牌、API 密钥        |
+| Skill 配置       | `/home/node/.jarvis/skills/`    | 主机卷挂载    | Skill 级别状态              |
+| 智能体工作区     | `/home/node/.jarvis/workspace/` | 主机卷挂载    | 代码和智能体产物            |
+| WhatsApp 会话    | `/home/node/.jarvis/`           | 主机卷挂载    | 保留 QR 登录                |
+| Gmail 密钥环     | `/home/node/.jarvis/`           | 主机卷 + 密码 | 需要 `GOG_KEYRING_PASSWORD` |
+| 外部二进制文件   | `/usr/local/bin/`               | Docker 镜像   | 必须在构建时内置            |
+| Node 运行时      | 容器文件系统                    | Docker 镜像   | 每次镜像构建时重建          |
+| OS 包            | 容器文件系统                    | Docker 镜像   | 不要在运行时安装            |
+| Docker 容器      | 临时                            | 可重启        | 可以安全销毁                |
 
 ---
 
@@ -434,7 +434,7 @@ Jarvis 在 Docker 中运行，但 Docker 不是真实来源。
 在 VM 上更新 Jarvis：
 
 ```bash
-cd ~/openclaw
+cd ~/jarvis
 git pull
 docker compose build
 docker compose up -d
@@ -486,14 +486,14 @@ gcloud compute instances start jarvis-gateway --zone=us-central1-a
 1. 创建服务账户：
 
    ```bash
-   gcloud iam service-accounts create openclaw-deploy \
+   gcloud iam service-accounts create jarvis-deploy \
      --display-name="Jarvis Deployment"
    ```
 
 2. 授予 Compute Instance Admin 角色（或更窄的自定义角色）：
    ```bash
-   gcloud projects add-iam-policy-binding my-openclaw-project \
-     --member="serviceAccount:openclaw-deploy@my-openclaw-project.iam.gserviceaccount.com" \
+   gcloud projects add-iam-policy-binding my-jarvis-project \
+     --member="serviceAccount:jarvis-deploy@my-jarvis-project.iam.gserviceaccount.com" \
      --role="roles/compute.instanceAdmin.v1"
    ```
 

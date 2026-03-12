@@ -73,7 +73,7 @@ function createPreflightArgs(params: {
     accountId: "default",
     token: "token",
     runtime: {} as import("../../runtime.js").RuntimeEnv,
-    botUserId: "openclaw-bot",
+    botUserId: "jarvis-bot",
     guildHistories: new Map(),
     historyLimit: 0,
     mediaMaxBytes: 1_000_000,
@@ -415,8 +415,8 @@ describe("preflightDiscordMessage", () => {
     const message = createMessage({
       id: "m-bot-mentions-on",
       channelId,
-      content: "hi <@openclaw-bot>",
-      mentionedUsers: [{ id: "openclaw-bot" }],
+      content: "hi <@jarvis-bot>",
+      mentionedUsers: [{ id: "jarvis-bot" }],
       author: {
         id: "relay-bot-1",
         bot: true,
@@ -541,7 +541,7 @@ describe("preflightDiscordMessage", () => {
   });
 
   it("uses attachment content_type for guild audio preflight mention detection", async () => {
-    transcribeFirstAudioMock.mockResolvedValue("hey openclaw");
+    transcribeFirstAudioMock.mockResolvedValue("hey jarvis");
 
     const channelId = "channel-audio-1";
     const client = createGuildTextClient(channelId);
@@ -571,7 +571,7 @@ describe("preflightDiscordMessage", () => {
           ...DEFAULT_CFG,
           messages: {
             groupChat: {
-              mentionPatterns: ["openclaw"],
+              mentionPatterns: ["jarvis"],
             },
           },
         } as import("../../config/config.js").JarvisConfig,

@@ -6,7 +6,7 @@ import {
   getGatewayMethods,
   getSessionsSpawnTool,
   setSessionsSpawnConfigOverride,
-} from "./openclaw-tools.subagents.sessions-spawn.test-harness.js";
+} from "./jarvis-tools.subagents.sessions-spawn.test-harness.js";
 import { resetSubagentRegistryForTests } from "./subagent-registry.js";
 
 const hookRunnerMocks = vi.hoisted(() => ({

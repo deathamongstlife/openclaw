@@ -18,10 +18,10 @@ A skill is a directory containing a `SKILL.md` file (which provides instructions
 
 ### 1. Create the Directory
 
-Skills live in your workspace, usually `~/.openclaw/workspace/skills/`. Create a new folder for your skill:
+Skills live in your workspace, usually `~/.jarvis/workspace/skills/`. Create a new folder for your skill:
 
 ```bash
-mkdir -p ~/.openclaw/workspace/skills/hello-world
+mkdir -p ~/.jarvis/workspace/skills/hello-world
 ```
 
 ### 2. Define the `SKILL.md`

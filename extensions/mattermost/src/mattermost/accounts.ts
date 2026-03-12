@@ -1,5 +1,5 @@
-import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "openclaw/plugin-sdk/account-id";
-import { createAccountListHelpers, type JarvisConfig } from "openclaw/plugin-sdk/mattermost";
+import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "jarvis/plugin-sdk/account-id";
+import { createAccountListHelpers, type JarvisConfig } from "jarvis/plugin-sdk/mattermost";
 import { normalizeResolvedSecretInputString, normalizeSecretInputString } from "../secret-input.js";
 import type { MattermostAccountConfig, MattermostChatMode } from "../types.js";
 import { normalizeMattermostBaseUrl } from "./client.js";

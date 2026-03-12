@@ -64,7 +64,7 @@ describe("entry root version fast path", () => {
     vi.resetModules();
     vi.clearAllMocks();
     originalArgv = [...process.argv];
-    process.argv = ["node", "openclaw", "--version"];
+    process.argv = ["node", "jarvis", "--version"];
     exitSpy = vi
       .spyOn(process, "exit")
       .mockImplementation(((_code?: number) => undefined) as typeof process.exit);

@@ -1,4 +1,4 @@
-import type { JarvisConfig, RuntimeEnv } from "openclaw/plugin-sdk/zalo";
+import type { JarvisConfig, RuntimeEnv } from "jarvis/plugin-sdk/zalo";
 import { describe, expect, it } from "vitest";
 import { zaloPlugin } from "./channel.js";
 

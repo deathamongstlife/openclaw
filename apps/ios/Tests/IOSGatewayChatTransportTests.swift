@@ -1,6 +1,6 @@
 import JarvisKit
 import Testing
-@testable import OpenClaw
+@testable import Jarvis
 
 @Suite struct IOSGatewayChatTransportTests {
     @Test func requestsFailFastWhenGatewayNotConnected() async {

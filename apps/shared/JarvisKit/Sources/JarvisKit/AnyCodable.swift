@@ -1,4 +1,4 @@
-import OpenClawProtocol
+import JarvisProtocol
 
-public typealias AnyCodable = OpenClawProtocol.AnyCodable
+public typealias AnyCodable = JarvisProtocol.AnyCodable
 

@@ -6,7 +6,7 @@
 
 ## What's Been Done
 
-✅ **Complete rebranding** from OpenClaw to Jarvis (2,749 files, 30,620+ changes)
+✅ **Complete rebranding** from Jarvis to Jarvis (2,749 files, 30,620+ changes)
 ✅ **Install script** created and ready (`install.sh`)
 ✅ **Documentation** prepared (`docs/` directory)
 ✅ **Deployment guides** created
@@ -33,6 +33,7 @@ CNAME  jarvis         deathamongstlife.github.io
 ### 3. Deploy Install Script
 
 Run:
+
 ```bash
 ./setup-docs-deployment.sh
 ```

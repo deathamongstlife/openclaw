@@ -6,7 +6,7 @@ Complete guide to deploying Jarvis with custom domains.
 
 - ✅ Install script available at: `https://jarvis.allyapp.cc/install.sh`
 - ✅ Documentation available at: `https://docs.jarvis.allyapp.cc`
-- ✅ Full rebranding from OpenClaw → Jarvis complete
+- ✅ Full rebranding from Jarvis → Jarvis complete
 
 ## 📋 Pre-Deployment Checklist
 
@@ -26,7 +26,7 @@ Complete guide to deploying Jarvis with custom domains.
 
 ### 3. GitHub Repository
 
-- [ ] Repository renamed to `jarvis` (from `openclaw`)
+- [ ] Repository renamed to `jarvis` (from `jarvis`)
 - [ ] Repository is public (for GitHub Pages)
 - [ ] GitHub Pages enabled
 
@@ -55,12 +55,14 @@ TTL: 3600
 **DNS Provider Examples:**
 
 **Cloudflare:**
+
 1. Go to DNS settings
 2. Add CNAME record: `docs.jarvis` → `deathamongstlife.github.io`
 3. Add CNAME record: `jarvis` → `deathamongstlife.github.io`
 4. Ensure proxy status is "DNS only" (gray cloud)
 
 **Namecheap:**
+
 1. Go to Advanced DNS
 2. Add CNAME Record:
    - Host: `docs.jarvis`
@@ -70,6 +72,7 @@ TTL: 3600
    - Value: `deathamongstlife.github.io`
 
 **GoDaddy:**
+
 1. Go to DNS Management
 2. Add CNAME:
    - Name: `docs.jarvis`
@@ -83,6 +86,7 @@ TTL: 3600
 #### For Documentation (docs.jarvis.allyapp.cc)
 
 1. **Go to GitHub repository settings:**
+
    ```
    https://github.com/deathamongstlife/jarvis/settings/pages
    ```
@@ -107,6 +111,7 @@ TTL: 3600
 **Option A: Same repo, gh-pages branch**
 
 Run the setup script:
+
 ```bash
 ./setup-docs-deployment.sh
 # Choose option 2
@@ -115,6 +120,7 @@ Run the setup script:
 **Option B: Separate repository**
 
 Run the setup script:
+
 ```bash
 ./setup-docs-deployment.sh
 # Choose option 3
@@ -192,10 +198,10 @@ npm view jarvis
 
 ### Step 3: Deprecate old package (optional)
 
-If you were using the `openclaw` package:
+If you were using the `jarvis` package:
 
 ```bash
-npm deprecate openclaw "Package renamed to jarvis. Install with: npm install jarvis"
+npm deprecate jarvis "Package renamed to jarvis. Install with: npm install jarvis"
 ```
 
 ## 🔍 Testing Checklist
@@ -205,7 +211,7 @@ After deployment, verify:
 ### Install Script
 
 - [ ] `curl -fsSL https://jarvis.allyapp.cc/install.sh` returns the script
-- [ ] Script contains "Jarvis" (not "OpenClaw")
+- [ ] Script contains "Jarvis" (not "Jarvis")
 - [ ] Installation works: `curl -fsSL https://jarvis.allyapp.cc/install.sh | bash`
 - [ ] HTTPS works (no certificate warnings)
 
@@ -215,7 +221,7 @@ After deployment, verify:
 - [ ] All pages render correctly
 - [ ] Internal links work
 - [ ] Search works (if using Mintlify)
-- [ ] No "openclaw" references visible
+- [ ] No "jarvis" references visible
 
 ### Package
 
@@ -231,6 +237,7 @@ After deployment, verify:
 **Problem:** Domain not resolving
 
 **Solution:**
+
 ```bash
 # Check DNS propagation
 dig +short docs.jarvis.allyapp.cc
@@ -248,6 +255,7 @@ dig docs.jarvis.allyapp.cc +trace
 **Problem:** Getting 404 on GitHub Pages
 
 **Solutions:**
+
 1. Verify CNAME file exists and contains correct domain
 2. Check GitHub Pages settings are correct
 3. Wait 5-10 minutes for GitHub to build
@@ -259,6 +267,7 @@ dig docs.jarvis.allyapp.cc +trace
 **Problem:** HTTPS showing certificate errors
 
 **Solutions:**
+
 1. Wait for GitHub to provision certificate (can take 1-24 hours)
 2. Ensure DNS is correctly configured
 3. Temporarily disable "Enforce HTTPS" in GitHub Pages settings
@@ -269,6 +278,7 @@ dig docs.jarvis.allyapp.cc +trace
 **Problem:** 404 when accessing install.sh
 
 **Solutions:**
+
 1. Verify install.sh is in correct location
 2. Check GitHub Pages is serving from correct branch/folder
 3. Verify CNAME is correct
@@ -296,6 +306,7 @@ Set up monitoring for:
 ### Announce the Launch
 
 1. **Update README:**
+
    ```markdown
    ## Installation
 
@@ -323,6 +334,7 @@ Set up monitoring for:
 Add to your docs (if using Mintlify or custom):
 
 1. **Google Analytics:**
+
    ```html
    <!-- Add to docs/index.html or mint.json -->
    ```

@@ -3,10 +3,10 @@ import Network
 import JarvisKit
 
 final class NetworkStatusService: @unchecked Sendable {
-    func currentStatus(timeoutMs: Int = 1500) async -> OpenClawNetworkStatusPayload {
+    func currentStatus(timeoutMs: Int = 1500) async -> JarvisNetworkStatusPayload {
         await withCheckedContinuation { cont in
             let monitor = NWPathMonitor()
-            let queue = DispatchQueue(label: "ai.openclaw.ios.network-status")
+            let queue = DispatchQueue(label: "ai.jarvis.ios.network-status")
             let state = NetworkStatusState()
 
             monitor.pathUpdateHandler = { path in
@@ -25,29 +25,29 @@ final class NetworkStatusService: @unchecked Sendable {
         }
     }
 
-    private static func payload(from path: NWPath) -> OpenClawNetworkStatusPayload {
-        let status: OpenClawNetworkPathStatus = switch path.status {
+    private static func payload(from path: NWPath) -> JarvisNetworkStatusPayload {
+        let status: JarvisNetworkPathStatus = switch path.status {
         case .satisfied: .satisfied
         case .requiresConnection: .requiresConnection
         case .unsatisfied: .unsatisfied
         @unknown default: .unsatisfied
         }
 
-        var interfaces: [OpenClawNetworkInterfaceType] = []
+        var interfaces: [JarvisNetworkInterfaceType] = []
         if path.usesInterfaceType(.wifi) { interfaces.append(.wifi) }
         if path.usesInterfaceType(.cellular) { interfaces.append(.cellular) }
         if path.usesInterfaceType(.wiredEthernet) { interfaces.append(.wired) }
         if interfaces.isEmpty { interfaces.append(.other) }
 
-        return OpenClawNetworkStatusPayload(
+        return JarvisNetworkStatusPayload(
             status: status,
             isExpensive: path.isExpensive,
             isConstrained: path.isConstrained,
             interfaces: interfaces)
     }
 
-    private static func fallbackPayload() -> OpenClawNetworkStatusPayload {
-        OpenClawNetworkStatusPayload(
+    private static func fallbackPayload() -> JarvisNetworkStatusPayload {
+        JarvisNetworkStatusPayload(
             status: .unsatisfied,
             isExpensive: false,
             isConstrained: false,

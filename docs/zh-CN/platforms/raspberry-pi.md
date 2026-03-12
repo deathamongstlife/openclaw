@@ -119,14 +119,14 @@ sudo sysctl -p
 ### 选项 A：标准安装（推荐）
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://jarvis.ai/install.sh | bash
 ```
 
 ### 选项 B：可修改安装（用于调试）
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
+git clone https://github.com/jarvis/jarvis.git
+cd jarvis
 npm install
 npm run build
 npm link
@@ -154,10 +154,10 @@ jarvis onboard --install-daemon
 jarvis status
 
 # 检查服务
-sudo systemctl status openclaw
+sudo systemctl status jarvis
 
 # 查看日志
-journalctl -u openclaw -f
+journalctl -u jarvis -f
 ```
 
 ## 9) 访问仪表板
@@ -181,7 +181,7 @@ sudo tailscale up
 
 # 更新配置
 jarvis config set gateway.bind tailnet
-sudo systemctl restart openclaw
+sudo systemctl restart jarvis
 ```
 
 ---
@@ -278,13 +278,13 @@ uname -m
 
 ```bash
 # 检查服务是否已启用
-sudo systemctl is-enabled openclaw
+sudo systemctl is-enabled jarvis
 
 # 如果没有则启用
-sudo systemctl enable openclaw
+sudo systemctl enable jarvis
 
 # 开机启动
-sudo systemctl start openclaw
+sudo systemctl start jarvis
 ```
 
 ---
@@ -311,12 +311,12 @@ free -h
 
 ```bash
 # 检查日志
-journalctl -u openclaw --no-pager -n 100
+journalctl -u jarvis --no-pager -n 100
 
 # 常见修复：重新构建
-cd ~/openclaw  # 如果使用可修改安装
+cd ~/jarvis  # 如果使用可修改安装
 npm run build
-sudo systemctl restart openclaw
+sudo systemctl restart jarvis
 ```
 
 ### ARM 二进制问题

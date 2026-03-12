@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/mattermost";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/mattermost";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/mattermost";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/mattermost";
 import { mattermostPlugin } from "./src/channel.js";
 import { getSlashCommandState, registerSlashCommandRoute } from "./src/mattermost/slash-state.js";
 import { setMattermostRuntime } from "./src/runtime.js";

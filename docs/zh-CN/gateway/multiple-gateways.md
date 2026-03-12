@@ -19,8 +19,8 @@ x-i18n:
 
 ## 隔离检查清单（必需）
 
-- `OPENCLAW_CONFIG_PATH` — 每个实例的配置文件
-- `OPENCLAW_STATE_DIR` — 每个实例的会话、凭证、缓存
+- `JARVIS_CONFIG_PATH` — 每个实例的配置文件
+- `JARVIS_STATE_DIR` — 每个实例的会话、凭证、缓存
 - `agents.defaults.workspace` — 每个实例的工作区根目录
 - `gateway.port`（或 `--port`）— 每个实例唯一
 - 派生端口（浏览器/画布）不得重叠
@@ -29,23 +29,23 @@ x-i18n:
 
 ## 推荐：配置文件（`--profile`）
 
-配置文件自动限定 `OPENCLAW_STATE_DIR` + `OPENCLAW_CONFIG_PATH` 范围并为服务名称添加后缀。
+配置文件自动限定 `JARVIS_STATE_DIR` + `JARVIS_CONFIG_PATH` 范围并为服务名称添加后缀。
 
 ```bash
 # main
-openclaw --profile main setup
-openclaw --profile main gateway --port 18789
+jarvis --profile main setup
+jarvis --profile main gateway --port 18789
 
 # rescue
-openclaw --profile rescue setup
-openclaw --profile rescue gateway --port 19001
+jarvis --profile rescue setup
+jarvis --profile rescue gateway --port 19001
 ```
 
 按配置文件的服务：
 
 ```bash
-openclaw --profile main gateway install
-openclaw --profile rescue gateway install
+jarvis --profile main gateway install
+jarvis --profile rescue gateway install
 ```
 
 ## 救援机器人指南
@@ -70,7 +70,7 @@ jarvis onboard
 jarvis gateway install
 
 # 救援机器人（隔离的配置文件 + 端口）
-openclaw --profile rescue onboard
+jarvis --profile rescue onboard
 # 注意：
 # - 工作区名称默认会添加 -rescue 后缀
 # - 端口应至少为 18789 + 20 个端口，
@@ -78,12 +78,12 @@ openclaw --profile rescue onboard
 # - 其余的新手引导与正常相同
 
 # 安装服务（如果在新手引导期间没有自动完成）
-openclaw --profile rescue gateway install
+jarvis --profile rescue gateway install
 ```
 
 ## 端口映射（派生）
 
-基础端口 = `gateway.port`（或 `OPENCLAW_GATEWAY_PORT` / `--port`）。
+基础端口 = `gateway.port`（或 `JARVIS_GATEWAY_PORT` / `--port`）。
 
 - 浏览器控制服务端口 = 基础 + 2（仅 loopback）
 - `canvasHost.port = 基础 + 4`
@@ -101,19 +101,19 @@ openclaw --profile rescue gateway install
 ## 手动环境变量示例
 
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/main.json \
-OPENCLAW_STATE_DIR=~/.openclaw-main \
+JARVIS_CONFIG_PATH=~/.jarvis/main.json \
+JARVIS_STATE_DIR=~/.jarvis-main \
 jarvis gateway --port 18789
 
-OPENCLAW_CONFIG_PATH=~/.openclaw/rescue.json \
-OPENCLAW_STATE_DIR=~/.openclaw-rescue \
+JARVIS_CONFIG_PATH=~/.jarvis/rescue.json \
+JARVIS_STATE_DIR=~/.jarvis-rescue \
 jarvis gateway --port 19001
 ```
 
 ## 快速检查
 
 ```bash
-openclaw --profile main status
-openclaw --profile rescue status
-openclaw --profile rescue browser status
+jarvis --profile main status
+jarvis --profile rescue status
+jarvis --profile rescue browser status
 ```

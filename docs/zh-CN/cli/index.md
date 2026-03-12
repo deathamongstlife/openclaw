@@ -2,7 +2,7 @@
 read_when:
   - 添加或修改 CLI 命令或选项
   - 为新命令界面编写文档
-summary: Jarvis `openclaw` 命令、子命令和选项的 CLI 参考
+summary: Jarvis `jarvis` 命令、子命令和选项的 CLI 参考
 title: CLI 参考
 x-i18n:
   generated_at: "2026-02-03T07:47:54Z"
@@ -61,8 +61,8 @@ x-i18n:
 
 ## 全局标志
 
-- `--dev`：将状态隔离到 `~/.openclaw-dev` 下并调整默认端口。
-- `--profile <name>`：将状态隔离到 `~/.openclaw-<name>` 下。
+- `--dev`：将状态隔离到 `~/.jarvis-dev` 下并调整默认端口。
+- `--profile <name>`：将状态隔离到 `~/.jarvis-<name>` 下。
 - `--no-color`：禁用 ANSI 颜色。
 - `--update`：`jarvis update` 的简写（仅限源码安装）。
 - `-V`、`--version`、`-v`：打印版本并退出。
@@ -93,7 +93,7 @@ Jarvis 在 CLI 输出中使用龙虾调色板。
 ## 命令树
 
 ```
-openclaw [--dev] [--profile <name>] <command>
+jarvis [--dev] [--profile <name>] <command>
   setup
   onboard
   configure
@@ -290,7 +290,7 @@ openclaw [--dev] [--profile <name>] <command>
 
 选项：
 
-- `--workspace <dir>`：智能体工作区路径（默认 `~/.openclaw/workspace`）。
+- `--workspace <dir>`：智能体工作区路径（默认 `~/.jarvis/workspace`）。
 - `--wizard`：运行新手引导向导。
 - `--non-interactive`：无提示运行向导。
 - `--mode <local|remote>`：向导模式。

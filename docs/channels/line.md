@@ -22,7 +22,7 @@ are not supported.
 Install the LINE plugin:
 
 ```bash
-jarvis plugins install @openclaw/line
+jarvis plugins install @jarvis/line
 ```
 
 Local checkout (when running from a git repo):

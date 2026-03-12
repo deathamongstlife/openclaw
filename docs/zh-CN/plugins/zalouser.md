@@ -34,7 +34,7 @@ x-i18n:
 ### 选项 A：从 npm 安装
 
 ```bash
-jarvis plugins install @openclaw/zalouser
+jarvis plugins install @jarvis/zalouser
 ```
 
 之后重启 Gateway 网关。

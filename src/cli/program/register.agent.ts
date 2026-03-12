@@ -70,7 +70,7 @@ ${formatHelpExamples([
   ],
 ])}
 
-${theme.muted("Docs:")} ${formatDocsLink("/cli/agent", "docs.openclaw.ai/cli/agent")}`,
+${theme.muted("Docs:")} ${formatDocsLink("/cli/agent", "docs.jarvis.ai/cli/agent")}`,
     )
     .action(async (opts) => {
       const verboseLevel = typeof opts.verbose === "string" ? opts.verbose.toLowerCase() : "";
@@ -88,7 +88,7 @@ ${theme.muted("Docs:")} ${formatDocsLink("/cli/agent", "docs.openclaw.ai/cli/age
     .addHelpText(
       "after",
       () =>
-        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/agents", "docs.openclaw.ai/cli/agents")}\n`,
+        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/agents", "docs.jarvis.ai/cli/agents")}\n`,
     );
 
   agents
@@ -220,13 +220,13 @@ ${theme.muted("Docs:")} ${formatDocsLink("/cli/agent", "docs.openclaw.ai/cli/age
 ${theme.heading("Examples:")}
 ${formatHelpExamples([
   ['jarvis agents set-identity --agent main --name "Jarvis" --emoji "🦞"', "Set name + emoji."],
-  ["jarvis agents set-identity --agent main --avatar avatars/openclaw.png", "Set avatar path."],
+  ["jarvis agents set-identity --agent main --avatar avatars/jarvis.png", "Set avatar path."],
   [
-    "jarvis agents set-identity --workspace ~/.openclaw/workspace --from-identity",
+    "jarvis agents set-identity --workspace ~/.jarvis/workspace --from-identity",
     "Load from IDENTITY.md.",
   ],
   [
-    "jarvis agents set-identity --identity-file ~/.openclaw/workspace/IDENTITY.md --agent main",
+    "jarvis agents set-identity --identity-file ~/.jarvis/workspace/IDENTITY.md --agent main",
     "Use a specific IDENTITY.md.",
   ],
 ])}

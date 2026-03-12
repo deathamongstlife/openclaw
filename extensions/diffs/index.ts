@@ -1,6 +1,6 @@
 import path from "node:path";
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/diffs";
-import { resolvePreferredJarvisTmpDir } from "openclaw/plugin-sdk/diffs";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/diffs";
+import { resolvePreferredJarvisTmpDir } from "jarvis/plugin-sdk/diffs";
 import {
   diffsPluginConfigSchema,
   resolveDiffsPluginDefaults,
@@ -20,7 +20,7 @@ const plugin = {
     const defaults = resolveDiffsPluginDefaults(api.pluginConfig);
     const security = resolveDiffsPluginSecurity(api.pluginConfig);
     const store = new DiffArtifactStore({
-      rootDir: path.join(resolvePreferredJarvisTmpDir(), "openclaw-diffs"),
+      rootDir: path.join(resolvePreferredJarvisTmpDir(), "jarvis-diffs"),
       logger: api.logger,
     });
 

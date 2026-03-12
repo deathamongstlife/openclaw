@@ -85,7 +85,7 @@ export function registerChannelsCli(program: Command) {
           ["jarvis channels login --channel whatsapp", "Link a WhatsApp Web account."],
         ])}\n\n${theme.muted("Docs:")} ${formatDocsLink(
           "/cli/channels",
-          "docs.openclaw.ai/cli/channels",
+          "docs.jarvis.ai/cli/channels",
         )}\n`,
     );
 

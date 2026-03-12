@@ -4,8 +4,7 @@ import { DEFAULT_AGENT_ID } from "../routing/session-key.js";
 import { resolveUserPath } from "../utils.js";
 
 export function resolveJarvisAgentDir(): string {
-  const override =
-    process.env.OPENCLAW_AGENT_DIR?.trim() || process.env.PI_CODING_AGENT_DIR?.trim();
+  const override = process.env.JARVIS_AGENT_DIR?.trim() || process.env.PI_CODING_AGENT_DIR?.trim();
   if (override) {
     return resolveUserPath(override);
   }
@@ -15,8 +14,8 @@ export function resolveJarvisAgentDir(): string {
 
 export function ensureJarvisAgentEnv(): string {
   const dir = resolveJarvisAgentDir();
-  if (!process.env.OPENCLAW_AGENT_DIR) {
-    process.env.OPENCLAW_AGENT_DIR = dir;
+  if (!process.env.JARVIS_AGENT_DIR) {
+    process.env.JARVIS_AGENT_DIR = dir;
   }
   if (!process.env.PI_CODING_AGENT_DIR) {
     process.env.PI_CODING_AGENT_DIR = dir;

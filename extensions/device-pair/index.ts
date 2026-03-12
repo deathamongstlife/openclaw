@@ -1,12 +1,12 @@
 import os from "node:os";
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/device-pair";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/device-pair";
 import {
   approveDevicePairing,
   listDevicePairing,
   resolveGatewayBindUrl,
   runPluginCommandWithTimeout,
   resolveTailnetHostWithRunner,
-} from "openclaw/plugin-sdk/device-pair";
+} from "jarvis/plugin-sdk/device-pair";
 import qrcode from "qrcode-terminal";
 import {
   armPairNotifyOnce,
@@ -88,7 +88,7 @@ function parsePositiveInteger(raw: string | undefined): number | null {
 
 function resolveGatewayPort(cfg: JarvisPluginApi["config"]): number {
   const envPort =
-    parsePositiveInteger(process.env.OPENCLAW_GATEWAY_PORT?.trim()) ??
+    parsePositiveInteger(process.env.JARVIS_GATEWAY_PORT?.trim()) ??
     parsePositiveInteger(process.env.CLAWDBOT_GATEWAY_PORT?.trim());
   if (envPort) {
     return envPort;
@@ -191,13 +191,13 @@ function resolveAuth(cfg: JarvisPluginApi["config"]): ResolveAuthResult {
   const mode = cfg.gateway?.auth?.mode;
   const token =
     pickFirstDefined([
-      process.env.OPENCLAW_GATEWAY_TOKEN,
+      process.env.JARVIS_GATEWAY_TOKEN,
       process.env.CLAWDBOT_GATEWAY_TOKEN,
       cfg.gateway?.auth?.token,
     ]) ?? undefined;
   const password =
     pickFirstDefined([
-      process.env.OPENCLAW_GATEWAY_PASSWORD,
+      process.env.JARVIS_GATEWAY_PASSWORD,
       process.env.CLAWDBOT_GATEWAY_PASSWORD,
       cfg.gateway?.auth?.password,
     ]) ?? undefined;

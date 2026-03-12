@@ -22,7 +22,7 @@ import type {
   JarvisConfig,
   OutboundDeliveryResult,
   RuntimeEnv,
-} from "openclaw/plugin-sdk/twitch";
+} from "jarvis/plugin-sdk/twitch";
 
 // ============================================================================
 // Twitch-Specific Types

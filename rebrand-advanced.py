@@ -50,14 +50,14 @@ REPLACEMENTS: List[Tuple[str, str, str]] = [
     (r'/\.jarvis/', '/.jarvis/', 'config directory'),
 
     # Binary and CLI names
-    (r'\bopenclaw-gateway\b', 'jarvis-gateway', 'gateway binary'),
-    (r'\bopenclaw-mac\b', 'jarvis-mac', 'mac binary'),
-    (r'\bopenclaw-cli\b', 'jarvis-cli', 'cli binary'),
+    (r'\bjarvis-gateway\b', 'jarvis-gateway', 'gateway binary'),
+    (r'\bjarvis-mac\b', 'jarvis-mac', 'mac binary'),
+    (r'\bjarvis-cli\b', 'jarvis-cli', 'cli binary'),
 
     # General case variations (do these last)
-    (r'\bOpenClaw\b', 'Jarvis', 'title case'),
-    (r'\bopenclaw\b', 'jarvis', 'lowercase'),
-    (r'\bOPENCLAW\b', 'JARVIS', 'uppercase'),
+    (r'\bJarvis\b', 'Jarvis', 'title case'),
+    (r'\bjarvis\b', 'jarvis', 'lowercase'),
+    (r'\bJARVIS\b', 'JARVIS', 'uppercase'),
     (r'\bopenClaw\b', 'jarvis', 'camelCase'),
 ]
 

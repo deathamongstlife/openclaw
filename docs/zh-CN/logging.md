@@ -27,16 +27,16 @@ Jarvis 在两个地方记录日志：
 
 默认情况下，Gateway 网关在以下位置写入滚动日志文件：
 
-`/tmp/openclaw/openclaw-YYYY-MM-DD.log`
+`/tmp/jarvis/jarvis-YYYY-MM-DD.log`
 
 日期使用 Gateway 网关主机的本地时区。
 
-你可以在 `~/.openclaw/openclaw.json` 中覆盖此设置：
+你可以在 `~/.jarvis/jarvis.json` 中覆盖此设置：
 
 ```json
 {
   "logging": {
-    "file": "/path/to/openclaw.log"
+    "file": "/path/to/jarvis.log"
   }
 }
 ```
@@ -103,13 +103,13 @@ jarvis channels logs --channel whatsapp
 
 ## 配置日志
 
-所有日志配置都在 `~/.openclaw/openclaw.json` 的 `logging` 下。
+所有日志配置都在 `~/.jarvis/jarvis.json` 的 `logging` 下。
 
 ```json
 {
   "logging": {
     "level": "info",
-    "file": "/tmp/openclaw/openclaw-YYYY-MM-DD.log",
+    "file": "/tmp/jarvis/jarvis-YYYY-MM-DD.log",
     "consoleLevel": "info",
     "consoleStyle": "pretty",
     "redactSensitive": "tools",
@@ -211,7 +211,7 @@ jarvis channels logs --channel whatsapp
 环境变量覆盖（一次性）：
 
 ```
-OPENCLAW_DIAGNOSTICS=telegram.http,telegram.payload
+JARVIS_DIAGNOSTICS=telegram.http,telegram.payload
 ```
 
 注意：
@@ -264,45 +264,45 @@ OPENCLAW_DIAGNOSTICS=telegram.http,telegram.payload
 
 模型使用：
 
-- `openclaw.tokens`（计数器，属性：`openclaw.token`、`openclaw.channel`、`openclaw.provider`、`openclaw.model`）
-- `openclaw.cost.usd`（计数器，属性：`openclaw.channel`、`openclaw.provider`、`openclaw.model`）
-- `openclaw.run.duration_ms`（直方图，属性：`openclaw.channel`、`openclaw.provider`、`openclaw.model`）
-- `openclaw.context.tokens`（直方图，属性：`openclaw.context`、`openclaw.channel`、`openclaw.provider`、`openclaw.model`）
+- `jarvis.tokens`（计数器，属性：`jarvis.token`、`jarvis.channel`、`jarvis.provider`、`jarvis.model`）
+- `jarvis.cost.usd`（计数器，属性：`jarvis.channel`、`jarvis.provider`、`jarvis.model`）
+- `jarvis.run.duration_ms`（直方图，属性：`jarvis.channel`、`jarvis.provider`、`jarvis.model`）
+- `jarvis.context.tokens`（直方图，属性：`jarvis.context`、`jarvis.channel`、`jarvis.provider`、`jarvis.model`）
 
 消息流：
 
-- `openclaw.webhook.received`（计数器，属性：`openclaw.channel`、`openclaw.webhook`）
-- `openclaw.webhook.error`（计数器，属性：`openclaw.channel`、`openclaw.webhook`）
-- `openclaw.webhook.duration_ms`（直方图，属性：`openclaw.channel`、`openclaw.webhook`）
-- `openclaw.message.queued`（计数器，属性：`openclaw.channel`、`openclaw.source`）
-- `openclaw.message.processed`（计数器，属性：`openclaw.channel`、`openclaw.outcome`）
-- `openclaw.message.duration_ms`（直方图，属性：`openclaw.channel`、`openclaw.outcome`）
+- `jarvis.webhook.received`（计数器，属性：`jarvis.channel`、`jarvis.webhook`）
+- `jarvis.webhook.error`（计数器，属性：`jarvis.channel`、`jarvis.webhook`）
+- `jarvis.webhook.duration_ms`（直方图，属性：`jarvis.channel`、`jarvis.webhook`）
+- `jarvis.message.queued`（计数器，属性：`jarvis.channel`、`jarvis.source`）
+- `jarvis.message.processed`（计数器，属性：`jarvis.channel`、`jarvis.outcome`）
+- `jarvis.message.duration_ms`（直方图，属性：`jarvis.channel`、`jarvis.outcome`）
 
 队列 + 会话：
 
-- `openclaw.queue.lane.enqueue`（计数器，属性：`openclaw.lane`）
-- `openclaw.queue.lane.dequeue`（计数器，属性：`openclaw.lane`）
-- `openclaw.queue.depth`（直方图，属性：`openclaw.lane` 或 `openclaw.channel=heartbeat`）
-- `openclaw.queue.wait_ms`（直方图，属性：`openclaw.lane`）
-- `openclaw.session.state`（计数器，属性：`openclaw.state`、`openclaw.reason`）
-- `openclaw.session.stuck`（计数器，属性：`openclaw.state`）
-- `openclaw.session.stuck_age_ms`（直方图，属性：`openclaw.state`）
-- `openclaw.run.attempt`（计数器，属性：`openclaw.attempt`）
+- `jarvis.queue.lane.enqueue`（计数器，属性：`jarvis.lane`）
+- `jarvis.queue.lane.dequeue`（计数器，属性：`jarvis.lane`）
+- `jarvis.queue.depth`（直方图，属性：`jarvis.lane` 或 `jarvis.channel=heartbeat`）
+- `jarvis.queue.wait_ms`（直方图，属性：`jarvis.lane`）
+- `jarvis.session.state`（计数器，属性：`jarvis.state`、`jarvis.reason`）
+- `jarvis.session.stuck`（计数器，属性：`jarvis.state`）
+- `jarvis.session.stuck_age_ms`（直方图，属性：`jarvis.state`）
+- `jarvis.run.attempt`（计数器，属性：`jarvis.attempt`）
 
 ### 导出的 span（名称 + 关键属性）
 
-- `openclaw.model.usage`
-  - `openclaw.channel`、`openclaw.provider`、`openclaw.model`
-  - `openclaw.sessionKey`、`openclaw.sessionId`
-  - `openclaw.tokens.*`（input/output/cache_read/cache_write/total）
-- `openclaw.webhook.processed`
-  - `openclaw.channel`、`openclaw.webhook`、`openclaw.chatId`
-- `openclaw.webhook.error`
-  - `openclaw.channel`、`openclaw.webhook`、`openclaw.chatId`、`openclaw.error`
-- `openclaw.message.processed`
-  - `openclaw.channel`、`openclaw.outcome`、`openclaw.chatId`、`openclaw.messageId`、`openclaw.sessionKey`、`openclaw.sessionId`、`openclaw.reason`
-- `openclaw.session.stuck`
-  - `openclaw.state`、`openclaw.ageMs`、`openclaw.queueDepth`、`openclaw.sessionKey`、`openclaw.sessionId`
+- `jarvis.model.usage`
+  - `jarvis.channel`、`jarvis.provider`、`jarvis.model`
+  - `jarvis.sessionKey`、`jarvis.sessionId`
+  - `jarvis.tokens.*`（input/output/cache_read/cache_write/total）
+- `jarvis.webhook.processed`
+  - `jarvis.channel`、`jarvis.webhook`、`jarvis.chatId`
+- `jarvis.webhook.error`
+  - `jarvis.channel`、`jarvis.webhook`、`jarvis.chatId`、`jarvis.error`
+- `jarvis.message.processed`
+  - `jarvis.channel`、`jarvis.outcome`、`jarvis.chatId`、`jarvis.messageId`、`jarvis.sessionKey`、`jarvis.sessionId`、`jarvis.reason`
+- `jarvis.session.stuck`
+  - `jarvis.state`、`jarvis.ageMs`、`jarvis.queueDepth`、`jarvis.sessionKey`、`jarvis.sessionId`
 
 ### 采样 + 刷新
 

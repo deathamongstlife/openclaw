@@ -1,5 +1,5 @@
-import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "openclaw/plugin-sdk/account-id";
-import { createAccountListHelpers, type JarvisConfig } from "openclaw/plugin-sdk/zalouser";
+import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "jarvis/plugin-sdk/account-id";
+import { createAccountListHelpers, type JarvisConfig } from "jarvis/plugin-sdk/zalouser";
 import type { ResolvedZalouserAccount, ZalouserAccountConfig, ZalouserConfig } from "./types.js";
 import { checkZaloAuthenticated, getZaloUserInfo } from "./zalo-js.js";
 

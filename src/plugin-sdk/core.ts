@@ -31,7 +31,7 @@ export {
   type PluginCommandRunOptions,
   type PluginCommandRunResult,
 } from "./run-command.js";
-export { resolvePreferredJarvisTmpDir } from "../infra/tmp-openclaw-dir.js";
+export { resolvePreferredJarvisTmpDir } from "../infra/tmp-jarvis-dir.js";
 
 export { resolveGatewayBindUrl } from "../shared/gateway-bind-url.js";
 export type { GatewayBindUrlResult } from "../shared/gateway-bind-url.js";

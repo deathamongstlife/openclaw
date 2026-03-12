@@ -1,4 +1,4 @@
-import type { JarvisConfig, JarvisPluginApi } from "openclaw/plugin-sdk/thread-ownership";
+import type { JarvisConfig, JarvisPluginApi } from "jarvis/plugin-sdk/thread-ownership";
 
 type ThreadOwnershipConfig = {
   forwarderUrl?: string;

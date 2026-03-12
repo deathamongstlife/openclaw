@@ -46,7 +46,7 @@ function pickHigherContrastText(r: number, g: number, b: number): boolean {
 }
 
 function isLightBackground(): boolean {
-  const explicit = process.env.OPENCLAW_THEME?.toLowerCase();
+  const explicit = process.env.JARVIS_THEME?.toLowerCase();
   if (explicit === "light") {
     return true;
   }
@@ -78,52 +78,54 @@ function isLightBackground(): boolean {
 /** Whether the terminal has a light background. Exported for testing only. */
 export const lightMode = isLightBackground();
 
+// JARVIS Dark Theme - Arc Reactor Blue
 export const darkPalette = {
-  text: "#E8E3D5",
-  dim: "#7B7F87",
-  accent: "#F6C453",
-  accentSoft: "#F2A65A",
-  border: "#3C414B",
-  userBg: "#2B2F36",
-  userText: "#F3EEE0",
-  systemText: "#9BA3B2",
-  toolPendingBg: "#1F2A2F",
-  toolSuccessBg: "#1E2D23",
-  toolErrorBg: "#2F1F1F",
-  toolTitle: "#F6C453",
-  toolOutput: "#E1DACB",
-  quote: "#8CC8FF",
-  quoteBorder: "#3B4D6B",
-  code: "#F0C987",
-  codeBlock: "#1E232A",
-  codeBorder: "#343A45",
-  link: "#7DD3A5",
-  error: "#F97066",
-  success: "#7DD3A5",
+  text: "#E8F4F8",
+  dim: "#607D8B",
+  accent: "#00D9FF",
+  accentSoft: "#4FC3F7",
+  border: "#1E3A5F",
+  userBg: "#0A1929",
+  userText: "#E8F4F8",
+  systemText: "#80DEEA",
+  toolPendingBg: "#0D1F2D",
+  toolSuccessBg: "#0D2818",
+  toolErrorBg: "#2D0D0D",
+  toolTitle: "#00D9FF",
+  toolOutput: "#B2EBF2",
+  quote: "#4FC3F7",
+  quoteBorder: "#0088FF",
+  code: "#00E5FF",
+  codeBlock: "#001529",
+  codeBorder: "#006064",
+  link: "#00E676",
+  error: "#FF1744",
+  success: "#00E676",
 } as const;
 
+// JARVIS Light Theme
 export const lightPalette = {
   text: "#1E1E1E",
-  dim: "#5B6472",
-  accent: "#B45309",
-  accentSoft: "#C2410C",
-  border: "#5B6472",
-  userBg: "#F3F0E8",
+  dim: "#546E7A",
+  accent: "#0088FF",
+  accentSoft: "#0097A7",
+  border: "#B0BEC5",
+  userBg: "#E3F2FD",
   userText: "#1E1E1E",
-  systemText: "#4B5563",
-  toolPendingBg: "#EFF6FF",
-  toolSuccessBg: "#ECFDF5",
-  toolErrorBg: "#FEF2F2",
-  toolTitle: "#B45309",
-  toolOutput: "#374151",
-  quote: "#1D4ED8",
-  quoteBorder: "#2563EB",
-  code: "#92400E",
-  codeBlock: "#F9FAFB",
-  codeBorder: "#92400E",
-  link: "#047857",
-  error: "#DC2626",
-  success: "#047857",
+  systemText: "#00838F",
+  toolPendingBg: "#E1F5FE",
+  toolSuccessBg: "#E8F5E9",
+  toolErrorBg: "#FFEBEE",
+  toolTitle: "#0088FF",
+  toolOutput: "#37474F",
+  quote: "#0277BD",
+  quoteBorder: "#01579B",
+  code: "#006064",
+  codeBlock: "#F5F5F5",
+  codeBorder: "#00838F",
+  link: "#00C853",
+  error: "#D32F2F",
+  success: "#00C853",
 } as const;
 
 export const palette = lightMode ? lightPalette : darkPalette;

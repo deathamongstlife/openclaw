@@ -135,7 +135,7 @@ describe("isSystemdServiceEnabled", () => {
       err.code = "EACCES";
       cb(err, "", "");
     });
-    const result = await isSystemdServiceEnabled({ env: { HOME: "/tmp/openclaw-test-home" } });
+    const result = await isSystemdServiceEnabled({ env: { HOME: "/tmp/jarvis-test-home" } });
     expect(result).toBe(false);
   });
 
@@ -145,7 +145,7 @@ describe("isSystemdServiceEnabled", () => {
     err.code = "ENOENT";
     vi.spyOn(fs, "access").mockRejectedValueOnce(err);
 
-    const result = await isSystemdServiceEnabled({ env: { HOME: "/tmp/openclaw-test-home" } });
+    const result = await isSystemdServiceEnabled({ env: { HOME: "/tmp/jarvis-test-home" } });
 
     expect(result).toBe(false);
     expect(execFileMock).not.toHaveBeenCalled();
@@ -158,7 +158,7 @@ describe("isSystemdServiceEnabled", () => {
       expect(args).toEqual(["--user", "is-enabled", "jarvis-gateway.service"]);
       cb(null, "enabled", "");
     });
-    const result = await isSystemdServiceEnabled({ env: { HOME: "/tmp/openclaw-test-home" } });
+    const result = await isSystemdServiceEnabled({ env: { HOME: "/tmp/jarvis-test-home" } });
     expect(result).toBe(true);
   });
 
@@ -170,7 +170,7 @@ describe("isSystemdServiceEnabled", () => {
       err.code = 1;
       cb(err, "disabled", "");
     });
-    const result = await isSystemdServiceEnabled({ env: { HOME: "/tmp/openclaw-test-home" } });
+    const result = await isSystemdServiceEnabled({ env: { HOME: "/tmp/jarvis-test-home" } });
     expect(result).toBe(false);
   });
 
@@ -187,7 +187,7 @@ describe("isSystemdServiceEnabled", () => {
     });
 
     await expect(
-      isSystemdServiceEnabled({ env: { HOME: "/tmp/openclaw-test-home" } }),
+      isSystemdServiceEnabled({ env: { HOME: "/tmp/jarvis-test-home" } }),
     ).rejects.toThrow(
       "systemctl is-enabled unavailable: Command failed: systemctl --user is-enabled jarvis-gateway.service",
     );
@@ -210,7 +210,7 @@ describe("isSystemdServiceEnabled", () => {
 
     await expect(
       isSystemdServiceEnabled({
-        env: { HOME: "/tmp/openclaw-test-home", USER: "", LOGNAME: "" },
+        env: { HOME: "/tmp/jarvis-test-home", USER: "", LOGNAME: "" },
       }),
     ).rejects.toThrow("systemctl is-enabled unavailable: Failed to connect to bus");
   });
@@ -247,7 +247,7 @@ describe("isSystemdServiceEnabled", () => {
 
     await expect(
       isSystemdServiceEnabled({
-        env: { HOME: "/tmp/openclaw-test-home", USER: "debian" },
+        env: { HOME: "/tmp/jarvis-test-home", USER: "debian" },
       }),
     ).rejects.toThrow("systemctl is-enabled unavailable: Failed to connect to user scope bus");
   });
@@ -265,7 +265,7 @@ describe("isSystemdServiceEnabled", () => {
     });
 
     await expect(
-      isSystemdServiceEnabled({ env: { HOME: "/tmp/openclaw-test-home" } }),
+      isSystemdServiceEnabled({ env: { HOME: "/tmp/jarvis-test-home" } }),
     ).rejects.toThrow("systemctl is-enabled unavailable: read-only file system");
   });
 
@@ -288,7 +288,7 @@ describe("isSystemdServiceEnabled", () => {
         cb(err, "", "permission denied");
       });
     await expect(
-      isSystemdServiceEnabled({ env: { HOME: "/tmp/openclaw-test-home" } }),
+      isSystemdServiceEnabled({ env: { HOME: "/tmp/jarvis-test-home" } }),
     ).rejects.toThrow("systemctl is-enabled unavailable: permission denied");
   });
 
@@ -304,7 +304,7 @@ describe("isSystemdServiceEnabled", () => {
       err.code = 4;
       cb(err, "not-found\n", "");
     });
-    const result = await isSystemdServiceEnabled({ env: { HOME: "/tmp/openclaw-test-home" } });
+    const result = await isSystemdServiceEnabled({ env: { HOME: "/tmp/jarvis-test-home" } });
     expect(result).toBe(false);
   });
 });
@@ -371,37 +371,37 @@ describe("systemd runtime parsing", () => {
 describe("resolveSystemdUserUnitPath", () => {
   it.each([
     {
-      name: "uses default service name when OPENCLAW_PROFILE is unset",
+      name: "uses default service name when JARVIS_PROFILE is unset",
       env: { HOME: "/home/test" },
       expected: "/home/test/.config/systemd/user/jarvis-gateway.service",
     },
     {
-      name: "uses profile-specific service name when OPENCLAW_PROFILE is set to a custom value",
-      env: { HOME: "/home/test", OPENCLAW_PROFILE: "jbphoenix" },
+      name: "uses profile-specific service name when JARVIS_PROFILE is set to a custom value",
+      env: { HOME: "/home/test", JARVIS_PROFILE: "jbphoenix" },
       expected: "/home/test/.config/systemd/user/jarvis-gateway-jbphoenix.service",
     },
     {
-      name: "prefers OPENCLAW_SYSTEMD_UNIT over OPENCLAW_PROFILE",
+      name: "prefers JARVIS_SYSTEMD_UNIT over JARVIS_PROFILE",
       env: {
         HOME: "/home/test",
-        OPENCLAW_PROFILE: "jbphoenix",
-        OPENCLAW_SYSTEMD_UNIT: "custom-unit",
+        JARVIS_PROFILE: "jbphoenix",
+        JARVIS_SYSTEMD_UNIT: "custom-unit",
       },
       expected: "/home/test/.config/systemd/user/custom-unit.service",
     },
     {
-      name: "handles OPENCLAW_SYSTEMD_UNIT with .service suffix",
+      name: "handles JARVIS_SYSTEMD_UNIT with .service suffix",
       env: {
         HOME: "/home/test",
-        OPENCLAW_SYSTEMD_UNIT: "custom-unit.service",
+        JARVIS_SYSTEMD_UNIT: "custom-unit.service",
       },
       expected: "/home/test/.config/systemd/user/custom-unit.service",
     },
     {
-      name: "trims whitespace from OPENCLAW_SYSTEMD_UNIT",
+      name: "trims whitespace from JARVIS_SYSTEMD_UNIT",
       env: {
         HOME: "/home/test",
-        OPENCLAW_SYSTEMD_UNIT: "  custom-unit  ",
+        JARVIS_SYSTEMD_UNIT: "  custom-unit  ",
       },
       expected: "/home/test/.config/systemd/user/custom-unit.service",
     },
@@ -413,7 +413,7 @@ describe("resolveSystemdUserUnitPath", () => {
 describe("splitArgsPreservingQuotes", () => {
   it("splits on whitespace outside quotes", () => {
     expect(splitArgsPreservingQuotes('/usr/bin/jarvis gateway start --name "My Bot"')).toEqual([
-      "/usr/bin/openclaw",
+      "/usr/bin/jarvis",
       "gateway",
       "start",
       "--name",
@@ -423,24 +423,24 @@ describe("splitArgsPreservingQuotes", () => {
 
   it("supports systemd-style backslash escaping", () => {
     expect(
-      splitArgsPreservingQuotes('openclaw --name "My \\"Bot\\"" --foo bar', {
+      splitArgsPreservingQuotes('jarvis --name "My \\"Bot\\"" --foo bar', {
         escapeMode: "backslash",
       }),
-    ).toEqual(["openclaw", "--name", 'My "Bot"', "--foo", "bar"]);
+    ).toEqual(["jarvis", "--name", 'My "Bot"', "--foo", "bar"]);
   });
 
   it("supports schtasks-style escaped quotes while preserving other backslashes", () => {
     expect(
-      splitArgsPreservingQuotes('openclaw --path "C:\\\\Program Files\\\\Jarvis"', {
+      splitArgsPreservingQuotes('jarvis --path "C:\\\\Program Files\\\\Jarvis"', {
         escapeMode: "backslash-quote-only",
       }),
-    ).toEqual(["openclaw", "--path", "C:\\\\Program Files\\\\Jarvis"]);
+    ).toEqual(["jarvis", "--path", "C:\\\\Program Files\\\\Jarvis"]);
 
     expect(
-      splitArgsPreservingQuotes('openclaw --label "My \\"Quoted\\" Name"', {
+      splitArgsPreservingQuotes('jarvis --label "My \\"Quoted\\" Name"', {
         escapeMode: "backslash-quote-only",
       }),
-    ).toEqual(["openclaw", "--label", 'My "Quoted" Name']);
+    ).toEqual(["jarvis", "--label", 'My "Quoted" Name']);
   });
 });
 
@@ -448,7 +448,7 @@ describe("parseSystemdExecStart", () => {
   it("preserves quoted arguments", () => {
     const execStart = '/usr/bin/jarvis gateway start --name "My Bot"';
     expect(parseSystemdExecStart(execStart)).toEqual([
-      "/usr/bin/openclaw",
+      "/usr/bin/jarvis",
       "gateway",
       "start",
       "--name",
@@ -462,24 +462,24 @@ describe("readSystemdServiceExecStart", () => {
     vi.restoreAllMocks();
   });
 
-  it("loads OPENCLAW_GATEWAY_TOKEN from EnvironmentFile", async () => {
+  it("loads JARVIS_GATEWAY_TOKEN from EnvironmentFile", async () => {
     const readFileSpy = vi.spyOn(fs, "readFile").mockImplementation(async (pathname) => {
       const pathValue = pathLikeToString(pathname);
       if (pathValue.endsWith("/jarvis-gateway.service")) {
         return [
           "[Service]",
           "ExecStart=/usr/bin/jarvis gateway run",
-          "EnvironmentFile=%h/.openclaw/.env",
+          "EnvironmentFile=%h/.jarvis/.env",
         ].join("\n");
       }
-      if (pathValue === "/home/test/.openclaw/.env") {
-        return "OPENCLAW_GATEWAY_TOKEN=env-file-token\n";
+      if (pathValue === "/home/test/.jarvis/.env") {
+        return "JARVIS_GATEWAY_TOKEN=env-file-token\n";
       }
       throw new Error(`unexpected readFile path: ${pathValue}`);
     });
 
     const command = await readSystemdServiceExecStart({ HOME: "/home/test" });
-    expect(command?.environment?.OPENCLAW_GATEWAY_TOKEN).toBe("env-file-token");
+    expect(command?.environment?.JARVIS_GATEWAY_TOKEN).toBe("env-file-token");
     expect(readFileSpy).toHaveBeenCalledTimes(2);
   });
 
@@ -490,19 +490,19 @@ describe("readSystemdServiceExecStart", () => {
         return [
           "[Service]",
           "ExecStart=/usr/bin/jarvis gateway run",
-          "EnvironmentFile=%h/.openclaw/.env",
-          'Environment="OPENCLAW_GATEWAY_TOKEN=inline-token"',
+          "EnvironmentFile=%h/.jarvis/.env",
+          'Environment="JARVIS_GATEWAY_TOKEN=inline-token"',
         ].join("\n");
       }
-      if (pathValue === "/home/test/.openclaw/.env") {
-        return "OPENCLAW_GATEWAY_TOKEN=env-file-token\n";
+      if (pathValue === "/home/test/.jarvis/.env") {
+        return "JARVIS_GATEWAY_TOKEN=env-file-token\n";
       }
       throw new Error(`unexpected readFile path: ${pathValue}`);
     });
 
     const command = await readSystemdServiceExecStart({ HOME: "/home/test" });
-    expect(command?.environment?.OPENCLAW_GATEWAY_TOKEN).toBe("env-file-token");
-    expect(command?.environmentValueSources?.OPENCLAW_GATEWAY_TOKEN).toBe("file");
+    expect(command?.environment?.JARVIS_GATEWAY_TOKEN).toBe("env-file-token");
+    expect(command?.environmentValueSources?.JARVIS_GATEWAY_TOKEN).toBe("file");
   });
 
   it("ignores missing optional EnvironmentFile entries", async () => {
@@ -512,14 +512,14 @@ describe("readSystemdServiceExecStart", () => {
         return [
           "[Service]",
           "ExecStart=/usr/bin/jarvis gateway run",
-          "EnvironmentFile=-%h/.openclaw/missing.env",
+          "EnvironmentFile=-%h/.jarvis/missing.env",
         ].join("\n");
       }
       throw new Error(`missing: ${pathValue}`);
     });
 
     const command = await readSystemdServiceExecStart({ HOME: "/home/test" });
-    expect(command?.programArguments).toEqual(["/usr/bin/openclaw", "gateway", "run"]);
+    expect(command?.programArguments).toEqual(["/usr/bin/jarvis", "gateway", "run"]);
     expect(command?.environment).toBeUndefined();
   });
 
@@ -530,14 +530,14 @@ describe("readSystemdServiceExecStart", () => {
         return [
           "[Service]",
           "ExecStart=/usr/bin/jarvis gateway run",
-          "EnvironmentFile=%h/.openclaw/missing.env",
+          "EnvironmentFile=%h/.jarvis/missing.env",
         ].join("\n");
       }
       throw new Error(`missing: ${pathValue}`);
     });
 
     const command = await readSystemdServiceExecStart({ HOME: "/home/test" });
-    expect(command?.programArguments).toEqual(["/usr/bin/openclaw", "gateway", "run"]);
+    expect(command?.programArguments).toEqual(["/usr/bin/jarvis", "gateway", "run"]);
     expect(command?.environment).toBeUndefined();
   });
 
@@ -548,22 +548,22 @@ describe("readSystemdServiceExecStart", () => {
         return [
           "[Service]",
           "ExecStart=/usr/bin/jarvis gateway run",
-          'EnvironmentFile=%h/.openclaw/first.env "%h/.openclaw/second env.env"',
+          'EnvironmentFile=%h/.jarvis/first.env "%h/.jarvis/second env.env"',
         ].join("\n");
       }
-      if (pathValue === "/home/test/.openclaw/first.env") {
-        return "OPENCLAW_GATEWAY_TOKEN=first-token\n"; // pragma: allowlist secret
+      if (pathValue === "/home/test/.jarvis/first.env") {
+        return "JARVIS_GATEWAY_TOKEN=first-token\n"; // pragma: allowlist secret
       }
-      if (pathValue === "/home/test/.openclaw/second env.env") {
-        return 'OPENCLAW_GATEWAY_PASSWORD="second password"\n'; // pragma: allowlist secret
+      if (pathValue === "/home/test/.jarvis/second env.env") {
+        return 'JARVIS_GATEWAY_PASSWORD="second password"\n'; // pragma: allowlist secret
       }
       throw new Error(`unexpected readFile path: ${pathValue}`);
     });
 
     const command = await readSystemdServiceExecStart({ HOME: "/home/test" });
     expect(command?.environment).toEqual({
-      OPENCLAW_GATEWAY_TOKEN: "first-token",
-      OPENCLAW_GATEWAY_PASSWORD: "second password", // pragma: allowlist secret
+      JARVIS_GATEWAY_TOKEN: "first-token",
+      JARVIS_GATEWAY_PASSWORD: "second password", // pragma: allowlist secret
     });
   });
 
@@ -579,20 +579,20 @@ describe("readSystemdServiceExecStart", () => {
       }
       if (pathValue.endsWith("/.config/systemd/user/gateway.env")) {
         return [
-          "OPENCLAW_GATEWAY_TOKEN=relative-token", // pragma: allowlist secret
-          "OPENCLAW_GATEWAY_PASSWORD=relative-password", // pragma: allowlist secret
+          "JARVIS_GATEWAY_TOKEN=relative-token", // pragma: allowlist secret
+          "JARVIS_GATEWAY_PASSWORD=relative-password", // pragma: allowlist secret
         ].join("\n");
       }
       if (pathValue.endsWith("/.config/systemd/user/override.env")) {
-        return "OPENCLAW_GATEWAY_TOKEN=override-token\n"; // pragma: allowlist secret
+        return "JARVIS_GATEWAY_TOKEN=override-token\n"; // pragma: allowlist secret
       }
       throw new Error(`unexpected readFile path: ${pathValue}`);
     });
 
     const command = await readSystemdServiceExecStart({ HOME: "/home/test" });
     expect(command?.environment).toEqual({
-      OPENCLAW_GATEWAY_TOKEN: "override-token",
-      OPENCLAW_GATEWAY_PASSWORD: "relative-password", // pragma: allowlist secret
+      JARVIS_GATEWAY_TOKEN: "override-token",
+      JARVIS_GATEWAY_PASSWORD: "relative-password", // pragma: allowlist secret
     });
   });
 
@@ -603,15 +603,15 @@ describe("readSystemdServiceExecStart", () => {
         return [
           "[Service]",
           "ExecStart=/usr/bin/jarvis gateway run",
-          "EnvironmentFile=%h/.openclaw/gateway.env",
+          "EnvironmentFile=%h/.jarvis/gateway.env",
         ].join("\n");
       }
-      if (pathValue === "/home/test/.openclaw/gateway.env") {
+      if (pathValue === "/home/test/.jarvis/gateway.env") {
         return [
           "# comment",
           "; another comment",
-          'OPENCLAW_GATEWAY_TOKEN="quoted token"', // pragma: allowlist secret
-          "OPENCLAW_GATEWAY_PASSWORD=quoted-password", // pragma: allowlist secret
+          'JARVIS_GATEWAY_TOKEN="quoted token"', // pragma: allowlist secret
+          "JARVIS_GATEWAY_PASSWORD=quoted-password", // pragma: allowlist secret
         ].join("\n");
       }
       throw new Error(`unexpected readFile path: ${pathValue}`);
@@ -619,12 +619,12 @@ describe("readSystemdServiceExecStart", () => {
 
     const command = await readSystemdServiceExecStart({ HOME: "/home/test" });
     expect(command?.environment).toEqual({
-      OPENCLAW_GATEWAY_TOKEN: "quoted token",
-      OPENCLAW_GATEWAY_PASSWORD: "quoted-password", // pragma: allowlist secret
+      JARVIS_GATEWAY_TOKEN: "quoted token",
+      JARVIS_GATEWAY_PASSWORD: "quoted-password", // pragma: allowlist secret
     });
     expect(command?.environmentValueSources).toEqual({
-      OPENCLAW_GATEWAY_TOKEN: "file",
-      OPENCLAW_GATEWAY_PASSWORD: "file", // pragma: allowlist secret
+      JARVIS_GATEWAY_TOKEN: "file",
+      JARVIS_GATEWAY_PASSWORD: "file", // pragma: allowlist secret
     });
   });
 });
@@ -681,7 +681,7 @@ describe("systemd service control", () => {
         expect(args).toEqual(["--user", "restart", "jarvis-gateway-work.service"]);
         cb(null, "", "");
       });
-    await assertRestartSuccess({ OPENCLAW_PROFILE: "work" });
+    await assertRestartSuccess({ JARVIS_PROFILE: "work" });
   });
 
   it("surfaces stop failures with systemctl detail", async () => {

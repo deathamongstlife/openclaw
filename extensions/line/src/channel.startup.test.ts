@@ -4,7 +4,7 @@ import type {
   JarvisConfig,
   PluginRuntime,
   ResolvedLineAccount,
-} from "openclaw/plugin-sdk/line";
+} from "jarvis/plugin-sdk/line";
 import { describe, expect, it, vi } from "vitest";
 import { createRuntimeEnv } from "../../test-utils/runtime-env.js";
 import { linePlugin } from "./channel.js";

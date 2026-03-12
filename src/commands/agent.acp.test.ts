@@ -25,7 +25,7 @@ const runtime: RuntimeEnv = {
 };
 
 async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
-  return withTempHomeBase(fn, { prefix: "openclaw-agent-acp-" });
+  return withTempHomeBase(fn, { prefix: "jarvis-agent-acp-" });
 }
 
 function createAcpEnabledConfig(home: string, storePath: string): JarvisConfig {
@@ -40,7 +40,7 @@ function createAcpEnabledConfig(home: string, storePath: string): JarvisConfig {
       defaults: {
         model: { primary: "openai/gpt-5.3-codex" },
         models: { "openai/gpt-5.3-codex": {} },
-        workspace: path.join(home, "openclaw"),
+        workspace: path.join(home, "jarvis"),
       },
     },
     session: { store: storePath, mainKey: "main" },

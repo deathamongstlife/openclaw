@@ -34,10 +34,10 @@ jarvis models status
 ```
 
 3. If the Gateway runs under systemd/launchd, prefer putting the key in
-   `~/.openclaw/.env` so the daemon can read it:
+   `~/.jarvis/.env` so the daemon can read it:
 
 ```bash
-cat >> ~/.openclaw/.env <<'EOF'
+cat >> ~/.jarvis/.env <<'EOF'
 <PROVIDER>_API_KEY=...
 EOF
 ```
@@ -53,7 +53,7 @@ If you’d rather not manage env vars yourself, the onboarding wizard can store
 API keys for daemon use: `jarvis onboard`.
 
 See [Help](/help) for details on env inheritance (`env.shellEnv`,
-`~/.openclaw/.env`, systemd/launchd).
+`~/.jarvis/.env`, systemd/launchd).
 
 ## Anthropic: setup-token (subscription auth)
 
@@ -126,7 +126,7 @@ Some providers support retrying a request with alternative keys when an API call
 hits a provider rate limit.
 
 - Priority order:
-  - `OPENCLAW_LIVE_<PROVIDER>_KEY` (single override)
+  - `JARVIS_LIVE_<PROVIDER>_KEY` (single override)
   - `<PROVIDER>_API_KEYS`
   - `<PROVIDER>_API_KEY`
   - `<PROVIDER>_API_KEY_*`

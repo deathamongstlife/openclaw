@@ -70,7 +70,7 @@ export function validateNestedObject(
     const schemaValue = schema[key];
 
     if (isPlainObject(value) && isPlainObject(schemaValue)) {
-      const result = validateNestedObject(value, keyPath, schemaValue as Record<string, unknown>);
+      const result = validateNestedObject(value, keyPath, schemaValue);
       errors.push(...result.errors);
       warnings.push(...result.warnings);
     }
@@ -205,10 +205,7 @@ export function mergeConfigs(
     }
 
     if (isPlainObject(value) && isPlainObject(result[key])) {
-      result[key] = mergeConfigs(
-        result[key] as Record<string, unknown>,
-        value as Record<string, unknown>,
-      );
+      result[key] = mergeConfigs(result[key], value);
     } else {
       result[key] = value;
     }

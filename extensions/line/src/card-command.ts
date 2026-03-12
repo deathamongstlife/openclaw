@@ -1,4 +1,4 @@
-import type { LineChannelData, JarvisPluginApi, ReplyPayload } from "openclaw/plugin-sdk/line";
+import type { LineChannelData, JarvisPluginApi, ReplyPayload } from "jarvis/plugin-sdk/line";
 import {
   createActionCard,
   createImageCard,
@@ -7,7 +7,7 @@ import {
   createReceiptCard,
   type CardAction,
   type ListItem,
-} from "openclaw/plugin-sdk/line";
+} from "jarvis/plugin-sdk/line";
 
 const CARD_USAGE = `Usage: /card <type> "title" "body" [options]
 

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct OpenClawCanvasNavigateParams: Codable, Sendable, Equatable {
+public struct JarvisCanvasNavigateParams: Codable, Sendable, Equatable {
     public var url: String
 
     public init(url: String) {
@@ -8,7 +8,7 @@ public struct OpenClawCanvasNavigateParams: Codable, Sendable, Equatable {
     }
 }
 
-public struct OpenClawCanvasPlacement: Codable, Sendable, Equatable {
+public struct JarvisCanvasPlacement: Codable, Sendable, Equatable {
     public var x: Double?
     public var y: Double?
     public var width: Double?
@@ -22,17 +22,17 @@ public struct OpenClawCanvasPlacement: Codable, Sendable, Equatable {
     }
 }
 
-public struct OpenClawCanvasPresentParams: Codable, Sendable, Equatable {
+public struct JarvisCanvasPresentParams: Codable, Sendable, Equatable {
     public var url: String?
-    public var placement: OpenClawCanvasPlacement?
+    public var placement: JarvisCanvasPlacement?
 
-    public init(url: String? = nil, placement: OpenClawCanvasPlacement? = nil) {
+    public init(url: String? = nil, placement: JarvisCanvasPlacement? = nil) {
         self.url = url
         self.placement = placement
     }
 }
 
-public struct OpenClawCanvasEvalParams: Codable, Sendable, Equatable {
+public struct JarvisCanvasEvalParams: Codable, Sendable, Equatable {
     public var javaScript: String
 
     public init(javaScript: String) {
@@ -40,7 +40,7 @@ public struct OpenClawCanvasEvalParams: Codable, Sendable, Equatable {
     }
 }
 
-public enum OpenClawCanvasSnapshotFormat: String, Codable, Sendable {
+public enum JarvisCanvasSnapshotFormat: String, Codable, Sendable {
     case png
     case jpeg
 
@@ -63,12 +63,12 @@ public enum OpenClawCanvasSnapshotFormat: String, Codable, Sendable {
     }
 }
 
-public struct OpenClawCanvasSnapshotParams: Codable, Sendable, Equatable {
+public struct JarvisCanvasSnapshotParams: Codable, Sendable, Equatable {
     public var maxWidth: Int?
     public var quality: Double?
-    public var format: OpenClawCanvasSnapshotFormat?
+    public var format: JarvisCanvasSnapshotFormat?
 
-    public init(maxWidth: Int? = nil, quality: Double? = nil, format: OpenClawCanvasSnapshotFormat? = nil) {
+    public init(maxWidth: Int? = nil, quality: Double? = nil, format: JarvisCanvasSnapshotFormat? = nil) {
         self.maxWidth = maxWidth
         self.quality = quality
         self.format = format

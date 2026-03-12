@@ -1,8 +1,5 @@
 import { Type } from "@sinclair/typebox";
-import type {
-  GatewayRequestHandlerOptions,
-  JarvisPluginApi,
-} from "openclaw/plugin-sdk/voice-call";
+import type { GatewayRequestHandlerOptions, JarvisPluginApi } from "jarvis/plugin-sdk/voice-call";
 import { registerVoiceCallCli } from "./src/cli.js";
 import {
   VoiceCallConfigSchema,

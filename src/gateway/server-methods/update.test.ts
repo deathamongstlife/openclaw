@@ -32,8 +32,8 @@ vi.mock("../../config/sessions.js", () => ({
   },
 }));
 
-vi.mock("../../infra/openclaw-root.js", () => ({
-  resolveJarvisPackageRoot: async () => "/tmp/openclaw",
+vi.mock("../../infra/jarvis-root.js", () => ({
+  resolveJarvisPackageRoot: async () => "/tmp/jarvis",
 }));
 
 vi.mock("../../infra/restart-sentinel.js", async (importOriginal) => {

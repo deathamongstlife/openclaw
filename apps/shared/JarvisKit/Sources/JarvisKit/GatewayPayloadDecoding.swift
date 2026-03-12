@@ -1,4 +1,4 @@
-import OpenClawProtocol
+import JarvisProtocol
 import Foundation
 
 public enum GatewayPayloadDecoding {

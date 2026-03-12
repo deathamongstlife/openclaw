@@ -10,16 +10,16 @@ title: "Gateway on macOS"
 # Gateway on macOS (external launchd)
 
 Jarvis.app no longer bundles Node/Bun or the Gateway runtime. The macOS app
-expects an **external** `openclaw` CLI install, does not spawn the Gateway as a
+expects an **external** `jarvis` CLI install, does not spawn the Gateway as a
 child process, and manages a per‑user launchd service to keep the Gateway
 running (or attaches to an existing local Gateway if one is already running).
 
 ## Install the CLI (required for local mode)
 
-You need Node 22+ on the Mac, then install `openclaw` globally:
+You need Node 22+ on the Mac, then install `jarvis` globally:
 
 ```bash
-npm install -g openclaw@<version>
+npm install -g jarvis@<version>
 ```
 
 The macOS app’s **Install CLI** button runs the same flow via npm/pnpm (bun not recommended for Gateway runtime).
@@ -28,12 +28,12 @@ The macOS app’s **Install CLI** button runs the same flow via npm/pnpm (bun no
 
 Label:
 
-- `ai.openclaw.gateway` (or `ai.openclaw.<profile>`; legacy `com.openclaw.*` may remain)
+- `ai.jarvis.gateway` (or `ai.jarvis.<profile>`; legacy `com.jarvis.*` may remain)
 
 Plist location (per‑user):
 
-- `~/Library/LaunchAgents/ai.openclaw.gateway.plist`
-  (or `~/Library/LaunchAgents/ai.openclaw.<profile>.plist`)
+- `~/Library/LaunchAgents/ai.jarvis.gateway.plist`
+  (or `~/Library/LaunchAgents/ai.jarvis.<profile>.plist`)
 
 Manager:
 
@@ -49,7 +49,7 @@ Behavior:
 
 Logging:
 
-- launchd stdout/err: `/tmp/openclaw/jarvis-gateway.log`
+- launchd stdout/err: `/tmp/jarvis/jarvis-gateway.log`
 
 ## Version compatibility
 
@@ -59,10 +59,10 @@ incompatible, update the global CLI to match the app version.
 ## Smoke check
 
 ```bash
-openclaw --version
+jarvis --version
 
-OPENCLAW_SKIP_CHANNELS=1 \
-OPENCLAW_SKIP_CANVAS_HOST=1 \
+JARVIS_SKIP_CHANNELS=1 \
+JARVIS_SKIP_CANVAS_HOST=1 \
 jarvis gateway --port 18999 --bind loopback
 ```
 

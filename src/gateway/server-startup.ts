@@ -13,7 +13,6 @@ import type { CliDeps } from "../cli/deps.js";
 import type { loadConfig } from "../config/config.js";
 import { resolveStateDir } from "../config/paths.js";
 import { startGmailWatcherWithLogs } from "../hooks/gmail-watcher-lifecycle.js";
-import { startAutomatedSessionCleanup } from "./session-auto-cleanup.js";
 import {
   clearInternalHooks,
   createInternalHookEvent,
@@ -29,6 +28,7 @@ import {
   shouldWakeFromRestartSentinel,
 } from "./server-restart-sentinel.js";
 import { startGatewayMemoryBackend } from "./server-startup-memory.js";
+import { startAutomatedSessionCleanup } from "./session-auto-cleanup.js";
 
 const SESSION_LOCK_STALE_MS = 30 * 60 * 1000;
 
@@ -124,10 +124,10 @@ export async function startGatewaySidecars(params: {
   }
 
   // Launch configured channels so gateway replies via the surface the message came from.
-  // Tests can opt out via OPENCLAW_SKIP_CHANNELS (or legacy OPENCLAW_SKIP_PROVIDERS).
+  // Tests can opt out via JARVIS_SKIP_CHANNELS (or legacy JARVIS_SKIP_PROVIDERS).
   const skipChannels =
-    isTruthyEnvValue(process.env.OPENCLAW_SKIP_CHANNELS) ||
-    isTruthyEnvValue(process.env.OPENCLAW_SKIP_PROVIDERS);
+    isTruthyEnvValue(process.env.JARVIS_SKIP_CHANNELS) ||
+    isTruthyEnvValue(process.env.JARVIS_SKIP_PROVIDERS);
   if (!skipChannels) {
     try {
       await params.startChannels();
@@ -136,7 +136,7 @@ export async function startGatewaySidecars(params: {
     }
   } else {
     params.logChannels.info(
-      "skipping channel start (OPENCLAW_SKIP_CHANNELS=1 or OPENCLAW_SKIP_PROVIDERS=1)",
+      "skipping channel start (JARVIS_SKIP_CHANNELS=1 or JARVIS_SKIP_PROVIDERS=1)",
     );
   }
 

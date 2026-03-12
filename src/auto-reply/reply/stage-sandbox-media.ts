@@ -8,7 +8,7 @@ import type { JarvisConfig } from "../../config/config.js";
 import { logVerbose } from "../../globals.js";
 import { copyFileWithinRoot, SafeOpenError } from "../../infra/fs-safe.js";
 import { normalizeScpRemoteHost } from "../../infra/scp-host.js";
-import { resolvePreferredJarvisTmpDir } from "../../infra/tmp-openclaw-dir.js";
+import { resolvePreferredJarvisTmpDir } from "../../infra/tmp-jarvis-dir.js";
 import {
   isInboundPathAllowed,
   resolveIMessageRemoteAttachmentRoots,
@@ -39,7 +39,7 @@ export async function stageSandboxMedia(params: {
     workspaceDir,
   });
 
-  // For remote attachments without sandbox, use ~/.openclaw/media (not agent workspace for privacy)
+  // For remote attachments without sandbox, use ~/.jarvis/media (not agent workspace for privacy)
   const remoteMediaCacheDir = ctx.MediaRemoteHost
     ? path.join(CONFIG_DIR, "media", "remote-cache", sessionKey)
     : null;

@@ -89,8 +89,10 @@ export function resolveSandboxDockerConfig(params: {
   };
 
   const env = agentDocker?.env
-    ? { ...defaultEnv, ...(globalDocker?.env ?? {}), ...agentDocker.env }
-    : (globalDocker?.env ? { ...defaultEnv, ...globalDocker.env } : defaultEnv);
+    ? { ...defaultEnv, ...globalDocker?.env, ...agentDocker.env }
+    : globalDocker?.env
+      ? { ...defaultEnv, ...globalDocker.env }
+      : defaultEnv;
 
   const ulimits = agentDocker?.ulimits
     ? { ...globalDocker?.ulimits, ...agentDocker.ulimits }
@@ -174,10 +176,7 @@ export function resolveSandboxPruneConfig(params: {
   };
 }
 
-export function resolveSandboxConfigForAgent(
-  cfg?: JarvisConfig,
-  agentId?: string,
-): SandboxConfig {
+export function resolveSandboxConfigForAgent(cfg?: JarvisConfig, agentId?: string): SandboxConfig {
   const agent = cfg?.agents?.defaults?.sandbox;
 
   // Agent-specific sandbox config overrides global

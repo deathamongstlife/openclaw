@@ -3,7 +3,7 @@
 ## 📁 File Structure
 
 ```
-openclaw/
+jarvis/
 ├── ui/
 │   ├── package.json                    ✅ UPDATED (added chart.js, date-fns)
 │   └── src/
@@ -32,6 +32,7 @@ openclaw/
 ## 🎨 UI Components
 
 ### Metric Card
+
 ```typescript
 <metric-card
   label="Messages/Minute"
@@ -44,6 +45,7 @@ openclaw/
 ```
 
 ### Session List Item
+
 ```typescript
 <session-list-item
   .session=${sessionData}
@@ -53,6 +55,7 @@ openclaw/
 ```
 
 ### Channel Health Card
+
 ```typescript
 <channel-health-card
   .channel=${channelData}
@@ -65,28 +68,32 @@ openclaw/
 ## 🔌 API Endpoints
 
 ### Metrics
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| `GET` | `/api/v1/metrics/realtime` | Current metrics snapshot |
-| `WS` | `/api/v1/metrics/stream` | Real-time metrics stream |
+
+| Method | Endpoint                   | Purpose                  |
+| ------ | -------------------------- | ------------------------ |
+| `GET`  | `/api/v1/metrics/realtime` | Current metrics snapshot |
+| `WS`   | `/api/v1/metrics/stream`   | Real-time metrics stream |
 
 ### Sessions
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| `GET` | `/api/v1/sessions` | List/search sessions |
-| `GET` | `/api/v1/sessions/:key` | Session details |
-| `POST` | `/api/v1/sessions/:key/export` | Export session |
+
+| Method | Endpoint                       | Purpose              |
+| ------ | ------------------------------ | -------------------- |
+| `GET`  | `/api/v1/sessions`             | List/search sessions |
+| `GET`  | `/api/v1/sessions/:key`        | Session details      |
+| `POST` | `/api/v1/sessions/:key/export` | Export session       |
 
 ### Configuration
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| `GET` | `/api/v1/config` | Get config (sanitized) |
-| `PUT` | `/api/v1/config` | Update config |
+
+| Method | Endpoint         | Purpose                |
+| ------ | ---------------- | ---------------------- |
+| `GET`  | `/api/v1/config` | Get config (sanitized) |
+| `PUT`  | `/api/v1/config` | Update config          |
 
 ### Channels
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| `GET` | `/api/v1/channels/health` | Channel health status |
+
+| Method | Endpoint                        | Purpose                |
+| ------ | ------------------------------- | ---------------------- |
+| `GET`  | `/api/v1/channels/health`       | Channel health status  |
 | `POST` | `/api/v1/channels/:name/action` | Perform channel action |
 
 ---
@@ -97,15 +104,17 @@ openclaw/
 type MetricsSnapshot = {
   timestamp: number;
   messagesPerMinute: number;
-  avgResponseTime: number;      // milliseconds
+  avgResponseTime: number; // milliseconds
   activeSessionsCount: number;
-  errorRate: number;             // percentage (0-100)
-  channelActivity: {             // messages per channel
+  errorRate: number; // percentage (0-100)
+  channelActivity: {
+    // messages per channel
     telegram: number;
     discord: number;
     // ...
   };
-  modelUsage: {                  // token usage by model
+  modelUsage: {
+    // token usage by model
     "claude-sonnet-4.5": {
       tokens: number;
       requests: number;
@@ -120,6 +129,7 @@ type MetricsSnapshot = {
 ## 🎯 Quick Integration Checklist
 
 ### Frontend (5 steps)
+
 - [ ] Install dependencies: `npm install chart.js date-fns`
 - [ ] Import views in `app.ts`
 - [ ] Add navigation tabs
@@ -127,6 +137,7 @@ type MetricsSnapshot = {
 - [ ] Build UI: `npm run build`
 
 ### Backend (4 steps)
+
 - [ ] Create `MetricsCollector` service
 - [ ] Implement WebSocket handler
 - [ ] Add REST endpoints
@@ -158,6 +169,7 @@ npm run typecheck
 ## 🔧 Configuration
 
 ### Metrics Collection
+
 ```typescript
 // Default settings in MetricsController
 reconnectDelay: 2000ms
@@ -171,6 +183,7 @@ responseTimes: last 100 samples
 ```
 
 ### Auto-Refresh
+
 ```typescript
 // Channels health view
 autoRefresh: true
@@ -182,11 +195,13 @@ refreshInterval: 5000ms // 5 seconds
 ## 💡 Common Patterns
 
 ### Recording a Message
+
 ```typescript
 metricsCollector.recordMessage(channelName, sessionKey);
 ```
 
 ### Recording Response Time
+
 ```typescript
 const start = Date.now();
 // ... process message ...
@@ -194,6 +209,7 @@ metricsCollector.recordResponseTime(Date.now() - start);
 ```
 
 ### Recording Error
+
 ```typescript
 try {
   // ... operation ...
@@ -204,6 +220,7 @@ try {
 ```
 
 ### Recording Model Usage
+
 ```typescript
 metricsCollector.recordModelUsage(modelName, tokensUsed);
 ```
@@ -213,6 +230,7 @@ metricsCollector.recordModelUsage(modelName, tokensUsed);
 ## 🎨 Styling
 
 ### CSS Variables Used
+
 ```css
 --color-primary          /* Primary brand color */
 --color-primary-light    /* Light primary for backgrounds */
@@ -224,6 +242,7 @@ metricsCollector.recordModelUsage(modelName, tokensUsed);
 ```
 
 ### Dark Mode Support
+
 All components automatically adapt to dark mode via CSS variables.
 
 ---
@@ -231,6 +250,7 @@ All components automatically adapt to dark mode via CSS variables.
 ## 🐛 Debugging
 
 ### Check WebSocket Connection
+
 ```javascript
 // Browser console
 const ws = new WebSocket("ws://localhost:8080/api/v1/metrics/stream");
@@ -240,6 +260,7 @@ ws.onerror = (e) => console.error("Error:", e);
 ```
 
 ### Check Metrics Collector
+
 ```typescript
 // Backend
 const snapshot = metricsCollector.getSnapshot();
@@ -247,6 +268,7 @@ console.log("Current metrics:", snapshot);
 ```
 
 ### Check Component Registration
+
 ```javascript
 // Browser console
 console.log(customElements.get("metric-card"));
@@ -259,6 +281,7 @@ console.log(customElements.get("channel-health-card"));
 ## 📦 Dependencies
 
 ### Production
+
 - `lit@^3.3.2` - Web components
 - `chart.js@^4.4.0` - Charts and graphs
 - `date-fns@^3.0.0` - Date formatting
@@ -266,6 +289,7 @@ console.log(customElements.get("channel-health-card"));
 - `dompurify@^3.3.2` - XSS protection (existing)
 
 ### Development
+
 - `vite@7.3.1` - Build tool
 - `vitest@4.0.18` - Testing
 - `playwright@^1.58.2` - E2E testing
@@ -274,20 +298,21 @@ console.log(customElements.get("channel-health-card"));
 
 ## 🎯 Feature Matrix
 
-| Feature | UI Status | Backend Status | Notes |
-|---------|-----------|----------------|-------|
-| Real-time Dashboard | ✅ Complete | ⏳ TODO | Charts ready, needs data |
-| Session Browser | ✅ Complete | ⏳ TODO | Search/filter UI ready |
-| Config Editor | ✅ Complete | ⏳ TODO | Visual editing ready |
-| Channels Health | ✅ Complete | ⏳ TODO | Monitoring UI ready |
-| WebSocket Metrics | ✅ Complete | ⏳ TODO | Client ready, need server |
-| Export Sessions | ✅ Complete | ⏳ TODO | UI ready, need formatters |
+| Feature             | UI Status   | Backend Status | Notes                     |
+| ------------------- | ----------- | -------------- | ------------------------- |
+| Real-time Dashboard | ✅ Complete | ⏳ TODO        | Charts ready, needs data  |
+| Session Browser     | ✅ Complete | ⏳ TODO        | Search/filter UI ready    |
+| Config Editor       | ✅ Complete | ⏳ TODO        | Visual editing ready      |
+| Channels Health     | ✅ Complete | ⏳ TODO        | Monitoring UI ready       |
+| WebSocket Metrics   | ✅ Complete | ⏳ TODO        | Client ready, need server |
+| Export Sessions     | ✅ Complete | ⏳ TODO        | UI ready, need formatters |
 
 ---
 
 ## 📚 Key Files Reference
 
 ### Most Important Files
+
 1. `ui/src/ui/views/dashboard.ts` - Main analytics dashboard
 2. `ui/src/controllers/metrics-controller.ts` - WebSocket management
 3. `ui/src/components/metric-card.ts` - Reusable metric display
@@ -295,6 +320,7 @@ console.log(customElements.get("channel-health-card"));
 5. Backend `metrics-stream.ts` - ⏳ TODO
 
 ### Integration Points
+
 1. `ui/src/ui/app.ts` - Add navigation
 2. `ui/src/ui/app-render.ts` - Add render cases
 3. `src/gateway/boot.ts` - Initialize services
@@ -306,6 +332,7 @@ console.log(customElements.get("channel-health-card"));
 ## 🎓 Best Practices
 
 ### Frontend
+
 - ✅ Use TypeScript strictly (no `any`)
 - ✅ Components are self-contained
 - ✅ State is localized where possible
@@ -313,6 +340,7 @@ console.log(customElements.get("channel-health-card"));
 - ✅ Accessible UI (ARIA labels, keyboard nav)
 
 ### Backend
+
 - ⚠️ Validate all user input
 - ⚠️ Sanitize config before sending to client
 - ⚠️ Rate limit WebSocket connections

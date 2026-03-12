@@ -28,7 +28,7 @@ jarvis plugins list
 2. Install an official plugin (example: Voice Call):
 
 ```bash
-jarvis plugins install @openclaw/voice-call
+jarvis plugins install @jarvis/voice-call
 ```
 
 Npm specs are **registry-only** (package name + optional **exact version** or
@@ -45,15 +45,15 @@ Looking for third-party listings? See [Community plugins](/plugins/community).
 
 ## Available plugins (official)
 
-- Microsoft Teams is plugin-only as of 2026.1.15; install `@openclaw/msteams` if you use Teams.
+- Microsoft Teams is plugin-only as of 2026.1.15; install `@jarvis/msteams` if you use Teams.
 - Memory (Core) — bundled memory search plugin (enabled by default via `plugins.slots.memory`)
 - Memory (LanceDB) — bundled long-term memory plugin (auto-recall/capture; set `plugins.slots.memory = "memory-lancedb"`)
-- [Voice Call](/plugins/voice-call) — `@openclaw/voice-call`
-- [Zalo Personal](/plugins/zalouser) — `@openclaw/zalouser`
-- [Matrix](/channels/matrix) — `@openclaw/matrix`
-- [Nostr](/channels/nostr) — `@openclaw/nostr`
-- [Zalo](/channels/zalo) — `@openclaw/zalo`
-- [Microsoft Teams](/channels/msteams) — `@openclaw/msteams`
+- [Voice Call](/plugins/voice-call) — `@jarvis/voice-call`
+- [Zalo Personal](/plugins/zalouser) — `@jarvis/zalouser`
+- [Matrix](/channels/matrix) — `@jarvis/matrix`
+- [Nostr](/channels/nostr) — `@jarvis/nostr`
+- [Zalo](/channels/zalo) — `@jarvis/zalo`
+- [Microsoft Teams](/channels/msteams) — `@jarvis/msteams`
 - Google Antigravity OAuth (provider auth) — bundled as `google-antigravity-auth` (disabled by default)
 - Gemini CLI OAuth (provider auth) — bundled as `google-gemini-cli-auth` (disabled by default)
 - Qwen OAuth (provider auth) — bundled as `qwen-portal-auth` (disabled by default)
@@ -145,41 +145,41 @@ Notes:
 
 ## Plugin SDK import paths
 
-Use SDK subpaths instead of the monolithic `openclaw/plugin-sdk` import when
+Use SDK subpaths instead of the monolithic `jarvis/plugin-sdk` import when
 authoring plugins:
 
-- `openclaw/plugin-sdk/core` for generic plugin APIs, provider auth types, and shared helpers.
-- `openclaw/plugin-sdk/compat` for bundled/internal plugin code that needs broader shared runtime helpers than `core`.
-- `openclaw/plugin-sdk/telegram` for Telegram channel plugins.
-- `openclaw/plugin-sdk/discord` for Discord channel plugins.
-- `openclaw/plugin-sdk/slack` for Slack channel plugins.
-- `openclaw/plugin-sdk/signal` for Signal channel plugins.
-- `openclaw/plugin-sdk/imessage` for iMessage channel plugins.
-- `openclaw/plugin-sdk/whatsapp` for WhatsApp channel plugins.
-- `openclaw/plugin-sdk/line` for LINE channel plugins.
-- `openclaw/plugin-sdk/msteams` for the bundled Microsoft Teams plugin surface.
+- `jarvis/plugin-sdk/core` for generic plugin APIs, provider auth types, and shared helpers.
+- `jarvis/plugin-sdk/compat` for bundled/internal plugin code that needs broader shared runtime helpers than `core`.
+- `jarvis/plugin-sdk/telegram` for Telegram channel plugins.
+- `jarvis/plugin-sdk/discord` for Discord channel plugins.
+- `jarvis/plugin-sdk/slack` for Slack channel plugins.
+- `jarvis/plugin-sdk/signal` for Signal channel plugins.
+- `jarvis/plugin-sdk/imessage` for iMessage channel plugins.
+- `jarvis/plugin-sdk/whatsapp` for WhatsApp channel plugins.
+- `jarvis/plugin-sdk/line` for LINE channel plugins.
+- `jarvis/plugin-sdk/msteams` for the bundled Microsoft Teams plugin surface.
 - Bundled extension-specific subpaths are also available:
-  `openclaw/plugin-sdk/acpx`, `openclaw/plugin-sdk/bluebubbles`,
-  `openclaw/plugin-sdk/copilot-proxy`, `openclaw/plugin-sdk/device-pair`,
-  `openclaw/plugin-sdk/diagnostics-otel`, `openclaw/plugin-sdk/diffs`,
-  `openclaw/plugin-sdk/feishu`,
-  `openclaw/plugin-sdk/google-gemini-cli-auth`, `openclaw/plugin-sdk/googlechat`,
-  `openclaw/plugin-sdk/irc`, `openclaw/plugin-sdk/llm-task`,
-  `openclaw/plugin-sdk/lobster`, `openclaw/plugin-sdk/matrix`,
-  `openclaw/plugin-sdk/mattermost`, `openclaw/plugin-sdk/memory-core`,
-  `openclaw/plugin-sdk/memory-lancedb`,
-  `openclaw/plugin-sdk/minimax-portal-auth`,
-  `openclaw/plugin-sdk/nextcloud-talk`, `openclaw/plugin-sdk/nostr`,
-  `openclaw/plugin-sdk/open-prose`, `openclaw/plugin-sdk/phone-control`,
-  `openclaw/plugin-sdk/qwen-portal-auth`, `openclaw/plugin-sdk/synology-chat`,
-  `openclaw/plugin-sdk/talk-voice`, `openclaw/plugin-sdk/test-utils`,
-  `openclaw/plugin-sdk/thread-ownership`, `openclaw/plugin-sdk/tlon`,
-  `openclaw/plugin-sdk/twitch`, `openclaw/plugin-sdk/voice-call`,
-  `openclaw/plugin-sdk/zalo`, and `openclaw/plugin-sdk/zalouser`.
+  `jarvis/plugin-sdk/acpx`, `jarvis/plugin-sdk/bluebubbles`,
+  `jarvis/plugin-sdk/copilot-proxy`, `jarvis/plugin-sdk/device-pair`,
+  `jarvis/plugin-sdk/diagnostics-otel`, `jarvis/plugin-sdk/diffs`,
+  `jarvis/plugin-sdk/feishu`,
+  `jarvis/plugin-sdk/google-gemini-cli-auth`, `jarvis/plugin-sdk/googlechat`,
+  `jarvis/plugin-sdk/irc`, `jarvis/plugin-sdk/llm-task`,
+  `jarvis/plugin-sdk/lobster`, `jarvis/plugin-sdk/matrix`,
+  `jarvis/plugin-sdk/mattermost`, `jarvis/plugin-sdk/memory-core`,
+  `jarvis/plugin-sdk/memory-lancedb`,
+  `jarvis/plugin-sdk/minimax-portal-auth`,
+  `jarvis/plugin-sdk/nextcloud-talk`, `jarvis/plugin-sdk/nostr`,
+  `jarvis/plugin-sdk/open-prose`, `jarvis/plugin-sdk/phone-control`,
+  `jarvis/plugin-sdk/qwen-portal-auth`, `jarvis/plugin-sdk/synology-chat`,
+  `jarvis/plugin-sdk/talk-voice`, `jarvis/plugin-sdk/test-utils`,
+  `jarvis/plugin-sdk/thread-ownership`, `jarvis/plugin-sdk/tlon`,
+  `jarvis/plugin-sdk/twitch`, `jarvis/plugin-sdk/voice-call`,
+  `jarvis/plugin-sdk/zalo`, and `jarvis/plugin-sdk/zalouser`.
 
 Compatibility note:
 
-- `openclaw/plugin-sdk` remains supported for existing external plugins.
+- `jarvis/plugin-sdk` remains supported for existing external plugins.
 - New and migrated bundled plugins should use channel or extension-specific
   subpaths; use `core` for generic surfaces and `compat` only when broader
   shared helpers are required.
@@ -220,10 +220,10 @@ Performance note:
 
 - Plugin discovery and manifest metadata use short in-process caches to reduce
   bursty startup/reload work.
-- Set `OPENCLAW_DISABLE_PLUGIN_DISCOVERY_CACHE=1` or
-  `OPENCLAW_DISABLE_PLUGIN_MANIFEST_CACHE=1` to disable these caches.
-- Tune cache windows with `OPENCLAW_PLUGIN_DISCOVERY_CACHE_MS` and
-  `OPENCLAW_PLUGIN_MANIFEST_CACHE_MS`.
+- Set `JARVIS_DISABLE_PLUGIN_DISCOVERY_CACHE=1` or
+  `JARVIS_DISABLE_PLUGIN_MANIFEST_CACHE=1` to disable these caches.
+- Tune cache windows with `JARVIS_PLUGIN_DISCOVERY_CACHE_MS` and
+  `JARVIS_PLUGIN_MANIFEST_CACHE_MS`.
 
 ## Discovery & precedence
 
@@ -235,17 +235,17 @@ Jarvis scans, in order:
 
 2. Workspace extensions
 
-- `<workspace>/.openclaw/extensions/*.ts`
-- `<workspace>/.openclaw/extensions/*/index.ts`
+- `<workspace>/.jarvis/extensions/*.ts`
+- `<workspace>/.jarvis/extensions/*/index.ts`
 
 3. Global extensions
 
-- `~/.openclaw/extensions/*.ts`
-- `~/.openclaw/extensions/*/index.ts`
+- `~/.jarvis/extensions/*.ts`
+- `~/.jarvis/extensions/*/index.ts`
 
 4. Bundled extensions (shipped with Jarvis, mostly disabled by default)
 
-- `<openclaw>/extensions/*`
+- `<jarvis>/extensions/*`
 
 Most bundled plugins must be enabled explicitly via
 `plugins.entries.<id>.enabled` or `jarvis plugins enable <id>`.
@@ -268,7 +268,7 @@ Hardening notes:
   - path ownership is suspicious for non-bundled plugins (POSIX owner is neither current uid nor root).
 - Loaded non-bundled plugins without install/load-path provenance emit a warning so you can pin trust (`plugins.allow`) or install tracking (`plugins.installs`).
 
-Each plugin must include a `openclaw.plugin.json` file in its root. If a path
+Each plugin must include a `jarvis.plugin.json` file in its root. If a path
 points at a file, the plugin root is the file's directory and must contain the
 manifest.
 
@@ -277,12 +277,12 @@ wins and lower-precedence copies are ignored.
 
 ### Package packs
 
-A plugin directory may include a `package.json` with `openclaw.extensions`:
+A plugin directory may include a `package.json` with `jarvis.extensions`:
 
 ```json
 {
   "name": "my-pack",
-  "openclaw": {
+  "jarvis": {
     "extensions": ["./src/safety.ts", "./src/tools.ts"]
   }
 }
@@ -294,7 +294,7 @@ becomes `name/<fileBase>`.
 If your plugin imports npm deps, install them in that directory so
 `node_modules` is available (`npm install` / `pnpm install`).
 
-Security guardrail: every `openclaw.extensions` entry must stay inside the plugin
+Security guardrail: every `jarvis.extensions` entry must stay inside the plugin
 directory after symlink resolution. Entries that escape the package directory are
 rejected.
 
@@ -304,15 +304,15 @@ trees "pure JS/TS" and avoid packages that require `postinstall` builds.
 
 ### Channel catalog metadata
 
-Channel plugins can advertise onboarding metadata via `openclaw.channel` and
-install hints via `openclaw.install`. This keeps the core catalog data-free.
+Channel plugins can advertise onboarding metadata via `jarvis.channel` and
+install hints via `jarvis.install`. This keeps the core catalog data-free.
 
 Example:
 
 ```json
 {
-  "name": "@openclaw/nextcloud-talk",
-  "openclaw": {
+  "name": "@jarvis/nextcloud-talk",
+  "jarvis": {
     "extensions": ["./index.ts"],
     "channel": {
       "id": "nextcloud-talk",
@@ -325,7 +325,7 @@ Example:
       "aliases": ["nc-talk", "nc"]
     },
     "install": {
-      "npmSpec": "@openclaw/nextcloud-talk",
+      "npmSpec": "@jarvis/nextcloud-talk",
       "localPath": "extensions/nextcloud-talk",
       "defaultChoice": "npm"
     }
@@ -336,13 +336,13 @@ Example:
 Jarvis can also merge **external channel catalogs** (for example, an MPM
 registry export). Drop a JSON file at one of:
 
-- `~/.openclaw/mpm/plugins.json`
-- `~/.openclaw/mpm/catalog.json`
-- `~/.openclaw/plugins/catalog.json`
+- `~/.jarvis/mpm/plugins.json`
+- `~/.jarvis/mpm/catalog.json`
+- `~/.jarvis/plugins/catalog.json`
 
-Or point `OPENCLAW_PLUGIN_CATALOG_PATHS` (or `OPENCLAW_MPM_CATALOG_PATHS`) at
+Or point `JARVIS_PLUGIN_CATALOG_PATHS` (or `JARVIS_MPM_CATALOG_PATHS`) at
 one or more JSON files (comma/semicolon/`PATH`-delimited). Each file should
-contain `{ "entries": [ { "name": "@scope/pkg", "openclaw": { "channel": {...}, "install": {...} } } ] }`.
+contain `{ "entries": [ { "name": "@scope/pkg", "jarvis": { "channel": {...}, "install": {...} } } ] }`.
 
 ## Plugin IDs
 
@@ -387,7 +387,7 @@ Validation rules (strict):
 - Unknown `channels.<id>` keys are **errors** unless a plugin manifest declares
   the channel id.
 - Plugin config is validated using the JSON Schema embedded in
-  `openclaw.plugin.json` (`configSchema`).
+  `jarvis.plugin.json` (`configSchema`).
 - If a plugin is disabled, its config is preserved and a **warning** is emitted.
 
 ## Plugin slots (exclusive categories)
@@ -462,13 +462,13 @@ Example:
 ```bash
 jarvis plugins list
 jarvis plugins info <id>
-jarvis plugins install <path>                 # copy a local file/dir into ~/.openclaw/extensions/<id>
+jarvis plugins install <path>                 # copy a local file/dir into ~/.jarvis/extensions/<id>
 jarvis plugins install ./extensions/voice-call # relative path ok
 jarvis plugins install ./plugin.tgz           # install from a local tarball
 jarvis plugins install ./plugin.zip           # install from a local zip
 jarvis plugins install -l ./extensions/voice-call # link (no copy) for dev
-jarvis plugins install @openclaw/voice-call # install from npm
-jarvis plugins install @openclaw/voice-call --pin # store exact resolved name@version
+jarvis plugins install @jarvis/voice-call # install from npm
+jarvis plugins install @jarvis/voice-call --pin # store exact resolved name@version
 jarvis plugins update <id>
 jarvis plugins update --all
 jarvis plugins enable <id>
@@ -922,14 +922,14 @@ it’s present in your workspace/managed skills locations.
 
 Recommended packaging:
 
-- Main package: `openclaw` (this repo)
-- Plugins: separate npm packages under `@openclaw/*` (example: `@openclaw/voice-call`)
+- Main package: `jarvis` (this repo)
+- Plugins: separate npm packages under `@jarvis/*` (example: `@jarvis/voice-call`)
 
 Publishing contract:
 
-- Plugin `package.json` must include `openclaw.extensions` with one or more entry files.
+- Plugin `package.json` must include `jarvis.extensions` with one or more entry files.
 - Entry files can be `.js` or `.ts` (jiti loads TS at runtime).
-- `jarvis plugins install <npm-spec>` uses `npm pack`, extracts into `~/.openclaw/extensions/<id>/`, and enables it in config.
+- `jarvis plugins install <npm-spec>` uses `npm pack`, extracts into `~/.jarvis/extensions/<id>/`, and enables it in config.
 - Config key stability: scoped packages are normalized to the **unscoped** id for `plugins.entries.*`.
 
 ## Example plugin: Voice Call
@@ -959,4 +959,4 @@ Plugins run in-process with the Gateway. Treat them as trusted code:
 Plugins can (and should) ship tests:
 
 - In-repo plugins can keep Vitest tests under `src/**` (example: `src/plugins/voice-call.plugin.test.ts`).
-- Separately published plugins should run their own CI (lint/build/test) and validate `openclaw.extensions` points at the built entrypoint (`dist/index.js`).
+- Separately published plugins should run their own CI (lint/build/test) and validate `jarvis.extensions` points at the built entrypoint (`dist/index.js`).

@@ -25,7 +25,7 @@ Remote mode supports two transports:
 ## Prereqs on the remote host
 
 1. Install Node + pnpm and build/install the Jarvis CLI (`pnpm install && pnpm build && pnpm link --global`).
-2. Ensure `openclaw` is on PATH for non-interactive shells (symlink into `/usr/local/bin` or `/opt/homebrew/bin` if needed).
+2. Ensure `jarvis` is on PATH for non-interactive shells (symlink into `/usr/local/bin` or `/opt/homebrew/bin` if needed).
 3. Open SSH with key auth. We recommend **Tailscale** IPs for stable reachability off-LAN.
 
 ## macOS app setup
@@ -38,7 +38,7 @@ Remote mode supports two transports:
    - **Gateway URL** (Direct only): `wss://gateway.example.ts.net` (or `ws://...` for local/LAN).
    - **Identity file** (advanced): path to your key.
    - **Project root** (advanced): remote checkout path used for commands.
-   - **CLI path** (advanced): optional path to a runnable `openclaw` entrypoint/binary (auto-filled when advertised).
+   - **CLI path** (advanced): optional path to a runnable `jarvis` entrypoint/binary (auto-filled when advertised).
 3. Hit **Test remote**. Success indicates the remote `jarvis status --json` runs correctly. Failures usually mean PATH/CLI issues; exit 127 means the CLI isn’t found remotely.
 4. Health checks and Web Chat will now run through this SSH tunnel automatically.
 
@@ -67,7 +67,7 @@ Remote mode supports two transports:
 
 ## Troubleshooting
 
-- **exit 127 / not found**: `openclaw` isn’t on PATH for non-login shells. Add it to `/etc/paths`, your shell rc, or symlink into `/usr/local/bin`/`/opt/homebrew/bin`.
+- **exit 127 / not found**: `jarvis` isn’t on PATH for non-login shells. Add it to `/etc/paths`, your shell rc, or symlink into `/usr/local/bin`/`/opt/homebrew/bin`.
 - **Health probe failed**: check SSH reachability, PATH, and that Baileys is logged in (`jarvis status --json`).
 - **Web Chat stuck**: confirm the gateway is running on the remote host and the forwarded port matches the gateway WS port; the UI requires a healthy WS connection.
 - **Node IP shows 127.0.0.1**: expected with the SSH tunnel. Switch **Transport** to **Direct (ws/wss)** if you want the gateway to see the real client IP.
@@ -75,7 +75,7 @@ Remote mode supports two transports:
 
 ## Notification sounds
 
-Pick sounds per notification from scripts with `openclaw` and `node.invoke`, e.g.:
+Pick sounds per notification from scripts with `jarvis` and `node.invoke`, e.g.:
 
 ```bash
 jarvis nodes notify --node <id> --title "Ping" --body "Remote gateway ready" --sound Glass

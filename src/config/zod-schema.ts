@@ -360,7 +360,7 @@ export const JarvisSchema = z
                 cdpPort: z.number().int().min(1).max(65535).optional(),
                 cdpUrl: z.string().optional(),
                 driver: z
-                  .union([z.literal("openclaw"), z.literal("clawd"), z.literal("extension")])
+                  .union([z.literal("jarvis"), z.literal("clawd"), z.literal("extension")])
                   .optional(),
                 attachOnly: z.boolean().optional(),
                 color: HexColorSchema,

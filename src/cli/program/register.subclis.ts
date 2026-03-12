@@ -15,7 +15,7 @@ type SubCliEntry = {
 };
 
 const shouldRegisterPrimaryOnly = (argv: string[]) => {
-  if (isTruthyEnvValue(process.env.OPENCLAW_DISABLE_LAZY_SUBCOMMANDS)) {
+  if (isTruthyEnvValue(process.env.JARVIS_DISABLE_LAZY_SUBCOMMANDS)) {
     return false;
   }
   if (hasHelpOrVersion(argv)) {
@@ -25,18 +25,17 @@ const shouldRegisterPrimaryOnly = (argv: string[]) => {
 };
 
 const shouldEagerRegisterSubcommands = (_argv: string[]) => {
-  return isTruthyEnvValue(process.env.OPENCLAW_DISABLE_LAZY_SUBCOMMANDS);
+  return isTruthyEnvValue(process.env.JARVIS_DISABLE_LAZY_SUBCOMMANDS);
 };
 
-export const loadValidatedConfigForPluginRegistration =
-  async (): Promise<JarvisConfig | null> => {
-    const mod = await import("../../config/config.js");
-    const snapshot = await mod.readConfigFileSnapshot();
-    if (!snapshot.valid) {
-      return null;
-    }
-    return mod.loadConfig();
-  };
+export const loadValidatedConfigForPluginRegistration = async (): Promise<JarvisConfig | null> => {
+  const mod = await import("../../config/config.js");
+  const snapshot = await mod.readConfigFileSnapshot();
+  if (!snapshot.valid) {
+    return null;
+  }
+  return mod.loadConfig();
+};
 
 // Note for humans and agents:
 // If you update the list of commands, also check whether they have subcommands

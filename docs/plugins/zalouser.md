@@ -29,7 +29,7 @@ No external `zca`/`openzca` CLI binary is required.
 ### Option A: install from npm
 
 ```bash
-jarvis plugins install @openclaw/zalouser
+jarvis plugins install @jarvis/zalouser
 ```
 
 Restart the Gateway afterwards.

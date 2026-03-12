@@ -27,7 +27,7 @@ export type CreateProfileParams = {
   name: string;
   color?: string;
   cdpUrl?: string;
-  driver?: "openclaw" | "extension";
+  driver?: "jarvis" | "extension";
 };
 
 export type CreateProfileResult = {

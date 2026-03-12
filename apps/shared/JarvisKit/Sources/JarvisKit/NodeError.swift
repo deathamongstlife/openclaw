@@ -1,6 +1,6 @@
 import Foundation
 
-public enum OpenClawNodeErrorCode: String, Codable, Sendable {
+public enum JarvisNodeErrorCode: String, Codable, Sendable {
     case notPaired = "NOT_PAIRED"
     case unauthorized = "UNAUTHORIZED"
     case backgroundUnavailable = "NODE_BACKGROUND_UNAVAILABLE"
@@ -8,14 +8,14 @@ public enum OpenClawNodeErrorCode: String, Codable, Sendable {
     case unavailable = "UNAVAILABLE"
 }
 
-public struct OpenClawNodeError: Error, Codable, Sendable, Equatable {
-    public var code: OpenClawNodeErrorCode
+public struct JarvisNodeError: Error, Codable, Sendable, Equatable {
+    public var code: JarvisNodeErrorCode
     public var message: String
     public var retryable: Bool?
     public var retryAfterMs: Int?
 
     public init(
-        code: OpenClawNodeErrorCode,
+        code: JarvisNodeErrorCode,
         message: String,
         retryable: Bool? = nil,
         retryAfterMs: Int? = nil)

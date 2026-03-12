@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/diffs",
+  "name": "@jarvis/diffs",
   "version": "2026.3.9",
   "private": true,
   "description": "Jarvis diff viewer plugin",
@@ -12,7 +12,7 @@
     "@sinclair/typebox": "0.34.48",
     "playwright-core": "1.58.2"
   },
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ]

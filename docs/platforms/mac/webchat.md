@@ -24,7 +24,7 @@ agent (with a session switcher for other sessions).
   dist/Jarvis.app/Contents/MacOS/Jarvis --webchat
   ```
 
-- Logs: `./scripts/clawlog.sh` (subsystem `ai.openclaw`, category `WebChatSwiftUI`).
+- Logs: `./scripts/clawlog.sh` (subsystem `ai.jarvis`, category `WebChatSwiftUI`).
 
 ## How it’s wired
 

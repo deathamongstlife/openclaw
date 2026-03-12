@@ -15,7 +15,7 @@ x-i18n:
 
 # `jarvis setup`
 
-初始化 `~/.openclaw/openclaw.json` 和智能体工作区。
+初始化 `~/.jarvis/jarvis.json` 和智能体工作区。
 
 相关内容：
 
@@ -26,7 +26,7 @@ x-i18n:
 
 ```bash
 jarvis setup
-jarvis setup --workspace ~/.openclaw/workspace
+jarvis setup --workspace ~/.jarvis/workspace
 ```
 
 通过 setup 运行向导：

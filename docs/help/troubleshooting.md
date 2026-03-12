@@ -42,12 +42,12 @@ go to [/gateway/troubleshooting#anthropic-429-extra-usage-required-for-long-cont
 
 ## Plugin install fails with missing jarvis extensions
 
-If install fails with `package.json missing openclaw.extensions`, the plugin package
+If install fails with `package.json missing jarvis.extensions`, the plugin package
 is using an old shape that Jarvis no longer accepts.
 
 Fix in the plugin package:
 
-1. Add `openclaw.extensions` to `package.json`.
+1. Add `jarvis.extensions` to `package.json`.
 2. Point entries at built runtime files (usually `./dist/index.js`).
 3. Republish the plugin and run `jarvis plugins install <npm-spec>` again.
 
@@ -55,9 +55,9 @@ Example:
 
 ```json
 {
-  "name": "@openclaw/my-plugin",
+  "name": "@jarvis/my-plugin",
   "version": "1.2.3",
-  "openclaw": {
+  "jarvis": {
     "extensions": ["./dist/index.js"]
   }
 }
@@ -278,7 +278,7 @@ flowchart TD
     Good output looks like:
 
     - Browser status shows `running: true` and a chosen browser/profile.
-    - `openclaw` profile starts or `chrome` relay has an attached tab.
+    - `jarvis` profile starts or `chrome` relay has an attached tab.
 
     Common log signatures:
 

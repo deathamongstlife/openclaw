@@ -97,7 +97,7 @@ run_as_user() {
   fi
 }
 
-run_as_openclaw() {
+run_as_jarvis() {
   # Avoid root writes into $JARVIS_HOME (symlink/hardlink/TOCTOU footguns).
   # Anything under the target user's home should be created/modified as that user.
   run_as_user "$JARVIS_USER" env HOME="$JARVIS_HOME" "$@"
@@ -228,30 +228,30 @@ if ! grep -q "^${JARVIS_USER}:" /etc/subuid 2>/dev/null; then
 fi
 
 echo "Creating $JARVIS_CONFIG and workspace..."
-run_as_openclaw mkdir -p "$JARVIS_CONFIG/workspace"
-run_as_openclaw chmod 700 "$JARVIS_CONFIG" "$JARVIS_CONFIG/workspace" 2>/dev/null || true
+run_as_jarvis mkdir -p "$JARVIS_CONFIG/workspace"
+run_as_jarvis chmod 700 "$JARVIS_CONFIG" "$JARVIS_CONFIG/workspace" 2>/dev/null || true
 
 ENV_FILE="$JARVIS_CONFIG/.env"
-if run_as_openclaw test -f "$ENV_FILE"; then
-  if ! run_as_openclaw grep -q '^JARVIS_GATEWAY_TOKEN=' "$ENV_FILE" 2>/dev/null; then
+if run_as_jarvis test -f "$ENV_FILE"; then
+  if ! run_as_jarvis grep -q '^JARVIS_GATEWAY_TOKEN=' "$ENV_FILE" 2>/dev/null; then
     TOKEN="$(generate_token_hex_32)"
-    printf 'JARVIS_GATEWAY_TOKEN=%s\n' "$TOKEN" | run_as_openclaw tee -a "$ENV_FILE" >/dev/null
+    printf 'JARVIS_GATEWAY_TOKEN=%s\n' "$TOKEN" | run_as_jarvis tee -a "$ENV_FILE" >/dev/null
     echo "Added JARVIS_GATEWAY_TOKEN to $ENV_FILE."
   fi
-  run_as_openclaw chmod 600 "$ENV_FILE" 2>/dev/null || true
+  run_as_jarvis chmod 600 "$ENV_FILE" 2>/dev/null || true
 else
   TOKEN="$(generate_token_hex_32)"
-  printf 'JARVIS_GATEWAY_TOKEN=%s\n' "$TOKEN" | run_as_openclaw tee "$ENV_FILE" >/dev/null
-  run_as_openclaw chmod 600 "$ENV_FILE" 2>/dev/null || true
+  printf 'JARVIS_GATEWAY_TOKEN=%s\n' "$TOKEN" | run_as_jarvis tee "$ENV_FILE" >/dev/null
+  run_as_jarvis chmod 600 "$ENV_FILE" 2>/dev/null || true
   echo "Created $ENV_FILE with new token."
 fi
 
 # The gateway refuses to start unless gateway.mode=local is set in config.
 # Make first-run non-interactive; users can run the wizard later to configure channels/providers.
 JARVIS_JSON="$JARVIS_CONFIG/jarvis.json"
-if ! run_as_openclaw test -f "$JARVIS_JSON"; then
-  printf '%s\n' '{ gateway: { mode: "local" } }' | run_as_openclaw tee "$JARVIS_JSON" >/dev/null
-  run_as_openclaw chmod 600 "$JARVIS_JSON" 2>/dev/null || true
+if ! run_as_jarvis test -f "$JARVIS_JSON"; then
+  printf '%s\n' '{ gateway: { mode: "local" } }' | run_as_jarvis tee "$JARVIS_JSON" >/dev/null
+  run_as_jarvis chmod 600 "$JARVIS_JSON" 2>/dev/null || true
   echo "Created $JARVIS_JSON (minimal gateway.mode=local)."
 fi
 
@@ -277,18 +277,18 @@ rm -rf "$TMP_STAGE_DIR"
 trap - EXIT
 
 echo "Copying launch script to $LAUNCH_SCRIPT_DST..."
-run_root cat "$RUN_SCRIPT_SRC" | run_as_openclaw tee "$LAUNCH_SCRIPT_DST" >/dev/null
-run_as_openclaw chmod 755 "$LAUNCH_SCRIPT_DST"
+run_root cat "$RUN_SCRIPT_SRC" | run_as_jarvis tee "$LAUNCH_SCRIPT_DST" >/dev/null
+run_as_jarvis chmod 755 "$LAUNCH_SCRIPT_DST"
 
 # Optionally install systemd quadlet for jarvis user (rootless Podman + systemd)
 QUADLET_DIR="$JARVIS_HOME/.config/containers/systemd"
 if [[ "$INSTALL_QUADLET" == true && -f "$QUADLET_TEMPLATE" ]]; then
   echo "Installing systemd quadlet for $JARVIS_USER..."
-  run_as_openclaw mkdir -p "$QUADLET_DIR"
+  run_as_jarvis mkdir -p "$QUADLET_DIR"
   JARVIS_HOME_SED="$(escape_sed_replacement_pipe_delim "$JARVIS_HOME")"
-  sed "s|{{JARVIS_HOME}}|$JARVIS_HOME_SED|g" "$QUADLET_TEMPLATE" | run_as_openclaw tee "$QUADLET_DIR/jarvis.container" >/dev/null
-  run_as_openclaw chmod 700 "$JARVIS_HOME/.config" "$JARVIS_HOME/.config/containers" "$QUADLET_DIR" 2>/dev/null || true
-  run_as_openclaw chmod 600 "$QUADLET_DIR/jarvis.container" 2>/dev/null || true
+  sed "s|{{JARVIS_HOME}}|$JARVIS_HOME_SED|g" "$QUADLET_TEMPLATE" | run_as_jarvis tee "$QUADLET_DIR/jarvis.container" >/dev/null
+  run_as_jarvis chmod 700 "$JARVIS_HOME/.config" "$JARVIS_HOME/.config/containers" "$QUADLET_DIR" 2>/dev/null || true
+  run_as_jarvis chmod 600 "$QUADLET_DIR/jarvis.container" 2>/dev/null || true
   if command -v systemctl &>/dev/null; then
     run_root systemctl --machine "${JARVIS_USER}@" --user daemon-reload 2>/dev/null || true
     run_root systemctl --machine "${JARVIS_USER}@" --user enable jarvis.service 2>/dev/null || true

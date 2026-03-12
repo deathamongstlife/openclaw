@@ -1,4 +1,4 @@
-import type { AnyAgentTool, JarvisPluginApi } from "openclaw/plugin-sdk/llm-task";
+import type { AnyAgentTool, JarvisPluginApi } from "jarvis/plugin-sdk/llm-task";
 import { createLlmTaskTool } from "./src/llm-task-tool.js";
 
 export default function register(api: JarvisPluginApi) {

@@ -21,7 +21,7 @@ If you are using an older build or a custom install that does not include bundle
 Feishu, install it manually:
 
 ```bash
-jarvis plugins install @openclaw/feishu
+jarvis plugins install @jarvis/feishu
 ```
 
 ---
@@ -173,7 +173,7 @@ Choose **Feishu** and paste your App ID + App Secret.
 
 ### Configure via config file
 
-Edit `~/.openclaw/openclaw.json`:
+Edit `~/.jarvis/jarvis.json`:
 
 ```json5
 {
@@ -437,8 +437,8 @@ jarvis pairing list feishu
 
 ## Gateway management commands
 
-| Command                    | Description                   |
-| -------------------------- | ----------------------------- |
+| Command                  | Description                   |
+| ------------------------ | ----------------------------- |
 | `jarvis gateway status`  | Show gateway status           |
 | `jarvis gateway install` | Install/start gateway service |
 | `jarvis gateway stop`    | Stop gateway service          |
@@ -542,12 +542,12 @@ Use `bindings` to route Feishu DMs or groups to different agents.
       {
         id: "clawd-fan",
         workspace: "/home/user/clawd-fan",
-        agentDir: "/home/user/.openclaw/agents/clawd-fan/agent",
+        agentDir: "/home/user/.jarvis/agents/clawd-fan/agent",
       },
       {
         id: "clawd-xi",
         workspace: "/home/user/clawd-xi",
-        agentDir: "/home/user/.openclaw/agents/clawd-xi/agent",
+        agentDir: "/home/user/.jarvis/agents/clawd-xi/agent",
       },
     ],
   },

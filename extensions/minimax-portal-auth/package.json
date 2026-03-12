@@ -1,10 +1,10 @@
 {
-  "name": "@openclaw/minimax-portal-auth",
+  "name": "@jarvis/minimax-portal-auth",
   "version": "2026.3.9",
   "private": true,
   "description": "Jarvis MiniMax Portal OAuth provider plugin",
   "type": "module",
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ]

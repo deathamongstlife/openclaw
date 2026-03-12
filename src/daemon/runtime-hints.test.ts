@@ -7,15 +7,15 @@ describe("buildPlatformRuntimeLogHints", () => {
       buildPlatformRuntimeLogHints({
         platform: "darwin",
         env: {
-          OPENCLAW_STATE_DIR: "/tmp/openclaw-state",
-          OPENCLAW_LOG_PREFIX: "gateway",
+          JARVIS_STATE_DIR: "/tmp/jarvis-state",
+          JARVIS_LOG_PREFIX: "gateway",
         },
         systemdServiceName: "jarvis-gateway",
         windowsTaskName: "Jarvis Gateway",
       }),
     ).toEqual([
-      "Launchd stdout (if installed): /tmp/openclaw-state/logs/gateway.log",
-      "Launchd stderr (if installed): /tmp/openclaw-state/logs/gateway.err.log",
+      "Launchd stdout (if installed): /tmp/jarvis-state/logs/gateway.log",
+      "Launchd stderr (if installed): /tmp/jarvis-state/logs/gateway.err.log",
     ]);
   });
 
@@ -44,21 +44,21 @@ describe("buildPlatformServiceStartHints", () => {
         platform: "darwin",
         installCommand: "jarvis gateway install",
         startCommand: "jarvis gateway",
-        launchAgentPlistPath: "~/Library/LaunchAgents/com.openclaw.gateway.plist",
+        launchAgentPlistPath: "~/Library/LaunchAgents/com.jarvis.gateway.plist",
         systemdServiceName: "jarvis-gateway",
         windowsTaskName: "Jarvis Gateway",
       }),
     ).toEqual([
       "jarvis gateway install",
       "jarvis gateway",
-      "launchctl bootstrap gui/$UID ~/Library/LaunchAgents/com.openclaw.gateway.plist",
+      "launchctl bootstrap gui/$UID ~/Library/LaunchAgents/com.jarvis.gateway.plist",
     ]);
     expect(
       buildPlatformServiceStartHints({
         platform: "linux",
         installCommand: "jarvis gateway install",
         startCommand: "jarvis gateway",
-        launchAgentPlistPath: "~/Library/LaunchAgents/com.openclaw.gateway.plist",
+        launchAgentPlistPath: "~/Library/LaunchAgents/com.jarvis.gateway.plist",
         systemdServiceName: "jarvis-gateway",
         windowsTaskName: "Jarvis Gateway",
       }),

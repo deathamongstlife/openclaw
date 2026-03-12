@@ -1,7 +1,7 @@
 ---
 name: discord
 description: "Discord ops via the message tool (channel=discord)."
-metadata: { "openclaw": { "emoji": "🎮", "requires": { "config": ["channels.discord.token"] } } }
+metadata: { "jarvis": { "emoji": "🎮", "requires": { "config": ["channels.discord.token"] } } }
 allowed-tools: ["message"]
 ---
 
@@ -47,6 +47,7 @@ Basic message sending with optional features.
 ```
 
 **Parameters:**
+
 - `to`: Target (channel or user)
 - `message`: Text content
 - `silent`: Suppress notifications (optional)
@@ -54,12 +55,14 @@ Basic message sending with optional features.
 - `tts`: Text-to-speech (optional, default false)
 
 **Use Cases:**
+
 - Basic communication
 - Notifications
 - Bot responses
 - Automated alerts
 
 **Best Practices:**
+
 - Keep messages under 2000 characters
 - Use `silent: true` for bulk operations
 - Use `reference` for contextual replies
@@ -79,22 +82,26 @@ Attach files, images, videos to messages.
 ```
 
 **Parameters:**
+
 - `media`: File path or URL (supports multiple via array)
 - `spoiler`: Mark as spoiler (optional)
 
 **Supported Formats:**
+
 - Images: PNG, JPG, GIF, WebP
 - Videos: MP4, WebM, MOV
 - Audio: MP3, WAV, OGG
 - Documents: PDF, TXT, JSON, etc.
 
 **Use Cases:**
+
 - Share screenshots
 - Log file attachments
 - Diagrams and charts
 - Build artifacts
 
 **Best Practices:**
+
 - Max file size: 8MB (non-Nitro), 50MB (Nitro)
 - Compress large images
 - Use spoiler tags for sensitive content
@@ -114,16 +121,19 @@ Add emoji reactions to messages.
 ```
 
 **Parameters:**
+
 - `emoji`: Unicode emoji or custom emoji format (`:name:id`)
 - `remove`: Remove reaction instead (optional)
 
 **Use Cases:**
+
 - Acknowledgment systems
 - Voting mechanisms
 - Status indicators
 - Quick responses
 
 **Best Practices:**
+
 - Use standard emojis for broad compatibility
 - Custom emoji format: `<:name:id>` or `<a:name:id>` (animated)
 - Remove reactions with `remove: true`
@@ -144,18 +154,21 @@ Fetch message history from channels.
 ```
 
 **Parameters:**
+
 - `limit`: Number of messages (1-100, default 50)
 - `before`: Get messages before this ID
 - `after`: Get messages after this ID
 - `around`: Get messages around this ID
 
 **Use Cases:**
+
 - Message history retrieval
 - Context gathering
 - Audit logging
 - Data analysis
 
 **Best Practices:**
+
 - Use pagination with `before`/`after` for large histories
 - Cache results to minimize API calls
 - Respect rate limits
@@ -175,17 +188,20 @@ Modify previously sent messages.
 ```
 
 **Parameters:**
+
 - `message`: New content
 - `embeds`: Updated embeds (optional)
 - `components`: Updated components (optional)
 
 **Use Cases:**
+
 - Typo corrections
 - Status updates
 - Dynamic content refresh
 - Progressive information disclosure
 
 **Best Practices:**
+
 - Only edit your own messages
 - Keep edit history in mind (users can see "edited")
 - Update timestamps when content changes
@@ -204,15 +220,18 @@ Remove messages from channels.
 ```
 
 **Parameters:**
+
 - `reason`: Audit log reason (optional)
 
 **Use Cases:**
+
 - Remove spam
 - Clean up errors
 - Moderate content
 - Temporary messages
 
 **Best Practices:**
+
 - Cannot delete messages older than 14 days in bulk
 - Use audit log reasons for moderation
 - Be cautious with bulk deletion
@@ -234,18 +253,21 @@ Interactive polling system.
 ```
 
 **Parameters:**
+
 - `pollQuestion`: The poll question
 - `pollOption`: Array of options (2-10)
 - `pollMulti`: Allow multiple selections
 - `pollDurationHours`: Duration (1-168 hours)
 
 **Use Cases:**
+
 - Team decisions
 - Feedback collection
 - Event planning
 - Feature voting
 
 **Best Practices:**
+
 - Keep options concise
 - Set reasonable durations
 - Use multi-select for preference surveys
@@ -264,16 +286,19 @@ Pin important messages to channel.
 ```
 
 **Parameters:**
+
 - `unpin`: Unpin instead (optional)
 - `reason`: Audit log reason (optional)
 
 **Use Cases:**
+
 - Important announcements
 - Channel guidelines
 - Reference materials
 - Event information
 
 **Best Practices:**
+
 - Maximum 50 pins per channel
 - Unpin old content regularly
 - Use for truly important content only
@@ -294,18 +319,21 @@ Start threaded conversations.
 ```
 
 **Parameters:**
+
 - `threadName`: Thread name (1-100 chars)
 - `autoArchiveDuration`: Archive after inactivity (60, 1440, 4320, 10080 minutes)
 - `slowmode`: Slowmode in seconds (optional)
 - `private`: Create private thread (optional, requires guild boost level 2)
 
 **Use Cases:**
+
 - Topic-specific discussions
 - Bug triage
 - Feature planning
 - Support tickets
 
 **Best Practices:**
+
 - Use descriptive thread names
 - Set appropriate auto-archive duration
 - Archive manually when resolved
@@ -331,6 +359,7 @@ Search guild messages by content.
 ```
 
 **Parameters:**
+
 - `query`: Search text
 - `channelIds`: Filter by channels (optional)
 - `authorId`: Filter by author (optional)
@@ -340,12 +369,14 @@ Search guild messages by content.
 - `limit`: Results limit (default 25)
 
 **Use Cases:**
+
 - Finding old messages
 - Audit trails
 - Information retrieval
 - Content analysis
 
 **Best Practices:**
+
 - Use specific queries to reduce results
 - Combine filters for precision
 - Respect search rate limits
@@ -366,6 +397,7 @@ Update bot status and activity.
 ```
 
 **Parameters:**
+
 - `status`: `online`, `idle`, `dnd`, `invisible`
 - `activityType`: `playing`, `streaming`, `listening`, `watching`, `competing`
 - `activityName`: Activity text
@@ -373,12 +405,14 @@ Update bot status and activity.
 - `afk`: AFK status (optional)
 
 **Use Cases:**
+
 - Status indicators
 - Service health display
 - Promotional messaging
 - User engagement
 
 **Best Practices:**
+
 - Update presence sparingly (rate limited)
 - Use meaningful activity names
 - Avoid rapid status changes
@@ -404,18 +438,21 @@ Schedule messages for future delivery.
 ```
 
 **Parameters:**
+
 - `scheduleTime`: ISO 8601 timestamp
 - `timezone`: IANA timezone name
 - `repeat`: `none`, `daily`, `weekly`, `monthly`
 - `repeatEnd`: End date for recurring (optional)
 
 **Use Cases:**
+
 - Scheduled announcements
 - Recurring reminders
 - Time-zone appropriate messages
 - Automated reports
 
 **Best Practices:**
+
 - Use UTC internally, display local times
 - Cancel scheduled messages when plans change
 - Verify timezone conversions
@@ -439,31 +476,37 @@ Reusable message templates with variable substitution.
 ```
 
 **Template Definition:**
+
 ```json
 {
   "action": "define-template",
   "channel": "discord",
   "templateName": "welcome",
   "content": "Welcome {{username}} to {{serverName}}! You're member #{{memberCount}}.",
-  "embeds": [{
-    "title": "Welcome Guide",
-    "description": "Check out <#rules-channel> to get started!"
-  }]
+  "embeds": [
+    {
+      "title": "Welcome Guide",
+      "description": "Check out <#rules-channel> to get started!"
+    }
+  ]
 }
 ```
 
 **Parameters:**
+
 - `template`: Template name or inline template string
 - `variables`: Key-value pairs for substitution
 - `templateName`: For template definition
 
 **Use Cases:**
+
 - Welcome messages
 - Standardized responses
 - Multi-language support
 - Consistent formatting
 
 **Best Practices:**
+
 - Use `{{variable}}` syntax for substitution
 - Define templates separately from usage
 - Version templates for changes
@@ -493,17 +536,20 @@ Perform operations on multiple messages.
 ```
 
 **Parameters:**
+
 - `messageIds`: Array of message IDs (2-100)
 - `reason`: Audit log reason
 - `filter`: Filter criteria (optional)
 
 **Use Cases:**
+
 - Spam removal
 - Mass acknowledgment
 - Channel cleanup
 - Batch processing
 
 **Best Practices:**
+
 - Maximum 100 messages per bulk delete
 - Messages must be less than 14 days old
 - Use for moderation, not regular cleanup
@@ -526,6 +572,7 @@ Forward messages between channels.
 ```
 
 **Parameters:**
+
 - `sourceChannelId`: Source channel
 - `sourceMessageId`: Message to forward
 - `targetChannelId`: Destination channel
@@ -534,12 +581,14 @@ Forward messages between channels.
 - `attribution`: Show original author (default true)
 
 **Use Cases:**
+
 - Cross-channel sharing
 - Content aggregation
 - Highlight interesting messages
 - Moderation reports
 
 **Best Practices:**
+
 - Respect attachment size limits
 - Preserve attribution when possible
 - Check target channel permissions
@@ -558,16 +607,19 @@ Publish messages to follower channels.
 ```
 
 **Parameters:**
+
 - `channelId`: Announcement channel ID
 - `messageId`: Message to crosspost
 
 **Use Cases:**
+
 - Server-wide announcements
 - Multi-guild notifications
 - Official updates
 - Event broadcasts
 
 **Best Practices:**
+
 - Only works in announcement channels
 - Messages are auto-followed to subscribed channels
 - Cannot be undone easily
@@ -589,9 +641,9 @@ Respond to slash command interactions.
       "description": "Metric to display",
       "required": true,
       "choices": [
-        {"name": "Members", "value": "members"},
-        {"name": "Messages", "value": "messages"},
-        {"name": "Activity", "value": "activity"}
+        { "name": "Members", "value": "members" },
+        { "name": "Messages", "value": "messages" },
+        { "name": "Activity", "value": "activity" }
       ]
     }
   ],
@@ -612,6 +664,7 @@ Respond to slash command interactions.
 ```
 
 **Parameters:**
+
 - `name`: Command name (lowercase, no spaces)
 - `description`: Command description
 - `options`: Command parameters
@@ -619,12 +672,14 @@ Respond to slash command interactions.
 - `ephemeral`: Only visible to command user
 
 **Use Cases:**
+
 - Custom bot commands
 - Interactive features
 - User tools
 - Guild-specific functionality
 
 **Best Practices:**
+
 - Register commands on bot startup
 - Respond within 3 seconds (use deferred for slow ops)
 - Use ephemeral for private responses
@@ -652,14 +707,14 @@ Add clickable buttons to messages.
           "style": 1,
           "label": "Approve",
           "custom_id": "approve_btn",
-          "emoji": {"name": "✅"}
+          "emoji": { "name": "✅" }
         },
         {
           "type": 2,
           "style": 4,
           "label": "Reject",
           "custom_id": "reject_btn",
-          "emoji": {"name": "❌"}
+          "emoji": { "name": "❌" }
         },
         {
           "type": 2,
@@ -674,6 +729,7 @@ Add clickable buttons to messages.
 ```
 
 **Button Styles:**
+
 - `1`: Primary (blurple)
 - `2`: Secondary (grey)
 - `3`: Success (green)
@@ -681,6 +737,7 @@ Add clickable buttons to messages.
 - `5`: Link (grey, requires `url`)
 
 **Parameters:**
+
 - `label`: Button text (max 80 chars)
 - `custom_id`: Unique identifier for callback
 - `style`: Button color style
@@ -689,12 +746,14 @@ Add clickable buttons to messages.
 - `url`: Link URL (style 5 only)
 
 **Use Cases:**
+
 - Approval workflows
 - Interactive menus
 - Quick actions
 - External links
 
 **Best Practices:**
+
 - Max 5 buttons per row, 5 rows per message
 - Use descriptive labels
 - Implement interaction handlers for `custom_id`
@@ -725,19 +784,19 @@ Dropdown selection components.
               "label": "Developer",
               "value": "dev",
               "description": "Software development role",
-              "emoji": {"name": "💻"}
+              "emoji": { "name": "💻" }
             },
             {
               "label": "Designer",
               "value": "design",
               "description": "UI/UX design role",
-              "emoji": {"name": "🎨"}
+              "emoji": { "name": "🎨" }
             },
             {
               "label": "Manager",
               "value": "manager",
               "description": "Project management role",
-              "emoji": {"name": "📊"}
+              "emoji": { "name": "📊" }
             }
           ]
         }
@@ -748,6 +807,7 @@ Dropdown selection components.
 ```
 
 **Select Menu Types:**
+
 - `3`: String select (custom options)
 - `5`: User select
 - `6`: Role select
@@ -755,6 +815,7 @@ Dropdown selection components.
 - `8`: Channel select
 
 **Parameters:**
+
 - `custom_id`: Unique identifier
 - `placeholder`: Placeholder text
 - `min_values`: Minimum selections (default 1)
@@ -762,12 +823,14 @@ Dropdown selection components.
 - `options`: Array of options (string select only)
 
 **Use Cases:**
+
 - Role assignment
 - Multi-choice forms
 - User selection
 - Channel routing
 
 **Best Practices:**
+
 - Max 25 options per select
 - Use type-specific selects for built-in types
 - Clear placeholder text
@@ -818,10 +881,12 @@ Popup forms for user input.
 ```
 
 **Text Input Styles:**
+
 - `1`: Short (single line)
 - `2`: Paragraph (multi-line)
 
 **Parameters:**
+
 - `title`: Modal title (max 45 chars)
 - `custom_id`: Unique identifier
 - `label`: Input label
@@ -831,12 +896,14 @@ Popup forms for user input.
 - `min_length`/`max_length`: Character limits
 
 **Use Cases:**
+
 - Bug reports
 - Feedback forms
 - User registration
 - Data collection
 
 **Best Practices:**
+
 - Max 5 text inputs per modal
 - Must be triggered from button/command interaction
 - Handle modal submission within 15 minutes
@@ -895,6 +962,7 @@ Rich formatted message embeds.
 ```
 
 **Parameters:**
+
 - `title`: Embed title (max 256 chars)
 - `description`: Main content (max 4096 chars)
 - `url`: Title hyperlink
@@ -907,17 +975,20 @@ Rich formatted message embeds.
 - `fields`: Array of fields (max 25)
 
 **Field Parameters:**
+
 - `name`: Field title (max 256 chars)
 - `value`: Field content (max 1024 chars)
 - `inline`: Display inline (optional)
 
 **Use Cases:**
+
 - Status updates
 - Rich notifications
 - Data displays
 - Formatted reports
 
 **Best Practices:**
+
 - Max 10 embeds per message
 - Total embed character limit: 6000
 - Use color coding for status
@@ -951,18 +1022,21 @@ Navigate through multiple embed pages.
 ```
 
 **Parameters:**
+
 - `pages`: Array of embed objects
 - `timeout`: Interaction timeout in seconds (default 300)
 - `showPageNumbers`: Display "Page X of Y" (default true)
 - `userId`: Restrict to specific user (optional)
 
 **Use Cases:**
+
 - Documentation
 - Long lists
 - Guides and tutorials
 - Search results
 
 **Best Practices:**
+
 - Keep pages focused and concise
 - Add page indicators in footer
 - Implement Next/Previous/First/Last buttons
@@ -990,12 +1064,14 @@ Update embeds in real-time.
 ```
 
 **Use Cases:**
+
 - Live dashboards
 - Progress indicators
 - Real-time stats
 - Dynamic content
 
 **Best Practices:**
+
 - Rate limit updates (avoid spam)
 - Include timestamps
 - Use color changes for state
@@ -1026,16 +1102,19 @@ Retrieve guild and channel information.
 ```
 
 **Parameters:**
+
 - `type`: Filter by type: `text`, `voice`, `category`, `news`, `stage`
 - `includePermissions`: Include permission info (optional)
 
 **Use Cases:**
+
 - Guild discovery
 - Channel listing
 - Permission audits
 - Automation setup
 
 **Best Practices:**
+
 - Cache guild/channel lists
 - Filter by type to reduce results
 - Check permissions before operations
@@ -1060,6 +1139,7 @@ Create new text, voice, or category channels.
 ```
 
 **Channel Types:**
+
 - `text` (0): Text channel
 - `voice` (2): Voice channel
 - `category` (4): Category container
@@ -1067,6 +1147,7 @@ Create new text, voice, or category channels.
 - `stage` (13): Stage voice channel
 
 **Parameters:**
+
 - `name`: Channel name (2-100 chars)
 - `type`: Channel type
 - `topic`: Channel topic (text channels only, max 1024 chars)
@@ -1077,12 +1158,14 @@ Create new text, voice, or category channels.
 - `userLimit`: Voice channel user limit (0-99, 0 = unlimited)
 
 **Use Cases:**
+
 - Dynamic channel creation
 - Event-specific channels
 - Project workspaces
 - Temporary channels
 
 **Best Practices:**
+
 - Use categories for organization
 - Set appropriate permissions
 - Clean up temporary channels
@@ -1113,16 +1196,19 @@ Update or remove channels.
 ```
 
 **Parameters:**
+
 - All create-channel parameters can be updated
 - `reason`: Audit log reason (optional)
 
 **Use Cases:**
+
 - Channel reorganization
 - Topic updates
 - Cleanup operations
 - Permission changes
 
 **Best Practices:**
+
 - Archive before delete when possible
 - Document reason in audit log
 - Verify no active users in voice channels
@@ -1145,6 +1231,7 @@ Manage channel-specific permissions.
 ```
 
 **Common Permissions:**
+
 - `VIEW_CHANNEL`: See channel
 - `SEND_MESSAGES`: Send messages
 - `READ_MESSAGE_HISTORY`: Read history
@@ -1157,6 +1244,7 @@ Manage channel-specific permissions.
 - `SPEAK`: Speak in voice
 
 **Parameters:**
+
 - `targetId`: Role or user ID
 - `targetType`: `role` or `member`
 - `allow`: Array of allowed permissions
@@ -1164,12 +1252,14 @@ Manage channel-specific permissions.
 - `reason`: Audit log reason
 
 **Use Cases:**
+
 - Role-based access control
 - Private channels
 - Read-only channels
 - Moderator permissions
 
 **Best Practices:**
+
 - Use role permissions over user permissions
 - Test permission changes
 - Document permission rationale
@@ -1199,17 +1289,20 @@ Organize channels with categories.
 ```
 
 **Parameters:**
+
 - `name`: Category name
 - `position`: Sort order
 - `syncPermissions`: Apply category permissions to channel
 
 **Use Cases:**
+
 - Channel organization
 - Permission inheritance
 - Visual grouping
 - Access control
 
 **Best Practices:**
+
 - Use categories for permission management
 - Sync permissions for consistency
 - Meaningful category names
@@ -1230,6 +1323,7 @@ Retrieve detailed guild information.
 ```
 
 **Returns:**
+
 - Guild name, ID, icon
 - Owner information
 - Member count
@@ -1239,12 +1333,14 @@ Retrieve detailed guild information.
 - Features and settings
 
 **Use Cases:**
+
 - Server analytics
 - Audit reports
 - Member statistics
 - Configuration verification
 
 **Best Practices:**
+
 - Cache guild info
 - Update periodically
 - Minimize API calls
@@ -1280,17 +1376,20 @@ Manage user roles.
 ```
 
 **Parameters:**
+
 - `userId`: Target user
 - `roleId`: Role to assign/remove
 - `reason`: Audit log reason
 
 **Use Cases:**
+
 - User promotions
 - Access management
 - Reward systems
 - Onboarding
 
 **Best Practices:**
+
 - Verify permissions before assignment
 - Document role changes
 - Check role hierarchy
@@ -1308,16 +1407,13 @@ Define new roles with permissions and appearance.
   "color": 3066993,
   "hoist": true,
   "mentionable": true,
-  "permissions": [
-    "MANAGE_MESSAGES",
-    "KICK_MEMBERS",
-    "BAN_MEMBERS"
-  ],
+  "permissions": ["MANAGE_MESSAGES", "KICK_MEMBERS", "BAN_MEMBERS"],
   "reason": "New team tier"
 }
 ```
 
 **Parameters:**
+
 - `name`: Role name (max 100 chars)
 - `color`: RGB color (decimal)
 - `hoist`: Display separately in member list
@@ -1326,12 +1422,14 @@ Define new roles with permissions and appearance.
 - `icon`: Role icon (emoji or URL, requires boost)
 
 **Use Cases:**
+
 - Team structure
 - Permission groups
 - Visual hierarchy
 - Special badges
 
 **Best Practices:**
+
 - Use color coding system
 - Limit high-privilege roles
 - Descriptive role names
@@ -1346,24 +1444,27 @@ Manage role positions and inheritance.
   "channel": "discord",
   "guildId": "999",
   "roles": [
-    {"id": "role1", "position": 10},
-    {"id": "role2", "position": 9},
-    {"id": "role3", "position": 8}
+    { "id": "role1", "position": 10 },
+    { "id": "role2", "position": 9 },
+    { "id": "role3", "position": 8 }
   ]
 }
 ```
 
 **Parameters:**
+
 - `roles`: Array of role IDs with positions
 - Higher position = more authority
 
 **Use Cases:**
+
 - Permission hierarchy
 - Moderation structure
 - Role organization
 - Access control
 
 **Best Practices:**
+
 - Bot's role must be higher to manage others
 - Owner always has highest implicit position
 - Test hierarchy changes
@@ -1385,17 +1486,20 @@ Assign roles with automatic expiration.
 ```
 
 **Parameters:**
+
 - `duration`: Seconds until auto-removal
 - `notify`: Send DM on expiration (optional)
 - `reason`: Assignment reason
 
 **Use Cases:**
+
 - Trial periods
 - Temporary access
 - Time-limited rewards
 - Event participation
 
 **Best Practices:**
+
 - Track expiration times
 - Notify users before expiration
 - Use for non-permanent assignments
@@ -1427,12 +1531,14 @@ Manage roles for multiple users.
 ```
 
 **Use Cases:**
+
 - Event management
 - Mass promotions
 - Access revocation
 - Onboarding groups
 
 **Best Practices:**
+
 - Rate limit consideration
 - Batch operations appropriately
 - Verify user lists before bulk ops
@@ -1456,17 +1562,20 @@ Remove users from guild.
 ```
 
 **Parameters:**
+
 - `userId`: User to kick
 - `reason`: Reason shown in audit log and DM
 - `notify`: Send DM to user (default true)
 
 **Use Cases:**
+
 - Rule enforcement
 - Spam removal
 - Temporary removal
 - Warning escalation
 
 **Best Practices:**
+
 - Document reason clearly
 - Send warning before kick when appropriate
 - User can rejoin with new invite
@@ -1497,17 +1606,20 @@ Permanently ban users from guild.
 ```
 
 **Parameters:**
+
 - `userId`: User to ban/unban
 - `deleteMessageDays`: Delete messages from past N days (0-7)
 - `reason`: Ban reason
 
 **Use Cases:**
+
 - Severe rule violations
 - Malicious users
 - Ban appeals
 - Spam accounts
 
 **Best Practices:**
+
 - Clear ban reasons for audit
 - Consider timeout for temporary issues
 - Review bans periodically
@@ -1538,16 +1650,19 @@ Temporarily mute users.
 ```
 
 **Parameters:**
+
 - `duration`: Timeout seconds (max 2419200 = 28 days)
 - `reason`: Timeout reason
 
 **Use Cases:**
+
 - Cooling off periods
 - Minor infractions
 - Spam prevention
 - Temporary muting
 
 **Best Practices:**
+
 - Use instead of ban for minor issues
 - Escalate to kick/ban if needed
 - Clear communication of duration
@@ -1582,18 +1697,21 @@ Delete multiple messages at once.
 ```
 
 **Parameters:**
+
 - `messageIds`: Specific messages (2-100)
 - `limit`: Number of recent messages to check
 - `filter`: Deletion criteria
 - Messages must be less than 14 days old
 
 **Use Cases:**
+
 - Spam removal
 - Conversation cleanup
 - Bot message pruning
 - Channel resets
 
 **Best Practices:**
+
 - Cannot delete pinned messages with bulk delete
 - Use filters to avoid deleting wanted content
 - Log deleted content for appeals
@@ -1620,7 +1738,7 @@ Configure automatic moderation.
     },
     {
       "type": "timeout",
-      "metadata": {"duration": 600}
+      "metadata": { "duration": 600 }
     },
     {
       "type": "send_alert_message",
@@ -1635,23 +1753,27 @@ Configure automatic moderation.
 ```
 
 **Trigger Types:**
+
 - `keyword`: Keyword/phrase matching
 - `spam`: Repeated content detection
 - `keyword_preset`: Built-in filter lists
 - `mention_spam`: Excessive mentions
 
 **Action Types:**
+
 - `block_message`: Delete message
 - `timeout`: Timeout user
 - `send_alert_message`: Log to channel
 
 **Use Cases:**
+
 - Spam prevention
 - Link filtering
 - Profanity blocking
 - Mention abuse prevention
 
 **Best Practices:**
+
 - Start with lenient rules
 - Exempt mod channels
 - Monitor false positives
@@ -1683,32 +1805,36 @@ Track and manage user warnings.
 ```
 
 **Parameters:**
+
 - `reason`: Warning reason
 - `severity`: `low`, `medium`, `high`
 - `autoEscalate`: Automatic action on threshold
 - `expiresAfter`: Seconds until warning expires
 
 **Escalation Rules:**
+
 ```json
 {
   "action": "set-escalation-rules",
   "channel": "discord",
   "guildId": "999",
   "rules": [
-    {"warnings": 3, "action": "timeout", "duration": 3600},
-    {"warnings": 5, "action": "kick"},
-    {"warnings": 7, "action": "ban"}
+    { "warnings": 3, "action": "timeout", "duration": 3600 },
+    { "warnings": 5, "action": "kick" },
+    { "warnings": 7, "action": "ban" }
   ]
 }
 ```
 
 **Use Cases:**
+
 - Progressive discipline
 - Warning tracking
 - Automated moderation
 - Appeal records
 
 **Best Practices:**
+
 - Clear warning criteria
 - Fair escalation rules
 - Warning expiration
@@ -1744,6 +1870,7 @@ Track all moderation actions.
 ```
 
 **Action Types:**
+
 - `member_kick`
 - `member_ban_add`
 - `member_ban_remove`
@@ -1752,12 +1879,14 @@ Track all moderation actions.
 - `message_bulk_delete`
 
 **Use Cases:**
+
 - Moderation accountability
 - Action review
 - Appeals evidence
 - Team coordination
 
 **Best Practices:**
+
 - Centralized log channel
 - Include evidence links
 - Regular log review
@@ -1783,17 +1912,20 @@ Relocate users across voice channels.
 ```
 
 **Parameters:**
+
 - `userId`: User to move
 - `targetChannelId`: Destination voice channel
 - `reason`: Optional audit log reason
 
 **Use Cases:**
+
 - Event management
 - Team organization
 - Moderation
 - User assistance
 
 **Best Practices:**
+
 - Verify user is in voice
 - Check target channel capacity
 - Announce moves in text
@@ -1816,18 +1948,21 @@ Create and configure voice channels.
 ```
 
 **Parameters:**
+
 - `userLimit`: Max users (0-99, 0 = unlimited)
 - `bitrate`: Audio quality (8000-384000, varies by boost level)
 - `videoQualityMode`: `auto` or `full` (720p)
 - `rtcRegion`: Voice region (auto by default)
 
 **Use Cases:**
+
 - Dynamic voice rooms
 - Event spaces
 - Team channels
 - Gaming lobbies
 
 **Best Practices:**
+
 - Set appropriate bitrate for boost level
 - Use user limits for small groups
 - Clean up empty temporary channels
@@ -1866,11 +2001,13 @@ Manage stage channels (audience + speakers).
 ```
 
 **Parameters:**
+
 - `topic`: Stage topic/title
 - `privacyLevel`: `public` or `guild_only`
 - `notifyEveryone`: Send @everyone notification
 
 **Speaker Management:**
+
 ```json
 {
   "action": "invite-stage-speaker",
@@ -1881,12 +2018,14 @@ Manage stage channels (audience + speakers).
 ```
 
 **Use Cases:**
+
 - Town halls
 - Q&A sessions
 - Presentations
 - Community events
 
 **Best Practices:**
+
 - Clear stage topics
 - Manage speaker permissions
 - Moderate audience questions
@@ -1906,17 +2045,20 @@ Configure voice server location.
 ```
 
 **Available Regions:**
+
 - `us-west`, `us-east`, `us-central`, `us-south`
 - `europe`, `russia`, `singapore`, `hong kong`, `sydney`, `brazil`, `japan`, `south africa`
 - `auto` (automatic selection)
 
 **Use Cases:**
+
 - Latency optimization
 - Geographic proximity
 - Connection quality
 - User experience
 
 **Best Practices:**
+
 - Use `auto` unless specific needs
 - Test different regions
 - Consider user locations
@@ -1958,17 +2100,20 @@ Create and configure webhooks.
 ```
 
 **Parameters:**
+
 - `name`: Webhook name (1-80 chars)
 - `avatar`: Avatar URL or data URI
 - `reason`: Audit log reason
 
 **Use Cases:**
+
 - External integrations
 - Bot automation
 - Custom message formatting
 - Multi-service notifications
 
 **Best Practices:**
+
 - Secure webhook URLs
 - Descriptive names and avatars
 - Delete unused webhooks
@@ -1993,8 +2138,8 @@ Post messages through webhooks.
       "description": "Version 2.0.1 deployed successfully",
       "color": 3066993,
       "fields": [
-        {"name": "Commit", "value": "abc123"},
-        {"name": "Duration", "value": "2m 30s"}
+        { "name": "Commit", "value": "abc123" },
+        { "name": "Duration", "value": "2m 30s" }
       ]
     }
   ],
@@ -2003,6 +2148,7 @@ Post messages through webhooks.
 ```
 
 **Parameters:**
+
 - `content`: Message text
 - `username`: Override webhook name
 - `avatarUrl`: Override webhook avatar
@@ -2012,12 +2158,14 @@ Post messages through webhooks.
 - `wait`: Return message object (default false)
 
 **Use Cases:**
+
 - CI/CD notifications
 - External service alerts
 - Custom bot messages
 - Integration relays
 
 **Best Practices:**
+
 - Cache webhook URLs securely
 - Use embeds for rich formatting
 - Set appropriate username/avatar
@@ -2055,12 +2203,14 @@ Edit messages sent via webhooks.
 ```
 
 **Use Cases:**
+
 - Live status updates
 - Progressive information
 - Error corrections
 - Dynamic dashboards
 
 **Best Practices:**
+
 - Store message IDs for editing
 - Update timestamps on edits
 - Delete obsolete messages
@@ -2100,6 +2250,7 @@ Automated member join/leave messages.
 ```
 
 **Variables:**
+
 - `{{user}}`: User mention
 - `{{username}}`: Username
 - `{{server}}`: Server name
@@ -2107,12 +2258,14 @@ Automated member join/leave messages.
 - `{{joinedAt}}`: Account creation date
 
 **Use Cases:**
+
 - Member onboarding
 - Community building
 - Auto-role assignment
 - Departure tracking
 
 **Best Practices:**
+
 - Keep messages friendly
 - Include important links
 - Auto-delete to reduce clutter
@@ -2141,16 +2294,19 @@ Configure custom bot command prefixes.
 ```
 
 **Parameters:**
+
 - `prefix`: Command prefix string (1-10 chars)
 - `allowMention`: Allow @bot mention as prefix
 
 **Use Cases:**
+
 - Bot customization
 - Multi-bot environments
 - User preference
 - Conflict resolution
 
 **Best Practices:**
+
 - Document prefix in channel topics
 - Support mention prefix
 - Allow per-guild customization
@@ -2167,9 +2323,9 @@ Role assignment via message reactions.
   "channelId": "roles-123",
   "messageId": "456",
   "reactions": [
-    {"emoji": "🎮", "roleId": "gamer-role"},
-    {"emoji": "💻", "roleId": "developer-role"},
-    {"emoji": "🎨", "roleId": "artist-role"}
+    { "emoji": "🎮", "roleId": "gamer-role" },
+    { "emoji": "💻", "roleId": "developer-role" },
+    { "emoji": "🎨", "roleId": "artist-role" }
   ],
   "removeOnUnreact": true,
   "uniqueRoles": false
@@ -2177,18 +2333,21 @@ Role assignment via message reactions.
 ```
 
 **Parameters:**
+
 - `reactions`: Array of emoji-role mappings
 - `removeOnUnreact`: Remove role when unreacting
 - `uniqueRoles`: Only allow one role from set
 - `verificationRequired`: Require account age/verification
 
 **Use Cases:**
+
 - Self-service role assignment
 - Interest-based roles
 - Access control
 - Community segmentation
 
 **Best Practices:**
+
 - Clear instructions message
 - Limit role quantity
 - Use unique roles for mutually exclusive options
@@ -2213,6 +2372,7 @@ Structured suggestion and voting.
 ```
 
 **Suggestion Management:**
+
 ```json
 {
   "action": "update-suggestion-status",
@@ -2226,6 +2386,7 @@ Structured suggestion and voting.
 ```
 
 **Statuses:**
+
 - `pending`: Under review
 - `approved`: Accepted
 - `denied`: Rejected
@@ -2233,12 +2394,14 @@ Structured suggestion and voting.
 - `duplicate`: Already exists
 
 **Use Cases:**
+
 - Feature requests
 - Community input
 - Feedback collection
 - Transparency
 
 **Best Practices:**
+
 - Dedicated suggestion channel
 - Clear submission format
 - Regular status updates
@@ -2261,6 +2424,7 @@ Support ticket creation and management.
 ```
 
 **Ticket Categories:**
+
 - `support`: General support
 - `bug`: Bug reports
 - `billing`: Billing questions
@@ -2278,18 +2442,21 @@ Support ticket creation and management.
 ```
 
 **Parameters:**
+
 - `category`: Ticket type
 - `priority`: `low`, `medium`, `high`, `urgent`
 - `transcript`: Save conversation
 - `archiveChannelId`: Where to archive
 
 **Use Cases:**
+
 - Customer support
 - Bug reporting
 - Appeals process
 - Private discussions
 
 **Best Practices:**
+
 - Auto-create private channels
 - Transcript all tickets
 - Priority-based assignment
@@ -2325,26 +2492,29 @@ Experience and leveling hooks.
   "channel": "discord",
   "guildId": "999",
   "levelRoles": [
-    {"level": 5, "roleId": "active-role"},
-    {"level": 10, "roleId": "regular-role"},
-    {"level": 25, "roleId": "veteran-role"}
+    { "level": 5, "roleId": "active-role" },
+    { "level": 10, "roleId": "regular-role" },
+    { "level": 25, "roleId": "veteran-role" }
   ]
 }
 ```
 
 **XP Sources:**
+
 - Messages (with cooldown)
 - Voice time
 - Reactions received
 - Custom events
 
 **Use Cases:**
+
 - Member engagement
 - Reward systems
 - Role progression
 - Activity tracking
 
 **Best Practices:**
+
 - XP cooldowns to prevent spam
 - Balanced XP rates
 - Milestone rewards
@@ -2375,6 +2545,7 @@ Server and member activity analytics.
 ```
 
 **Metrics:**
+
 - Message count by channel/user
 - Voice time statistics
 - Peak activity times
@@ -2382,12 +2553,14 @@ Server and member activity analytics.
 - Retention rates
 
 **Use Cases:**
+
 - Server health monitoring
 - Engagement analysis
 - Moderation workload
 - Growth tracking
 
 **Best Practices:**
+
 - Regular data collection
 - Privacy considerations
 - Visualize trends
@@ -2408,17 +2581,12 @@ Real-time server statistics.
   "guildId": "999",
   "channelId": "stats-123",
   "refreshInterval": 300,
-  "metrics": [
-    "memberCount",
-    "onlineCount",
-    "boostCount",
-    "messageCount24h",
-    "voiceUsers"
-  ]
+  "metrics": ["memberCount", "onlineCount", "boostCount", "messageCount24h", "voiceUsers"]
 }
 ```
 
 **Available Metrics:**
+
 - Member counts (total, online, by role)
 - Boost level and count
 - Message statistics
@@ -2426,12 +2594,14 @@ Real-time server statistics.
 - Channel counts
 
 **Use Cases:**
+
 - Server showcase
 - Growth tracking
 - Engagement monitoring
 - Transparency
 
 **Best Practices:**
+
 - Update at reasonable intervals
 - Highlight key metrics
 - Visual embeds with colors
@@ -2466,6 +2636,7 @@ Advanced member queries.
 ```
 
 **Filter Options:**
+
 - Role membership
 - Join date range
 - Account age
@@ -2474,12 +2645,14 @@ Advanced member queries.
 - Activity status
 
 **Use Cases:**
+
 - Member management
 - Role audits
 - Targeted announcements
 - List generation
 
 **Best Practices:**
+
 - Combine filters for precision
 - Respect privacy
 - Paginate large results
@@ -2502,18 +2675,21 @@ Export channel message history.
 ```
 
 **Formats:**
+
 - `json`: Raw data
 - `csv`: Spreadsheet format
 - `html`: Readable archive
 - `txt`: Plain text
 
 **Use Cases:**
+
 - Archival
 - Data analysis
 - Backup
 - Migration
 
 **Best Practices:**
+
 - Export before major changes
 - Store securely
 - Include metadata
@@ -2548,6 +2724,7 @@ Channel backup and restoration.
 ```
 
 **Backup Contents:**
+
 - Channel settings
 - Permissions
 - Messages
@@ -2556,12 +2733,14 @@ Channel backup and restoration.
 - Webhooks
 
 **Use Cases:**
+
 - Disaster recovery
 - Channel migration
 - Testing environments
 - Template creation
 
 **Best Practices:**
+
 - Regular backup schedule
 - Verify backup integrity
 - Test restore process
@@ -2584,6 +2763,7 @@ Duplicate channel structure.
 ```
 
 **Cloned Elements:**
+
 - Channel type and settings
 - Permissions overwrites
 - Topic and description
@@ -2591,12 +2771,14 @@ Duplicate channel structure.
 - NSFW flag
 
 **Use Cases:**
+
 - Template channels
 - Event channels
 - Testing
 - Quick setup
 
 **Best Practices:**
+
 - Update name to avoid confusion
 - Clone permissions for consistency
 - Don't clone messages by default
@@ -2616,17 +2798,20 @@ Configure message rate limiting.
 ```
 
 **Parameters:**
+
 - `seconds`: Delay between messages (0-21600)
 - 0 = disabled
 - `exemptRoles`: Roles that bypass (optional)
 
 **Use Cases:**
+
 - Spam prevention
 - Quality control
 - Event management
 - High-traffic channels
 
 **Best Practices:**
+
 - Start with low values
 - Communicate clearly
 - Exempt moderators
@@ -2660,6 +2845,7 @@ Format GitHub events for Discord.
 ```
 
 **Event Types:**
+
 - `push`: New commits
 - `pull_request`: PR actions
 - `issues`: Issue actions
@@ -2668,6 +2854,7 @@ Format GitHub events for Discord.
 - `fork`: Repository forked
 
 **Format Example:**
+
 ```json
 {
   "embeds": [
@@ -2686,12 +2873,14 @@ Format GitHub events for Discord.
 ```
 
 **Use Cases:**
+
 - Development updates
 - Release notifications
 - Issue tracking
 - Team coordination
 
 **Best Practices:**
+
 - Dedicated dev channels
 - Filter noise (watch vs all)
 - Link to GitHub
@@ -2720,12 +2909,14 @@ Format CI/CD pipeline results.
 ```
 
 **Statuses:**
+
 - `success`: Green
 - `failure`: Red
 - `pending`: Yellow
 - `cancelled`: Grey
 
 **Format Example:**
+
 ```json
 {
   "embeds": [
@@ -2743,12 +2934,14 @@ Format CI/CD pipeline results.
 ```
 
 **Use Cases:**
+
 - Build notifications
 - Deployment alerts
 - Test results
 - Pipeline monitoring
 
 **Best Practices:**
+
 - Color code by status
 - Include commit info
 - Link to logs
@@ -2779,24 +2972,28 @@ Format status page incidents.
 ```
 
 **Statuses:**
+
 - `investigating`: Yellow
 - `identified`: Orange
 - `monitoring`: Blue
 - `resolved`: Green
 
 **Impact Levels:**
+
 - `none`: Grey
 - `minor`: Yellow
 - `major`: Orange
 - `critical`: Red
 
 **Use Cases:**
+
 - Service status
 - Incident updates
 - Maintenance windows
 - Uptime reports
 
 **Best Practices:**
+
 - Update in real-time
 - Clear impact descriptions
 - Timeline of events
@@ -2825,12 +3022,14 @@ Standardized alert formatting.
 ```
 
 **Alert Types:**
+
 - `error`: Red
 - `warning`: Yellow
 - `info`: Blue
 - `success`: Green
 
 **Format Example:**
+
 ```json
 {
   "embeds": [
@@ -2839,9 +3038,9 @@ Standardized alert formatting.
       "description": "Response time exceeded threshold",
       "color": 15158332,
       "fields": [
-        {"name": "P95 Latency", "value": "2500ms", "inline": true},
-        {"name": "Threshold", "value": "1000ms", "inline": true},
-        {"name": "Impact", "value": "15% of requests", "inline": true}
+        { "name": "P95 Latency", "value": "2500ms", "inline": true },
+        { "name": "Threshold", "value": "1000ms", "inline": true },
+        { "name": "Impact", "value": "15% of requests", "inline": true }
       ],
       "footer": {
         "text": "Runbook: docs.example.com/runbooks/high-latency"
@@ -2866,12 +3065,14 @@ Standardized alert formatting.
 ```
 
 **Use Cases:**
+
 - System monitoring
 - Error alerts
 - Performance issues
 - Security events
 
 **Best Practices:**
+
 - Severity-based colors
 - Include metrics
 - Link to runbooks
@@ -2887,16 +3088,19 @@ Standardized alert formatting.
 Discord enforces rate limits to prevent abuse. Plan operations accordingly.
 
 **Global Limits:**
+
 - 50 requests per second across all endpoints
 - Cloudflare blocks above limits (HTTP 429)
 
 **Per-Route Limits:**
+
 - Sending messages: 5 per 5 seconds per channel
 - Deleting messages: 5 per second
 - Adding reactions: 1 per 0.25 seconds
 - Member modifications: 10 per 10 seconds
 
 **Best Practices:**
+
 - Implement exponential backoff
 - Batch operations when possible
 - Cache frequently accessed data
@@ -2919,6 +3123,7 @@ Always verify permissions before operations.
 ```
 
 **Critical Permissions:**
+
 - `SEND_MESSAGES`: Send messages
 - `EMBED_LINKS`: Send embeds
 - `ATTACH_FILES`: Send attachments
@@ -2929,6 +3134,7 @@ Always verify permissions before operations.
 - `ADMINISTRATOR`: Full access (dangerous)
 
 **Best Practices:**
+
 - Check before each operation
 - Graceful error handling
 - Request minimal permissions
@@ -2939,6 +3145,7 @@ Always verify permissions before operations.
 Robust error handling for reliability.
 
 **Common Errors:**
+
 - `50001`: Missing Access
 - `50013`: Missing Permissions
 - `10008`: Unknown Message
@@ -2947,6 +3154,7 @@ Robust error handling for reliability.
 - `30005`: Maximum Reactions
 
 **Best Practices:**
+
 - Parse error codes
 - User-friendly messages
 - Retry transient errors
@@ -2958,18 +3166,21 @@ Robust error handling for reliability.
 Protect tokens and sensitive data.
 
 **Token Security:**
+
 - Never commit tokens
 - Use environment variables
 - Rotate compromised tokens
 - Limit token scope
 
 **User Privacy:**
+
 - Respect privacy settings
 - Minimal data collection
 - Clear data retention
 - GDPR compliance
 
 **Best Practices:**
+
 - Validate all inputs
 - Sanitize user content
 - Rate limit user actions

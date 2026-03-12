@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/nextcloud-talk";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/nextcloud-talk";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/nextcloud-talk";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/nextcloud-talk";
 import { nextcloudTalkPlugin } from "./src/channel.js";
 import { setNextcloudTalkRuntime } from "./src/runtime.js";
 

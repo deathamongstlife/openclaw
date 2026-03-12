@@ -46,7 +46,7 @@ describe("installGatewayDaemonNonInteractive", () => {
       warnings: [],
     });
     buildGatewayInstallPlan.mockResolvedValue({
-      programArguments: ["openclaw", "gateway", "run"],
+      programArguments: ["jarvis", "gateway", "run"],
       workingDirectory: "/tmp",
       environment: {},
     });
@@ -63,7 +63,7 @@ describe("installGatewayDaemonNonInteractive", () => {
             token: {
               source: "env",
               provider: "default",
-              id: "OPENCLAW_GATEWAY_TOKEN",
+              id: "JARVIS_GATEWAY_TOKEN",
             },
           },
         },

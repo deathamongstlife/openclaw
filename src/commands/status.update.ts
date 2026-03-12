@@ -1,5 +1,5 @@
 import { formatCliCommand } from "../cli/command-format.js";
-import { resolveJarvisPackageRoot } from "../infra/openclaw-root.js";
+import { resolveJarvisPackageRoot } from "../infra/jarvis-root.js";
 import {
   checkUpdateStatus,
   compareSemverStrings,

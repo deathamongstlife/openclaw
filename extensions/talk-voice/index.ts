@@ -1,4 +1,4 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/talk-voice";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/talk-voice";
 
 type ElevenLabsVoice = {
   voice_id: string;

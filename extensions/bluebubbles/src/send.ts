@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
-import type { JarvisConfig } from "openclaw/plugin-sdk/bluebubbles";
-import { stripMarkdown } from "openclaw/plugin-sdk/bluebubbles";
+import type { JarvisConfig } from "jarvis/plugin-sdk/bluebubbles";
+import { stripMarkdown } from "jarvis/plugin-sdk/bluebubbles";
 import { resolveBlueBubblesAccount } from "./accounts.js";
 import {
   getCachedBlueBubblesPrivateApiStatus,

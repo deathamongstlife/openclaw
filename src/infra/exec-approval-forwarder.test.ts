@@ -364,7 +364,7 @@ describe("exec approval forwarder", () => {
 
   it("prefers turn-source routing over stale session last route", async () => {
     vi.useFakeTimers();
-    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-exec-approval-forwarder-test-"));
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "jarvis-exec-approval-forwarder-test-"));
     try {
       const storePath = path.join(tmpDir, "sessions.json");
       fs.writeFileSync(

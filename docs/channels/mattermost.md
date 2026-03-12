@@ -19,7 +19,7 @@ Mattermost ships as a plugin and is not bundled with the core install.
 Install via CLI (npm registry):
 
 ```bash
-jarvis plugins install @openclaw/mattermost
+jarvis plugins install @jarvis/mattermost
 ```
 
 Local checkout (when running from a git repo):
@@ -295,7 +295,7 @@ The gateway verifies button clicks with HMAC-SHA256. External scripts must gener
 that match the gateway's verification logic:
 
 1. Derive the secret from the bot token:
-   `HMAC-SHA256(key="openclaw-mattermost-interactions", data=botToken)`
+   `HMAC-SHA256(key="jarvis-mattermost-interactions", data=botToken)`
 2. Build the context object with all fields **except** `_token`.
 3. Serialize with **sorted keys** and **no spaces** (the gateway uses `JSON.stringify`
    with sorted keys, which produces compact output).
@@ -308,7 +308,7 @@ Python example:
 import hmac, hashlib, json
 
 secret = hmac.new(
-    b"openclaw-mattermost-interactions",
+    b"jarvis-mattermost-interactions",
     bot_token.encode(), hashlib.sha256
 ).hexdigest()
 

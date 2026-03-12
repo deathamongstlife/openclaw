@@ -14,7 +14,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 
 - [Quick start and first-run setup]
   - [Im stuck what's the fastest way to get unstuck?](#im-stuck-whats-the-fastest-way-to-get-unstuck)
-  - [What's the recommended way to install and set up Jarvis?](#whats-the-recommended-way-to-install-and-set-up-openclaw)
+  - [What's the recommended way to install and set up Jarvis?](#whats-the-recommended-way-to-install-and-set-up-jarvis)
   - [How do I open the dashboard after onboarding?](#how-do-i-open-the-dashboard-after-onboarding)
   - [How do I authenticate the dashboard (token) on localhost vs remote?](#how-do-i-authenticate-the-dashboard-token-on-localhost-vs-remote)
   - [What runtime do I need?](#what-runtime-do-i-need)
@@ -23,19 +23,19 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [It is stuck on "wake up my friend" / onboarding will not hatch. What now?](#it-is-stuck-on-wake-up-my-friend-onboarding-will-not-hatch-what-now)
   - [Can I migrate my setup to a new machine (Mac mini) without redoing onboarding?](#can-i-migrate-my-setup-to-a-new-machine-mac-mini-without-redoing-onboarding)
   - [Where do I see what is new in the latest version?](#where-do-i-see-what-is-new-in-the-latest-version)
-  - [I can't access docs.openclaw.ai (SSL error). What now?](#i-cant-access-docsopenclawai-ssl-error-what-now)
+  - [I can't access docs.jarvis.ai (SSL error). What now?](#i-cant-access-docsjarvisai-ssl-error-what-now)
   - [What's the difference between stable and beta?](#whats-the-difference-between-stable-and-beta)
   - [How do I install the beta version, and what's the difference between beta and dev?](#how-do-i-install-the-beta-version-and-whats-the-difference-between-beta-and-dev)
   - [How do I try the latest bits?](#how-do-i-try-the-latest-bits)
   - [How long does install and onboarding usually take?](#how-long-does-install-and-onboarding-usually-take)
   - [Installer stuck? How do I get more feedback?](#installer-stuck-how-do-i-get-more-feedback)
-  - [Windows install says git not found or jarvis not recognized](#windows-install-says-git-not-found-or-openclaw-not-recognized)
+  - [Windows install says git not found or jarvis not recognized](#windows-install-says-git-not-found-or-jarvis-not-recognized)
   - [Windows exec output shows garbled Chinese text what should I do](#windows-exec-output-shows-garbled-chinese-text-what-should-i-do)
   - [The docs didn't answer my question - how do I get a better answer?](#the-docs-didnt-answer-my-question-how-do-i-get-a-better-answer)
-  - [How do I install Jarvis on Linux?](#how-do-i-install-openclaw-on-linux)
-  - [How do I install Jarvis on a VPS?](#how-do-i-install-openclaw-on-a-vps)
+  - [How do I install Jarvis on Linux?](#how-do-i-install-jarvis-on-linux)
+  - [How do I install Jarvis on a VPS?](#how-do-i-install-jarvis-on-a-vps)
   - [Where are the cloud/VPS install guides?](#where-are-the-cloudvps-install-guides)
-  - [Can I ask Jarvis to update itself?](#can-i-ask-openclaw-to-update-itself)
+  - [Can I ask Jarvis to update itself?](#can-i-ask-jarvis-to-update-itself)
   - [What does the onboarding wizard actually do?](#what-does-the-onboarding-wizard-actually-do)
   - [Do I need a Claude or OpenAI subscription to run this?](#do-i-need-a-claude-or-openai-subscription-to-run-this)
   - [Can I use Claude Max subscription without an API key](#can-i-use-claude-max-subscription-without-an-api-key)
@@ -51,24 +51,24 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [How do I keep hosted model traffic in a specific region?](#how-do-i-keep-hosted-model-traffic-in-a-specific-region)
   - [Do I have to buy a Mac Mini to install this?](#do-i-have-to-buy-a-mac-mini-to-install-this)
   - [Do I need a Mac mini for iMessage support?](#do-i-need-a-mac-mini-for-imessage-support)
-  - [If I buy a Mac mini to run Jarvis, can I connect it to my MacBook Pro?](#if-i-buy-a-mac-mini-to-run-openclaw-can-i-connect-it-to-my-macbook-pro)
+  - [If I buy a Mac mini to run Jarvis, can I connect it to my MacBook Pro?](#if-i-buy-a-mac-mini-to-run-jarvis-can-i-connect-it-to-my-macbook-pro)
   - [Can I use Bun?](#can-i-use-bun)
   - [Telegram: what goes in `allowFrom`?](#telegram-what-goes-in-allowfrom)
-  - [Can multiple people use one WhatsApp number with different Jarvis instances?](#can-multiple-people-use-one-whatsapp-number-with-different-openclaw-instances)
+  - [Can multiple people use one WhatsApp number with different Jarvis instances?](#can-multiple-people-use-one-whatsapp-number-with-different-jarvis-instances)
   - [Can I run a "fast chat" agent and an "Opus for coding" agent?](#can-i-run-a-fast-chat-agent-and-an-opus-for-coding-agent)
   - [Does Homebrew work on Linux?](#does-homebrew-work-on-linux)
   - [What's the difference between the hackable (git) install and npm install?](#whats-the-difference-between-the-hackable-git-install-and-npm-install)
   - [Can I switch between npm and git installs later?](#can-i-switch-between-npm-and-git-installs-later)
   - [Should I run the Gateway on my laptop or a VPS?](#should-i-run-the-gateway-on-my-laptop-or-a-vps)
-  - [How important is it to run Jarvis on a dedicated machine?](#how-important-is-it-to-run-openclaw-on-a-dedicated-machine)
+  - [How important is it to run Jarvis on a dedicated machine?](#how-important-is-it-to-run-jarvis-on-a-dedicated-machine)
   - [What are the minimum VPS requirements and recommended OS?](#what-are-the-minimum-vps-requirements-and-recommended-os)
-  - [Can I run Jarvis in a VM and what are the requirements](#can-i-run-openclaw-in-a-vm-and-what-are-the-requirements)
-- [What is Jarvis?](#what-is-openclaw)
-  - [What is Jarvis, in one paragraph?](#what-is-openclaw-in-one-paragraph)
+  - [Can I run Jarvis in a VM and what are the requirements](#can-i-run-jarvis-in-a-vm-and-what-are-the-requirements)
+- [What is Jarvis?](#what-is-jarvis)
+  - [What is Jarvis, in one paragraph?](#what-is-jarvis-in-one-paragraph)
   - [What's the value proposition?](#whats-the-value-proposition)
   - [I just set it up what should I do first](#i-just-set-it-up-what-should-i-do-first)
-  - [What are the top five everyday use cases for Jarvis](#what-are-the-top-five-everyday-use-cases-for-openclaw)
-  - [Can Jarvis help with lead gen outreach ads and blogs for a SaaS](#can-openclaw-help-with-lead-gen-outreach-ads-and-blogs-for-a-saas)
+  - [What are the top five everyday use cases for Jarvis](#what-are-the-top-five-everyday-use-cases-for-jarvis)
+  - [Can Jarvis help with lead gen outreach ads and blogs for a SaaS](#can-jarvis-help-with-lead-gen-outreach-ads-and-blogs-for-a-saas)
   - [What are the advantages vs Claude Code for web development?](#what-are-the-advantages-vs-claude-code-for-web-development)
 - [Skills and automation](#skills-and-automation)
   - [How do I customize skills without keeping the repo dirty?](#how-do-i-customize-skills-without-keeping-the-repo-dirty)
@@ -77,7 +77,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [The bot freezes while doing heavy work. How do I offload that?](#the-bot-freezes-while-doing-heavy-work-how-do-i-offload-that)
   - [Cron or reminders do not fire. What should I check?](#cron-or-reminders-do-not-fire-what-should-i-check)
   - [How do I install skills on Linux?](#how-do-i-install-skills-on-linux)
-  - [Can Jarvis run tasks on a schedule or continuously in the background?](#can-openclaw-run-tasks-on-a-schedule-or-continuously-in-the-background)
+  - [Can Jarvis run tasks on a schedule or continuously in the background?](#can-jarvis-run-tasks-on-a-schedule-or-continuously-in-the-background)
   - [Can I run Apple macOS-only skills from Linux?](#can-i-run-apple-macos-only-skills-from-linux)
   - [Do you have a Notion or HeyGen integration?](#do-you-have-a-notion-or-heygen-integration)
   - [How do I install the Chrome extension for browser takeover?](#how-do-i-install-the-chrome-extension-for-browser-takeover)
@@ -89,11 +89,11 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [Does memory persist forever? What are the limits?](#does-memory-persist-forever-what-are-the-limits)
   - [Does semantic memory search require an OpenAI API key?](#does-semantic-memory-search-require-an-openai-api-key)
 - [Where things live on disk](#where-things-live-on-disk)
-  - [Is all data used with Jarvis saved locally?](#is-all-data-used-with-openclaw-saved-locally)
-  - [Where does Jarvis store its data?](#where-does-openclaw-store-its-data)
+  - [Is all data used with Jarvis saved locally?](#is-all-data-used-with-jarvis-saved-locally)
+  - [Where does Jarvis store its data?](#where-does-jarvis-store-its-data)
   - [Where should AGENTS.md / SOUL.md / USER.md / MEMORY.md live?](#where-should-agentsmd-soulmd-usermd-memorymd-live)
   - [What's the recommended backup strategy?](#whats-the-recommended-backup-strategy)
-  - [How do I completely uninstall Jarvis?](#how-do-i-completely-uninstall-openclaw)
+  - [How do I completely uninstall Jarvis?](#how-do-i-completely-uninstall-jarvis)
   - [Can agents work outside the workspace?](#can-agents-work-outside-the-workspace)
   - [I'm in remote mode - where is the session store?](#im-in-remote-mode-where-is-the-session-store)
 - [Config basics](#config-basics)
@@ -105,13 +105,13 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [How do I enable web search (and web fetch)?](#how-do-i-enable-web-search-and-web-fetch)
   - [config.apply wiped my config. How do I recover and avoid this?](#configapply-wiped-my-config-how-do-i-recover-and-avoid-this)
   - [How do I run a central Gateway with specialized workers across devices?](#how-do-i-run-a-central-gateway-with-specialized-workers-across-devices)
-  - [Can the Jarvis browser run headless?](#can-the-openclaw-browser-run-headless)
+  - [Can the Jarvis browser run headless?](#can-the-jarvis-browser-run-headless)
   - [How do I use Brave for browser control?](#how-do-i-use-brave-for-browser-control)
 - [Remote gateways and nodes](#remote-gateways-and-nodes)
   - [How do commands propagate between Telegram, the gateway, and nodes?](#how-do-commands-propagate-between-telegram-the-gateway-and-nodes)
   - [How can my agent access my computer if the Gateway is hosted remotely?](#how-can-my-agent-access-my-computer-if-the-gateway-is-hosted-remotely)
   - [Tailscale is connected but I get no replies. What now?](#tailscale-is-connected-but-i-get-no-replies-what-now)
-  - [Can two Jarvis instances talk to each other (local + VPS)?](#can-two-openclaw-instances-talk-to-each-other-local-vps)
+  - [Can two Jarvis instances talk to each other (local + VPS)?](#can-two-jarvis-instances-talk-to-each-other-local-vps)
   - [Do I need separate VPSes for multiple agents](#do-i-need-separate-vpses-for-multiple-agents)
   - [Is there a benefit to using a node on my personal laptop instead of SSH from a VPS?](#is-there-a-benefit-to-using-a-node-on-my-personal-laptop-instead-of-ssh-from-a-vps)
   - [Do nodes run a gateway service?](#do-nodes-run-a-gateway-service)
@@ -121,21 +121,21 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [How do I connect a Mac node to a remote Gateway (Tailscale Serve)?](#how-do-i-connect-a-mac-node-to-a-remote-gateway-tailscale-serve)
   - [Should I install on a second laptop or just add a node?](#should-i-install-on-a-second-laptop-or-just-add-a-node)
 - [Env vars and .env loading](#env-vars-and-env-loading)
-  - [How does Jarvis load environment variables?](#how-does-openclaw-load-environment-variables)
+  - [How does Jarvis load environment variables?](#how-does-jarvis-load-environment-variables)
   - ["I started the Gateway via the service and my env vars disappeared." What now?](#i-started-the-gateway-via-the-service-and-my-env-vars-disappeared-what-now)
   - [I set `COPILOT_GITHUB_TOKEN`, but models status shows "Shell env: off." Why?](#i-set-copilotgithubtoken-but-models-status-shows-shell-env-off-why)
 - [Sessions and multiple chats](#sessions-and-multiple-chats)
   - [How do I start a fresh conversation?](#how-do-i-start-a-fresh-conversation)
   - [Do sessions reset automatically if I never send `/new`?](#do-sessions-reset-automatically-if-i-never-send-new)
-  - [Is there a way to make a team of Jarvis instances one CEO and many agents](#is-there-a-way-to-make-a-team-of-openclaw-instances-one-ceo-and-many-agents)
+  - [Is there a way to make a team of Jarvis instances one CEO and many agents](#is-there-a-way-to-make-a-team-of-jarvis-instances-one-ceo-and-many-agents)
   - [Why did context get truncated mid-task? How do I prevent it?](#why-did-context-get-truncated-midtask-how-do-i-prevent-it)
-  - [How do I completely reset Jarvis but keep it installed?](#how-do-i-completely-reset-openclaw-but-keep-it-installed)
+  - [How do I completely reset Jarvis but keep it installed?](#how-do-i-completely-reset-jarvis-but-keep-it-installed)
   - [I'm getting "context too large" errors - how do I reset or compact?](#im-getting-context-too-large-errors-how-do-i-reset-or-compact)
   - [Why am I seeing "LLM request rejected: messages.content.tool_use.input field required"?](#why-am-i-seeing-llm-request-rejected-messagescontenttool_useinput-field-required)
   - [Why am I getting heartbeat messages every 30 minutes?](#why-am-i-getting-heartbeat-messages-every-30-minutes)
   - [Do I need to add a "bot account" to a WhatsApp group?](#do-i-need-to-add-a-bot-account-to-a-whatsapp-group)
   - [How do I get the JID of a WhatsApp group?](#how-do-i-get-the-jid-of-a-whatsapp-group)
-  - [Why doesn't Jarvis reply in a group?](#why-doesnt-openclaw-reply-in-a-group)
+  - [Why doesn't Jarvis reply in a group?](#why-doesnt-jarvis-reply-in-a-group)
   - [Do groups/threads share context with DMs?](#do-groupsthreads-share-context-with-dms)
   - [How many workspaces and agents can I create?](#how-many-workspaces-and-agents-can-i-create)
   - [Can I run multiple bots or chats at the same time (Slack), and how should I set that up?](#can-i-run-multiple-bots-or-chats-at-the-same-time-slack-and-how-should-i-set-that-up)
@@ -144,7 +144,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [What model do you recommend?](#what-model-do-you-recommend)
   - [How do I switch models without wiping my config?](#how-do-i-switch-models-without-wiping-my-config)
   - [Can I use self-hosted models (llama.cpp, vLLM, Ollama)?](#can-i-use-selfhosted-models-llamacpp-vllm-ollama)
-  - [What do Jarvis, Flawd, and Krill use for models?](#what-do-openclaw-flawd-and-krill-use-for-models)
+  - [What do Jarvis, Flawd, and Krill use for models?](#what-do-jarvis-flawd-and-krill-use-for-models)
   - [How do I switch models on the fly (without restarting)?](#how-do-i-switch-models-on-the-fly-without-restarting)
   - [Can I use GPT 5.2 for daily tasks and Codex 5.3 for coding](#can-i-use-gpt-52-for-daily-tasks-and-codex-53-for-coding)
   - [Why do I see "Model … is not allowed" and then no reply?](#why-do-i-see-model-is-not-allowed-and-then-no-reply)
@@ -168,7 +168,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [Why does `jarvis gateway status` say `Runtime: running` but `RPC probe: failed`?](#why-does-jarvis-gateway-status-say-runtime-running-but-rpc-probe-failed)
   - [Why does `jarvis gateway status` show `Config (cli)` and `Config (service)` different?](#why-does-jarvis-gateway-status-show-config-cli-and-config-service-different)
   - [What does "another gateway instance is already listening" mean?](#what-does-another-gateway-instance-is-already-listening-mean)
-  - [How do I run Jarvis in remote mode (client connects to a Gateway elsewhere)?](#how-do-i-run-openclaw-in-remote-mode-client-connects-to-a-gateway-elsewhere)
+  - [How do I run Jarvis in remote mode (client connects to a Gateway elsewhere)?](#how-do-i-run-jarvis-in-remote-mode-client-connects-to-a-gateway-elsewhere)
   - [The Control UI says "unauthorized" (or keeps reconnecting). What now?](#the-control-ui-says-unauthorized-or-keeps-reconnecting-what-now)
   - [I set `gateway.bind: "tailnet"` but it can't bind / nothing listens](#i-set-gatewaybind-tailnet-but-it-cant-bind-nothing-listens)
   - [Can I run multiple Gateways on the same host?](#can-i-run-multiple-gateways-on-the-same-host)
@@ -176,7 +176,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 - [Logging and debugging](#logging-and-debugging)
   - [Where are logs?](#where-are-logs)
   - [How do I start/stop/restart the Gateway service?](#how-do-i-startstoprestart-the-gateway-service)
-  - [I closed my terminal on Windows - how do I restart Jarvis?](#i-closed-my-terminal-on-windows-how-do-i-restart-openclaw)
+  - [I closed my terminal on Windows - how do I restart Jarvis?](#i-closed-my-terminal-on-windows-how-do-i-restart-jarvis)
   - [The Gateway is up but replies never arrive. What should I check?](#the-gateway-is-up-but-replies-never-arrive-what-should-i-check)
   - ["Disconnected from gateway: no reason" - what now?](#disconnected-from-gateway-no-reason-what-now)
   - [Telegram setMyCommands fails with network errors. What should I check?](#telegram-setmycommands-fails-with-network-errors-what-should-i-check)
@@ -187,7 +187,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 - [Media and attachments](#media-and-attachments)
   - [My skill generated an image/PDF, but nothing was sent](#my-skill-generated-an-imagepdf-but-nothing-was-sent)
 - [Security and access control](#security-and-access-control)
-  - [Is it safe to expose Jarvis to inbound DMs?](#is-it-safe-to-expose-openclaw-to-inbound-dms)
+  - [Is it safe to expose Jarvis to inbound DMs?](#is-it-safe-to-expose-jarvis-to-inbound-dms)
   - [Is prompt injection only a concern for public bots?](#is-prompt-injection-only-a-concern-for-public-bots)
   - [Should my bot have its own email GitHub account or phone number](#should-my-bot-have-its-own-email-github-account-or-phone-number)
   - [Can I give it autonomy over my text messages and is that safe](#can-i-give-it-autonomy-over-my-text-messages-and-is-that-safe)
@@ -243,7 +243,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
    If RPC is down, fall back to:
 
    ```bash
-   tail -f "$(ls -t /tmp/openclaw/openclaw-*.log | head -1)"
+   tail -f "$(ls -t /tmp/jarvis/jarvis-*.log | head -1)"
    ```
 
    File logs are separate from service logs; see [Logging](/logging) and [Troubleshooting](/gateway/troubleshooting).
@@ -281,7 +281,7 @@ setup (PATH, services, permissions, auth files). Give them the **full source che
 the hackable (git) install:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git
+curl -fsSL https://jarvis.ai/install.sh | bash -s -- --install-method git
 ```
 
 This installs Jarvis **from a git checkout**, so the agent can read the code + docs and
@@ -292,8 +292,8 @@ Tip: ask the agent to **plan and supervise** the fix (step-by-step), then execut
 necessary commands. That keeps changes small and easier to audit.
 
 If you discover a real bug or fix, please file a GitHub issue or send a PR:
-[https://github.com/openclaw/openclaw/issues](https://github.com/openclaw/openclaw/issues)
-[https://github.com/openclaw/openclaw/pulls](https://github.com/openclaw/openclaw/pulls)
+[https://github.com/jarvis/jarvis/issues](https://github.com/jarvis/jarvis/issues)
+[https://github.com/jarvis/jarvis/pulls](https://github.com/jarvis/jarvis/pulls)
 
 Start with these commands (share outputs when asking for help):
 
@@ -320,7 +320,7 @@ Install docs: [Install](/install), [Installer flags](/install/installer), [Updat
 The repo recommends running from source and using the onboarding wizard:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://jarvis.ai/install.sh | bash
 jarvis onboard --install-daemon
 ```
 
@@ -329,8 +329,8 @@ The wizard can also build UI assets automatically. After onboarding, you typical
 From source (contributors/dev):
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
+git clone https://github.com/jarvis/jarvis.git
+cd jarvis
 pnpm install
 pnpm build
 pnpm ui:build # auto-installs UI deps on first run
@@ -348,7 +348,7 @@ The wizard opens your browser with a clean (non-tokenized) dashboard URL right a
 **Localhost (same machine):**
 
 - Open `http://127.0.0.1:18789/`.
-- If it asks for auth, paste the token from `gateway.auth.token` (or `OPENCLAW_GATEWAY_TOKEN`) into Control UI settings.
+- If it asks for auth, paste the token from `gateway.auth.token` (or `JARVIS_GATEWAY_TOKEN`) into Control UI settings.
 - Retrieve it from the gateway host: `jarvis config get gateway.auth.token` (or generate one: `jarvis doctor --generate-gateway-token`).
 
 **Not on localhost:**
@@ -421,8 +421,8 @@ keeps your bot "exactly the same" (memory, session history, auth, and channel
 state) as long as you copy **both** locations:
 
 1. Install Jarvis on the new machine.
-2. Copy `$OPENCLAW_STATE_DIR` (default: `~/.openclaw`) from the old machine.
-3. Copy your workspace (default: `~/.openclaw/workspace`).
+2. Copy `$JARVIS_STATE_DIR` (default: `~/.jarvis`) from the old machine.
+3. Copy your workspace (default: `~/.jarvis/workspace`).
 4. Run `jarvis doctor` and restart the Gateway service.
 
 That preserves config, auth profiles, WhatsApp creds, sessions, and memory. If you're in
@@ -430,30 +430,30 @@ remote mode, remember the gateway host owns the session store and workspace.
 
 **Important:** if you only commit/push your workspace to GitHub, you're backing
 up **memory + bootstrap files**, but **not** session history or auth. Those live
-under `~/.openclaw/` (for example `~/.openclaw/agents/<agentId>/sessions/`).
+under `~/.jarvis/` (for example `~/.jarvis/agents/<agentId>/sessions/`).
 
-Related: [Migrating](/install/migrating), [Where things live on disk](/help/faq#where-does-openclaw-store-its-data),
+Related: [Migrating](/install/migrating), [Where things live on disk](/help/faq#where-does-jarvis-store-its-data),
 [Agent workspace](/concepts/agent-workspace), [Doctor](/gateway/doctor),
 [Remote mode](/gateway/remote).
 
 ### Where do I see what is new in the latest version
 
 Check the GitHub changelog:
-[https://github.com/openclaw/openclaw/blob/main/CHANGELOG.md](https://github.com/openclaw/openclaw/blob/main/CHANGELOG.md)
+[https://github.com/jarvis/jarvis/blob/main/CHANGELOG.md](https://github.com/jarvis/jarvis/blob/main/CHANGELOG.md)
 
 Newest entries are at the top. If the top section is marked **Unreleased**, the next dated
 section is the latest shipped version. Entries are grouped by **Highlights**, **Changes**, and
 **Fixes** (plus docs/other sections when needed).
 
-### I can't access docs.openclaw.ai SSL error What now
+### I can't access docs.jarvis.ai SSL error What now
 
-Some Comcast/Xfinity connections incorrectly block `docs.openclaw.ai` via Xfinity
-Advanced Security. Disable it or allowlist `docs.openclaw.ai`, then retry. More
-detail: [Troubleshooting](/help/troubleshooting#docsopenclawai-shows-an-ssl-error-comcastxfinity).
+Some Comcast/Xfinity connections incorrectly block `docs.jarvis.ai` via Xfinity
+Advanced Security. Disable it or allowlist `docs.jarvis.ai`, then retry. More
+detail: [Troubleshooting](/help/troubleshooting#docsjarvisai-shows-an-ssl-error-comcastxfinity).
 Please help us unblock it by reporting here: [https://spa.xfinity.com/check_url_status](https://spa.xfinity.com/check_url_status).
 
 If you still can't reach the site, the docs are mirrored on GitHub:
-[https://github.com/openclaw/openclaw/tree/main/docs](https://github.com/openclaw/openclaw/tree/main/docs)
+[https://github.com/jarvis/jarvis/tree/main/docs](https://github.com/jarvis/jarvis/tree/main/docs)
 
 ### What's the difference between stable and beta
 
@@ -467,7 +467,7 @@ that same version to `latest`**. That's why beta and stable can point at the
 **same version**.
 
 See what changed:
-[https://github.com/openclaw/openclaw/blob/main/CHANGELOG.md](https://github.com/openclaw/openclaw/blob/main/CHANGELOG.md)
+[https://github.com/jarvis/jarvis/blob/main/CHANGELOG.md](https://github.com/jarvis/jarvis/blob/main/CHANGELOG.md)
 
 ### How do I install the beta version and what's the difference between beta and dev
 
@@ -477,15 +477,15 @@ See what changed:
 One-liners (macOS/Linux):
 
 ```bash
-curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --beta
+curl -fsSL --proto '=https' --tlsv1.2 https://jarvis.ai/install.sh | bash -s -- --beta
 ```
 
 ```bash
-curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --install-method git
+curl -fsSL --proto '=https' --tlsv1.2 https://jarvis.ai/install.sh | bash -s -- --install-method git
 ```
 
 Windows installer (PowerShell):
-[https://openclaw.ai/install.ps1](https://openclaw.ai/install.ps1)
+[https://jarvis.ai/install.ps1](https://jarvis.ai/install.ps1)
 
 More detail: [Development channels](/install/development-channels) and [Installer flags](/install/installer).
 
@@ -514,7 +514,7 @@ This switches to the `main` branch and updates from source.
 2. **Hackable install (from the installer site):**
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git
+curl -fsSL https://jarvis.ai/install.sh | bash -s -- --install-method git
 ```
 
 That gives you a local repo you can edit, then update via git.
@@ -522,8 +522,8 @@ That gives you a local repo you can edit, then update via git.
 If you prefer a clean clone manually, use:
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
+git clone https://github.com/jarvis/jarvis.git
+cd jarvis
 pnpm install
 pnpm build
 ```
@@ -536,19 +536,19 @@ Docs: [Update](/cli/update), [Development channels](/install/development-channel
 Re-run the installer with **verbose output**:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --verbose
+curl -fsSL https://jarvis.ai/install.sh | bash -s -- --verbose
 ```
 
 Beta install with verbose:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --beta --verbose
+curl -fsSL https://jarvis.ai/install.sh | bash -s -- --beta --verbose
 ```
 
 For a hackable (git) install:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git --verbose
+curl -fsSL https://jarvis.ai/install.sh | bash -s -- --install-method git --verbose
 ```
 
 Windows (PowerShell) equivalent:
@@ -556,7 +556,7 @@ Windows (PowerShell) equivalent:
 ```powershell
 # install.ps1 has no dedicated -Verbose flag yet.
 Set-PSDebug -Trace 1
-& ([scriptblock]::Create((iwr -useb https://openclaw.ai/install.ps1))) -NoOnboard
+& ([scriptblock]::Create((iwr -useb https://jarvis.ai/install.ps1))) -NoOnboard
 Set-PSDebug -Trace 0
 ```
 
@@ -612,7 +612,7 @@ jarvis gateway restart
 
 If you still reproduce this on latest Jarvis, track/report it in:
 
-- [Issue #30640](https://github.com/openclaw/openclaw/issues/30640)
+- [Issue #30640](https://github.com/jarvis/jarvis/issues/30640)
 
 ### The docs didn't answer my question how do I get a better answer
 
@@ -620,7 +620,7 @@ Use the **hackable (git) install** so you have the full source and docs locally,
 your bot (or Claude/Codex) _from that folder_ so it can read the repo and answer precisely.
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git
+curl -fsSL https://jarvis.ai/install.sh | bash -s -- --install-method git
 ```
 
 More detail: [Install](/install) and [Installer flags](/install/installer).
@@ -779,7 +779,7 @@ See [OAuth](/concepts/oauth), [Model providers](/concepts/model-providers), and 
 
 ### How do I set up Gemini CLI OAuth
 
-Gemini CLI uses a **plugin auth flow**, not a client id or secret in `openclaw.json`.
+Gemini CLI uses a **plugin auth flow**, not a client id or secret in `jarvis.json`.
 
 Steps:
 
@@ -895,13 +895,13 @@ Docs: [Getting started](/start/getting-started), [Updating](/install/updating).
 
 Yes. Install the other flavor, then run Doctor so the gateway service points at the new entrypoint.
 This **does not delete your data** - it only changes the Jarvis code install. Your state
-(`~/.openclaw`) and workspace (`~/.openclaw/workspace`) stay untouched.
+(`~/.jarvis`) and workspace (`~/.jarvis/workspace`) stay untouched.
 
 From npm → git:
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
+git clone https://github.com/jarvis/jarvis.git
+cd jarvis
 pnpm install
 pnpm build
 jarvis doctor
@@ -911,7 +911,7 @@ jarvis gateway restart
 From git → npm:
 
 ```bash
-npm install -g openclaw@latest
+npm install -g jarvis@latest
 jarvis doctor
 jarvis gateway restart
 ```
@@ -1051,17 +1051,17 @@ Advantages:
 - **Always-on Gateway** (run on a VPS, interact from anywhere)
 - **Nodes** for local browser/screen/camera/exec
 
-Showcase: [https://openclaw.ai/showcase](https://openclaw.ai/showcase)
+Showcase: [https://jarvis.ai/showcase](https://jarvis.ai/showcase)
 
 ## Skills and automation
 
 ### How do I customize skills without keeping the repo dirty
 
-Use managed overrides instead of editing the repo copy. Put your changes in `~/.openclaw/skills/<name>/SKILL.md` (or add a folder via `skills.load.extraDirs` in `~/.openclaw/openclaw.json`). Precedence is `<workspace>/skills` > `~/.openclaw/skills` > bundled, so managed overrides win without touching git. Only upstream-worthy edits should live in the repo and go out as PRs.
+Use managed overrides instead of editing the repo copy. Put your changes in `~/.jarvis/skills/<name>/SKILL.md` (or add a folder via `skills.load.extraDirs` in `~/.jarvis/jarvis.json`). Precedence is `<workspace>/skills` > `~/.jarvis/skills` > bundled, so managed overrides win without touching git. Only upstream-worthy edits should live in the repo and go out as PRs.
 
 ### Can I load skills from a custom folder
 
-Yes. Add extra directories via `skills.load.extraDirs` in `~/.openclaw/openclaw.json` (lowest precedence). Default precedence remains: `<workspace>/skills` → `~/.openclaw/skills` → bundled → `skills.load.extraDirs`. `clawhub` installs into `./skills` by default, which Jarvis treats as `<workspace>/skills`.
+Yes. Add extra directories via `skills.load.extraDirs` in `~/.jarvis/jarvis.json` (lowest precedence). Default precedence remains: `<workspace>/skills` → `~/.jarvis/skills` → bundled → `skills.load.extraDirs`. `clawhub` installs into `./skills` by default, which Jarvis treats as `<workspace>/skills`.
 
 ### How can I use different models for different tasks
 
@@ -1113,7 +1113,7 @@ scheduled jobs will not run.
 
 Checklist:
 
-- Confirm cron is enabled (`cron.enabled`) and `OPENCLAW_SKIP_CRON` is not set.
+- Confirm cron is enabled (`cron.enabled`) and `JARVIS_SKIP_CRON` is not set.
 - Check the Gateway is running 24/7 (no sleep/restarts).
 - Verify timezone settings for the job (`--tz` vs host timezone).
 
@@ -1154,12 +1154,12 @@ Docs: [Cron jobs](/automation/cron-jobs), [Cron vs Heartbeat](/automation/cron-v
 
 ### Can I run Apple macOS-only skills from Linux?
 
-Not directly. macOS skills are gated by `metadata.openclaw.os` plus required binaries, and skills only appear in the system prompt when they are eligible on the **Gateway host**. On Linux, `darwin`-only skills (like `apple-notes`, `apple-reminders`, `things-mac`) will not load unless you override the gating.
+Not directly. macOS skills are gated by `metadata.jarvis.os` plus required binaries, and skills only appear in the system prompt when they are eligible on the **Gateway host**. On Linux, `darwin`-only skills (like `apple-notes`, `apple-reminders`, `things-mac`) will not load unless you override the gating.
 
 You have three supported patterns:
 
 **Option A - run the Gateway on a Mac (simplest).**
-Run the Gateway where the macOS binaries exist, then connect from Linux in [remote mode](#how-do-i-run-openclaw-in-remote-mode-client-connects-to-a-gateway-elsewhere) or over Tailscale. The skills load normally because the Gateway host is macOS.
+Run the Gateway where the macOS binaries exist, then connect from Linux in [remote mode](#how-do-i-run-jarvis-in-remote-mode-client-connects-to-a-gateway-elsewhere) or over Tailscale. The skills load normally because the Gateway host is macOS.
 
 **Option B - use a macOS node (no SSH).**
 Run the Gateway on Linux, pair a macOS node (menubar app), and set **Node Run Commands** to "Always Ask" or "Always Allow" on the Mac. Jarvis can treat macOS-only skills as eligible when the required binaries exist on the node. The agent runs those skills via the `nodes` tool. If you choose "Always Ask", approving "Always Allow" in the prompt adds that command to the allowlist.
@@ -1176,13 +1176,13 @@ Keep the Gateway on Linux, but make the required CLI binaries resolve to SSH wra
    ```
 
 2. Put the wrapper on `PATH` on the Linux host (for example `~/bin/memo`).
-3. Override the skill metadata (workspace or `~/.openclaw/skills`) to allow Linux:
+3. Override the skill metadata (workspace or `~/.jarvis/skills`) to allow Linux:
 
    ```markdown
    ---
    name: apple-notes
    description: Manage Apple Notes via the memo CLI on macOS.
-   metadata: { "openclaw": { "os": ["darwin", "linux"], "requires": { "bins": ["memo"] } } }
+   metadata: { "jarvis": { "os": ["darwin", "linux"], "requires": { "bins": ["memo"] } } }
    ---
    ```
 
@@ -1212,7 +1212,7 @@ clawhub install <skill-slug>
 clawhub update --all
 ```
 
-ClawHub installs into `./skills` under your current directory (or falls back to your configured Jarvis workspace); Jarvis treats that as `<workspace>/skills` on the next session. For shared skills across agents, place them in `~/.openclaw/skills/<name>/SKILL.md`. Some skills expect binaries installed via Homebrew; on Linux that means Linuxbrew (see the Homebrew Linux FAQ entry above). See [Skills](/tools/skills) and [ClawHub](/tools/clawhub).
+ClawHub installs into `./skills` under your current directory (or falls back to your configured Jarvis workspace); Jarvis treats that as `<workspace>/skills` on the next session. For shared skills across agents, place them in `~/.jarvis/skills/<name>/SKILL.md`. Some skills expect binaries installed via Homebrew; on Linux that means Linuxbrew (see the Homebrew Linux FAQ entry above). See [Skills](/tools/skills) and [ClawHub](/tools/clawhub).
 
 ### How do I install the Chrome extension for browser takeover
 
@@ -1242,8 +1242,8 @@ Yes. See [Sandboxing](/gateway/sandboxing). For Docker-specific setup (full gate
 The default image is security-first and runs as the `node` user, so it does not
 include system packages, Homebrew, or bundled browsers. For a fuller setup:
 
-- Persist `/home/node` with `OPENCLAW_HOME_VOLUME` so caches survive.
-- Bake system deps into the image with `OPENCLAW_DOCKER_APT_PACKAGES`.
+- Persist `/home/node` with `JARVIS_HOME_VOLUME` so caches survive.
+- Bake system deps into the image with `JARVIS_DOCKER_APT_PACKAGES`.
 - Install Playwright browsers via the bundled CLI:
   `node /app/node_modules/playwright-core/cli.js install chromium`
 - Set `PLAYWRIGHT_BROWSERS_PATH` and ensure the path is persisted.
@@ -1324,7 +1324,7 @@ Docs: [Memory](/concepts/memory), [Context](/concepts/context).
 No - **Jarvis's state is local**, but **external services still see what you send them**.
 
 - **Local by default:** sessions, memory files, config, and workspace live on the Gateway host
-  (`~/.openclaw` + your workspace directory).
+  (`~/.jarvis` + your workspace directory).
 - **Remote by necessity:** messages you send to model providers (Anthropic/OpenAI/etc.) go to
   their APIs, and chat platforms (WhatsApp/Telegram/Slack/etc.) store message data on their
   servers.
@@ -1335,38 +1335,38 @@ Related: [Agent workspace](/concepts/agent-workspace), [Memory](/concepts/memory
 
 ### Where does Jarvis store its data
 
-Everything lives under `$OPENCLAW_STATE_DIR` (default: `~/.openclaw`):
+Everything lives under `$JARVIS_STATE_DIR` (default: `~/.jarvis`):
 
-| Path                                                            | Purpose                                                            |
-| --------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `$OPENCLAW_STATE_DIR/openclaw.json`                             | Main config (JSON5)                                                |
-| `$OPENCLAW_STATE_DIR/credentials/oauth.json`                    | Legacy OAuth import (copied into auth profiles on first use)       |
-| `$OPENCLAW_STATE_DIR/agents/<agentId>/agent/auth-profiles.json` | Auth profiles (OAuth, API keys, and optional `keyRef`/`tokenRef`)  |
-| `$OPENCLAW_STATE_DIR/secrets.json`                              | Optional file-backed secret payload for `file` SecretRef providers |
-| `$OPENCLAW_STATE_DIR/agents/<agentId>/agent/auth.json`          | Legacy compatibility file (static `api_key` entries scrubbed)      |
-| `$OPENCLAW_STATE_DIR/credentials/`                              | Provider state (e.g. `whatsapp/<accountId>/creds.json`)            |
-| `$OPENCLAW_STATE_DIR/agents/`                                   | Per-agent state (agentDir + sessions)                              |
-| `$OPENCLAW_STATE_DIR/agents/<agentId>/sessions/`                | Conversation history & state (per agent)                           |
-| `$OPENCLAW_STATE_DIR/agents/<agentId>/sessions/sessions.json`   | Session metadata (per agent)                                       |
+| Path                                                          | Purpose                                                            |
+| ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `$JARVIS_STATE_DIR/jarvis.json`                               | Main config (JSON5)                                                |
+| `$JARVIS_STATE_DIR/credentials/oauth.json`                    | Legacy OAuth import (copied into auth profiles on first use)       |
+| `$JARVIS_STATE_DIR/agents/<agentId>/agent/auth-profiles.json` | Auth profiles (OAuth, API keys, and optional `keyRef`/`tokenRef`)  |
+| `$JARVIS_STATE_DIR/secrets.json`                              | Optional file-backed secret payload for `file` SecretRef providers |
+| `$JARVIS_STATE_DIR/agents/<agentId>/agent/auth.json`          | Legacy compatibility file (static `api_key` entries scrubbed)      |
+| `$JARVIS_STATE_DIR/credentials/`                              | Provider state (e.g. `whatsapp/<accountId>/creds.json`)            |
+| `$JARVIS_STATE_DIR/agents/`                                   | Per-agent state (agentDir + sessions)                              |
+| `$JARVIS_STATE_DIR/agents/<agentId>/sessions/`                | Conversation history & state (per agent)                           |
+| `$JARVIS_STATE_DIR/agents/<agentId>/sessions/sessions.json`   | Session metadata (per agent)                                       |
 
-Legacy single-agent path: `~/.openclaw/agent/*` (migrated by `jarvis doctor`).
+Legacy single-agent path: `~/.jarvis/agent/*` (migrated by `jarvis doctor`).
 
-Your **workspace** (AGENTS.md, memory files, skills, etc.) is separate and configured via `agents.defaults.workspace` (default: `~/.openclaw/workspace`).
+Your **workspace** (AGENTS.md, memory files, skills, etc.) is separate and configured via `agents.defaults.workspace` (default: `~/.jarvis/workspace`).
 
 ### Where should AGENTSmd SOULmd USERmd MEMORYmd live
 
-These files live in the **agent workspace**, not `~/.openclaw`.
+These files live in the **agent workspace**, not `~/.jarvis`.
 
 - **Workspace (per agent)**: `AGENTS.md`, `SOUL.md`, `IDENTITY.md`, `USER.md`,
   `MEMORY.md` (or `memory.md`), `memory/YYYY-MM-DD.md`, optional `HEARTBEAT.md`.
-- **State dir (`~/.openclaw`)**: config, credentials, auth profiles, sessions, logs,
-  and shared skills (`~/.openclaw/skills`).
+- **State dir (`~/.jarvis`)**: config, credentials, auth profiles, sessions, logs,
+  and shared skills (`~/.jarvis/skills`).
 
-Default workspace is `~/.openclaw/workspace`, configurable via:
+Default workspace is `~/.jarvis/workspace`, configurable via:
 
 ```json5
 {
-  agents: { defaults: { workspace: "~/.openclaw/workspace" } },
+  agents: { defaults: { workspace: "~/.jarvis/workspace" } },
 }
 ```
 
@@ -1385,7 +1385,7 @@ Put your **agent workspace** in a **private** git repo and back it up somewhere
 private (for example GitHub private). This captures memory + AGENTS/SOUL/USER
 files, and lets you restore the assistant's "mind" later.
 
-Do **not** commit anything under `~/.openclaw` (credentials, sessions, tokens, or encrypted secrets payloads).
+Do **not** commit anything under `~/.jarvis` (credentials, sessions, tokens, or encrypted secrets payloads).
 If you need a full restore, back up both the workspace and the state directory
 separately (see the migration question above).
 
@@ -1425,17 +1425,17 @@ Session state is owned by the **gateway host**. If you're in remote mode, the se
 
 ### What format is the config Where is it
 
-Jarvis reads an optional **JSON5** config from `$OPENCLAW_CONFIG_PATH` (default: `~/.openclaw/openclaw.json`):
+Jarvis reads an optional **JSON5** config from `$JARVIS_CONFIG_PATH` (default: `~/.jarvis/jarvis.json`):
 
 ```
-$OPENCLAW_CONFIG_PATH
+$JARVIS_CONFIG_PATH
 ```
 
-If the file is missing, it uses safe-ish defaults (including a default workspace of `~/.openclaw/workspace`).
+If the file is missing, it uses safe-ish defaults (including a default workspace of `~/.jarvis/workspace`).
 
 ### I set gatewaybind lan or tailnet and now nothing listens the UI says unauthorized
 
-Non-loopback binds **require auth**. Configure `gateway.auth.mode` + `gateway.auth.token` (or use `OPENCLAW_GATEWAY_TOKEN`).
+Non-loopback binds **require auth**. Configure `gateway.auth.mode` + `gateway.auth.token` (or use `JARVIS_GATEWAY_TOKEN`).
 
 ```json5
 {
@@ -1486,7 +1486,7 @@ Set `cli.banner.taglineMode` in config:
 - `off`: hides tagline text but keeps the banner title/version line.
 - `default`: uses `All your chats, one Jarvis.` every time.
 - `random`: rotating funny/seasonal taglines (default behavior).
-- If you want no banner at all, set env `OPENCLAW_HIDE_BANNER=1`.
+- If you want no banner at all, set env `JARVIS_HIDE_BANNER=1`.
 
 ### How do I enable web search and web fetch
 
@@ -1523,7 +1523,7 @@ Notes:
 
 - If you use allowlists, add `web_search`/`web_fetch` or `group:web`.
 - `web_fetch` is enabled by default (unless explicitly disabled).
-- Daemons read env vars from `~/.openclaw/.env` (or the service environment).
+- Daemons read env vars from `~/.jarvis/.env` (or the service environment).
 
 Docs: [Web tools](/tools/web).
 
@@ -1701,7 +1701,7 @@ else is removed.
 
 Recover:
 
-- Restore from backup (git or a copied `~/.openclaw/openclaw.json`).
+- Restore from backup (git or a copied `~/.jarvis/jarvis.json`).
 - If you have no backup, re-run `jarvis doctor` and reconfigure channels/models.
 - If this was unexpected, file a bug and include your last known config or any backup.
 - A local coding agent can often reconstruct a working config from logs or history.
@@ -1717,7 +1717,7 @@ Docs: [Config](/cli/config), [Configure](/cli/configure), [Doctor](/gateway/doct
 
 ```json5
 {
-  agents: { defaults: { workspace: "~/.openclaw/workspace" } },
+  agents: { defaults: { workspace: "~/.jarvis/workspace" } },
   channels: { whatsapp: { allowFrom: ["+15555550123"] } },
 }
 ```
@@ -1776,7 +1776,7 @@ Docs: [Gateway protocol](/gateway/protocol), [Discovery](/gateway/discovery), [m
 Jarvis reads env vars from the parent process (shell, launchd/systemd, CI, etc.) and additionally loads:
 
 - `.env` from the current working directory
-- a global fallback `.env` from `~/.openclaw/.env` (aka `$OPENCLAW_STATE_DIR/.env`)
+- a global fallback `.env` from `~/.jarvis/.env` (aka `$JARVIS_STATE_DIR/.env`)
 
 Neither `.env` file overrides existing env vars.
 
@@ -1797,7 +1797,7 @@ See [/environment](/help/environment) for full precedence and sources.
 
 Two common fixes:
 
-1. Put the missing keys in `~/.openclaw/.env` so they're picked up even when the service doesn't inherit your shell env.
+1. Put the missing keys in `~/.jarvis/.env` so they're picked up even when the service doesn't inherit your shell env.
 2. Enable shell import (opt-in convenience):
 
 ```json5
@@ -1812,7 +1812,7 @@ Two common fixes:
 ```
 
 This runs your login shell and imports only missing expected keys (never overrides). Env var equivalents:
-`OPENCLAW_LOAD_SHELL_ENV=1`, `OPENCLAW_SHELL_ENV_TIMEOUT_MS=15000`.
+`JARVIS_LOAD_SHELL_ENV=1`, `JARVIS_SHELL_ENV_TIMEOUT_MS=15000`.
 
 ### I set COPILOTGITHUBTOKEN but models status shows Shell env off Why
 
@@ -1823,7 +1823,7 @@ your login shell automatically.
 If the Gateway runs as a service (launchd/systemd), it won't inherit your shell
 environment. Fix by doing one of these:
 
-1. Put the token in `~/.openclaw/.env`:
+1. Put the token in `~/.jarvis/.env`:
 
    ```
    COPILOT_GITHUB_TOKEN=...
@@ -1909,7 +1909,7 @@ jarvis onboard --install-daemon
 Notes:
 
 - The onboarding wizard also offers **Reset** if it sees an existing config. See [Wizard](/start/wizard).
-- If you used profiles (`--profile` / `OPENCLAW_PROFILE`), reset each state dir (defaults are `~/.openclaw-<profile>`).
+- If you used profiles (`--profile` / `JARVIS_PROFILE`), reset each state dir (defaults are `~/.jarvis-<profile>`).
 - Dev reset: `jarvis gateway --dev --reset` (dev-only; wipes dev config + credentials + sessions + workspace).
 
 ### Im getting context too large errors how do I reset or compact
@@ -2022,7 +2022,7 @@ Direct chats collapse to the main session by default. Groups/channels have their
 
 No hard limits. Dozens (even hundreds) are fine, but watch for:
 
-- **Disk growth:** sessions + transcripts live under `~/.openclaw/agents/<agentId>/sessions/`.
+- **Disk growth:** sessions + transcripts live under `~/.jarvis/agents/<agentId>/sessions/`.
 - **Token cost:** more agents means more concurrent model usage.
 - **Ops overhead:** per-agent auth profiles, workspaces, and channel routing.
 
@@ -2104,7 +2104,7 @@ Safe options:
 - `/model` in chat (quick, per-session)
 - `jarvis models set ...` (updates just model config)
 - `jarvis configure --section model` (interactive)
-- edit `agents.defaults.model` in `~/.openclaw/openclaw.json`
+- edit `agents.defaults.model` in `~/.jarvis/jarvis.json`
 
 Avoid `config.apply` with a partial object unless you intend to replace the whole config.
 If you did overwrite config, restore from backup or re-run `jarvis doctor` to repair.
@@ -2314,7 +2314,7 @@ This usually means the **new agent** has an empty auth store. Auth is per-agent 
 stored in:
 
 ```
-~/.openclaw/agents/<agentId>/agent/auth-profiles.json
+~/.jarvis/agents/<agentId>/agent/auth-profiles.json
 ```
 
 Fix options:
@@ -2346,10 +2346,10 @@ It means the system attempted to use the auth profile ID `anthropic:default`, bu
 ### Fix checklist for No credentials found for profile anthropicdefault
 
 - **Confirm where auth profiles live** (new vs legacy paths)
-  - Current: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
-  - Legacy: `~/.openclaw/agent/*` (migrated by `jarvis doctor`)
+  - Current: `~/.jarvis/agents/<agentId>/agent/auth-profiles.json`
+  - Legacy: `~/.jarvis/agent/*` (migrated by `jarvis doctor`)
 - **Confirm your env var is loaded by the Gateway**
-  - If you set `ANTHROPIC_API_KEY` in your shell but run the Gateway via systemd/launchd, it may not inherit it. Put it in `~/.openclaw/.env` or enable `env.shellEnv`.
+  - If you set `ANTHROPIC_API_KEY` in your shell but run the Gateway via systemd/launchd, it may not inherit it. Put it in `~/.jarvis/.env` or enable `env.shellEnv`.
 - **Make sure you're editing the correct agent**
   - Multi-agent setups mean there can be multiple `auth-profiles.json` files.
 - **Sanity-check model/auth status**
@@ -2364,7 +2364,7 @@ can't find it in its auth store.
   - Run `claude setup-token`, then paste it with `jarvis models auth setup-token --provider anthropic`.
   - If the token was created on another machine, use `jarvis models auth paste-token --provider anthropic`.
 - **If you want to use an API key instead**
-  - Put `ANTHROPIC_API_KEY` in `~/.openclaw/.env` on the **gateway host**.
+  - Put `ANTHROPIC_API_KEY` in `~/.jarvis/.env` on the **gateway host**.
   - Clear any pinned order that forces a missing profile:
 
     ```bash
@@ -2396,7 +2396,7 @@ Related: [/concepts/oauth](/concepts/oauth) (OAuth flows, token storage, multi-a
 An auth profile is a named credential record (OAuth or API key) tied to a provider. Profiles live in:
 
 ```
-~/.openclaw/agents/<agentId>/agent/auth-profiles.json
+~/.jarvis/agents/<agentId>/agent/auth-profiles.json
 ```
 
 ### What are typical profile IDs
@@ -2453,7 +2453,7 @@ The wizard explicitly supports Anthropic setup-token and OpenAI Codex OAuth and 
 Precedence:
 
 ```
---port > OPENCLAW_GATEWAY_PORT > gateway.port > default 18789
+--port > JARVIS_GATEWAY_PORT > gateway.port > default 18789
 ```
 
 ### Why does jarvis gateway status say Runtime running but RPC probe failed
@@ -2468,7 +2468,7 @@ Use `jarvis gateway status` and trust these lines:
 
 ### Why does jarvis gateway status show Config cli and Config service different
 
-You're editing one config file while the service is running another (often a `--profile` / `OPENCLAW_STATE_DIR` mismatch).
+You're editing one config file while the service is running another (often a `--profile` / `JARVIS_STATE_DIR` mismatch).
 
 Fix:
 
@@ -2520,7 +2520,7 @@ Fix:
 - Fastest: `jarvis dashboard` (prints + copies the dashboard URL, tries to open; shows SSH hint if headless).
 - If you don't have a token yet: `jarvis doctor --generate-gateway-token`.
 - If remote, tunnel first: `ssh -N -L 18789:127.0.0.1:18789 user@host` then open `http://127.0.0.1:18789/`.
-- Set `gateway.auth.token` (or `OPENCLAW_GATEWAY_TOKEN`) on the gateway host.
+- Set `gateway.auth.token` (or `JARVIS_GATEWAY_TOKEN`) on the gateway host.
 - In the Control UI settings, paste the same token.
 - If mismatch persists after the one retry, rotate/re-approve the paired device token:
   - `jarvis devices list`
@@ -2544,18 +2544,18 @@ Usually no - one Gateway can run multiple messaging channels and agents. Use mul
 
 Yes, but you must isolate:
 
-- `OPENCLAW_CONFIG_PATH` (per-instance config)
-- `OPENCLAW_STATE_DIR` (per-instance state)
+- `JARVIS_CONFIG_PATH` (per-instance config)
+- `JARVIS_STATE_DIR` (per-instance state)
 - `agents.defaults.workspace` (workspace isolation)
 - `gateway.port` (unique ports)
 
 Quick setup (recommended):
 
-- Use `openclaw --profile <name> …` per instance (auto-creates `~/.openclaw-<name>`).
+- Use `jarvis --profile <name> …` per instance (auto-creates `~/.jarvis-<name>`).
 - Set a unique `gateway.port` in each profile config (or pass `--port` for manual runs).
-- Install a per-profile service: `openclaw --profile <name> gateway install`.
+- Install a per-profile service: `jarvis --profile <name> gateway install`.
 
-Profiles also suffix service names (`ai.openclaw.<profile>`; legacy `com.openclaw.*`, `jarvis-gateway-<profile>.service`, `Jarvis Gateway (<profile>)`).
+Profiles also suffix service names (`ai.jarvis.<profile>`; legacy `com.jarvis.*`, `jarvis-gateway-<profile>.service`, `Jarvis Gateway (<profile>)`).
 Full guide: [Multiple gateways](/gateway/multiple-gateways).
 
 ### What does invalid handshake code 1008 mean
@@ -2591,7 +2591,7 @@ Protocol details: [Gateway protocol](/gateway/protocol).
 File logs (structured):
 
 ```
-/tmp/openclaw/openclaw-YYYY-MM-DD.log
+/tmp/jarvis/jarvis-YYYY-MM-DD.log
 ```
 
 You can set a stable path via `logging.file`. File log level is controlled by `logging.level`. Console verbosity is controlled by `--verbose` and `logging.consoleLevel`.
@@ -2604,7 +2604,7 @@ jarvis logs --follow
 
 Service/supervisor logs (when the gateway runs via launchd/systemd):
 
-- macOS: `$OPENCLAW_STATE_DIR/logs/gateway.log` and `gateway.err.log` (default: `~/.openclaw/logs/...`; profiles use `~/.openclaw-<profile>/logs/...`)
+- macOS: `$JARVIS_STATE_DIR/logs/gateway.log` and `gateway.err.log` (default: `~/.jarvis/logs/...`; profiles use `~/.jarvis-<profile>/logs/...`)
 - Linux: `journalctl --user -u jarvis-gateway[-<profile>].service -n 200 --no-pager`
 - Windows: `schtasks /Query /TN "Jarvis Gateway (<profile>)" /V /FO LIST`
 
@@ -2762,7 +2762,7 @@ Start the Gateway with `--verbose` to get more console detail. Then inspect the 
 
 ### My skill generated an imagePDF but nothing was sent
 
-Outbound attachments from the agent must include a `MEDIA:<path-or-url>` line (on its own line). See [Jarvis assistant setup](/start/openclaw) and [Agent send](/tools/agent-send).
+Outbound attachments from the agent must include a `MEDIA:<path-or-url>` line (on its own line). See [Jarvis assistant setup](/start/jarvis) and [Agent send](/tools/agent-send).
 
 CLI sending:
 
@@ -2900,7 +2900,7 @@ stop run
 stop current run
 stop agent
 stop the agent
-stop openclaw
+stop jarvis
 jarvis stop
 stop don't do anything
 stop do not do anything
@@ -2973,4 +2973,4 @@ You can add options like `debounce:2s cap:25 drop:summarize` for followup modes.
 
 ---
 
-Still stuck? Ask in [Discord](https://discord.com/invite/clawd) or open a [GitHub discussion](https://github.com/openclaw/openclaw/discussions).
+Still stuck? Ask in [Discord](https://discord.com/invite/clawd) or open a [GitHub discussion](https://github.com/jarvis/jarvis/discussions).

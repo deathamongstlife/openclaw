@@ -28,7 +28,7 @@ updates.
 | Session modes                                                         | Partial     | `session/set_mode` is supported and the bridge exposes initial Gateway-backed session controls for thought level, tool verbosity, reasoning, usage detail, and elevated actions. Broader ACP-native mode/config surfaces are still out of scope. |
 | Session info and usage updates                                        | Partial     | The bridge emits `session_info_update` and best-effort `usage_update` notifications from cached Gateway session snapshots. Usage is approximate and only sent when Gateway token totals are marked fresh.                                        |
 | Tool streaming                                                        | Partial     | `tool_call` / `tool_call_update` events include raw I/O, text content, and best-effort file locations when Gateway tool args/results expose them. Embedded terminals and richer diff-native output are still not exposed.                        |
-| Per-session MCP servers (`mcpServers`)                                | Unsupported | Bridge mode rejects per-session MCP server requests. Configure MCP on the Jarvis gateway or agent instead.                                                                                                                                     |
+| Per-session MCP servers (`mcpServers`)                                | Unsupported | Bridge mode rejects per-session MCP server requests. Configure MCP on the Jarvis gateway or agent instead.                                                                                                                                       |
 | Client filesystem methods (`fs/read_text_file`, `fs/write_text_file`) | Unsupported | The bridge does not call ACP client filesystem methods.                                                                                                                                                                                          |
 | Client terminal methods (`terminal/*`)                                | Unsupported | The bridge does not create ACP client terminals or stream terminal ids through tool calls.                                                                                                                                                       |
 | Session plans / thought streaming                                     | Unsupported | The bridge currently emits output text and tool status, not ACP plan or thought updates.                                                                                                                                                         |
@@ -65,7 +65,7 @@ jarvis acp
 jarvis acp --url wss://gateway-host:18789 --token <token>
 
 # Remote Gateway (token from file)
-jarvis acp --url wss://gateway-host:18789 --token-file ~/.openclaw/gateway.token
+jarvis acp --url wss://gateway-host:18789 --token-file ~/.jarvis/gateway.token
 
 # Attach to an existing session key
 jarvis acp --session agent:main:main
@@ -86,10 +86,10 @@ It spawns the ACP bridge and lets you type prompts interactively.
 jarvis acp client
 
 # Point the spawned bridge at a remote Gateway
-jarvis acp client --server-args --url wss://gateway-host:18789 --token-file ~/.openclaw/gateway.token
+jarvis acp client --server-args --url wss://gateway-host:18789 --token-file ~/.jarvis/gateway.token
 
-# Override the server command (default: openclaw)
-jarvis acp client --server "node" --server-args openclaw.mjs acp --url ws://127.0.0.1:19001
+# Override the server command (default: jarvis)
+jarvis acp client --server "node" --server-args jarvis.mjs acp --url ws://127.0.0.1:19001
 ```
 
 Permission model (client debug mode):
@@ -120,7 +120,7 @@ Example direct run (no config write):
 ```bash
 jarvis acp --url wss://gateway-host:18789 --token <token>
 # preferred for local process safety
-jarvis acp --url wss://gateway-host:18789 --token-file ~/.openclaw/gateway.token
+jarvis acp --url wss://gateway-host:18789 --token-file ~/.jarvis/gateway.token
 ```
 
 ## Selecting agents
@@ -146,12 +146,12 @@ error instead of silently ignoring them.
 ## Use from `acpx` (Codex, Claude, other ACP clients)
 
 If you want a coding agent such as Codex or Claude Code to talk to your
-Jarvis bot over ACP, use `acpx` with its built-in `openclaw` target.
+Jarvis bot over ACP, use `acpx` with its built-in `jarvis` target.
 
 Typical flow:
 
 1. Run the Gateway and make sure the ACP bridge can reach it.
-2. Point `acpx openclaw` at `jarvis acp`.
+2. Point `acpx jarvis` at `jarvis acp`.
 3. Target the Jarvis session key you want the coding agent to use.
 
 Examples:
@@ -162,18 +162,18 @@ acpx jarvis exec "Summarize the active Jarvis session state."
 
 # Persistent named session for follow-up turns
 acpx jarvis sessions ensure --name codex-bridge
-acpx openclaw -s codex-bridge --cwd /path/to/repo \
+acpx jarvis -s codex-bridge --cwd /path/to/repo \
   "Ask my Jarvis work agent for recent context relevant to this repo."
 ```
 
-If you want `acpx openclaw` to target a specific Gateway and session key every
-time, override the `openclaw` agent command in `~/.acpx/config.json`:
+If you want `acpx jarvis` to target a specific Gateway and session key every
+time, override the `jarvis` agent command in `~/.acpx/config.json`:
 
 ```json
 {
   "agents": {
-    "openclaw": {
-      "command": "env OPENCLAW_HIDE_BANNER=1 OPENCLAW_SUPPRESS_NOTES=1 jarvis acp --url ws://127.0.0.1:18789 --token-file ~/.openclaw/gateway.token --session agent:main:main"
+    "jarvis": {
+      "command": "env JARVIS_HIDE_BANNER=1 JARVIS_SUPPRESS_NOTES=1 jarvis acp --url ws://127.0.0.1:18789 --token-file ~/.jarvis/gateway.token --session agent:main:main"
     }
   }
 }
@@ -183,7 +183,7 @@ For a repo-local Jarvis checkout, use the direct CLI entrypoint instead of the
 dev runner so the ACP stream stays clean. For example:
 
 ```bash
-env OPENCLAW_HIDE_BANNER=1 OPENCLAW_SUPPRESS_NOTES=1 node openclaw.mjs acp ...
+env JARVIS_HIDE_BANNER=1 JARVIS_SUPPRESS_NOTES=1 node jarvis.mjs acp ...
 ```
 
 This is the easiest way to let Codex, Claude Code, or another ACP-aware client
@@ -198,7 +198,7 @@ Add a custom ACP agent in `~/.config/zed/settings.json` (or use Zed’s Settings
   "agent_servers": {
     "Jarvis ACP": {
       "type": "custom",
-      "command": "openclaw",
+      "command": "jarvis",
       "args": ["acp"],
       "env": {}
     }
@@ -213,7 +213,7 @@ To target a specific Gateway or agent:
   "agent_servers": {
     "Jarvis ACP": {
       "type": "custom",
-      "command": "openclaw",
+      "command": "jarvis",
       "args": [
         "acp",
         "--url",
@@ -271,18 +271,18 @@ Learn more about session keys at [/concepts/session](/concepts/session).
 Security note:
 
 - `--token` and `--password` can be visible in local process listings on some systems.
-- Prefer `--token-file`/`--password-file` or environment variables (`OPENCLAW_GATEWAY_TOKEN`, `OPENCLAW_GATEWAY_PASSWORD`).
+- Prefer `--token-file`/`--password-file` or environment variables (`JARVIS_GATEWAY_TOKEN`, `JARVIS_GATEWAY_PASSWORD`).
 - Gateway auth resolution follows the shared contract used by other Gateway clients:
-  - local mode: env (`OPENCLAW_GATEWAY_*`) -> `gateway.auth.*` -> `gateway.remote.*` fallback only when `gateway.auth.*` is unset (configured-but-unresolved local SecretRefs fail closed)
+  - local mode: env (`JARVIS_GATEWAY_*`) -> `gateway.auth.*` -> `gateway.remote.*` fallback only when `gateway.auth.*` is unset (configured-but-unresolved local SecretRefs fail closed)
   - remote mode: `gateway.remote.*` with env/config fallback per remote precedence rules
   - `--url` is override-safe and does not reuse implicit config/env credentials; pass explicit `--token`/`--password` (or file variants)
-- ACP runtime backend child processes receive `OPENCLAW_SHELL=acp`, which can be used for context-specific shell/profile rules.
-- `jarvis acp client` sets `OPENCLAW_SHELL=acp-client` on the spawned bridge process.
+- ACP runtime backend child processes receive `JARVIS_SHELL=acp`, which can be used for context-specific shell/profile rules.
+- `jarvis acp client` sets `JARVIS_SHELL=acp-client` on the spawned bridge process.
 
 ### `acp client` options
 
 - `--cwd <dir>`: working directory for the ACP session.
-- `--server <command>`: ACP server command (default: `openclaw`).
+- `--server <command>`: ACP server command (default: `jarvis`).
 - `--server-args <args...>`: extra arguments passed to the ACP server.
 - `--server-verbose`: enable verbose logging on the ACP server.
 - `--verbose, -v`: verbose client logging.

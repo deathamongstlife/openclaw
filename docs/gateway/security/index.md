@@ -50,7 +50,7 @@ Start with the smallest access that still works, then widen it as you gain confi
 
 Jarvis assumes the host and config boundary are trusted:
 
-- If someone can modify Gateway host state/config (`~/.openclaw`, including `openclaw.json`), treat them as a trusted operator.
+- If someone can modify Gateway host state/config (`~/.jarvis`, including `jarvis.json`), treat them as a trusted operator.
 - Running one Gateway for multiple mutually untrusted/adversarial operators is **not a recommended setup**.
 - For mixed-trust teams, split trust boundaries with separate gateways (or at minimum separate OS users/hosts).
 - Jarvis can run multiple gateway instances on one machine, but recommended operations favor clean trust-boundary separation.
@@ -139,7 +139,7 @@ Before opening a GHSA, verify all of these:
 1. Repro still works on latest `main` or latest release.
 2. Report includes exact code path (`file`, function, line range) and tested version/commit.
 3. Impact crosses a documented trust boundary (not just prompt injection).
-4. Claim is not listed in [Out of Scope](https://github.com/openclaw/openclaw/blob/main/SECURITY.md#out-of-scope).
+4. Claim is not listed in [Out of Scope](https://github.com/jarvis/jarvis/blob/main/SECURITY.md#out-of-scope).
 5. Existing advisories were checked for duplicates (reuse canonical GHSA when applicable).
 6. Deployment assumptions are explicit (loopback/local vs exposed, trusted vs untrusted operators).
 
@@ -199,16 +199,16 @@ If you run `--deep`, Jarvis also attempts a best-effort live Gateway probe.
 
 Use this when auditing access or deciding what to back up:
 
-- **WhatsApp**: `~/.openclaw/credentials/whatsapp/<accountId>/creds.json`
+- **WhatsApp**: `~/.jarvis/credentials/whatsapp/<accountId>/creds.json`
 - **Telegram bot token**: config/env or `channels.telegram.tokenFile` (regular file only; symlinks rejected)
 - **Discord bot token**: config/env or SecretRef (env/file/exec providers)
 - **Slack tokens**: config/env (`channels.slack.*`)
 - **Pairing allowlists**:
-  - `~/.openclaw/credentials/<channel>-allowFrom.json` (default account)
-  - `~/.openclaw/credentials/<channel>-<accountId>-allowFrom.json` (non-default accounts)
-- **Model auth profiles**: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
-- **File-backed secrets payload (optional)**: `~/.openclaw/secrets.json`
-- **Legacy OAuth import**: `~/.openclaw/credentials/oauth.json`
+  - `~/.jarvis/credentials/<channel>-allowFrom.json` (default account)
+  - `~/.jarvis/credentials/<channel>-<accountId>-allowFrom.json` (non-default accounts)
+- **Model auth profiles**: `~/.jarvis/agents/<agentId>/agent/auth-profiles.json`
+- **File-backed secrets payload (optional)**: `~/.jarvis/secrets.json`
+- **Legacy OAuth import**: `~/.jarvis/credentials/oauth.json`
 
 ## Security Audit Checklist
 
@@ -227,8 +227,8 @@ High-signal `checkId` values you will most likely see in real deployments (not e
 
 | `checkId`                                          | Severity      | Why it matters                                                                       | Primary fix key/path                                                                              | Auto-fix |
 | -------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- | -------- |
-| `fs.state_dir.perms_world_writable`                | critical      | Other users/processes can modify full Jarvis state                                 | filesystem perms on `~/.openclaw`                                                                 | yes      |
-| `fs.config.perms_writable`                         | critical      | Others can change auth/tool policy/config                                            | filesystem perms on `~/.openclaw/openclaw.json`                                                   | yes      |
+| `fs.state_dir.perms_world_writable`                | critical      | Other users/processes can modify full Jarvis state                                   | filesystem perms on `~/.jarvis`                                                                   | yes      |
+| `fs.config.perms_writable`                         | critical      | Others can change auth/tool policy/config                                            | filesystem perms on `~/.jarvis/jarvis.json`                                                       | yes      |
 | `fs.config.perms_world_readable`                   | critical      | Config can expose tokens/settings                                                    | filesystem perms on config file                                                                   | yes      |
 | `gateway.bind_no_auth`                             | critical      | Remote bind without shared secret                                                    | `gateway.bind`, `gateway.auth.*`                                                                  | no       |
 | `gateway.loopback_no_auth`                         | critical      | Reverse-proxied loopback may become unauthenticated                                  | `gateway.auth.*`, proxy setup                                                                     | no       |
@@ -330,7 +330,7 @@ gateway:
   allowRealIpFallback: false
   auth:
     mode: password
-    password: ${OPENCLAW_GATEWAY_PASSWORD}
+    password: ${JARVIS_GATEWAY_PASSWORD}
 ```
 
 When `trustedProxies` is configured, the Gateway uses `X-Forwarded-For` to determine the client IP. `X-Real-IP` is ignored by default unless `gateway.allowRealIpFallback: true` is explicitly set.
@@ -359,10 +359,10 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
 ## Local session logs live on disk
 
-Jarvis stores session transcripts on disk under `~/.openclaw/agents/<agentId>/sessions/*.jsonl`.
+Jarvis stores session transcripts on disk under `~/.jarvis/agents/<agentId>/sessions/*.jsonl`.
 This is required for session continuity and (optionally) session memory indexing, but it also means
 **any process/user with filesystem access can read those logs**. Treat disk access as the trust
-boundary and lock down permissions on `~/.openclaw` (see the audit section below). If you need
+boundary and lock down permissions on `~/.jarvis` (see the audit section below). If you need
 stronger isolation between agents, run them under separate OS users or separate hosts.
 
 ## Node execution (system.run)
@@ -446,7 +446,7 @@ Plugins run **in-process** with the Gateway. Treat them as trusted code:
 - Review plugin config before enabling.
 - Restart the Gateway after plugin changes.
 - If you install plugins from npm (`jarvis plugins install <npm-spec>`), treat it like running untrusted code:
-  - The install path is `~/.openclaw/extensions/<pluginId>/` (or `$OPENCLAW_STATE_DIR/extensions/<pluginId>/`).
+  - The install path is `~/.jarvis/extensions/<pluginId>/` (or `$JARVIS_STATE_DIR/extensions/<pluginId>/`).
   - Jarvis uses `npm pack` and then runs `npm install --omit=dev` in that directory (npm lifecycle scripts can execute code during install).
   - Prefer pinned, exact versions (`@scope/pkg@1.2.3`), and inspect the unpacked code on disk before enabling.
 
@@ -499,7 +499,7 @@ If you run multiple accounts on the same channel, use `per-account-channel-peer`
 Jarvis has two separate “who can trigger me?” layers:
 
 - **DM allowlist** (`allowFrom` / `channels.discord.allowFrom` / `channels.slack.allowFrom`; legacy: `channels.discord.dm.allowFrom`, `channels.slack.dm.allowFrom`): who is allowed to talk to the bot in direct messages.
-  - When `dmPolicy="pairing"`, approvals are written to the account-scoped pairing allowlist store under `~/.openclaw/credentials/` (`<channel>-allowFrom.json` for default account, `<channel>-<accountId>-allowFrom.json` for non-default accounts), merged with config allowlists.
+  - When `dmPolicy="pairing"`, approvals are written to the account-scoped pairing allowlist store under `~/.jarvis/credentials/` (`<channel>-allowFrom.json` for default account, `<channel>-<accountId>-allowFrom.json` for non-default accounts), merged with config allowlists.
 - **Group allowlist** (channel-specific): which groups/channels/guilds the bot will accept messages from at all.
   - Common patterns:
     - `channels.whatsapp.groups`, `channels.telegram.groups`, `channels.imessage.groups`: per-group defaults like `requireMention`; when set, it also acts as a group allowlist (include `"*"` to keep allow-all behavior).
@@ -604,8 +604,8 @@ Guidance:
 
 Keep config + state private on the gateway host:
 
-- `~/.openclaw/openclaw.json`: `600` (user read/write only)
-- `~/.openclaw`: `700` (user only)
+- `~/.jarvis/jarvis.json`: `600` (user read/write only)
+- `~/.jarvis`: `700` (user only)
 
 `jarvis doctor` can warn and offer to tighten these permissions.
 
@@ -614,12 +614,12 @@ Keep config + state private on the gateway host:
 The Gateway multiplexes **WebSocket + HTTP** on a single port:
 
 - Default: `18789`
-- Config/flags/env: `gateway.port`, `--port`, `OPENCLAW_GATEWAY_PORT`
+- Config/flags/env: `gateway.port`, `--port`, `JARVIS_GATEWAY_PORT`
 
 This HTTP surface includes the Control UI and the canvas host:
 
 - Control UI (SPA assets) (default base path `/`)
-- Canvas host: `/__openclaw__/canvas/` and `/__openclaw__/a2ui/` (arbitrary HTML/JS; treat as untrusted content)
+- Canvas host: `/__jarvis__/canvas/` and `/__jarvis__/a2ui/` (arbitrary HTML/JS; treat as untrusted content)
 
 If you load canvas content in a normal browser, treat it like any other untrusted web page:
 
@@ -688,7 +688,7 @@ setups: SSH + your reverse proxy ports).
 
 ### 0.4.2) mDNS/Bonjour discovery (information disclosure)
 
-The Gateway broadcasts its presence via mDNS (`_openclaw-gw._tcp` on port 5353) for local device discovery. In full mode, this includes TXT records that may expose operational details:
+The Gateway broadcasts its presence via mDNS (`_jarvis-gw._tcp` on port 5353) for local device discovery. In full mode, this includes TXT records that may expose operational details:
 
 - `cliPath`: full filesystem path to the CLI binary (reveals username and install location)
 - `sshPort`: advertises SSH availability on the host
@@ -728,7 +728,7 @@ The Gateway broadcasts its presence via mDNS (`_openclaw-gw._tcp` on port 5353) 
    }
    ```
 
-4. **Environment variable** (alternative): set `OPENCLAW_DISABLE_BONJOUR=1` to disable mDNS without config changes.
+4. **Environment variable** (alternative): set `JARVIS_DISABLE_BONJOUR=1` to disable mDNS without config changes.
 
 In minimal mode, the Gateway still broadcasts enough for device discovery (`role`, `gatewayPort`, `transport`) but omits `cliPath` and `sshPort`. Apps that need CLI path information can fetch it via the authenticated WebSocket connection instead.
 
@@ -760,7 +760,7 @@ If `gateway.auth.token` / `gateway.auth.password` is explicitly configured via
 SecretRef and unresolved, resolution fails closed (no remote fallback masking).
 Optional: pin remote TLS with `gateway.remote.tlsFingerprint` when using `wss://`.
 Plaintext `ws://` is loopback-only by default. For trusted private-network
-paths, set `OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1` on the client process as break-glass.
+paths, set `JARVIS_ALLOW_INSECURE_PRIVATE_WS=1` on the client process as break-glass.
 
 Local device pairing:
 
@@ -772,12 +772,12 @@ Local device pairing:
 Auth modes:
 
 - `gateway.auth.mode: "token"`: shared bearer token (recommended for most setups).
-- `gateway.auth.mode: "password"`: password auth (prefer setting via env: `OPENCLAW_GATEWAY_PASSWORD`).
+- `gateway.auth.mode: "password"`: password auth (prefer setting via env: `JARVIS_GATEWAY_PASSWORD`).
 - `gateway.auth.mode: "trusted-proxy"`: trust an identity-aware reverse proxy to authenticate users and pass identity via headers (see [Trusted Proxy Auth](/gateway/trusted-proxy-auth)).
 
 Rotation checklist (token/password):
 
-1. Generate/set a new secret (`gateway.auth.token` or `OPENCLAW_GATEWAY_PASSWORD`).
+1. Generate/set a new secret (`gateway.auth.token` or `JARVIS_GATEWAY_PASSWORD`).
 2. Restart the Gateway (or restart the macOS app if it supervises the Gateway).
 3. Update any remote clients (`gateway.remote.token` / `.password` on machines that call into the Gateway).
 4. Verify you can no longer connect with the old credentials.
@@ -835,9 +835,9 @@ Avoid:
 
 ### 0.7) Secrets on disk (what’s sensitive)
 
-Assume anything under `~/.openclaw/` (or `$OPENCLAW_STATE_DIR/`) may contain secrets or private data:
+Assume anything under `~/.jarvis/` (or `$JARVIS_STATE_DIR/`) may contain secrets or private data:
 
-- `openclaw.json`: config may include tokens (gateway, remote gateway), provider settings, and allowlists.
+- `jarvis.json`: config may include tokens (gateway, remote gateway), provider settings, and allowlists.
 - `credentials/**`: channel credentials (example: WhatsApp creds), pairing allowlists, legacy OAuth imports.
 - `agents/<agentId>/agent/auth-profiles.json`: API keys, token profiles, OAuth tokens, and optional `keyRef`/`tokenRef`.
 - `secrets.json` (optional): file-backed secret payload used by `file` SecretRef providers (`secrets.providers`).
@@ -891,7 +891,7 @@ Details: [Logging](/gateway/logging)
     "list": [
       {
         "id": "main",
-        "groupChat": { "mentionPatterns": ["@openclaw", "@mybot"] }
+        "groupChat": { "mentionPatterns": ["@jarvis", "@mybot"] }
       }
     ]
   }
@@ -920,7 +920,7 @@ Additional hardening options:
 
 - `tools.exec.applyPatch.workspaceOnly: true` (default): ensures `apply_patch` cannot write/delete outside the workspace directory even when sandboxing is off. Set to `false` only if you intentionally want `apply_patch` to touch files outside the workspace.
 - `tools.fs.workspaceOnly: true` (optional): restricts `read`/`write`/`edit`/`apply_patch` paths and native prompt image auto-load paths to the workspace directory (useful if you allow absolute paths today and want a single guardrail).
-- Keep filesystem roots narrow: avoid broad roots like your home directory for agent workspaces/sandbox workspaces. Broad roots can expose sensitive local files (for example state/config under `~/.openclaw`) to filesystem tools.
+- Keep filesystem roots narrow: avoid broad roots like your home directory for agent workspaces/sandbox workspaces. Broad roots can expose sensitive local files (for example state/config under `~/.jarvis`) to filesystem tools.
 
 ### 5) Secure baseline (copy/paste)
 
@@ -962,7 +962,7 @@ single container/workspace.
 
 Also consider agent workspace access inside the sandbox:
 
-- `agents.defaults.sandbox.workspaceAccess: "none"` (default) keeps the agent workspace off-limits; tools run against a sandbox workspace under `~/.openclaw/sandboxes`
+- `agents.defaults.sandbox.workspaceAccess: "none"` (default) keeps the agent workspace off-limits; tools run against a sandbox workspace under `~/.jarvis/sandboxes`
 - `agents.defaults.sandbox.workspaceAccess: "ro"` mounts the agent workspace read-only at `/agent` (disables `write`/`edit`/`apply_patch`)
 - `agents.defaults.sandbox.workspaceAccess: "rw"` mounts the agent workspace read/write at `/workspace`
 
@@ -983,7 +983,7 @@ Enabling browser control gives the model the ability to drive a real browser.
 If that browser profile already contains logged-in sessions, the model can
 access those accounts and data. Treat browser profiles as **sensitive state**:
 
-- Prefer a dedicated profile for the agent (the default `openclaw` profile).
+- Prefer a dedicated profile for the agent (the default `jarvis` profile).
 - Avoid pointing the agent at your personal daily-driver profile.
 - Keep host browser control disabled for sandboxed agents unless you trust them.
 - Treat browser downloads as untrusted input; prefer an isolated downloads directory.
@@ -1039,7 +1039,7 @@ Common use cases:
     list: [
       {
         id: "personal",
-        workspace: "~/.openclaw/workspace-personal",
+        workspace: "~/.jarvis/workspace-personal",
         sandbox: { mode: "off" },
       },
     ],
@@ -1055,7 +1055,7 @@ Common use cases:
     list: [
       {
         id: "family",
-        workspace: "~/.openclaw/workspace-family",
+        workspace: "~/.jarvis/workspace-family",
         sandbox: {
           mode: "all",
           scope: "agent",
@@ -1079,7 +1079,7 @@ Common use cases:
     list: [
       {
         id: "public",
-        workspace: "~/.openclaw/workspace-public",
+        workspace: "~/.jarvis/workspace-public",
         sandbox: {
           mode: "all",
           scope: "agent",
@@ -1147,14 +1147,14 @@ If your AI does something bad:
 
 ### Rotate (assume compromise if secrets leaked)
 
-1. Rotate Gateway auth (`gateway.auth.token` / `OPENCLAW_GATEWAY_PASSWORD`) and restart.
+1. Rotate Gateway auth (`gateway.auth.token` / `JARVIS_GATEWAY_PASSWORD`) and restart.
 2. Rotate remote client secrets (`gateway.remote.token` / `.password`) on any machine that can call the Gateway.
 3. Rotate provider/API credentials (WhatsApp creds, Slack/Discord tokens, model/API keys in `auth-profiles.json`, and encrypted secrets payload values when used).
 
 ### Audit
 
-1. Check Gateway logs: `/tmp/openclaw/openclaw-YYYY-MM-DD.log` (or `logging.file`).
-2. Review the relevant transcript(s): `~/.openclaw/agents/<agentId>/sessions/*.jsonl`.
+1. Check Gateway logs: `/tmp/jarvis/jarvis-YYYY-MM-DD.log` (or `logging.file`).
+2. Review the relevant transcript(s): `~/.jarvis/agents/<agentId>/sessions/*.jsonl`.
 3. Review recent config changes (anything that could have widened access: `gateway.bind`, `gateway.auth`, dm/group policies, `tools.elevated`, plugin changes).
 4. Re-run `jarvis security audit --deep` and confirm critical findings are resolved.
 
@@ -1202,6 +1202,6 @@ Commit the updated `.secrets.baseline` once it reflects the intended state.
 
 Found a vulnerability in Jarvis? Please report responsibly:
 
-1. Email: [security@openclaw.ai](mailto:security@openclaw.ai)
+1. Email: [security@jarvis.ai](mailto:security@jarvis.ai)
 2. Don't post publicly until fixed
 3. We'll credit you (unless you prefer anonymity)

@@ -181,11 +181,7 @@ export class QmdMemoryManager implements MemorySearchManager {
   private attemptedNullByteCollectionRepair = false;
   private attemptedDuplicateDocumentRepair = false;
 
-  private constructor(params: {
-    cfg: JarvisConfig;
-    agentId: string;
-    resolved: ResolvedQmdConfig;
-  }) {
+  private constructor(params: { cfg: JarvisConfig; agentId: string; resolved: ResolvedQmdConfig }) {
     this.cfg = params.cfg;
     this.agentId = params.agentId;
     this.qmd = params.resolved;
@@ -1211,11 +1207,11 @@ export class QmdMemoryManager implements MemorySearchManager {
     }
     if (!mcporter.startDaemon) {
       type McporterWarnGlobal = typeof globalThis & {
-        __openclawMcporterColdStartWarned?: boolean;
+        __jarvisMcporterColdStartWarned?: boolean;
       };
       const g: McporterWarnGlobal = globalThis;
-      if (!g.__openclawMcporterColdStartWarned) {
-        g.__openclawMcporterColdStartWarned = true;
+      if (!g.__jarvisMcporterColdStartWarned) {
+        g.__jarvisMcporterColdStartWarned = true;
         log.warn(
           "mcporter qmd bridge enabled but startDaemon=false; each query may cold-start QMD MCP. Consider setting memory.qmd.mcporter.startDaemon=true to keep it warm.",
         );
@@ -1223,21 +1219,21 @@ export class QmdMemoryManager implements MemorySearchManager {
       return;
     }
     type McporterGlobal = typeof globalThis & {
-      __openclawMcporterDaemonStart?: Promise<void>;
+      __jarvisMcporterDaemonStart?: Promise<void>;
     };
     const g: McporterGlobal = globalThis;
-    if (!g.__openclawMcporterDaemonStart) {
-      g.__openclawMcporterDaemonStart = (async () => {
+    if (!g.__jarvisMcporterDaemonStart) {
+      g.__jarvisMcporterDaemonStart = (async () => {
         try {
           await this.runMcporter(["daemon", "start"], { timeoutMs: 10_000 });
         } catch (err) {
           log.warn(`mcporter daemon start failed: ${String(err)}`);
           // Allow future searches to retry daemon start on transient failures.
-          delete g.__openclawMcporterDaemonStart;
+          delete g.__jarvisMcporterDaemonStart;
         }
       })();
     }
-    await g.__openclawMcporterDaemonStart;
+    await g.__jarvisMcporterDaemonStart;
   }
 
   private async runMcporter(

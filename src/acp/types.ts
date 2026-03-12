@@ -45,7 +45,7 @@ export type AcpServerOptions = {
 };
 
 export const ACP_AGENT_INFO = {
-  name: "openclaw-acp",
+  name: "jarvis-acp",
   title: "Jarvis ACP Gateway",
   version: VERSION,
 };

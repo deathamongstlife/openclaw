@@ -5,8 +5,8 @@
  * This is the primary entry point for the Twitch channel integration.
  */
 
-import type { JarvisConfig } from "openclaw/plugin-sdk/twitch";
-import { buildChannelConfigSchema } from "openclaw/plugin-sdk/twitch";
+import type { JarvisConfig } from "jarvis/plugin-sdk/twitch";
+import { buildChannelConfigSchema } from "jarvis/plugin-sdk/twitch";
 import { twitchMessageActions } from "./actions.js";
 import { removeClientManager } from "./client-manager-registry.js";
 import { TwitchConfigSchema } from "./config-schema.js";

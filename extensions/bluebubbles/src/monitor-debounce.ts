@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/bluebubbles";
+import type { JarvisConfig } from "jarvis/plugin-sdk/bluebubbles";
 import type { NormalizedWebhookMessage } from "./monitor-normalize.js";
 import type { BlueBubblesCoreRuntime, WebhookTarget } from "./monitor-shared.js";
 
@@ -94,10 +94,7 @@ function combineDebounceEntries(entries: BlueBubblesDebounceEntry[]): Normalized
   };
 }
 
-function resolveBlueBubblesDebounceMs(
-  config: JarvisConfig,
-  core: BlueBubblesCoreRuntime,
-): number {
+function resolveBlueBubblesDebounceMs(config: JarvisConfig, core: BlueBubblesCoreRuntime): number {
   const inbound = config.messages?.inbound;
   const hasExplicitDebounce =
     typeof inbound?.debounceMs === "number" || typeof inbound?.byChannel?.bluebubbles === "number";

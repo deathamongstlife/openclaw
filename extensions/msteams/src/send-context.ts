@@ -2,7 +2,7 @@ import {
   resolveChannelMediaMaxBytes,
   type JarvisConfig,
   type PluginRuntime,
-} from "openclaw/plugin-sdk/msteams";
+} from "jarvis/plugin-sdk/msteams";
 import type { MSTeamsAccessTokenProvider } from "./attachments/types.js";
 import { createMSTeamsConversationStoreFs } from "./conversation-store-fs.js";
 import type {

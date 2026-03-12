@@ -26,14 +26,11 @@ export function registerNodeCli(program: Command) {
       "after",
       () =>
         `\n${theme.heading("Examples:")}\n${formatHelpExamples([
-          [
-            "jarvis node run --host 127.0.0.1 --port 18789",
-            "Run the node host in the foreground.",
-          ],
+          ["jarvis node run --host 127.0.0.1 --port 18789", "Run the node host in the foreground."],
           ["jarvis node status", "Check node host service status."],
           ["jarvis node install", "Install the node host service."],
           ["jarvis node restart", "Restart the installed node host service."],
-        ])}\n\n${theme.muted("Docs:")} ${formatDocsLink("/cli/node", "docs.openclaw.ai/cli/node")}\n`,
+        ])}\n\n${theme.muted("Docs:")} ${formatDocsLink("/cli/node", "docs.jarvis.ai/cli/node")}\n`,
     );
 
   node

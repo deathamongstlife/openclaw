@@ -87,10 +87,10 @@ jarvis hooks info session-memory
 Save session context to memory when /new command is issued
 
 Details:
-  Source: openclaw-bundled
-  Path: /path/to/openclaw/hooks/bundled/session-memory/HOOK.md
-  Handler: /path/to/openclaw/hooks/bundled/session-memory/handler.ts
-  Homepage: https://docs.openclaw.ai/automation/hooks#session-memory
+  Source: jarvis-bundled
+  Path: /path/to/jarvis/hooks/bundled/session-memory/HOOK.md
+  Handler: /path/to/jarvis/hooks/bundled/session-memory/handler.ts
+  Homepage: https://docs.jarvis.ai/automation/hooks#session-memory
   Events: command:new
 
 Requirements:
@@ -125,7 +125,7 @@ Not ready: 0
 jarvis hooks enable <name>
 ```
 
-Enable a specific hook by adding it to your config (`~/.openclaw/config.json`).
+Enable a specific hook by adding it to your config (`~/.jarvis/config.json`).
 
 **Note:** Hooks managed by plugins show `plugin:<id>` in `jarvis hooks list` and
 can’t be enabled/disabled here. Enable/disable the plugin instead.
@@ -203,7 +203,7 @@ prerelease tag such as `@beta`/`@rc` or an exact prerelease version.
 
 **What it does:**
 
-- Copies the hook pack into `~/.openclaw/hooks/<id>`
+- Copies the hook pack into `~/.jarvis/hooks/<id>`
 - Enables the installed hooks in `hooks.internal.entries.*`
 - Records the install under `hooks.internal.installs`
 
@@ -224,7 +224,7 @@ jarvis hooks install ./my-hook-pack
 jarvis hooks install ./my-hook-pack.zip
 
 # NPM package
-jarvis hooks install @openclaw/my-hook-pack
+jarvis hooks install @jarvis/my-hook-pack
 
 # Link a local directory without copying
 jarvis hooks install -l ./my-hook-pack
@@ -260,7 +260,7 @@ Saves session context to memory when you issue `/new`.
 jarvis hooks enable session-memory
 ```
 
-**Output:** `~/.openclaw/workspace/memory/YYYY-MM-DD-slug.md`
+**Output:** `~/.jarvis/workspace/memory/YYYY-MM-DD-slug.md`
 
 **See:** [session-memory documentation](/automation/hooks#session-memory)
 
@@ -286,19 +286,19 @@ Logs all command events to a centralized audit file.
 jarvis hooks enable command-logger
 ```
 
-**Output:** `~/.openclaw/logs/commands.log`
+**Output:** `~/.jarvis/logs/commands.log`
 
 **View logs:**
 
 ```bash
 # Recent commands
-tail -n 20 ~/.openclaw/logs/commands.log
+tail -n 20 ~/.jarvis/logs/commands.log
 
 # Pretty-print
-cat ~/.openclaw/logs/commands.log | jq .
+cat ~/.jarvis/logs/commands.log | jq .
 
 # Filter by action
-grep '"action":"new"' ~/.openclaw/logs/commands.log | jq .
+grep '"action":"new"' ~/.jarvis/logs/commands.log | jq .
 ```
 
 **See:** [command-logger documentation](/automation/hooks#command-logger)

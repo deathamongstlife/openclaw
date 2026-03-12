@@ -26,13 +26,13 @@ Canvas 状态存储在 Application Support 下：
 
 Canvas 面板通过**自定义 URL 方案**提供这些文件：
 
-- `openclaw-canvas://<session>/<path>`
+- `jarvis-canvas://<session>/<path>`
 
 示例：
 
-- `openclaw-canvas://main/` → `<canvasRoot>/main/index.html`
-- `openclaw-canvas://main/assets/app.css` → `<canvasRoot>/main/assets/app.css`
-- `openclaw-canvas://main/widgets/todo/` → `<canvasRoot>/main/widgets/todo/index.html`
+- `jarvis-canvas://main/` → `<canvasRoot>/main/index.html`
+- `jarvis-canvas://main/assets/app.css` → `<canvasRoot>/main/assets/app.css`
+- `jarvis-canvas://main/widgets/todo/` → `<canvasRoot>/main/widgets/todo/index.html`
 
 如果根目录下没有 `index.html`，应用会显示一个**内置脚手架页面**。
 
@@ -76,7 +76,7 @@ A2UI 由 Gateway 网关 canvas 主机托管并在 Canvas 面板内渲染。
 默认 A2UI 主机 URL：
 
 ```
-http://<gateway-host>:18793/__openclaw__/a2ui/
+http://<gateway-host>:18793/__jarvis__/a2ui/
 ```
 
 ### A2UI 命令（v0.8）
@@ -111,12 +111,12 @@ jarvis nodes canvas a2ui push --node <id> --text "Hello from A2UI"
 
 Canvas 可以通过深层链接触发新的智能体运行：
 
-- `openclaw://agent?...`
+- `jarvis://agent?...`
 
 示例（在 JS 中）：
 
 ```js
-window.location.href = "openclaw://agent?message=Review%20this%20design";
+window.location.href = "jarvis://agent?message=Review%20this%20design";
 ```
 
 除非提供有效密钥，否则应用会提示确认。

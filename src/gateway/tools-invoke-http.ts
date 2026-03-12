@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { createJarvisTools } from "../agents/openclaw-tools.js";
+import { createJarvisTools } from "../agents/jarvis-tools.js";
 import {
   resolveEffectiveToolPolicy,
   resolveGroupToolPolicy,
@@ -209,12 +209,10 @@ export async function handleToolsInvokeHttpRequest(
     !rawSessionKey || rawSessionKey === "main" ? resolveMainSessionKey(cfg) : rawSessionKey;
 
   // Resolve message channel/account hints (optional headers) for policy inheritance.
-  const messageChannel = normalizeMessageChannel(
-    getHeader(req, "x-openclaw-message-channel") ?? "",
-  );
-  const accountId = getHeader(req, "x-openclaw-account-id")?.trim() || undefined;
-  const agentTo = getHeader(req, "x-openclaw-message-to")?.trim() || undefined;
-  const agentThreadId = getHeader(req, "x-openclaw-thread-id")?.trim() || undefined;
+  const messageChannel = normalizeMessageChannel(getHeader(req, "x-jarvis-message-channel") ?? "");
+  const accountId = getHeader(req, "x-jarvis-account-id")?.trim() || undefined;
+  const agentTo = getHeader(req, "x-jarvis-message-to")?.trim() || undefined;
+  const agentThreadId = getHeader(req, "x-jarvis-thread-id")?.trim() || undefined;
 
   const {
     agentId,

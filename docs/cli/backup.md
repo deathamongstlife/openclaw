@@ -17,7 +17,7 @@ jarvis backup create --dry-run --json
 jarvis backup create --verify
 jarvis backup create --no-include-workspace
 jarvis backup create --only-config
-jarvis backup verify ./2026-03-09T00-00-00.000Z-openclaw-backup.tar.gz
+jarvis backup verify ./2026-03-09T00-00-00.000Z-jarvis-backup.tar.gz
 ```
 
 ## Notes
@@ -35,7 +35,7 @@ jarvis backup verify ./2026-03-09T00-00-00.000Z-openclaw-backup.tar.gz
 
 `jarvis backup create` plans backup sources from your local Jarvis install:
 
-- The state directory returned by Jarvis's local state resolver, usually `~/.openclaw`
+- The state directory returned by Jarvis's local state resolver, usually `~/.jarvis`
 - The active config file path
 - The OAuth / credentials directory
 - Workspace directories discovered from the current config, unless you pass `--no-include-workspace`

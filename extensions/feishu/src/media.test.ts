@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { resolvePreferredJarvisTmpDir } from "../../../src/infra/tmp-openclaw-dir.js";
+import { resolvePreferredJarvisTmpDir } from "../../../src/infra/tmp-jarvis-dir.js";
 
 const createFeishuClientMock = vi.hoisted(() => vi.fn());
 const resolveFeishuAccountMock = vi.hoisted(() => vi.fn());
@@ -270,7 +270,7 @@ describe("sendMediaFeishu msg_type routing", () => {
       contentType: "application/pdf",
     });
 
-    const roots = ["/allowed/workspace", "/tmp/openclaw"];
+    const roots = ["/allowed/workspace", "/tmp/jarvis"];
     await sendMediaFeishu({
       cfg: {} as any,
       to: "user:ou_target",

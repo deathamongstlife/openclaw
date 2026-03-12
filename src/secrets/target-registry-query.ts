@@ -15,8 +15,8 @@ import type {
 } from "./target-registry-types.js";
 
 const COMPILED_SECRET_TARGET_REGISTRY = SECRET_TARGET_REGISTRY.map(compileTargetRegistryEntry);
-const OPENCLAW_COMPILED_SECRET_TARGETS = COMPILED_SECRET_TARGET_REGISTRY.filter(
-  (entry) => entry.configFile === "openclaw.json",
+const JARVIS_COMPILED_SECRET_TARGETS = COMPILED_SECRET_TARGET_REGISTRY.filter(
+  (entry) => entry.configFile === "jarvis.json",
 );
 const AUTH_PROFILES_COMPILED_SECRET_TARGETS = COMPILED_SECRET_TARGET_REGISTRY.filter(
   (entry) => entry.configFile === "auth-profiles.json",
@@ -46,7 +46,7 @@ const KNOWN_TARGET_IDS = new Set(COMPILED_SECRET_TARGET_REGISTRY.map((entry) => 
 
 function buildConfigTargetIdIndex(): Map<string, CompiledTargetRegistryEntry[]> {
   const byId = new Map<string, CompiledTargetRegistryEntry[]>();
-  for (const entry of OPENCLAW_COMPILED_SECRET_TARGETS) {
+  for (const entry of JARVIS_COMPILED_SECRET_TARGETS) {
     const existing = byId.get(entry.id);
     if (existing) {
       existing.push(entry);
@@ -57,7 +57,7 @@ function buildConfigTargetIdIndex(): Map<string, CompiledTargetRegistryEntry[]> 
   return byId;
 }
 
-const OPENCLAW_TARGETS_BY_ID = buildConfigTargetIdIndex();
+const JARVIS_TARGETS_BY_ID = buildConfigTargetIdIndex();
 
 function buildAuthProfileTargetIdIndex(): Map<string, CompiledTargetRegistryEntry[]> {
   const byId = new Map<string, CompiledTargetRegistryEntry[]>();
@@ -239,9 +239,7 @@ export function resolvePlanTargetAgainstRegistry(candidate: {
   return null;
 }
 
-export function discoverConfigSecretTargets(
-  config: JarvisConfig,
-): DiscoveredConfigSecretTarget[] {
+export function discoverConfigSecretTargets(config: JarvisConfig): DiscoveredConfigSecretTarget[] {
   return discoverConfigSecretTargetsByIds(config);
 }
 
@@ -252,8 +250,8 @@ export function discoverConfigSecretTargetsByIds(
   const allowedTargetIds = normalizeAllowedTargetIds(targetIds);
   const discoveryEntries = resolveDiscoveryEntries({
     allowedTargetIds,
-    defaultEntries: OPENCLAW_COMPILED_SECRET_TARGETS,
-    entriesById: OPENCLAW_TARGETS_BY_ID,
+    defaultEntries: JARVIS_COMPILED_SECRET_TARGETS,
+    entriesById: JARVIS_TARGETS_BY_ID,
   });
   return discoverSecretTargetsFromEntries(config, discoveryEntries);
 }

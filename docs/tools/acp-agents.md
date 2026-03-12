@@ -55,7 +55,7 @@ Use ACP when you want an external harness runtime. Use sub-agents when you want 
 
 | Area          | ACP session                           | Sub-agent run                      |
 | ------------- | ------------------------------------- | ---------------------------------- |
-| Runtime       | ACP backend plugin (for example acpx) | Jarvis native sub-agent runtime  |
+| Runtime       | ACP backend plugin (for example acpx) | Jarvis native sub-agent runtime    |
 | Session key   | `agent:<agentId>:acp:<uuid>`          | `agent:<agentId>:subagent:<uuid>`  |
 | Main commands | `/acp ...`                            | `/subagents ...`                   |
 | Spawn tool    | `sessions_spawn` with `runtime:"acp"` | `sessions_spawn` (default runtime) |
@@ -136,7 +136,7 @@ Example:
             agent: "codex",
             backend: "acpx",
             mode: "persistent",
-            cwd: "/workspace/openclaw",
+            cwd: "/workspace/jarvis",
           },
         },
       },
@@ -526,7 +526,7 @@ Then verify backend health:
 
 ### acpx command and version configuration
 
-By default, the acpx plugin (published as `@openclaw/acpx`) uses the plugin-local pinned binary:
+By default, the acpx plugin (published as `@jarvis/acpx`) uses the plugin-local pinned binary:
 
 1. Command defaults to `extensions/acpx/node_modules/.bin/acpx`.
 2. Expected version defaults to the extension pin.

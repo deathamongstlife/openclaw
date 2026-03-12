@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# OpenClaw Android Development Environment Setup Script
-# This script installs Rust, Android Studio, and configures Android SDK for building OpenClaw Android app
+# Jarvis Android Development Environment Setup Script
+# This script installs Rust, Android Studio, and configures Android SDK for building Jarvis Android app
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -30,7 +30,7 @@ case "$(uname -s)" in
 esac
 
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║   OpenClaw Android Development Environment Setup              ║${NC}"
+echo -e "${BLUE}║   Jarvis Android Development Environment Setup              ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 echo -e "${GREEN}Detected OS: ${OS}${NC}"
@@ -284,7 +284,7 @@ configure_environment() {
         else
             cat >> "$SHELL_CONFIG" <<EOF
 
-# Android SDK configuration (added by OpenClaw setup script)
+# Android SDK configuration (added by Jarvis setup script)
 export ANDROID_SDK_ROOT="$ANDROID_SDK_ROOT"
 export ANDROID_HOME="\$ANDROID_SDK_ROOT"
 export PATH="\$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:\$ANDROID_SDK_ROOT/platform-tools:\$ANDROID_SDK_ROOT/emulator:\$PATH"
@@ -442,9 +442,9 @@ verify_installation() {
     fi
 }
 
-# Build OpenClaw Android app
-build_openclaw_android() {
-    log_info "Building OpenClaw Android app..."
+# Build Jarvis Android app
+build_jarvis_android() {
+    log_info "Building Jarvis Android app..."
 
     cd "$PROJECT_ROOT/apps/android"
 
@@ -463,8 +463,8 @@ build_openclaw_android() {
             log_success "APK location: $APK_PATH"
 
             # Copy to easier location
-            cp "$APK_PATH" "$PROJECT_ROOT/openclaw-debug.apk"
-            log_success "APK copied to: $PROJECT_ROOT/openclaw-debug.apk"
+            cp "$APK_PATH" "$PROJECT_ROOT/jarvis-debug.apk"
+            log_success "APK copied to: $PROJECT_ROOT/jarvis-debug.apk"
         else
             log_error "APK not found at expected location"
         fi
@@ -506,7 +506,7 @@ install_to_device() {
 
 # Main installation flow
 main() {
-    log_info "Starting OpenClaw Android development environment setup..."
+    log_info "Starting Jarvis Android development environment setup..."
     echo ""
 
     # Install dependencies based on OS
@@ -543,10 +543,10 @@ main() {
 
     # Offer to build
     echo ""
-    read -p "Do you want to build the OpenClaw Android app now? (y/n) " -n 1 -r
+    read -p "Do you want to build the Jarvis Android app now? (y/n) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        build_openclaw_android
+        build_jarvis_android
 
         echo ""
         read -p "Do you want to install to a connected Android device? (y/n) " -n 1 -r

@@ -10,7 +10,7 @@ title: "Uninstall"
 
 Two paths:
 
-- **Easy path** if `openclaw` is still installed.
+- **Easy path** if `jarvis` is still installed.
 - **Manual service removal** if the CLI is gone but the service is still running.
 
 ## Easy path (CLI still installed)
@@ -45,23 +45,23 @@ jarvis gateway uninstall
 3. Delete state + config:
 
 ```bash
-rm -rf "${OPENCLAW_STATE_DIR:-$HOME/.openclaw}"
+rm -rf "${JARVIS_STATE_DIR:-$HOME/.jarvis}"
 ```
 
-If you set `OPENCLAW_CONFIG_PATH` to a custom location outside the state dir, delete that file too.
+If you set `JARVIS_CONFIG_PATH` to a custom location outside the state dir, delete that file too.
 
 4. Delete your workspace (optional, removes agent files):
 
 ```bash
-rm -rf ~/.openclaw/workspace
+rm -rf ~/.jarvis/workspace
 ```
 
 5. Remove the CLI install (pick the one you used):
 
 ```bash
-npm rm -g openclaw
-pnpm remove -g openclaw
-bun remove -g openclaw
+npm rm -g jarvis
+pnpm remove -g jarvis
+bun remove -g jarvis
 ```
 
 6. If you installed the macOS app:
@@ -72,23 +72,23 @@ rm -rf /Applications/Jarvis.app
 
 Notes:
 
-- If you used profiles (`--profile` / `OPENCLAW_PROFILE`), repeat step 3 for each state dir (defaults are `~/.openclaw-<profile>`).
+- If you used profiles (`--profile` / `JARVIS_PROFILE`), repeat step 3 for each state dir (defaults are `~/.jarvis-<profile>`).
 - In remote mode, the state dir lives on the **gateway host**, so run steps 1-4 there too.
 
 ## Manual service removal (CLI not installed)
 
-Use this if the gateway service keeps running but `openclaw` is missing.
+Use this if the gateway service keeps running but `jarvis` is missing.
 
 ### macOS (launchd)
 
-Default label is `ai.openclaw.gateway` (or `ai.openclaw.<profile>`; legacy `com.openclaw.*` may still exist):
+Default label is `ai.jarvis.gateway` (or `ai.jarvis.<profile>`; legacy `com.jarvis.*` may still exist):
 
 ```bash
-launchctl bootout gui/$UID/ai.openclaw.gateway
-rm -f ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+launchctl bootout gui/$UID/ai.jarvis.gateway
+rm -f ~/Library/LaunchAgents/ai.jarvis.gateway.plist
 ```
 
-If you used a profile, replace the label and plist name with `ai.openclaw.<profile>`. Remove any legacy `com.openclaw.*` plists if present.
+If you used a profile, replace the label and plist name with `ai.jarvis.<profile>`. Remove any legacy `com.jarvis.*` plists if present.
 
 ### Linux (systemd user unit)
 
@@ -107,21 +107,21 @@ The task script lives under your state dir.
 
 ```powershell
 schtasks /Delete /F /TN "Jarvis Gateway"
-Remove-Item -Force "$env:USERPROFILE\.openclaw\gateway.cmd"
+Remove-Item -Force "$env:USERPROFILE\.jarvis\gateway.cmd"
 ```
 
-If you used a profile, delete the matching task name and `~\.openclaw-<profile>\gateway.cmd`.
+If you used a profile, delete the matching task name and `~\.jarvis-<profile>\gateway.cmd`.
 
 ## Normal install vs source checkout
 
 ### Normal install (install.sh / npm / pnpm / bun)
 
-If you used `https://openclaw.ai/install.sh` or `install.ps1`, the CLI was installed with `npm install -g openclaw@latest`.
-Remove it with `npm rm -g openclaw` (or `pnpm remove -g` / `bun remove -g` if you installed that way).
+If you used `https://jarvis.ai/install.sh` or `install.ps1`, the CLI was installed with `npm install -g jarvis@latest`.
+Remove it with `npm rm -g jarvis` (or `pnpm remove -g` / `bun remove -g` if you installed that way).
 
 ### Source checkout (git clone)
 
-If you run from a repo checkout (`git clone` + `openclaw ...` / `bun run openclaw ...`):
+If you run from a repo checkout (`git clone` + `jarvis ...` / `bun run jarvis ...`):
 
 1. Uninstall the gateway service **before** deleting the repo (use the easy path above or manual service removal).
 2. Delete the repo directory.

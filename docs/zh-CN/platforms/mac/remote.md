@@ -32,7 +32,7 @@ x-i18n:
 ## 远程主机上的先决条件
 
 1. 安装 Node + pnpm 并构建/安装 Jarvis CLI（`pnpm install && pnpm build && pnpm link --global`）。
-2. 确保 `openclaw` 在非交互式 shell 的 PATH 中（如需要，请符号链接到 `/usr/local/bin` 或 `/opt/homebrew/bin`）。
+2. 确保 `jarvis` 在非交互式 shell 的 PATH 中（如需要，请符号链接到 `/usr/local/bin` 或 `/opt/homebrew/bin`）。
 3. 使用密钥认证打开 SSH。我们推荐使用 **Tailscale** IP 以实现离开局域网时的稳定可达性。
 
 ## macOS 应用设置
@@ -45,7 +45,7 @@ x-i18n:
    - **Gateway URL**（仅 Direct）：`wss://gateway.example.ts.net`（或本地/局域网使用 `ws://...`）。
    - **Identity file**（高级）：你的密钥路径。
    - **Project root**（高级）：用于命令的远程 checkout 路径。
-   - **CLI path**（高级）：可运行的 `openclaw` 入口点/二进制文件的可选路径（广播时自动填充）。
+   - **CLI path**（高级）：可运行的 `jarvis` 入口点/二进制文件的可选路径（广播时自动填充）。
 3. 点击 **Test remote**。成功表示远程 `jarvis status --json` 正确运行。失败通常意味着 PATH/CLI 问题；退出码 127 表示远程找不到 CLI。
 4. 健康检查和 Web Chat 现在将自动通过此 SSH 隧道运行。
 
@@ -73,7 +73,7 @@ x-i18n:
 
 ## 故障排除
 
-- **exit 127 / not found**：`openclaw` 不在非登录 shell 的 PATH 中。将其添加到 `/etc/paths`、你的 shell rc，或符号链接到 `/usr/local/bin`/`/opt/homebrew/bin`。
+- **exit 127 / not found**：`jarvis` 不在非登录 shell 的 PATH 中。将其添加到 `/etc/paths`、你的 shell rc，或符号链接到 `/usr/local/bin`/`/opt/homebrew/bin`。
 - **Health probe failed**：检查 SSH 可达性、PATH，以及 Baileys 是否已登录（`jarvis status --json`）。
 - **Web Chat 卡住**：确认 Gateway 网关正在远程主机上运行，转发的端口与 Gateway 网关 WS 端口匹配；UI 需要健康的 WS 连接。
 - **节点 IP 显示 127.0.0.1**：使用 SSH 隧道时是预期的。如果你想让 Gateway 网关看到真实的客户端 IP，请将 **Transport** 切换到 **Direct (ws/wss)**。
@@ -81,7 +81,7 @@ x-i18n:
 
 ## 通知声音
 
-通过带有 `openclaw` 和 `node.invoke` 的脚本为每个通知选择声音，例如：
+通过带有 `jarvis` 和 `node.invoke` 的脚本为每个通知选择声音，例如：
 
 ```bash
 jarvis nodes notify --node <id> --title "Ping" --body "Remote gateway ready" --sound Glass

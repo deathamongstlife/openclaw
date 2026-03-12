@@ -17,9 +17,9 @@ Jarvis has two log “surfaces”:
 
 ## File-based logger
 
-- Default rolling log file is under `/tmp/openclaw/` (one file per day): `openclaw-YYYY-MM-DD.log`
+- Default rolling log file is under `/tmp/jarvis/` (one file per day): `jarvis-YYYY-MM-DD.log`
   - Date uses the gateway host's local timezone.
-- The log file path and level can be configured via `~/.openclaw/openclaw.json`:
+- The log file path and level can be configured via `~/.jarvis/jarvis.json`:
   - `logging.file`
   - `logging.level`
 

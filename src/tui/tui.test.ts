@@ -113,8 +113,8 @@ describe("resolveInitialTuiAgentId", () => {
   const cfg: JarvisConfig = {
     agents: {
       list: [
-        { id: "main", workspace: "/tmp/openclaw" },
-        { id: "ops", workspace: "/tmp/openclaw/projects/ops" },
+        { id: "main", workspace: "/tmp/jarvis" },
+        { id: "ops", workspace: "/tmp/jarvis/projects/ops" },
       ],
     },
   };
@@ -125,7 +125,7 @@ describe("resolveInitialTuiAgentId", () => {
         cfg,
         fallbackAgentId: "main",
         initialSessionInput: "",
-        cwd: "/tmp/openclaw/projects/ops/src",
+        cwd: "/tmp/jarvis/projects/ops/src",
       }),
     ).toBe("ops");
   });
@@ -136,7 +136,7 @@ describe("resolveInitialTuiAgentId", () => {
         cfg,
         fallbackAgentId: "main",
         initialSessionInput: "agent:main:incident",
-        cwd: "/tmp/openclaw/projects/ops/src",
+        cwd: "/tmp/jarvis/projects/ops/src",
       }),
     ).toBe("main");
   });

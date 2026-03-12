@@ -36,7 +36,7 @@ If you use a remote Gateway, install/configure the plugin on the **machine runni
 ### Option A: install from npm (recommended)
 
 ```bash
-jarvis plugins install @openclaw/voice-call
+jarvis plugins install @jarvis/voice-call
 ```
 
 Restart the Gateway afterwards.

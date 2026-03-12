@@ -4,6 +4,10 @@ import { streamSimple } from "@mariozechner/pi-ai";
 import type { ThinkLevel } from "../../auto-reply/thinking.js";
 import type { JarvisConfig } from "../../config/config.js";
 import {
+  createAnthropicExtendedThinkingWrapper,
+  supportsExtendedThinking,
+} from "./anthropic-extra-params.js";
+import {
   createAnthropicBetaHeadersWrapper,
   createAnthropicToolPayloadCompatibilityWrapper,
   createBedrockNoCacheWrapper,
@@ -11,10 +15,6 @@ import {
   resolveAnthropicBetas,
   resolveCacheRetention,
 } from "./anthropic-stream-wrappers.js";
-import {
-  createAnthropicExtendedThinkingWrapper,
-  supportsExtendedThinking,
-} from "./anthropic-extra-params.js";
 import { log } from "./logger.js";
 import {
   createMoonshotThinkingWrapper,
@@ -372,9 +372,7 @@ export function applyExtraParamsToAgent(
 
   // Apply Anthropic extended thinking for Claude 3.7+ models
   if (provider === "anthropic" && supportsExtendedThinking(modelId)) {
-    log.debug(
-      `applying Anthropic extended thinking wrapper for ${provider}/${modelId}`,
-    );
+    log.debug(`applying Anthropic extended thinking wrapper for ${provider}/${modelId}`);
     agent.streamFn = createAnthropicExtendedThinkingWrapper(agent.streamFn, merged);
   }
 
@@ -407,12 +405,12 @@ export function applyExtraParamsToAgent(
     // Omit the thinkingLevel so we never inject `reasoning.effort: "none"`,
     // which would cause a 400 on models where reasoning is mandatory.
     // Users who need reasoning control should target a specific model ID.
-    // See: openclaw/openclaw#24851
+    // See: jarvis/jarvis#24851
     //
     // x-ai/grok models do not support OpenRouter's reasoning.effort parameter
     // and reject payloads containing it with "Invalid arguments passed to the
     // model." Skip reasoning injection for these models.
-    // See: openclaw/openclaw#32039
+    // See: jarvis/jarvis#32039
     const skipReasoningInjection = modelId === "auto" || isProxyReasoningUnsupported(modelId);
     const openRouterThinkingLevel = skipReasoningInjection ? undefined : thinkingLevel;
     agent.streamFn = createOpenRouterWrapper(agent.streamFn, openRouterThinkingLevel);
@@ -422,7 +420,7 @@ export function applyExtraParamsToAgent(
   if (provider === "kilocode") {
     log.debug(`applying Kilocode feature header for ${provider}/${modelId}`);
     // kilo/auto is a dynamic routing model — skip reasoning injection
-    // (same rationale as OpenRouter "auto"). See: openclaw/openclaw#24851
+    // (same rationale as OpenRouter "auto"). See: jarvis/jarvis#24851
     // Also skip for models known to reject reasoning.effort (e.g. x-ai/*).
     const kilocodeThinkingLevel =
       modelId === "kilo/auto" || isProxyReasoningUnsupported(modelId) ? undefined : thinkingLevel;

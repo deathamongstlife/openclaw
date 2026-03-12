@@ -41,7 +41,7 @@ name: session-memory
 description: "Save session context"
 metadata:
   {
-    "openclaw": {
+    "jarvis": {
       "emoji": "💾",
       "events": ["command:new"]
     }
@@ -58,8 +58,8 @@ metadata:
 
     // Verify the metadata is valid JSON
     const parsed = JSON.parse(result.metadata);
-    expect(parsed.openclaw.emoji).toBe("💾");
-    expect(parsed.openclaw.events).toEqual(["command:new"]);
+    expect(parsed.jarvis.emoji).toBe("💾");
+    expect(parsed.jarvis.events).toEqual(["command:new"]);
   });
 
   it("parses multi-line metadata with complex nested structure", () => {
@@ -68,7 +68,7 @@ name: command-logger
 description: "Log all command events"
 metadata:
   {
-    "openclaw":
+    "jarvis":
       {
         "emoji": "📝",
         "events": ["command"],
@@ -83,21 +83,21 @@ metadata:
     expect(result.metadata).toBeDefined();
 
     const parsed = JSON.parse(result.metadata);
-    expect(parsed.openclaw.emoji).toBe("📝");
-    expect(parsed.openclaw.events).toEqual(["command"]);
-    expect(parsed.openclaw.requires.config).toEqual(["workspace.dir"]);
-    expect(parsed.openclaw.install[0].kind).toBe("bundled");
+    expect(parsed.jarvis.emoji).toBe("📝");
+    expect(parsed.jarvis.events).toEqual(["command"]);
+    expect(parsed.jarvis.requires.config).toEqual(["workspace.dir"]);
+    expect(parsed.jarvis.install[0].kind).toBe("bundled");
   });
 
   it("handles single-line metadata (inline JSON)", () => {
     const content = `---
 name: simple-hook
-metadata: {"openclaw": {"events": ["test"]}}
+metadata: {"jarvis": {"events": ["test"]}}
 ---
 `;
     const result = parseFrontmatter(content);
     expect(result.name).toBe("simple-hook");
-    expect(result.metadata).toBe('{"openclaw": {"events": ["test"]}}');
+    expect(result.metadata).toBe('{"jarvis": {"events": ["test"]}}');
   });
 
   it("handles mixed single-line and multi-line values", () => {
@@ -107,7 +107,7 @@ description: "A hook with mixed values"
 homepage: https://example.com
 metadata:
   {
-    "openclaw": {
+    "jarvis": {
       "events": ["command:new"]
     }
   }
@@ -153,7 +153,7 @@ describe("resolveJarvisMetadata", () => {
     const frontmatter = {
       name: "test-hook",
       metadata: JSON.stringify({
-        openclaw: {
+        jarvis: {
           emoji: "🔥",
           events: ["command:new", "command:reset"],
           requires: {
@@ -197,11 +197,11 @@ describe("resolveJarvisMetadata", () => {
   it("handles install specs", () => {
     const frontmatter = {
       metadata: JSON.stringify({
-        openclaw: {
+        jarvis: {
           events: ["command"],
           install: [
             { id: "bundled", kind: "bundled", label: "Bundled with Jarvis" },
-            { id: "npm", kind: "npm", package: "@openclaw/hook" },
+            { id: "npm", kind: "npm", package: "@jarvis/hook" },
           ],
         },
       }),
@@ -211,13 +211,13 @@ describe("resolveJarvisMetadata", () => {
     expect(result?.install).toHaveLength(2);
     expect(result?.install?.[0].kind).toBe("bundled");
     expect(result?.install?.[1].kind).toBe("npm");
-    expect(result?.install?.[1].package).toBe("@openclaw/hook");
+    expect(result?.install?.[1].package).toBe("@jarvis/hook");
   });
 
   it("handles os restrictions", () => {
     const frontmatter = {
       metadata: JSON.stringify({
-        openclaw: {
+        jarvis: {
           events: ["command"],
           os: ["darwin", "linux"],
         },
@@ -233,10 +233,10 @@ describe("resolveJarvisMetadata", () => {
     const content = `---
 name: session-memory
 description: "Save session context to memory when /new or /reset command is issued"
-homepage: https://docs.openclaw.ai/automation/hooks#session-memory
+homepage: https://docs.jarvis.ai/automation/hooks#session-memory
 metadata:
   {
-    "openclaw":
+    "jarvis":
       {
         "emoji": "💾",
         "events": ["command:new", "command:reset"],
@@ -253,28 +253,28 @@ metadata:
     expect(frontmatter.name).toBe("session-memory");
     expect(frontmatter.metadata).toBeDefined();
 
-    const openclaw = resolveJarvisMetadata(frontmatter);
-    expect(openclaw).toBeDefined();
-    expect(openclaw?.emoji).toBe("💾");
-    expect(openclaw?.events).toEqual(["command:new", "command:reset"]);
-    expect(openclaw?.requires?.config).toEqual(["workspace.dir"]);
-    expect(openclaw?.install?.[0].kind).toBe("bundled");
+    const jarvis = resolveJarvisMetadata(frontmatter);
+    expect(jarvis).toBeDefined();
+    expect(jarvis?.emoji).toBe("💾");
+    expect(jarvis?.events).toEqual(["command:new", "command:reset"]);
+    expect(jarvis?.requires?.config).toEqual(["workspace.dir"]);
+    expect(jarvis?.install?.[0].kind).toBe("bundled");
   });
 
   it("parses YAML metadata map", () => {
     const content = `---
 name: yaml-metadata
 metadata:
-  openclaw:
+  jarvis:
     emoji: disk
     events:
       - command:new
 ---
 `;
     const frontmatter = parseFrontmatter(content);
-    const openclaw = resolveJarvisMetadata(frontmatter);
-    expect(openclaw?.emoji).toBe("disk");
-    expect(openclaw?.events).toEqual(["command:new"]);
+    const jarvis = resolveJarvisMetadata(frontmatter);
+    expect(jarvis?.emoji).toBe("disk");
+    expect(jarvis?.events).toEqual(["command:new"]);
   });
 });
 

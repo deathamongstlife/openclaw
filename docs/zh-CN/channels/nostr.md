@@ -36,13 +36,13 @@ Nostr 是一个去中心化的社交网络协议。此渠道使 Jarvis 能够通
 ### 手动安装
 
 ```bash
-jarvis plugins install @openclaw/nostr
+jarvis plugins install @jarvis/nostr
 ```
 
 使用本地 checkout（开发工作流）：
 
 ```bash
-jarvis plugins install --link <path-to-openclaw>/extensions/nostr
+jarvis plugins install --link <path-to-jarvis>/extensions/nostr
 ```
 
 安装或启用插件后重启 Gateway 网关。
@@ -100,14 +100,14 @@ export NOSTR_PRIVATE_KEY="nsec1..."
     "nostr": {
       "privateKey": "${NOSTR_PRIVATE_KEY}",
       "profile": {
-        "name": "openclaw",
+        "name": "jarvis",
         "displayName": "Jarvis",
         "about": "Personal assistant DM bot",
         "picture": "https://example.com/avatar.png",
         "banner": "https://example.com/banner.png",
         "website": "https://example.com",
-        "nip05": "openclaw@example.com",
-        "lud16": "openclaw@example.com"
+        "nip05": "jarvis@example.com",
+        "lud16": "jarvis@example.com"
       }
     }
   }

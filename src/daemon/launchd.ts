@@ -29,11 +29,11 @@ const LAUNCH_AGENT_DIR_MODE = 0o755;
 const LAUNCH_AGENT_PLIST_MODE = 0o644;
 
 function resolveLaunchAgentLabel(args?: { env?: Record<string, string | undefined> }): string {
-  const envLabel = args?.env?.OPENCLAW_LAUNCHD_LABEL?.trim();
+  const envLabel = args?.env?.JARVIS_LAUNCHD_LABEL?.trim();
   if (envLabel) {
     return envLabel;
   }
-  return resolveGatewayLaunchAgentLabel(args?.env?.OPENCLAW_PROFILE);
+  return resolveGatewayLaunchAgentLabel(args?.env?.JARVIS_PROFILE);
 }
 
 function resolveLaunchAgentPlistPathForLabel(
@@ -56,7 +56,7 @@ export function resolveGatewayLogPaths(env: GatewayServiceEnv): {
 } {
   const stateDir = resolveGatewayStateDir(env);
   const logDir = path.join(stateDir, "logs");
-  const prefix = env.OPENCLAW_LOG_PREFIX?.trim() || "gateway";
+  const prefix = env.JARVIS_LOG_PREFIX?.trim() || "gateway";
   return {
     logDir,
     stdoutPath: path.join(logDir, `${prefix}.log`),
@@ -248,7 +248,7 @@ export type LegacyLaunchAgent = {
 export async function findLegacyLaunchAgents(env: GatewayServiceEnv): Promise<LegacyLaunchAgent[]> {
   const domain = resolveGuiDomain();
   const results: LegacyLaunchAgent[] = [];
-  for (const label of resolveLegacyGatewayLaunchAgentLabels(env.OPENCLAW_PROFILE)) {
+  for (const label of resolveLegacyGatewayLaunchAgentLabels(env.JARVIS_PROFILE)) {
     const plistPath = resolveLaunchAgentPlistPathForLabel(env, label);
     const res = await execLaunchctl(["print", `${domain}/${label}`]);
     const loaded = res.code === 0;
@@ -403,7 +403,7 @@ export async function installLaunchAgent({
 
   const domain = resolveGuiDomain();
   const label = resolveLaunchAgentLabel({ env });
-  for (const legacyLabel of resolveLegacyGatewayLaunchAgentLabels(env.OPENCLAW_PROFILE)) {
+  for (const legacyLabel of resolveLegacyGatewayLaunchAgentLabels(env.JARVIS_PROFILE)) {
     const legacyPlistPath = resolveLaunchAgentPlistPathForLabel(env, legacyLabel);
     await execLaunchctl(["bootout", domain, legacyPlistPath]);
     await execLaunchctl(["unload", legacyPlistPath]);
@@ -448,7 +448,7 @@ export async function installLaunchAgent({
           `LaunchAgent install requires a logged-in macOS GUI session for this user (${domain}).`,
           "This usually means you are running from SSH/headless context or as the wrong user (including sudo).",
           "Fix: sign in to the macOS desktop as the target user and rerun `jarvis gateway install --force`.",
-          "Headless deployments should use a dedicated logged-in user session or a custom LaunchDaemon (not shipped): https://docs.openclaw.ai/gateway",
+          "Headless deployments should use a dedicated logged-in user session or a custom LaunchDaemon (not shipped): https://docs.jarvis.ai/gateway",
         ].join("\n"),
       );
     }
@@ -504,7 +504,7 @@ export async function restartLaunchAgent({
           `LaunchAgent restart requires a logged-in macOS GUI session for this user (${domain}).`,
           "This usually means you are running from SSH/headless context or as the wrong user (including sudo).",
           "Fix: sign in to the macOS desktop as the target user and rerun `jarvis gateway restart`.",
-          "Headless deployments should use a dedicated logged-in user session or a custom LaunchDaemon (not shipped): https://docs.openclaw.ai/gateway",
+          "Headless deployments should use a dedicated logged-in user session or a custom LaunchDaemon (not shipped): https://docs.jarvis.ai/gateway",
         ].join("\n"),
       );
     }

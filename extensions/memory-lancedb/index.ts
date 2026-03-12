@@ -9,8 +9,8 @@
 import { randomUUID } from "node:crypto";
 import type * as LanceDB from "@lancedb/lancedb";
 import { Type } from "@sinclair/typebox";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/memory-lancedb";
 import OpenAI from "openai";
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/memory-lancedb";
 import {
   DEFAULT_CAPTURE_MAX_CHARS,
   MEMORY_CATEGORIES,

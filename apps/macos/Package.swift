@@ -1,18 +1,18 @@
 // swift-tools-version: 6.2
-// Package manifest for the OpenClaw macOS companion (menu bar app + IPC library).
+// Package manifest for the Jarvis macOS companion (menu bar app + IPC library).
 
 import PackageDescription
 
 let package = Package(
-    name: "OpenClaw",
+    name: "Jarvis",
     platforms: [
         .macOS(.v15),
     ],
     products: [
-        .library(name: "OpenClawIPC", targets: ["OpenClawIPC"]),
-        .library(name: "OpenClawDiscovery", targets: ["OpenClawDiscovery"]),
-        .executable(name: "OpenClaw", targets: ["OpenClaw"]),
-        .executable(name: "openclaw-mac", targets: ["OpenClawMacCLI"]),
+        .library(name: "JarvisIPC", targets: ["JarvisIPC"]),
+        .library(name: "JarvisDiscovery", targets: ["JarvisDiscovery"]),
+        .executable(name: "Jarvis", targets: ["Jarvis"]),
+        .executable(name: "jarvis-mac", targets: ["JarvisMacCLI"]),
     ],
     dependencies: [
         .package(url: "https://github.com/orchetect/MenuBarExtraAccess", exact: "1.2.2"),
@@ -25,28 +25,28 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "OpenClawIPC",
+            name: "JarvisIPC",
             dependencies: [],
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .target(
-            name: "OpenClawDiscovery",
+            name: "JarvisDiscovery",
             dependencies: [
                 .product(name: "JarvisKit", package: "JarvisKit"),
             ],
-            path: "Sources/OpenClawDiscovery",
+            path: "Sources/JarvisDiscovery",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .executableTarget(
-            name: "OpenClaw",
+            name: "Jarvis",
             dependencies: [
-                "OpenClawIPC",
-                "OpenClawDiscovery",
+                "JarvisIPC",
+                "JarvisDiscovery",
                 .product(name: "JarvisKit", package: "JarvisKit"),
-                .product(name: "OpenClawChatUI", package: "JarvisKit"),
-                .product(name: "OpenClawProtocol", package: "JarvisKit"),
+                .product(name: "JarvisChatUI", package: "JarvisKit"),
+                .product(name: "JarvisProtocol", package: "JarvisKit"),
                 .product(name: "SwabbleKit", package: "swabble"),
                 .product(name: "MenuBarExtraAccess", package: "MenuBarExtraAccess"),
                 .product(name: "Subprocess", package: "swift-subprocess"),
@@ -59,30 +59,30 @@ let package = Package(
                 "Resources/Info.plist",
             ],
             resources: [
-                .copy("Resources/OpenClaw.icns"),
+                .copy("Resources/Jarvis.icns"),
                 .copy("Resources/DeviceModels"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .executableTarget(
-            name: "OpenClawMacCLI",
+            name: "JarvisMacCLI",
             dependencies: [
-                "OpenClawDiscovery",
+                "JarvisDiscovery",
                 .product(name: "JarvisKit", package: "JarvisKit"),
-                .product(name: "OpenClawProtocol", package: "JarvisKit"),
+                .product(name: "JarvisProtocol", package: "JarvisKit"),
             ],
-            path: "Sources/OpenClawMacCLI",
+            path: "Sources/JarvisMacCLI",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .testTarget(
-            name: "OpenClawIPCTests",
+            name: "JarvisIPCTests",
             dependencies: [
-                "OpenClawIPC",
-                "OpenClaw",
-                "OpenClawDiscovery",
-                .product(name: "OpenClawProtocol", package: "JarvisKit"),
+                "JarvisIPC",
+                "Jarvis",
+                "JarvisDiscovery",
+                .product(name: "JarvisProtocol", package: "JarvisKit"),
                 .product(name: "SwabbleKit", package: "swabble"),
             ],
             swiftSettings: [

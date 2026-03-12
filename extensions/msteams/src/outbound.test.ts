@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/msteams";
+import type { JarvisConfig } from "jarvis/plugin-sdk/msteams";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mocks = vi.hoisted(() => ({

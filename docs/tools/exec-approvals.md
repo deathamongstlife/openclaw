@@ -22,7 +22,7 @@ resolved by the **ask fallback** (default: deny).
 
 Exec approvals are enforced locally on the execution host:
 
-- **gateway host** → `openclaw` process on the gateway machine
+- **gateway host** → `jarvis` process on the gateway machine
 - **node host** → node runner (macOS companion app or headless node host)
 
 Trust model note:
@@ -48,7 +48,7 @@ macOS split:
 
 Approvals live in a local JSON file on the execution host:
 
-`~/.openclaw/exec-approvals.json`
+`~/.jarvis/exec-approvals.json`
 
 Example schema:
 
@@ -56,7 +56,7 @@ Example schema:
 {
   "version": 1,
   "socket": {
-    "path": "~/.openclaw/exec-approvals.sock",
+    "path": "~/.jarvis/exec-approvals.sock",
     "token": "base64url-token"
   },
   "defaults": {
@@ -216,7 +216,7 @@ Configuration location:
 - `safeBins` comes from config (`tools.exec.safeBins` or per-agent `agents.list[].tools.exec.safeBins`).
 - `safeBinTrustedDirs` comes from config (`tools.exec.safeBinTrustedDirs` or per-agent `agents.list[].tools.exec.safeBinTrustedDirs`).
 - `safeBinProfiles` comes from config (`tools.exec.safeBinProfiles` or per-agent `agents.list[].tools.exec.safeBinProfiles`). Per-agent profile keys override global keys.
-- allowlist entries live in host-local `~/.openclaw/exec-approvals.json` under `agents.<id>.allowlist` (or via Control UI / `jarvis approvals allowlist ...`).
+- allowlist entries live in host-local `~/.jarvis/exec-approvals.json` under `agents.<id>.allowlist` (or via Control UI / `jarvis approvals allowlist ...`).
 - `jarvis security audit` warns with `tools.exec.safe_bins_interpreter_unprofiled` when interpreter/runtime bins appear in `safeBins` without explicit profiles.
 - `jarvis doctor --fix` can scaffold missing custom `safeBinProfiles.<bin>` entries as `{}` (review and tighten afterward). Interpreter/runtime bins are not auto-scaffolded.
 
@@ -250,7 +250,7 @@ per pattern so you can keep the list tidy.
 The target selector chooses **Gateway** (local approvals) or a **Node**. Nodes
 must advertise `system.execApprovals.get/set` (macOS app or headless node host).
 If a node does not advertise exec approvals yet, edit its local
-`~/.openclaw/exec-approvals.json` directly.
+`~/.jarvis/exec-approvals.json` directly.
 
 CLI: `jarvis approvals` supports gateway or node editing (see [Approvals CLI](/cli/approvals)).
 

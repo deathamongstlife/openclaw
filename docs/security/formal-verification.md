@@ -26,7 +26,7 @@ misconfiguration safety), under explicit assumptions.
 
 ## Where the models live
 
-Models are maintained in a separate repo: [vignesh07/openclaw-formal-models](https://github.com/vignesh07/openclaw-formal-models).
+Models are maintained in a separate repo: [vignesh07/jarvis-formal-models](https://github.com/vignesh07/jarvis-formal-models).
 
 ## Important caveats
 
@@ -44,8 +44,8 @@ Today, results are reproduced by cloning the models repo locally and running TLC
 Getting started:
 
 ```bash
-git clone https://github.com/vignesh07/openclaw-formal-models
-cd openclaw-formal-models
+git clone https://github.com/vignesh07/jarvis-formal-models
+cd jarvis-formal-models
 
 # Java 11+ required (TLC runs on the JVM).
 # The repo vendors a pinned `tla2tools.jar` (TLA+ tools) and provides `bin/tlc` + Make targets.

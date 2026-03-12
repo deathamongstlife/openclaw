@@ -24,7 +24,7 @@ function runMutation(args: string[], input?: string) {
 
 describe("sandbox pinned mutation helper", () => {
   it("writes through a pinned directory fd", async () => {
-    await withTempRoot("openclaw-mutation-helper-", async (root) => {
+    await withTempRoot("jarvis-mutation-helper-", async (root) => {
       const workspace = path.join(root, "workspace");
       await fs.mkdir(workspace, { recursive: true });
 
@@ -40,7 +40,7 @@ describe("sandbox pinned mutation helper", () => {
   it.runIf(process.platform !== "win32")(
     "rejects symlink-parent writes instead of materializing a temp file outside the mount",
     async () => {
-      await withTempRoot("openclaw-mutation-helper-", async (root) => {
+      await withTempRoot("jarvis-mutation-helper-", async (root) => {
         const workspace = path.join(root, "workspace");
         const outside = path.join(root, "outside");
         await fs.mkdir(workspace, { recursive: true });
@@ -56,7 +56,7 @@ describe("sandbox pinned mutation helper", () => {
   );
 
   it.runIf(process.platform !== "win32")("rejects symlink segments during mkdirp", async () => {
-    await withTempRoot("openclaw-mutation-helper-", async (root) => {
+    await withTempRoot("jarvis-mutation-helper-", async (root) => {
       const workspace = path.join(root, "workspace");
       const outside = path.join(root, "outside");
       await fs.mkdir(workspace, { recursive: true });
@@ -71,7 +71,7 @@ describe("sandbox pinned mutation helper", () => {
   });
 
   it.runIf(process.platform !== "win32")("remove unlinks the symlink itself", async () => {
-    await withTempRoot("openclaw-mutation-helper-", async (root) => {
+    await withTempRoot("jarvis-mutation-helper-", async (root) => {
       const workspace = path.join(root, "workspace");
       const outside = path.join(root, "outside");
       await fs.mkdir(workspace, { recursive: true });
@@ -92,7 +92,7 @@ describe("sandbox pinned mutation helper", () => {
   it.runIf(process.platform !== "win32")(
     "rejects symlink destination parents during rename",
     async () => {
-      await withTempRoot("openclaw-mutation-helper-", async (root) => {
+      await withTempRoot("jarvis-mutation-helper-", async (root) => {
         const workspace = path.join(root, "workspace");
         const outside = path.join(root, "outside");
         await fs.mkdir(workspace, { recursive: true });
@@ -123,7 +123,7 @@ describe("sandbox pinned mutation helper", () => {
   it.runIf(process.platform !== "win32")(
     "copies directories across different mount roots during rename fallback",
     async () => {
-      await withTempRoot("openclaw-mutation-helper-", async (root) => {
+      await withTempRoot("jarvis-mutation-helper-", async (root) => {
         const sourceRoot = path.join(root, "source");
         const destRoot = path.join(root, "dest");
         await fs.mkdir(path.join(sourceRoot, "dir", "nested"), { recursive: true });

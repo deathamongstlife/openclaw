@@ -1,4 +1,4 @@
-import type { JarvisPluginConfigSchema } from "openclaw/plugin-sdk/diffs";
+import type { JarvisPluginConfigSchema } from "jarvis/plugin-sdk/diffs";
 import {
   DIFF_IMAGE_QUALITY_PRESETS,
   DIFF_INDICATORS,

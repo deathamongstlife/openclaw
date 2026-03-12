@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/diffs";
+import type { JarvisConfig } from "jarvis/plugin-sdk/diffs";
 
 const DEFAULT_GATEWAY_PORT = 18789;
 

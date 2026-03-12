@@ -52,7 +52,7 @@ macOS 应用支持 Anthropic OAuth（Claude Pro/Max）。流程：
 
 - 打开浏览器进行 OAuth（PKCE）
 - 要求用户粘贴 `code#state` 值
-- 将凭证写入 `~/.openclaw/credentials/oauth.json`
+- 将凭证写入 `~/.jarvis/credentials/oauth.json`
 
 其他提供商（OpenAI、自定义 API）目前通过环境变量或配置文件配置。
 
@@ -72,7 +72,7 @@ macOS 应用支持 Anthropic OAuth（Claude Pro/Max）。流程：
 
 ## 6) CLI（可选）
 
-应用可以通过 npm/pnpm 安装全局 `openclaw` CLI，以便终端工作流和 launchd 任务开箱即用。
+应用可以通过 npm/pnpm 安装全局 `jarvis` CLI，以便终端工作流和 launchd 任务开箱即用。
 
 ## 7) 新手引导聊天（专用会话）
 
@@ -80,7 +80,7 @@ macOS 应用支持 Anthropic OAuth（Claude Pro/Max）。流程：
 
 ## 智能体引导仪式
 
-在首次智能体运行时，Jarvis 会引导一个工作区（默认 `~/.openclaw/workspace`）：
+在首次智能体运行时，Jarvis 会引导一个工作区（默认 `~/.jarvis/workspace`）：
 
 - 初始化 `AGENTS.md`、`BOOTSTRAP.md`、`IDENTITY.md`、`USER.md`
 - 运行简短的问答仪式（一次一个问题）
@@ -101,5 +101,5 @@ jarvis webhooks gmail setup --account you@gmail.com
 
 当 Gateway 网关在另一台机器上运行时，凭证和工作区文件存储在**该主机上**。如果你需要在远程模式下使用 OAuth，请在 Gateway 网关主机上创建：
 
-- `~/.openclaw/credentials/oauth.json`
-- `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
+- `~/.jarvis/credentials/oauth.json`
+- `~/.jarvis/agents/<agentId>/agent/auth-profiles.json`

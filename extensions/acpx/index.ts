@@ -1,4 +1,4 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/acpx";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/acpx";
 import { createAcpxPluginConfigSchema } from "./src/config.js";
 import { createAcpxRuntimeService } from "./src/service.js";
 

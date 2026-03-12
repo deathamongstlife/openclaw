@@ -290,12 +290,12 @@ Discord 到处使用数字 ID；Jarvis 配置优先使用 ID。
         policy: "pairing", // pairing | allowlist | open | disabled
         allowFrom: ["123456789012345678", "steipete"],
         groupEnabled: false,
-        groupChannels: ["openclaw-dm"],
+        groupChannels: ["jarvis-dm"],
       },
       guilds: {
         "*": { requireMention: true },
         "123456789012345678": {
-          slug: "friends-of-openclaw",
+          slug: "friends-of-jarvis",
           requireMention: false,
           reactionNotifications: "own",
           users: ["987654321098765432", "steipete"],

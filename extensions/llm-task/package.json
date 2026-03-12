@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/llm-task",
+  "name": "@jarvis/llm-task",
   "version": "2026.3.9",
   "private": true,
   "description": "Jarvis JSON-only LLM task plugin",
@@ -8,7 +8,7 @@
     "@sinclair/typebox": "0.34.48",
     "ajv": "^8.18.0"
   },
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ]

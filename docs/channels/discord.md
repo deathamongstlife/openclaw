@@ -707,7 +707,7 @@ Default slash command settings:
             agent: "codex",
             backend: "acpx",
             mode: "persistent",
-            cwd: "/workspace/openclaw",
+            cwd: "/workspace/jarvis",
           },
         },
       },
@@ -891,7 +891,7 @@ Default slash command settings:
     discord: {
       activity: "Live coding",
       activityType: 1,
-      activityUrl: "https://twitch.tv/openclaw",
+      activityUrl: "https://twitch.tv/jarvis",
     },
   },
 }
@@ -945,7 +945,7 @@ Default slash command settings:
 
     Gateway auth for this handler uses the same shared credential resolution contract as other Gateway clients:
 
-    - env-first local auth (`OPENCLAW_GATEWAY_TOKEN` / `OPENCLAW_GATEWAY_PASSWORD` then `gateway.auth.*`)
+    - env-first local auth (`JARVIS_GATEWAY_TOKEN` / `JARVIS_GATEWAY_PASSWORD` then `gateway.auth.*`)
     - in local mode, `gateway.remote.*` can be used as fallback only when `gateway.auth.*` is unset; configured-but-unresolved local SecretRefs fail closed
     - remote-mode support via `gateway.remote.*` when applicable
     - URL overrides are override-safe: CLI overrides do not reuse implicit credentials, and env overrides use env credentials only

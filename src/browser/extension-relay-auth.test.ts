@@ -38,7 +38,7 @@ function handleNonVersionRequest(req: IncomingMessage, res: ServerResponse): boo
 async function probeRelay(baseUrl: string, relayAuthToken: string): Promise<boolean> {
   return await probeAuthenticatedJarvisRelay({
     baseUrl,
-    relayAuthHeader: "x-openclaw-relay-token",
+    relayAuthHeader: "x-jarvis-relay-token",
     relayAuthToken,
   });
 }
@@ -48,15 +48,15 @@ describe("extension-relay-auth", () => {
   let prevGatewayToken: string | undefined;
 
   beforeEach(() => {
-    prevGatewayToken = process.env.OPENCLAW_GATEWAY_TOKEN;
-    process.env.OPENCLAW_GATEWAY_TOKEN = TEST_GATEWAY_TOKEN;
+    prevGatewayToken = process.env.JARVIS_GATEWAY_TOKEN;
+    process.env.JARVIS_GATEWAY_TOKEN = TEST_GATEWAY_TOKEN;
   });
 
   afterEach(() => {
     if (prevGatewayToken === undefined) {
-      delete process.env.OPENCLAW_GATEWAY_TOKEN;
+      delete process.env.JARVIS_GATEWAY_TOKEN;
     } else {
-      process.env.OPENCLAW_GATEWAY_TOKEN = prevGatewayToken;
+      process.env.JARVIS_GATEWAY_TOKEN = prevGatewayToken;
     }
   });
 
@@ -83,7 +83,7 @@ describe("extension-relay-auth", () => {
         if (handleNonVersionRequest(req, res)) {
           return;
         }
-        const header = req.headers["x-openclaw-relay-token"];
+        const header = req.headers["x-jarvis-relay-token"];
         seenToken = Array.isArray(header) ? header[0] : header;
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ Browser: "Jarvis/extension-relay" }));

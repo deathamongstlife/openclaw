@@ -1,5 +1,5 @@
-import type { ChannelPlugin, JarvisPluginApi } from "openclaw/plugin-sdk/telegram";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/telegram";
+import type { ChannelPlugin, JarvisPluginApi } from "jarvis/plugin-sdk/telegram";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/telegram";
 import { telegramPlugin } from "./src/channel.js";
 import { setTelegramRuntime } from "./src/runtime.js";
 

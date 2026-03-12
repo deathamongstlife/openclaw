@@ -1,11 +1,11 @@
-# OpenClaw Installer for Windows (PowerShell)
-# Usage: iwr -useb https://openclaw.ai/install.ps1 | iex
-# Or: & ([scriptblock]::Create((iwr -useb https://openclaw.ai/install.ps1))) -NoOnboard
+# Jarvis Installer for Windows (PowerShell)
+# Usage: iwr -useb https://jarvis.ai/install.ps1 | iex
+# Or: & ([scriptblock]::Create((iwr -useb https://jarvis.ai/install.ps1))) -NoOnboard
 
 param(
     [string]$InstallMethod = "npm",
     [string]$Tag = "latest",
-    [string]$GitDir = "$env:USERPROFILE\openclaw",
+    [string]$GitDir = "$env:USERPROFILE\jarvis",
     [switch]$NoOnboard,
     [switch]$NoGitUpdate,
     [switch]$DryRun
@@ -34,8 +34,8 @@ function Write-Host {
 
 function Write-Banner {
     Write-Host ""
-    Write-Host "${ACCENT}  🦞 OpenClaw Installer$NC" -Level info
-    Write-Host "${MUTED}  All your chats, one OpenClaw.$NC" -Level info
+    Write-Host "${ACCENT}  🦞 Jarvis Installer$NC" -Level info
+    Write-Host "${MUTED}  All your chats, one Jarvis.$NC" -Level info
     Write-Host ""
 }
 
@@ -199,15 +199,15 @@ function Ensure-Git {
     return Install-Git
 }
 
-function Install-OpenClawNpm {
+function Install-JarvisNpm {
     param([string]$Version = "latest")
     
-    Write-Host "Installing OpenClaw (openclaw@$Version)..." -Level info
+    Write-Host "Installing Jarvis (jarvis@$Version)..." -Level info
     
     try {
         # Use -ExecutionPolicy Bypass to handle restricted execution policy
-        npm install -g openclaw@$Version --no-fund --no-audit 2>&1
-        Write-Host "OpenClaw installed" -Level success
+        npm install -g jarvis@$Version --no-fund --no-audit 2>&1
+        Write-Host "Jarvis installed" -Level success
         return $true
     } catch {
         Write-Host "npm install failed: $_" -Level error
@@ -215,14 +215,14 @@ function Install-OpenClawNpm {
     }
 }
 
-function Install-OpenClawGit {
+function Install-JarvisGit {
     param([string]$RepoDir, [switch]$Update)
     
-    Write-Host "Installing OpenClaw from git..." -Level info
+    Write-Host "Installing Jarvis from git..." -Level info
     
     if (!(Test-Path $RepoDir)) {
         Write-Host "  Cloning repository..." -Level info
-        git clone https://github.com/openclaw/openclaw.git $RepoDir 2>&1
+        git clone https://github.com/jarvis/jarvis.git $RepoDir 2>&1
     } elseif ($Update) {
         Write-Host "  Updating repository..." -Level info
         git -C $RepoDir pull --rebase 2>&1
@@ -250,10 +250,10 @@ function Install-OpenClawGit {
     
     @"
 @echo off
-node "%~dp0..\openclaw\dist\entry.js" %*
-"@ | Out-File -FilePath "$wrapperDir\openclaw.cmd" -Encoding ASCII -Force
+node "%~dp0..\jarvis\dist\entry.js" %*
+"@ | Out-File -FilePath "$wrapperDir\jarvis.cmd" -Encoding ASCII -Force
     
-    Write-Host "OpenClaw installed" -Level success
+    Write-Host "Jarvis installed" -Level success
     return $true
 }
 
@@ -290,9 +290,9 @@ function Main {
         }
         
         if ($DryRun) {
-            Write-Host "[DRY RUN] Would install OpenClaw from git to $GitDir" -Level info
+            Write-Host "[DRY RUN] Would install Jarvis from git to $GitDir" -Level info
         } else {
-            Install-OpenClawGit -RepoDir $GitDir -Update:(-not $NoGitUpdate)
+            Install-JarvisGit -RepoDir $GitDir -Update:(-not $NoGitUpdate)
         }
     } else {
         # npm method
@@ -301,9 +301,9 @@ function Main {
         }
         
         if ($DryRun) {
-            Write-Host "[DRY RUN] Would install OpenClaw via npm (tag: $Tag)" -Level info
+            Write-Host "[DRY RUN] Would install Jarvis via npm (tag: $Tag)" -Level info
         } else {
-            if (!(Install-OpenClawNpm -Version $Tag)) {
+            if (!(Install-JarvisNpm -Version $Tag)) {
                 exit 1
             }
         }
@@ -319,11 +319,11 @@ function Main {
     
     if (!$NoOnboard -and !$DryRun) {
         Write-Host ""
-        Write-Host "Run 'openclaw onboard' to complete setup" -Level info
+        Write-Host "Run 'jarvis onboard' to complete setup" -Level info
     }
     
     Write-Host ""
-    Write-Host "🦞 OpenClaw installed successfully!" -Level success
+    Write-Host "🦞 Jarvis installed successfully!" -Level success
 }
 
 Main

@@ -51,7 +51,7 @@ describe("sandbox fs bridge anchored ops", () => {
   ] as const;
 
   it.each(pinnedReadCases)("$name", async (testCase) => {
-    await withTempDir("openclaw-fs-bridge-contract-read-", async (stateDir) => {
+    await withTempDir("jarvis-fs-bridge-contract-read-", async (stateDir) => {
       const workspaceDir = path.join(stateDir, "workspace");
       await testCase.setup(workspaceDir, stateDir);
       const bridge = createSandboxFsBridge({
@@ -90,7 +90,7 @@ describe("sandbox fs bridge anchored ops", () => {
   ] as const;
 
   it.each(pinnedCases)("$name", async (testCase) => {
-    await withTempDir("openclaw-fs-bridge-contract-write-", async (stateDir) => {
+    await withTempDir("jarvis-fs-bridge-contract-write-", async (stateDir) => {
       const workspaceDir = path.join(stateDir, "workspace");
       await fs.mkdir(path.join(workspaceDir, "nested"), { recursive: true });
       await fs.writeFile(path.join(workspaceDir, "from.txt"), "hello", "utf8");

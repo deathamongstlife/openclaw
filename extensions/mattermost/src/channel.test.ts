@@ -1,5 +1,5 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/mattermost";
-import { createReplyPrefixOptions } from "openclaw/plugin-sdk/mattermost";
+import type { JarvisConfig } from "jarvis/plugin-sdk/mattermost";
+import { createReplyPrefixOptions } from "jarvis/plugin-sdk/mattermost";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 const { sendMessageMattermostMock } = vi.hoisted(() => ({
   sendMessageMattermostMock: vi.fn(),

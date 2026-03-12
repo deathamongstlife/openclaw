@@ -100,7 +100,7 @@ jarvis sandbox explain --json
 - `group:automation`：`cron`、`gateway`
 - `group:messaging`：`message`
 - `group:nodes`：`nodes`
-- `group:openclaw`：所有内置 Jarvis 工具（不包括提供商插件）
+- `group:jarvis`：所有内置 Jarvis 工具（不包括提供商插件）
 
 ## 提权：仅限 exec 的"在主机上运行"
 

@@ -60,7 +60,7 @@ x-i18n:
   - 设置 `channels.discord.commands.nativeSkills`、`channels.telegram.commands.nativeSkills` 或 `channels.slack.commands.nativeSkills` 以按提供商覆盖（布尔值或 `"auto"`）。
 - `commands.bash`（默认 `false`）启用 `! <cmd>` 来运行主机 shell 命令（`/bash <cmd>` 是别名；需要 `tools.elevated` 白名单）。
 - `commands.bashForegroundMs`（默认 `2000`）控制 bash 切换到后台模式之前等待多长时间（`0` 立即后台运行）。
-- `commands.config`（默认 `false`）启用 `/config`（读写 `openclaw.json`）。
+- `commands.config`（默认 `false`）启用 `/config`（读写 `jarvis.json`）。
 - `commands.debug`（默认 `false`）启用 `/debug`（仅运行时覆盖）。
 - `commands.useAccessGroups`（默认 `true`）对命令强制执行白名单/策略。
 
@@ -164,7 +164,7 @@ x-i18n:
 
 ```
 /debug show
-/debug set messages.responsePrefix="[openclaw]"
+/debug set messages.responsePrefix="[jarvis]"
 /debug set channels.whatsapp.allowFrom=["+1555","+4477"]
 /debug unset messages.responsePrefix
 /debug reset
@@ -172,12 +172,12 @@ x-i18n:
 
 注意事项：
 
-- 覆盖立即应用于新的配置读取，但**不会**写入 `openclaw.json`。
+- 覆盖立即应用于新的配置读取，但**不会**写入 `jarvis.json`。
 - 使用 `/debug reset` 清除所有覆盖并返回到磁盘上的配置。
 
 ## 配置更新
 
-`/config` 写入你的磁盘配置（`openclaw.json`）。仅所有者。默认禁用；使用 `commands.config: true` 启用。
+`/config` 写入你的磁盘配置（`jarvis.json`）。仅所有者。默认禁用；使用 `commands.config: true` 启用。
 
 示例：
 
@@ -185,7 +185,7 @@ x-i18n:
 /config show
 /config show messages.responsePrefix
 /config get messages.responsePrefix
-/config set messages.responsePrefix="[openclaw]"
+/config set messages.responsePrefix="[jarvis]"
 /config unset messages.responsePrefix
 ```
 
@@ -202,4 +202,4 @@ x-i18n:
   - Slack：`agent:<agentId>:slack:slash:<userId>`（前缀可通过 `channels.slack.slashCommand.sessionPrefix` 配置）
   - Telegram：`telegram:slash:<userId>`（通过 `CommandTargetSessionKey` 定向到聊天会话）
 - **`/stop`** 定向到活动聊天会话，因此可以中止当前运行。
-- **Slack：** `channels.slack.slashCommand` 仍然支持单个 `/openclaw` 风格的命令。如果你启用 `commands.native`，你必须为每个内置命令创建一个 Slack 斜杠命令（与 `/help` 相同的名称）。Slack 的命令参数菜单以临时 Block Kit 按钮形式发送。
+- **Slack：** `channels.slack.slashCommand` 仍然支持单个 `/jarvis` 风格的命令。如果你启用 `commands.native`，你必须为每个内置命令创建一个 Slack 斜杠命令（与 `/help` 相同的名称）。Slack 的命令参数菜单以临时 Block Kit 按钮形式发送。

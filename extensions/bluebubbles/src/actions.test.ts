@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/bluebubbles";
+import type { JarvisConfig } from "jarvis/plugin-sdk/bluebubbles";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { bluebubblesMessageActions } from "./actions.js";
 import { getCachedBlueBubblesPrivateApiStatus } from "./probe.js";

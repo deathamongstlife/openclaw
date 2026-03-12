@@ -184,9 +184,9 @@ export type InternalHookHandler = (event: InternalHookEvent) => Promise<void> | 
  * to silently fire with zero handlers.
  */
 const _g = globalThis as typeof globalThis & {
-  __openclaw_internal_hook_handlers__?: Map<string, InternalHookHandler[]>;
+  __jarvis_internal_hook_handlers__?: Map<string, InternalHookHandler[]>;
 };
-const handlers = (_g.__openclaw_internal_hook_handlers__ ??= new Map<
+const handlers = (_g.__jarvis_internal_hook_handlers__ ??= new Map<
   string,
   InternalHookHandler[]
 >());

@@ -93,7 +93,7 @@ Available groups:
 - `group:automation`: `cron`, `gateway`
 - `group:messaging`: `message`
 - `group:nodes`: `nodes`
-- `group:openclaw`: all built-in Jarvis tools (excludes provider plugins)
+- `group:jarvis`: all built-in Jarvis tools (excludes provider plugins)
 
 ## Elevated: exec-only “run on host”
 

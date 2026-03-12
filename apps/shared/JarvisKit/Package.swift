@@ -9,9 +9,9 @@ let package = Package(
         .macOS(.v15),
     ],
     products: [
-        .library(name: "OpenClawProtocol", targets: ["OpenClawProtocol"]),
+        .library(name: "JarvisProtocol", targets: ["JarvisProtocol"]),
         .library(name: "JarvisKit", targets: ["JarvisKit"]),
-        .library(name: "OpenClawChatUI", targets: ["OpenClawChatUI"]),
+        .library(name: "JarvisChatUI", targets: ["JarvisChatUI"]),
     ],
     dependencies: [
         .package(url: "https://github.com/steipete/ElevenLabsKit", exact: "0.1.0"),
@@ -19,15 +19,15 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "OpenClawProtocol",
-            path: "Sources/OpenClawProtocol",
+            name: "JarvisProtocol",
+            path: "Sources/JarvisProtocol",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .target(
             name: "JarvisKit",
             dependencies: [
-                "OpenClawProtocol",
+                "JarvisProtocol",
                 .product(name: "ElevenLabsKit", package: "ElevenLabsKit"),
             ],
             path: "Sources/JarvisKit",
@@ -38,7 +38,7 @@ let package = Package(
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .target(
-            name: "OpenClawChatUI",
+            name: "JarvisChatUI",
             dependencies: [
                 "JarvisKit",
                 .product(
@@ -46,13 +46,13 @@ let package = Package(
                     package: "textual",
                     condition: .when(platforms: [.macOS, .iOS])),
             ],
-            path: "Sources/OpenClawChatUI",
+            path: "Sources/JarvisChatUI",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .testTarget(
             name: "JarvisKitTests",
-            dependencies: ["JarvisKit", "OpenClawChatUI"],
+            dependencies: ["JarvisKit", "JarvisChatUI"],
             path: "Tests/JarvisKitTests",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),

@@ -192,7 +192,7 @@ In group `120363403215116621@g.us` with agents `["alfred", "baerbel"]`:
 ```
 Session: agent:alfred:whatsapp:group:120363403215116621@g.us
 History: [user message, alfred's previous responses]
-Workspace: /Users/pascal/openclaw-alfred/
+Workspace: /Users/pascal/jarvis-alfred/
 Tools: read, write, exec
 ```
 
@@ -201,7 +201,7 @@ Tools: read, write, exec
 ```
 Session: agent:baerbel:whatsapp:group:120363403215116621@g.us
 History: [user message, baerbel's previous responses]
-Workspace: /Users/pascal/openclaw-baerbel/
+Workspace: /Users/pascal/jarvis-baerbel/
 Tools: read only
 ```
 
@@ -317,7 +317,7 @@ Broadcast groups work alongside existing routing:
 **Debug:**
 
 ```bash
-tail -f ~/.openclaw/logs/gateway.log | grep broadcast
+tail -f ~/.jarvis/logs/gateway.log | grep broadcast
 ```
 
 ### Only One Agent Responding

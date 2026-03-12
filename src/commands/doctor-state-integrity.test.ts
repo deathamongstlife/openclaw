@@ -13,17 +13,17 @@ vi.mock("../terminal/note.js", () => ({
 
 type EnvSnapshot = {
   HOME?: string;
-  OPENCLAW_HOME?: string;
-  OPENCLAW_STATE_DIR?: string;
-  OPENCLAW_OAUTH_DIR?: string;
+  JARVIS_HOME?: string;
+  JARVIS_STATE_DIR?: string;
+  JARVIS_OAUTH_DIR?: string;
 };
 
 function captureEnv(): EnvSnapshot {
   return {
     HOME: process.env.HOME,
-    OPENCLAW_HOME: process.env.OPENCLAW_HOME,
-    OPENCLAW_STATE_DIR: process.env.OPENCLAW_STATE_DIR,
-    OPENCLAW_OAUTH_DIR: process.env.OPENCLAW_OAUTH_DIR,
+    JARVIS_HOME: process.env.JARVIS_HOME,
+    JARVIS_STATE_DIR: process.env.JARVIS_STATE_DIR,
+    JARVIS_OAUTH_DIR: process.env.JARVIS_OAUTH_DIR,
   };
 }
 
@@ -85,12 +85,12 @@ describe("doctor state integrity oauth dir checks", () => {
 
   beforeEach(() => {
     envSnapshot = captureEnv();
-    tempHome = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-doctor-state-integrity-"));
+    tempHome = fs.mkdtempSync(path.join(os.tmpdir(), "jarvis-doctor-state-integrity-"));
     process.env.HOME = tempHome;
-    process.env.OPENCLAW_HOME = tempHome;
-    process.env.OPENCLAW_STATE_DIR = path.join(tempHome, ".openclaw");
-    delete process.env.OPENCLAW_OAUTH_DIR;
-    fs.mkdirSync(process.env.OPENCLAW_STATE_DIR, { recursive: true, mode: 0o700 });
+    process.env.JARVIS_HOME = tempHome;
+    process.env.JARVIS_STATE_DIR = path.join(tempHome, ".jarvis");
+    delete process.env.JARVIS_OAUTH_DIR;
+    fs.mkdirSync(process.env.JARVIS_STATE_DIR, { recursive: true, mode: 0o700 });
     vi.mocked(note).mockClear();
   });
 
@@ -131,8 +131,8 @@ describe("doctor state integrity oauth dir checks", () => {
     expect(confirmSkipInNonInteractive).toHaveBeenCalledWith(OAUTH_PROMPT_MATCHER);
   });
 
-  it("prompts for oauth dir when OPENCLAW_OAUTH_DIR is explicitly configured", async () => {
-    process.env.OPENCLAW_OAUTH_DIR = path.join(tempHome, ".oauth");
+  it("prompts for oauth dir when JARVIS_OAUTH_DIR is explicitly configured", async () => {
+    process.env.JARVIS_OAUTH_DIR = path.join(tempHome, ".oauth");
     const cfg: JarvisConfig = {};
     const confirmSkipInNonInteractive = await runStateIntegrity(cfg);
     expect(confirmSkipInNonInteractive).toHaveBeenCalledWith(OAUTH_PROMPT_MATCHER);
@@ -158,7 +158,7 @@ describe("doctor state integrity oauth dir checks", () => {
     expect(files.some((name) => name.startsWith("orphan-session.jsonl.deleted."))).toBe(true);
   });
 
-  it("prints openclaw-only verification hints when recent sessions are missing transcripts", async () => {
+  it("prints jarvis-only verification hints when recent sessions are missing transcripts", async () => {
     const cfg: JarvisConfig = {};
     writeSessionStore(cfg, {
       "agent:main:main": {

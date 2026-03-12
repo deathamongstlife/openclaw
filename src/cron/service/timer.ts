@@ -547,7 +547,13 @@ export function armTimer(state: CronServiceState) {
       });
     }, stuckRecoveryDelay);
     state.deps.log.warn(
-      { jobCount, enabledCount, withNextRun, withRunningMarkers, recoveryDelayMs: stuckRecoveryDelay },
+      {
+        jobCount,
+        enabledCount,
+        withNextRun,
+        withRunningMarkers,
+        recoveryDelayMs: stuckRecoveryDelay,
+      },
       "cron: timer armed for stuck marker recovery",
     );
     return;
@@ -612,7 +618,7 @@ export async function onTimer(state: CronServiceState) {
     // We use MAX_TIMER_DELAY_MS as a fixed re-check interval to avoid a
     // zero-delay hot-loop when past-due jobs are waiting for the current
     // execution to finish.
-    // See: https://github.com/openclaw/openclaw/issues/12025
+    // See: https://github.com/jarvis/jarvis/issues/12025
     state.deps.log.debug({}, "cron: timer tick skipped - already running, rearming recheck timer");
     armRunningRecheckTimer(state);
     return;
@@ -1139,7 +1145,7 @@ export async function executeJobCore(
           // Cron-triggered heartbeats should deliver to the last active channel.
           // Without this override, heartbeat target defaults to "none" (since
           // e2362d35) and cron main-session responses are silently swallowed.
-          // See: https://github.com/openclaw/openclaw/issues/28508
+          // See: https://github.com/jarvis/jarvis/issues/28508
           heartbeat: { target: "last" },
         });
         if (

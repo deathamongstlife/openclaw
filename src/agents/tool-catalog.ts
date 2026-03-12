@@ -266,11 +266,11 @@ function buildCoreToolGroupMap() {
     list.push(tool.id);
     sectionToolMap.set(groupId, list);
   }
-  const openclawTools = CORE_TOOL_DEFINITIONS.filter((tool) => tool.includeInJarvisGroup).map(
+  const jarvisTools = CORE_TOOL_DEFINITIONS.filter((tool) => tool.includeInJarvisGroup).map(
     (tool) => tool.id,
   );
   return {
-    "group:openclaw": openclawTools,
+    "group:jarvis": jarvisTools,
     ...Object.fromEntries(sectionToolMap.entries()),
   };
 }

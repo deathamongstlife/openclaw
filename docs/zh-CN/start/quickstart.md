@@ -21,12 +21,12 @@ Jarvis 需要 Node 22 或更新版本。
 <Tabs>
   <Tab title="npm">
     ```bash
-    npm install -g openclaw@latest
+    npm install -g jarvis@latest
     ```
   </Tab>
   <Tab title="pnpm">
     ```bash
-    pnpm add -g openclaw@latest
+    pnpm add -g jarvis@latest
     ```
   </Tab>
 </Tabs>
@@ -61,21 +61,21 @@ Jarvis 需要 Node 22 或更新版本。
 ## 从源码安装（开发）
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
+git clone https://github.com/jarvis/jarvis.git
+cd jarvis
 pnpm install
 pnpm ui:build # 首次运行时会自动安装 UI 依赖
 pnpm build
 jarvis onboard --install-daemon
 ```
 
-如果你还没有全局安装，可以在仓库目录中通过 `pnpm openclaw ...` 运行新手引导。
+如果你还没有全局安装，可以在仓库目录中通过 `pnpm jarvis ...` 运行新手引导。
 
 ## 多实例快速开始（可选）
 
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/a.json \
-OPENCLAW_STATE_DIR=~/.openclaw-a \
+JARVIS_CONFIG_PATH=~/.jarvis/a.json \
+JARVIS_STATE_DIR=~/.jarvis-a \
 jarvis gateway --port 19001
 ```
 

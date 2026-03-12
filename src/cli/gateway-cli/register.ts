@@ -99,7 +99,7 @@ export function registerGatewayCli(program: Command) {
             ["jarvis gateway status", "Show service status and probe reachability."],
             ["jarvis gateway discover", "Find local and wide-area gateway beacons."],
             ["jarvis gateway call health", "Call a gateway RPC method directly."],
-          ])}\n\n${theme.muted("Docs:")} ${formatDocsLink("/cli/gateway", "docs.openclaw.ai/cli/gateway")}\n`,
+          ])}\n\n${theme.muted("Docs:")} ${formatDocsLink("/cli/gateway", "docs.jarvis.ai/cli/gateway")}\n`,
       ),
   );
 

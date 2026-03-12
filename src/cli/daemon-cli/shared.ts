@@ -84,11 +84,11 @@ export function pickProbeHostForBind(
 }
 
 const SAFE_DAEMON_ENV_KEYS = [
-  "OPENCLAW_PROFILE",
-  "OPENCLAW_STATE_DIR",
-  "OPENCLAW_CONFIG_PATH",
-  "OPENCLAW_GATEWAY_PORT",
-  "OPENCLAW_NIX_MODE",
+  "JARVIS_PROFILE",
+  "JARVIS_STATE_DIR",
+  "JARVIS_CONFIG_PATH",
+  "JARVIS_GATEWAY_PORT",
+  "JARVIS_NIX_MODE",
 ];
 
 export function filterDaemonEnv(env: Record<string, string> | undefined): Record<string, string> {
@@ -150,8 +150,8 @@ export function renderRuntimeHints(
     hints.push(
       ...buildPlatformRuntimeLogHints({
         env,
-        systemdServiceName: resolveGatewaySystemdServiceName(env.OPENCLAW_PROFILE),
-        windowsTaskName: resolveGatewayWindowsTaskName(env.OPENCLAW_PROFILE),
+        systemdServiceName: resolveGatewaySystemdServiceName(env.JARVIS_PROFILE),
+        windowsTaskName: resolveGatewayWindowsTaskName(env.JARVIS_PROFILE),
       }),
     );
   }
@@ -159,7 +159,7 @@ export function renderRuntimeHints(
 }
 
 export function renderGatewayServiceStartHints(env: NodeJS.ProcessEnv = process.env): string[] {
-  const profile = env.OPENCLAW_PROFILE;
+  const profile = env.JARVIS_PROFILE;
   return buildPlatformServiceStartHints({
     installCommand: formatCliCommand("jarvis gateway install", env),
     startCommand: formatCliCommand("jarvis gateway", env),

@@ -1,11 +1,11 @@
 #!/bin/bash
 # Claude Code Authentication Status Checker
-# Checks both Claude Code and OpenClaw auth status
+# Checks both Claude Code and Jarvis auth status
 
 set -euo pipefail
 
 CLAUDE_CREDS="$HOME/.claude/.credentials.json"
-OPENCLAW_AUTH="$HOME/.openclaw/agents/main/agent/auth-profiles.json"
+JARVIS_AUTH="$HOME/.jarvis/agents/main/agent/auth-profiles.json"
 
 # Colors for terminal output
 RED='\033[0;31m'
@@ -103,7 +103,7 @@ check_claude_code_auth() {
     calc_status_from_expires "$expires_at"
 }
 
-check_openclaw_auth() {
+check_jarvis_auth() {
     if [ "$USE_JSON" -eq 1 ]; then
         local api_keys
         api_keys=$(json_anthropic_api_key_count)
@@ -122,7 +122,7 @@ check_openclaw_auth() {
         return $?
     fi
 
-    if [ ! -f "$OPENCLAW_AUTH" ]; then
+    if [ ! -f "$JARVIS_AUTH" ]; then
         echo "MISSING"
         return 1
     fi
@@ -131,7 +131,7 @@ check_openclaw_auth() {
     expires=$(jq -r '
         [.profiles | to_entries[] | select(.value.provider == "anthropic") | .value.expires]
         | max // 0
-    ' "$OPENCLAW_AUTH" 2>/dev/null || echo "0")
+    ' "$JARVIS_AUTH" 2>/dev/null || echo "0")
 
     calc_status_from_expires "$expires"
 }
@@ -139,26 +139,26 @@ check_openclaw_auth() {
 # JSON output mode
 if [ "$OUTPUT_MODE" = "json" ]; then
     claude_status=$(check_claude_code_auth 2>/dev/null || true)
-    openclaw_status=$(check_openclaw_auth 2>/dev/null || true)
+    jarvis_status=$(check_jarvis_auth 2>/dev/null || true)
 
     claude_expires=0
-    openclaw_expires=0
+    jarvis_expires=0
     if [ "$USE_JSON" -eq 1 ]; then
         claude_expires=$(json_expires_for_claude_cli)
-        openclaw_expires=$(json_expires_for_anthropic_any)
+        jarvis_expires=$(json_expires_for_anthropic_any)
     else
         claude_expires=$(jq -r '.claudeAiOauth.expiresAt // 0' "$CLAUDE_CREDS" 2>/dev/null || echo "0")
-        openclaw_expires=$(jq -r '.profiles["anthropic:default"].expires // 0' "$OPENCLAW_AUTH" 2>/dev/null || echo "0")
+        jarvis_expires=$(jq -r '.profiles["anthropic:default"].expires // 0' "$JARVIS_AUTH" 2>/dev/null || echo "0")
     fi
 
     jq -n \
         --arg cs "$claude_status" \
         --arg ce "$claude_expires" \
-        --arg bs "$openclaw_status" \
-        --arg be "$openclaw_expires" \
+        --arg bs "$jarvis_status" \
+        --arg be "$jarvis_expires" \
         '{
             claude_code: {status: $cs, expires_at_ms: ($ce | tonumber)},
-            openclaw: {status: $bs, expires_at_ms: ($be | tonumber)},
+            jarvis: {status: $bs, expires_at_ms: ($be | tonumber)},
             needs_reauth: (($cs | startswith("EXPIRED") or startswith("EXPIRING") or startswith("MISSING")) or ($bs | startswith("EXPIRED") or startswith("EXPIRING") or startswith("MISSING")))
         }'
     exit 0
@@ -167,19 +167,19 @@ fi
 # Simple output mode (for scripts/widgets)
 if [ "$OUTPUT_MODE" = "simple" ]; then
     claude_status=$(check_claude_code_auth 2>/dev/null || true)
-    openclaw_status=$(check_openclaw_auth 2>/dev/null || true)
+    jarvis_status=$(check_jarvis_auth 2>/dev/null || true)
 
     if [[ "$claude_status" == EXPIRED* ]] || [[ "$claude_status" == MISSING* ]]; then
         echo "CLAUDE_EXPIRED"
         exit 1
-    elif [[ "$openclaw_status" == EXPIRED* ]] || [[ "$openclaw_status" == MISSING* ]]; then
-        echo "OPENCLAW_EXPIRED"
+    elif [[ "$jarvis_status" == EXPIRED* ]] || [[ "$jarvis_status" == MISSING* ]]; then
+        echo "JARVIS_EXPIRED"
         exit 1
     elif [[ "$claude_status" == EXPIRING* ]]; then
         echo "CLAUDE_EXPIRING"
         exit 2
-    elif [[ "$openclaw_status" == EXPIRING* ]]; then
-        echo "OPENCLAW_EXPIRING"
+    elif [[ "$jarvis_status" == EXPIRING* ]]; then
+        echo "JARVIS_EXPIRING"
         exit 2
     else
         echo "OK"
@@ -228,7 +228,7 @@ else
 fi
 
 echo ""
-echo "OpenClaw Auth (~/.openclaw/agents/main/agent/auth-profiles.json):"
+echo "Jarvis Auth (~/.jarvis/agents/main/agent/auth-profiles.json):"
 if [ "$USE_JSON" -eq 1 ]; then
     best_profile=$(json_best_anthropic_profile)
     expires=$(json_expires_for_anthropic_any)
@@ -239,11 +239,11 @@ else
         | map(select(.value.provider == "anthropic"))
         | sort_by(.value.expires) | reverse
         | .[0].key // "none"
-    ' "$OPENCLAW_AUTH" 2>/dev/null || echo "none")
+    ' "$JARVIS_AUTH" 2>/dev/null || echo "none")
     expires=$(jq -r '
         [.profiles | to_entries[] | select(.value.provider == "anthropic") | .value.expires]
         | max // 0
-    ' "$OPENCLAW_AUTH" 2>/dev/null || echo "0")
+    ' "$JARVIS_AUTH" 2>/dev/null || echo "0")
     api_keys=0
 fi
 
@@ -273,8 +273,8 @@ fi
 
 echo ""
 echo "=== Service Status ==="
-if systemctl --user is-active openclaw >/dev/null 2>&1; then
-    echo -e "OpenClaw service: ${GREEN}running${NC}"
+if systemctl --user is-active jarvis >/dev/null 2>&1; then
+    echo -e "Jarvis service: ${GREEN}running${NC}"
 else
-    echo -e "OpenClaw service: ${RED}NOT running${NC}"
+    echo -e "Jarvis service: ${RED}NOT running${NC}"
 fi

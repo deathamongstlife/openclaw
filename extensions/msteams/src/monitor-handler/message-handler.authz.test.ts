@@ -1,4 +1,4 @@
-import type { JarvisConfig, PluginRuntime, RuntimeEnv } from "openclaw/plugin-sdk/msteams";
+import type { JarvisConfig, PluginRuntime, RuntimeEnv } from "jarvis/plugin-sdk/msteams";
 import { describe, expect, it, vi } from "vitest";
 import type { MSTeamsMessageHandlerDeps } from "../monitor-handler.js";
 import { setMSTeamsRuntime } from "../runtime.js";

@@ -12,7 +12,7 @@ import { setActivePluginRegistry } from "../../plugins/runtime.js";
 import { createOutboundTestPlugin, createTestRegistry } from "../../test-utils/channel-plugins.js";
 import { createIMessageTestPlugin } from "../../test-utils/imessage-test-plugin.js";
 import { loadWebMedia } from "../../web/media.js";
-import { resolvePreferredJarvisTmpDir } from "../tmp-openclaw-dir.js";
+import { resolvePreferredJarvisTmpDir } from "../tmp-jarvis-dir.js";
 import { runMessageAction } from "./message-action-runner.js";
 
 vi.mock("../../web/media.js", async () => {
@@ -805,7 +805,7 @@ describe("runMessageAction sandboxed media validation", () => {
       }
       // runMessageAction normalizes media paths through platform resolution.
       expect(result.sendResult?.mediaUrl).toBe(path.resolve(tmpFile));
-      const hostTmpOutsideJarvis = path.join(os.tmpdir(), "outside-openclaw", "test-media.png");
+      const hostTmpOutsideJarvis = path.join(os.tmpdir(), "outside-jarvis", "test-media.png");
       await expect(
         runMessageAction({
           cfg: slackConfig,

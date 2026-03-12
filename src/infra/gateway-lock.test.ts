@@ -15,13 +15,13 @@ let fixtureCount = 0;
 async function makeEnv() {
   const dir = path.join(fixtureRoot, `case-${fixtureCount++}`);
   await fs.mkdir(dir, { recursive: true });
-  const configPath = path.join(dir, "openclaw.json");
+  const configPath = path.join(dir, "jarvis.json");
   await fs.writeFile(configPath, "{}", "utf8");
   await fs.mkdir(resolveGatewayLockDir(), { recursive: true });
   return {
     ...process.env,
-    OPENCLAW_STATE_DIR: dir,
-    OPENCLAW_CONFIG_PATH: configPath,
+    JARVIS_STATE_DIR: dir,
+    JARVIS_CONFIG_PATH: configPath,
   };
 }
 
@@ -273,7 +273,7 @@ describe("gateway lock", () => {
   it("returns null when multi-gateway override is enabled", async () => {
     const env = await makeEnv();
     const lock = await acquireGatewayLock({
-      env: { ...env, OPENCLAW_ALLOW_MULTI_GATEWAY: "1", VITEST: "" },
+      env: { ...env, JARVIS_ALLOW_MULTI_GATEWAY: "1", VITEST: "" },
     });
     expect(lock).toBeNull();
   });

@@ -24,8 +24,8 @@ describe("updateNpmInstalledPlugins", () => {
   it("skips integrity drift checks for unpinned npm specs during dry-run updates", async () => {
     installPluginFromNpmSpecMock.mockResolvedValue({
       ok: true,
-      pluginId: "opik-openclaw",
-      targetDir: "/tmp/opik-openclaw",
+      pluginId: "opik-jarvis",
+      targetDir: "/tmp/opik-jarvis",
       version: "0.2.6",
       extensions: ["index.ts"],
     });
@@ -35,22 +35,22 @@ describe("updateNpmInstalledPlugins", () => {
       config: {
         plugins: {
           installs: {
-            "opik-openclaw": {
+            "opik-jarvis": {
               source: "npm",
-              spec: "@opik/opik-openclaw",
+              spec: "@opik/opik-jarvis",
               integrity: "sha512-old",
-              installPath: "/tmp/opik-openclaw",
+              installPath: "/tmp/opik-jarvis",
             },
           },
         },
       },
-      pluginIds: ["opik-openclaw"],
+      pluginIds: ["opik-jarvis"],
       dryRun: true,
     });
 
     expect(installPluginFromNpmSpecMock).toHaveBeenCalledWith(
       expect.objectContaining({
-        spec: "@opik/opik-openclaw",
+        spec: "@opik/opik-jarvis",
         expectedIntegrity: undefined,
       }),
     );
@@ -59,8 +59,8 @@ describe("updateNpmInstalledPlugins", () => {
   it("keeps integrity drift checks for exact-version npm specs during dry-run updates", async () => {
     installPluginFromNpmSpecMock.mockResolvedValue({
       ok: true,
-      pluginId: "opik-openclaw",
-      targetDir: "/tmp/opik-openclaw",
+      pluginId: "opik-jarvis",
+      targetDir: "/tmp/opik-jarvis",
       version: "0.2.6",
       extensions: ["index.ts"],
     });
@@ -70,22 +70,22 @@ describe("updateNpmInstalledPlugins", () => {
       config: {
         plugins: {
           installs: {
-            "opik-openclaw": {
+            "opik-jarvis": {
               source: "npm",
-              spec: "@opik/opik-openclaw@0.2.5",
+              spec: "@opik/opik-jarvis@0.2.5",
               integrity: "sha512-old",
-              installPath: "/tmp/opik-openclaw",
+              installPath: "/tmp/opik-jarvis",
             },
           },
         },
       },
-      pluginIds: ["opik-openclaw"],
+      pluginIds: ["opik-jarvis"],
       dryRun: true,
     });
 
     expect(installPluginFromNpmSpecMock).toHaveBeenCalledWith(
       expect.objectContaining({
-        spec: "@opik/opik-openclaw@0.2.5",
+        spec: "@opik/opik-jarvis@0.2.5",
         expectedIntegrity: "sha512-old",
       }),
     );
@@ -95,7 +95,7 @@ describe("updateNpmInstalledPlugins", () => {
     installPluginFromNpmSpecMock.mockResolvedValue({
       ok: false,
       code: "npm_package_not_found",
-      error: "Package not found on npm: @openclaw/missing.",
+      error: "Package not found on npm: @jarvis/missing.",
     });
 
     const { updateNpmInstalledPlugins } = await import("./update.js");
@@ -105,7 +105,7 @@ describe("updateNpmInstalledPlugins", () => {
           installs: {
             missing: {
               source: "npm",
-              spec: "@openclaw/missing",
+              spec: "@jarvis/missing",
               installPath: "/tmp/missing",
             },
           },
@@ -119,7 +119,7 @@ describe("updateNpmInstalledPlugins", () => {
       {
         pluginId: "missing",
         status: "error",
-        message: "Failed to check missing: npm package not found for @openclaw/missing.",
+        message: "Failed to check missing: npm package not found for @jarvis/missing.",
       },
     ]);
   });
@@ -172,7 +172,7 @@ describe("syncPluginsForUpdateChannel", () => {
           {
             pluginId: "feishu",
             localPath: "/app/extensions/feishu",
-            npmSpec: "@openclaw/feishu",
+            npmSpec: "@jarvis/feishu",
           },
         ],
       ]),
@@ -189,7 +189,7 @@ describe("syncPluginsForUpdateChannel", () => {
               source: "path",
               sourcePath: "/app/extensions/feishu",
               installPath: "/app/extensions/feishu",
-              spec: "@openclaw/feishu",
+              spec: "@jarvis/feishu",
             },
           },
         },
@@ -211,7 +211,7 @@ describe("syncPluginsForUpdateChannel", () => {
           {
             pluginId: "feishu",
             localPath: "/app/extensions/feishu",
-            npmSpec: "@openclaw/feishu",
+            npmSpec: "@jarvis/feishu",
           },
         ],
       ]),
@@ -228,7 +228,7 @@ describe("syncPluginsForUpdateChannel", () => {
               source: "path",
               sourcePath: "/app/extensions/feishu",
               installPath: "/tmp/old-feishu",
-              spec: "@openclaw/feishu",
+              spec: "@jarvis/feishu",
             },
           },
         },
@@ -241,7 +241,7 @@ describe("syncPluginsForUpdateChannel", () => {
       source: "path",
       sourcePath: "/app/extensions/feishu",
       installPath: "/app/extensions/feishu",
-      spec: "@openclaw/feishu",
+      spec: "@jarvis/feishu",
     });
     expect(installPluginFromNpmSpecMock).not.toHaveBeenCalled();
   });

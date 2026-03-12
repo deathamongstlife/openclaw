@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/zalo",
+  "name": "@jarvis/zalo",
   "version": "2026.3.9",
   "description": "Jarvis Zalo channel plugin",
   "type": "module",
@@ -7,7 +7,7 @@
     "undici": "7.22.0",
     "zod": "^4.3.6"
   },
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ],
@@ -25,7 +25,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@openclaw/zalo",
+      "npmSpec": "@jarvis/zalo",
       "localPath": "extensions/zalo",
       "defaultChoice": "npm"
     }

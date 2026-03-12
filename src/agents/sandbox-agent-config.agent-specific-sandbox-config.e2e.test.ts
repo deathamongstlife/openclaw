@@ -104,7 +104,7 @@ function createWorkSetupCommandConfig(scope: "agent" | "shared"): JarvisConfig {
       list: [
         {
           id: "work",
-          workspace: "~/openclaw-work",
+          workspace: "~/jarvis-work",
           sandbox: {
             mode: "all",
             scope,
@@ -141,13 +141,13 @@ describe("Agent-specific sandbox config", () => {
           sandbox: {
             mode: "all",
             scope: "agent",
-            workspaceRoot: "~/.openclaw/sandboxes",
+            workspaceRoot: "~/.jarvis/sandboxes",
           },
         },
         list: [
           {
             id: "isolated",
-            workspace: "~/openclaw-isolated",
+            workspace: "~/jarvis-isolated",
             sandbox: {
               mode: "all",
               scope: "agent",
@@ -176,14 +176,14 @@ describe("Agent-specific sandbox config", () => {
         list: [
           {
             id: "main",
-            workspace: "~/openclaw",
+            workspace: "~/jarvis",
             sandbox: {
               mode: "off",
             },
           },
           {
             id: "family",
-            workspace: "~/openclaw-family",
+            workspace: "~/jarvis-family",
             sandbox: {
               mode: "all",
               scope: "agent",
@@ -243,7 +243,7 @@ describe("Agent-specific sandbox config", () => {
         list: [
           {
             id: "main",
-            workspace: "~/openclaw",
+            workspace: "~/jarvis",
           },
         ],
       },
@@ -293,7 +293,7 @@ describe("Agent-specific sandbox config", () => {
         list: [
           {
             id: "work",
-            workspace: "~/openclaw-work",
+            workspace: "~/jarvis-work",
             sandbox: {
               mode: "all",
               scope: "agent",
@@ -326,7 +326,7 @@ describe("Agent-specific sandbox config", () => {
             list: [
               {
                 id: "main",
-                workspace: "~/openclaw",
+                workspace: "~/jarvis",
                 sandbox: {
                   mode: "off",
                 },
@@ -351,7 +351,7 @@ describe("Agent-specific sandbox config", () => {
             list: [
               {
                 id: "family",
-                workspace: "~/openclaw-family",
+                workspace: "~/jarvis-family",
                 sandbox: {
                   mode: "all",
                   scope: "agent",
@@ -387,7 +387,7 @@ describe("Agent-specific sandbox config", () => {
         list: [
           {
             id: "work",
-            workspace: "~/openclaw-work",
+            workspace: "~/jarvis-work",
             sandbox: {
               mode: "all",
               scope: "agent",

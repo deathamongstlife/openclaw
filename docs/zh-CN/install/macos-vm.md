@@ -52,9 +52,9 @@ x-i18n:
 ## 快速路径（Lume，有经验的用户）
 
 1. 安装 Lume
-2. `lume create openclaw --os macos --ipsw latest`
+2. `lume create jarvis --os macos --ipsw latest`
 3. 完成设置助手，启用远程登录（SSH）
-4. `lume run openclaw --no-display`
+4. `lume run jarvis --no-display`
 5. SSH 进入，安装 Jarvis，配置渠道
 6. 完成
 
@@ -94,7 +94,7 @@ lume --version
 ## 2) 创建 macOS VM
 
 ```bash
-lume create openclaw --os macos --ipsw latest
+lume create jarvis --os macos --ipsw latest
 ```
 
 这会下载 macOS 并创建 VM。VNC 窗口会自动打开。
@@ -122,7 +122,7 @@ lume create openclaw --os macos --ipsw latest
 ## 4) 获取 VM 的 IP 地址
 
 ```bash
-lume get openclaw
+lume get jarvis
 ```
 
 查找 IP 地址（通常是 `192.168.64.x`）。
@@ -144,7 +144,7 @@ ssh youruser@192.168.64.X
 在 VM 内：
 
 ```bash
-npm install -g openclaw@latest
+npm install -g jarvis@latest
 jarvis onboard --install-daemon
 ```
 
@@ -157,7 +157,7 @@ jarvis onboard --install-daemon
 编辑配置文件：
 
 ```bash
-nano ~/.openclaw/openclaw.json
+nano ~/.jarvis/jarvis.json
 ```
 
 添加你的渠道：
@@ -189,8 +189,8 @@ jarvis channels login
 停止 VM 并在无显示器模式下重启：
 
 ```bash
-lume stop openclaw
-lume run openclaw --no-display
+lume stop jarvis
+lume run jarvis --no-display
 ```
 
 VM 在后台运行。Jarvis 的守护进程保持 Gateway 网关运行。
@@ -239,16 +239,16 @@ ssh youruser@192.168.64.X "jarvis status"
 在进一步自定义之前，快照你的干净状态：
 
 ```bash
-lume stop openclaw
-lume clone jarvis openclaw-golden
+lume stop jarvis
+lume clone jarvis jarvis-golden
 ```
 
 随时重置：
 
 ```bash
-lume stop openclaw && lume delete openclaw
-lume clone openclaw-golden openclaw
-lume run openclaw --no-display
+lume stop jarvis && lume delete jarvis
+lume clone jarvis-golden jarvis
+lume run jarvis --no-display
 ```
 
 ---
@@ -267,11 +267,11 @@ lume run openclaw --no-display
 
 ## 故障排除
 
-| 问题                    | 解决方案                                                         |
-| ----------------------- | ---------------------------------------------------------------- |
-| 无法 SSH 进入 VM        | 检查 VM 的系统设置中是否启用了"远程登录"                         |
-| VM IP 未显示            | 等待 VM 完全启动，再次运行 `lume get openclaw`                   |
-| 找不到 Lume 命令        | 将 `~/.local/bin` 添加到你的 PATH                                |
+| 问题                    | 解决方案                                                       |
+| ----------------------- | -------------------------------------------------------------- |
+| 无法 SSH 进入 VM        | 检查 VM 的系统设置中是否启用了"远程登录"                       |
+| VM IP 未显示            | 等待 VM 完全启动，再次运行 `lume get jarvis`                   |
+| 找不到 Lume 命令        | 将 `~/.local/bin` 添加到你的 PATH                              |
 | WhatsApp 二维码扫描失败 | 确保运行 `jarvis channels login` 时你是登录到 VM（而不是主机） |
 
 ---

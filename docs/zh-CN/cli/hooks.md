@@ -93,10 +93,10 @@ jarvis hooks info session-memory
 Save session context to memory when /new command is issued
 
 Details:
-  Source: openclaw-bundled
-  Path: /path/to/openclaw/hooks/bundled/session-memory/HOOK.md
-  Handler: /path/to/openclaw/hooks/bundled/session-memory/handler.ts
-  Homepage: https://docs.openclaw.ai/automation/hooks#session-memory
+  Source: jarvis-bundled
+  Path: /path/to/jarvis/hooks/bundled/session-memory/HOOK.md
+  Handler: /path/to/jarvis/hooks/bundled/session-memory/handler.ts
+  Homepage: https://docs.jarvis.ai/automation/hooks#session-memory
   Events: command:new
 
 Requirements:
@@ -131,7 +131,7 @@ Not ready: 0
 jarvis hooks enable <name>
 ```
 
-通过将特定钩子添加到配置（`~/.openclaw/config.json`）来启用它。
+通过将特定钩子添加到配置（`~/.jarvis/config.json`）来启用它。
 
 **注意：** 由插件管理的钩子在 `jarvis hooks list` 中显示 `plugin:<id>`，
 无法在此处启用/禁用。请改为启用/禁用该插件。
@@ -200,7 +200,7 @@ jarvis hooks install <path-or-spec>
 
 **执行操作：**
 
-- 将钩子包复制到 `~/.openclaw/hooks/<id>`
+- 将钩子包复制到 `~/.jarvis/hooks/<id>`
 - 在 `hooks.internal.entries.*` 中启用已安装的钩子
 - 在 `hooks.internal.installs` 下记录安装信息
 
@@ -220,7 +220,7 @@ jarvis hooks install ./my-hook-pack
 jarvis hooks install ./my-hook-pack.zip
 
 # NPM 包
-jarvis hooks install @openclaw/my-hook-pack
+jarvis hooks install @jarvis/my-hook-pack
 
 # 链接本地目录而不复制
 jarvis hooks install -l ./my-hook-pack
@@ -252,7 +252,7 @@ jarvis hooks update --all
 jarvis hooks enable session-memory
 ```
 
-**输出：** `~/.openclaw/workspace/memory/YYYY-MM-DD-slug.md`
+**输出：** `~/.jarvis/workspace/memory/YYYY-MM-DD-slug.md`
 
 **参见：** [session-memory 文档](/automation/hooks#session-memory)
 
@@ -266,19 +266,19 @@ jarvis hooks enable session-memory
 jarvis hooks enable command-logger
 ```
 
-**输出：** `~/.openclaw/logs/commands.log`
+**输出：** `~/.jarvis/logs/commands.log`
 
 **查看日志：**
 
 ```bash
 # 最近的命令
-tail -n 20 ~/.openclaw/logs/commands.log
+tail -n 20 ~/.jarvis/logs/commands.log
 
 # 格式化输出
-cat ~/.openclaw/logs/commands.log | jq .
+cat ~/.jarvis/logs/commands.log | jq .
 
 # 按操作过滤
-grep '"action":"new"' ~/.openclaw/logs/commands.log | jq .
+grep '"action":"new"' ~/.jarvis/logs/commands.log | jq .
 ```
 
 **参见：** [command-logger 文档](/automation/hooks#command-logger)

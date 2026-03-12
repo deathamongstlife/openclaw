@@ -1,5 +1,5 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/msteams";
-import { loadOutboundMediaFromUrl } from "openclaw/plugin-sdk/msteams";
+import type { JarvisConfig } from "jarvis/plugin-sdk/msteams";
+import { loadOutboundMediaFromUrl } from "jarvis/plugin-sdk/msteams";
 import { createMSTeamsConversationStoreFs } from "./conversation-store-fs.js";
 import {
   classifyMSTeamsSendError,

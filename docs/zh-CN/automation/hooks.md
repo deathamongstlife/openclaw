@@ -50,8 +50,8 @@ hooks 系统允许你：
 
 Jarvis 附带三个自动发现的捆绑 hooks：
 
-- **💾 session-memory**：当你发出 `/new` 时将会话上下文保存到智能体工作区（默认 `~/.openclaw/workspace/memory/`）
-- **📝 command-logger**：将所有命令事件记录到 `~/.openclaw/logs/commands.log`
+- **💾 session-memory**：当你发出 `/new` 时将会话上下文保存到智能体工作区（默认 `~/.jarvis/workspace/memory/`）
+- **📝 command-logger**：将所有命令事件记录到 `~/.jarvis/logs/commands.log`
 - **🚀 boot-md**：当 Gateway 网关启动时运行 `BOOT.md`（需要启用内部 hooks）
 
 列出可用的 hooks：
@@ -87,8 +87,8 @@ jarvis hooks info session-memory
 Hooks 从三个目录自动发现（按优先级顺序）：
 
 1. **工作区 hooks**：`<workspace>/hooks/`（每智能体，最高优先级）
-2. **托管 hooks**：`~/.openclaw/hooks/`（用户安装，跨工作区共享）
-3. **捆绑 hooks**：`<openclaw>/dist/hooks/bundled/`（随 Jarvis 附带）
+2. **托管 hooks**：`~/.jarvis/hooks/`（用户安装，跨工作区共享）
+3. **捆绑 hooks**：`<jarvis>/dist/hooks/bundled/`（随 Jarvis 附带）
 
 托管 hook 目录可以是**单个 hook** 或 **hook 包**（包目录）。
 
@@ -102,7 +102,7 @@ my-hook/
 
 ## Hook 包（npm/archives）
 
-Hook 包是标准的 npm 包，通过 `package.json` 中的 `openclaw.hooks` 导出一个或多个 hooks。使用以下命令安装：
+Hook 包是标准的 npm 包，通过 `package.json` 中的 `jarvis.hooks` 导出一个或多个 hooks。使用以下命令安装：
 
 ```bash
 jarvis hooks install <path-or-spec>
@@ -114,14 +114,14 @@ jarvis hooks install <path-or-spec>
 {
   "name": "@acme/my-hooks",
   "version": "0.1.0",
-  "openclaw": {
+  "jarvis": {
     "hooks": ["./hooks/my-hook", "./hooks/other-hook"]
   }
 }
 ```
 
 每个条目指向包含 `HOOK.md` 和 `handler.ts`（或 `index.ts`）的 hook 目录。
-Hook 包可以附带依赖；它们将安装在 `~/.openclaw/hooks/<id>` 下。
+Hook 包可以附带依赖；它们将安装在 `~/.jarvis/hooks/<id>` 下。
 
 ## Hook 结构
 
@@ -133,9 +133,9 @@ Hook 包可以附带依赖；它们将安装在 `~/.openclaw/hooks/<id>` 下。
 ---
 name: my-hook
 description: "Short description of what this hook does"
-homepage: https://docs.openclaw.ai/automation/hooks#my-hook
+homepage: https://docs.jarvis.ai/automation/hooks#my-hook
 metadata:
-  { "openclaw": { "emoji": "🔗", "events": ["command:new"], "requires": { "bins": ["node"] } } }
+  { "jarvis": { "emoji": "🔗", "events": ["command:new"], "requires": { "bins": ["node"] } } }
 ---
 
 # My Hook
@@ -159,7 +159,7 @@ No configuration needed.
 
 ### 元数据字段
 
-`metadata.openclaw` 对象支持：
+`metadata.jarvis` 对象支持：
 
 - **`emoji`**：CLI 的显示表情符号（例如 `"💾"`）
 - **`events`**：要监听的事件数组（例如 `["command:new", "command:reset"]`）
@@ -266,13 +266,13 @@ export default myHandler;
 ### 1. 选择位置
 
 - **工作区 hooks**（`<workspace>/hooks/`）：每智能体，最高优先级
-- **托管 hooks**（`~/.openclaw/hooks/`）：跨工作区共享
+- **托管 hooks**（`~/.jarvis/hooks/`）：跨工作区共享
 
 ### 2. 创建目录结构
 
 ```bash
-mkdir -p ~/.openclaw/hooks/my-hook
-cd ~/.openclaw/hooks/my-hook
+mkdir -p ~/.jarvis/hooks/my-hook
+cd ~/.jarvis/hooks/my-hook
 ```
 
 ### 3. 创建 HOOK.md
@@ -281,7 +281,7 @@ cd ~/.openclaw/hooks/my-hook
 ---
 name: my-hook
 description: "Does something useful"
-metadata: { "openclaw": { "emoji": "🎯", "events": ["command:new"] } }
+metadata: { "jarvis": { "emoji": "🎯", "events": ["command:new"] } }
 ---
 
 # My Custom Hook
@@ -459,7 +459,7 @@ jarvis hooks disable command-logger
 
 **要求**：必须配置 `workspace.dir`
 
-**输出**：`<workspace>/memory/YYYY-MM-DD-slug.md`（默认为 `~/.openclaw/workspace`）
+**输出**：`<workspace>/memory/YYYY-MM-DD-slug.md`（默认为 `~/.jarvis/workspace`）
 
 **功能**：
 
@@ -498,7 +498,7 @@ jarvis hooks enable session-memory
 
 **要求**：无
 
-**输出**：`~/.openclaw/logs/commands.log`
+**输出**：`~/.jarvis/logs/commands.log`
 
 **功能**：
 
@@ -517,13 +517,13 @@ jarvis hooks enable session-memory
 
 ```bash
 # View recent commands
-tail -n 20 ~/.openclaw/logs/commands.log
+tail -n 20 ~/.jarvis/logs/commands.log
 
 # Pretty-print with jq
-cat ~/.openclaw/logs/commands.log | jq .
+cat ~/.jarvis/logs/commands.log | jq .
 
 # Filter by action
-grep '"action":"new"' ~/.openclaw/logs/commands.log | jq .
+grep '"action":"new"' ~/.jarvis/logs/commands.log | jq .
 ```
 
 **启用**：
@@ -607,13 +607,13 @@ const handler: HookHandler = async (event) => {
 尽可能在元数据中指定确切事件：
 
 ```yaml
-metadata: { "openclaw": { "events": ["command:new"] } } # Specific
+metadata: { "jarvis": { "events": ["command:new"] } } # Specific
 ```
 
 而不是：
 
 ```yaml
-metadata: { "openclaw": { "events": ["command"] } } # General - more overhead
+metadata: { "jarvis": { "events": ["command"] } } # General - more overhead
 ```
 
 ## 调试
@@ -668,7 +668,7 @@ jarvis hooks info my-hook
 ./scripts/clawlog.sh -f
 
 # Other platforms
-tail -f ~/.openclaw/gateway.log
+tail -f ~/.jarvis/gateway.log
 ```
 
 ### 直接测试 Hooks
@@ -744,14 +744,14 @@ Gateway 网关启动
 1. 检查目录结构：
 
    ```bash
-   ls -la ~/.openclaw/hooks/my-hook/
+   ls -la ~/.jarvis/hooks/my-hook/
    # Should show: HOOK.md, handler.ts
    ```
 
 2. 验证 HOOK.md 格式：
 
    ```bash
-   cat ~/.openclaw/hooks/my-hook/HOOK.md
+   cat ~/.jarvis/hooks/my-hook/HOOK.md
    # Should have YAML frontmatter with name and metadata
    ```
 
@@ -827,8 +827,8 @@ node -e "import('./path/to/handler.ts').then(console.log)"
 1. 创建 hook 目录：
 
    ```bash
-   mkdir -p ~/.openclaw/hooks/my-hook
-   mv ./hooks/handlers/my-handler.ts ~/.openclaw/hooks/my-hook/handler.ts
+   mkdir -p ~/.jarvis/hooks/my-hook
+   mv ./hooks/handlers/my-handler.ts ~/.jarvis/hooks/my-hook/handler.ts
    ```
 
 2. 创建 HOOK.md：
@@ -837,7 +837,7 @@ node -e "import('./path/to/handler.ts').then(console.log)"
    ---
    name: my-hook
    description: "My custom hook"
-   metadata: { "openclaw": { "emoji": "🎯", "events": ["command:new"] } }
+   metadata: { "jarvis": { "emoji": "🎯", "events": ["command:new"] } }
    ---
 
    # My Hook
@@ -877,6 +877,6 @@ node -e "import('./path/to/handler.ts').then(console.log)"
 ## 另请参阅
 
 - [CLI 参考：hooks](/cli/hooks)
-- [捆绑 Hooks README](https://github.com/openclaw/openclaw/tree/main/src/hooks/bundled)
+- [捆绑 Hooks README](https://github.com/jarvis/jarvis/tree/main/src/hooks/bundled)
 - [Webhook Hooks](/automation/webhook)
 - [配置](/gateway/configuration#hooks)

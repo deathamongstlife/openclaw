@@ -22,7 +22,7 @@ and process access when the model does something dumb.
 - Optional sandboxed browser (`agents.defaults.sandbox.browser`).
   - By default, the sandbox browser auto-starts (ensures CDP is reachable) when the browser tool needs it.
     Configure via `agents.defaults.sandbox.browser.autoStart` and `agents.defaults.sandbox.browser.autoStartTimeoutMs`.
-  - By default, sandbox browser containers use a dedicated Docker network (`openclaw-sandbox-browser`) instead of the global `bridge` network.
+  - By default, sandbox browser containers use a dedicated Docker network (`jarvis-sandbox-browser`) instead of the global `bridge` network.
     Configure with `agents.defaults.sandbox.browser.network`.
   - Optional `agents.defaults.sandbox.browser.cdpSourceRange` restricts container-edge CDP ingress with a CIDR allowlist (for example `172.21.0.1/32`).
   - noVNC observer access is password-protected by default; Jarvis emits a short-lived token URL that serves a local bootstrap page and opens noVNC with password in URL fragment (not query/header logs).
@@ -58,7 +58,7 @@ Not sandboxed:
 
 `agents.defaults.sandbox.workspaceAccess` controls **what the sandbox can see**:
 
-- `"none"` (default): tools see a sandbox workspace under `~/.openclaw/sandboxes`.
+- `"none"` (default): tools see a sandbox workspace under `~/.jarvis/sandboxes`.
 - `"ro"`: mounts the agent workspace read-only at `/agent` (disables `write`/`edit`/`apply_patch`).
 - `"rw"`: mounts the agent workspace read/write at `/workspace`.
 
@@ -116,7 +116,7 @@ Security notes:
 
 ## Images + setup
 
-Default image: `openclaw-sandbox:bookworm-slim`
+Default image: `jarvis-sandbox:bookworm-slim`
 
 Build it once:
 
@@ -137,7 +137,7 @@ scripts/sandbox-common-setup.sh
 ```
 
 Then set `agents.defaults.sandbox.docker.image` to
-`openclaw-sandbox-common:bookworm-slim`.
+`jarvis-sandbox-common:bookworm-slim`.
 
 Sandboxed browser image:
 
@@ -152,7 +152,7 @@ The bundled sandbox browser image also applies conservative Chromium startup def
 for containerized workloads. Current container defaults include:
 
 - `--remote-debugging-address=127.0.0.1`
-- `--remote-debugging-port=<derived from OPENCLAW_BROWSER_CDP_PORT>`
+- `--remote-debugging-port=<derived from JARVIS_BROWSER_CDP_PORT>`
 - `--user-data-dir=${HOME}/.chrome`
 - `--no-first-run`
 - `--no-default-browser-check`
@@ -171,12 +171,12 @@ for containerized workloads. Current container defaults include:
 - `--no-sandbox` and `--disable-setuid-sandbox` when `noSandbox` is enabled.
 - The three graphics hardening flags (`--disable-3d-apis`,
   `--disable-software-rasterizer`, `--disable-gpu`) are optional and are useful
-  when containers lack GPU support. Set `OPENCLAW_BROWSER_DISABLE_GRAPHICS_FLAGS=0`
+  when containers lack GPU support. Set `JARVIS_BROWSER_DISABLE_GRAPHICS_FLAGS=0`
   if your workload requires WebGL or other 3D/browser features.
 - `--disable-extensions` is enabled by default and can be disabled with
-  `OPENCLAW_BROWSER_DISABLE_EXTENSIONS=0` for extension-reliant flows.
+  `JARVIS_BROWSER_DISABLE_EXTENSIONS=0` for extension-reliant flows.
 - `--renderer-process-limit=2` is controlled by
-  `OPENCLAW_BROWSER_RENDERER_PROCESS_LIMIT=<N>`, where `0` keeps Chromium's default.
+  `JARVIS_BROWSER_RENDERER_PROCESS_LIMIT=<N>`, where `0` keeps Chromium's default.
 
 If you need a different runtime profile, use a custom browser image and provide
 your own entrypoint. For local (non-container) Chromium profiles, use
@@ -192,8 +192,8 @@ Docker installs and the containerized gateway live here:
 [Docker](/install/docker)
 
 For Docker gateway deployments, `docker-setup.sh` can bootstrap sandbox config.
-Set `OPENCLAW_SANDBOX=1` (or `true`/`yes`/`on`) to enable that path. You can
-override socket location with `OPENCLAW_DOCKER_SOCKET`. Full setup and env
+Set `JARVIS_SANDBOX=1` (or `true`/`yes`/`on`) to enable that path. You can
+override socket location with `JARVIS_DOCKER_SOCKET`. Full setup and env
 reference: [Docker](/install/docker#enable-agent-sandbox-for-docker-gateway-opt-in).
 
 ## setupCommand (one-time container setup)

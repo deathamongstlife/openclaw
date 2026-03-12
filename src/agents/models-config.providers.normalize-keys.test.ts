@@ -8,7 +8,7 @@ import { normalizeProviders } from "./models-config.providers.js";
 
 describe("normalizeProviders", () => {
   it("trims provider keys so image models remain discoverable for custom providers", async () => {
-    const agentDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-agent-"));
+    const agentDir = await fs.mkdtemp(path.join(os.tmpdir(), "jarvis-agent-"));
     try {
       const providers: NonNullable<NonNullable<JarvisConfig["models"]>["providers"]> = {
         " dashscope-vision ": {
@@ -38,7 +38,7 @@ describe("normalizeProviders", () => {
   });
 
   it("keeps the latest provider config when duplicate keys only differ by whitespace", async () => {
-    const agentDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-agent-"));
+    const agentDir = await fs.mkdtemp(path.join(os.tmpdir(), "jarvis-agent-"));
     try {
       const providers: NonNullable<NonNullable<JarvisConfig["models"]>["providers"]> = {
         openai: {
@@ -75,7 +75,7 @@ describe("normalizeProviders", () => {
     }
   });
   it("replaces resolved env var value with env var name to prevent plaintext persistence", async () => {
-    const agentDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-agent-"));
+    const agentDir = await fs.mkdtemp(path.join(os.tmpdir(), "jarvis-agent-"));
     const original = process.env.OPENAI_API_KEY;
     process.env.OPENAI_API_KEY = "sk-test-secret-value-12345"; // pragma: allowlist secret
     const secretRefManagedProviders = new Set<string>();
@@ -112,7 +112,7 @@ describe("normalizeProviders", () => {
   });
 
   it("normalizes SecretRef-backed provider headers to non-secret marker values", async () => {
-    const agentDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-agent-"));
+    const agentDir = await fs.mkdtemp(path.join(os.tmpdir(), "jarvis-agent-"));
     try {
       const providers: NonNullable<NonNullable<JarvisConfig["models"]>["providers"]> = {
         openai: {

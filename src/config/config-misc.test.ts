@@ -12,11 +12,11 @@ import { JarvisSchema } from "./zod-schema.js";
 describe("$schema key in config (#14998)", () => {
   it("accepts config with $schema string", () => {
     const result = JarvisSchema.safeParse({
-      $schema: "https://openclaw.ai/config.json",
+      $schema: "https://jarvis.ai/config.json",
     });
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(result.data.$schema).toBe("https://openclaw.ai/config.json");
+      expect(result.data.$schema).toBe("https://jarvis.ai/config.json");
     }
   });
 
@@ -377,11 +377,11 @@ describe("config strict validation", () => {
   it("does not mark resolved-only gateway.bind aliases as auto-migratable legacy", async () => {
     await withTempHome(async (home) => {
       await writeJarvisConfig(home, {
-        gateway: { bind: "${OPENCLAW_BIND}" },
+        gateway: { bind: "${JARVIS_BIND}" },
       });
 
-      const prev = process.env.OPENCLAW_BIND;
-      process.env.OPENCLAW_BIND = "0.0.0.0";
+      const prev = process.env.JARVIS_BIND;
+      process.env.JARVIS_BIND = "0.0.0.0";
       try {
         const snap = await readConfigFileSnapshot();
         expect(snap.valid).toBe(false);
@@ -389,9 +389,9 @@ describe("config strict validation", () => {
         expect(snap.issues.some((issue) => issue.path === "gateway.bind")).toBe(true);
       } finally {
         if (prev === undefined) {
-          delete process.env.OPENCLAW_BIND;
+          delete process.env.JARVIS_BIND;
         } else {
-          process.env.OPENCLAW_BIND = prev;
+          process.env.JARVIS_BIND = prev;
         }
       }
     });

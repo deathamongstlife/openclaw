@@ -25,7 +25,7 @@ LINE 通过 LINE Messaging API 连接到 Jarvis。该插件作为 webhook 接收
 安装 LINE 插件：
 
 ```bash
-jarvis plugins install @openclaw/line
+jarvis plugins install @jarvis/line
 ```
 
 本地检出（从 git 仓库运行时）：

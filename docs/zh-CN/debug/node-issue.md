@@ -20,7 +20,7 @@ x-i18n:
 通过 Node 使用 `tsx` 运行 Jarvis 时，启动阶段报错：
 
 ```
-[openclaw] Failed to start CLI: TypeError: __name is not a function
+[jarvis] Failed to start CLI: TypeError: __name is not a function
     at createSubsystemLogger (.../src/logging/subsystem.ts:203:25)
     at .../src/agents/auth-profiles/constants.ts:25:20
 ```
@@ -71,9 +71,9 @@ node --import tsx scripts/repro/tsx-name-repro.ts
 - 使用 Node + tsc watch，然后运行编译产物：
   ```bash
   pnpm exec tsc --watch --preserveWatchOutput
-  node --watch openclaw.mjs status
+  node --watch jarvis.mjs status
   ```
-- 已在本地确认：`pnpm exec tsc -p tsconfig.json` + `node openclaw.mjs status` 在 Node 25 上可正常运行。
+- 已在本地确认：`pnpm exec tsc -p tsconfig.json` + `node jarvis.mjs status` 在 Node 25 上可正常运行。
 - 如果可能，在 TS 加载器中禁用 esbuild 的 keepNames（防止插入 `__name` 辅助函数）；tsx 目前不提供此配置项。
 - 在 Node LTS（22/24）上测试 `tsx`，确认该问题是否为 Node 25 特有。
 

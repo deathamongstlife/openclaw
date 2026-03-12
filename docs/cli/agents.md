@@ -18,12 +18,12 @@ Related:
 
 ```bash
 jarvis agents list
-jarvis agents add work --workspace ~/.openclaw/workspace-work
+jarvis agents add work --workspace ~/.jarvis/workspace-work
 jarvis agents bindings
 jarvis agents bind --agent work --bind telegram:ops
 jarvis agents unbind --agent work --bind telegram:ops
-jarvis agents set-identity --workspace ~/.openclaw/workspace --from-identity
-jarvis agents set-identity --agent main --avatar avatars/openclaw.png
+jarvis agents set-identity --workspace ~/.jarvis/workspace --from-identity
+jarvis agents set-identity --agent main --avatar avatars/jarvis.png
 jarvis agents delete work
 ```
 
@@ -76,7 +76,7 @@ jarvis agents unbind --agent work --all
 
 Each agent workspace can include an `IDENTITY.md` at the workspace root:
 
-- Example path: `~/.openclaw/workspace/IDENTITY.md`
+- Example path: `~/.jarvis/workspace/IDENTITY.md`
 - `set-identity --from-identity` reads from the workspace root (or an explicit `--identity-file`)
 
 Avatar paths resolve relative to the workspace root.
@@ -93,13 +93,13 @@ Avatar paths resolve relative to the workspace root.
 Load from `IDENTITY.md`:
 
 ```bash
-jarvis agents set-identity --workspace ~/.openclaw/workspace --from-identity
+jarvis agents set-identity --workspace ~/.jarvis/workspace --from-identity
 ```
 
 Override fields explicitly:
 
 ```bash
-jarvis agents set-identity --agent main --name "Jarvis" --emoji "🦞" --avatar avatars/openclaw.png
+jarvis agents set-identity --agent main --name "Jarvis" --emoji "🦞" --avatar avatars/jarvis.png
 ```
 
 Config sample:
@@ -114,7 +114,7 @@ Config sample:
           name: "Jarvis",
           theme: "space lobster",
           emoji: "🦞",
-          avatar: "avatars/openclaw.png",
+          avatar: "avatars/jarvis.png",
         },
       },
     ],

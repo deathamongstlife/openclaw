@@ -2,12 +2,12 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { Type } from "@sinclair/typebox";
 import Ajv from "ajv";
-import { resolvePreferredJarvisTmpDir } from "openclaw/plugin-sdk/llm-task";
+import { resolvePreferredJarvisTmpDir } from "jarvis/plugin-sdk/llm-task";
 // NOTE: This extension is intended to be bundled with Jarvis.
 // When running from source (tests/dev), Jarvis internals live under src/.
 // When running from a built install, internals live under dist/ (no src/ tree).
 // So we resolve internal imports dynamically with src-first, dist-fallback.
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/llm-task";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/llm-task";
 
 type RunEmbeddedPiAgentFn = (params: Record<string, unknown>) => Promise<unknown>;
 
@@ -75,7 +75,7 @@ export function createLlmTaskTool(api: JarvisPluginApi) {
     name: "llm-task",
     label: "LLM Task",
     description:
-      "Run a generic JSON-only LLM task and return schema-validated JSON. Designed for orchestration from Lobster workflows via openclaw.invoke.",
+      "Run a generic JSON-only LLM task and return schema-validated JSON. Designed for orchestration from Lobster workflows via jarvis.invoke.",
     parameters: Type.Object({
       prompt: Type.String({ description: "Task instruction for the LLM." }),
       input: Type.Optional(Type.Unknown({ description: "Optional input payload for the task." })),
@@ -184,9 +184,7 @@ export function createLlmTaskTool(api: JarvisPluginApi) {
 
       let tmpDir: string | null = null;
       try {
-        tmpDir = await fs.mkdtemp(
-          path.join(resolvePreferredJarvisTmpDir(), "openclaw-llm-task-"),
-        );
+        tmpDir = await fs.mkdtemp(path.join(resolvePreferredJarvisTmpDir(), "jarvis-llm-task-"));
         const sessionId = `llm-task-${Date.now()}`;
         const sessionFile = path.join(tmpDir, "session.json");
 

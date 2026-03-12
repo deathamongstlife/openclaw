@@ -50,7 +50,7 @@ function resetRuntimeConfigState(): void {
 
 describe("runtime config snapshot writes", () => {
   it("returns the source snapshot when runtime snapshot is active", async () => {
-    await withTempHome("openclaw-config-runtime-source-", async () => {
+    await withTempHome("jarvis-config-runtime-source-", async () => {
       const sourceConfig = createSourceConfig();
       const runtimeConfig = createRuntimeConfig();
       try {
@@ -63,7 +63,7 @@ describe("runtime config snapshot writes", () => {
   });
 
   it("skips source projection for non-runtime-derived configs", async () => {
-    await withTempHome("openclaw-config-runtime-projection-shape-", async () => {
+    await withTempHome("jarvis-config-runtime-projection-shape-", async () => {
       const sourceConfig: JarvisConfig = {
         ...createSourceConfig(),
         gateway: {
@@ -112,8 +112,8 @@ describe("runtime config snapshot writes", () => {
   });
 
   it("preserves source secret refs when writeConfigFile receives runtime-resolved config", async () => {
-    await withTempHome("openclaw-config-runtime-write-", async (home) => {
-      const configPath = path.join(home, ".openclaw", "openclaw.json");
+    await withTempHome("jarvis-config-runtime-write-", async (home) => {
+      const configPath = path.join(home, ".jarvis", "jarvis.json");
       const sourceConfig = createSourceConfig();
       const runtimeConfig = createRuntimeConfig();
 
@@ -141,8 +141,8 @@ describe("runtime config snapshot writes", () => {
   });
 
   it("refreshes the runtime snapshot after writes so follow-up reads see persisted changes", async () => {
-    await withTempHome("openclaw-config-runtime-write-refresh-", async (home) => {
-      const configPath = path.join(home, ".openclaw", "openclaw.json");
+    await withTempHome("jarvis-config-runtime-write-refresh-", async (home) => {
+      const configPath = path.join(home, ".jarvis", "jarvis.json");
       const sourceConfig: JarvisConfig = {
         models: {
           providers: {
@@ -214,8 +214,8 @@ describe("runtime config snapshot writes", () => {
   });
 
   it("keeps the last-known-good runtime snapshot active while a specialized refresh is pending", async () => {
-    await withTempHome("openclaw-config-runtime-refresh-pending-", async (home) => {
-      const configPath = path.join(home, ".openclaw", "openclaw.json");
+    await withTempHome("jarvis-config-runtime-refresh-pending-", async (home) => {
+      const configPath = path.join(home, ".jarvis", "jarvis.json");
       const sourceConfig = createSourceConfig();
       const runtimeConfig = createRuntimeConfig();
       const nextRuntimeConfig: JarvisConfig = {

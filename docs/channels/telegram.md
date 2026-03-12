@@ -514,7 +514,7 @@ curl "https://api.telegram.org/bot<bot_token>/getUpdates"
                 agent: "codex",
                 backend: "acpx",
                 mode: "persistent",
-                cwd: "/workspace/openclaw",
+                cwd: "/workspace/jarvis",
               },
             },
           },
@@ -623,7 +623,7 @@ curl "https://api.telegram.org/bot<bot_token>/getUpdates"
 
     Sticker cache file:
 
-    - `~/.openclaw/telegram/sticker-cache.json`
+    - `~/.jarvis/telegram/sticker-cache.json`
 
     Stickers are described once (when possible) and cached to reduce repeated vision calls.
 
@@ -871,9 +871,9 @@ channels:
 ```
 
     - Environment overrides (temporary):
-      - `OPENCLAW_TELEGRAM_DISABLE_AUTO_SELECT_FAMILY=1`
-      - `OPENCLAW_TELEGRAM_ENABLE_AUTO_SELECT_FAMILY=1`
-      - `OPENCLAW_TELEGRAM_DNS_RESULT_ORDER=ipv4first`
+      - `JARVIS_TELEGRAM_DISABLE_AUTO_SELECT_FAMILY=1`
+      - `JARVIS_TELEGRAM_ENABLE_AUTO_SELECT_FAMILY=1`
+      - `JARVIS_TELEGRAM_DNS_RESULT_ORDER=ipv4first`
     - Validate DNS answers:
 
 ```bash

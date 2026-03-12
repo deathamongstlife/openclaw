@@ -49,7 +49,7 @@ describe("findExtraGatewayServices (win32)", () => {
       code: 0,
       stdout: [
         "TaskName: Jarvis Gateway",
-        "Task To Run: C:\\Program Files\\Jarvis\\openclaw.exe gateway run",
+        "Task To Run: C:\\Program Files\\Jarvis\\jarvis.exe gateway run",
         "",
         "TaskName: Clawdbot Legacy",
         "Task To Run: C:\\clawdbot\\clawdbot.exe run",

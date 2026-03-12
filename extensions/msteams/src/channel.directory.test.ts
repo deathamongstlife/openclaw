@@ -1,4 +1,4 @@
-import type { JarvisConfig, RuntimeEnv } from "openclaw/plugin-sdk/msteams";
+import type { JarvisConfig, RuntimeEnv } from "jarvis/plugin-sdk/msteams";
 import { describe, expect, it } from "vitest";
 import { msteamsPlugin } from "./channel.js";
 

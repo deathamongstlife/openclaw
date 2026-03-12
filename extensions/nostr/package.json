@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/nostr",
+  "name": "@jarvis/nostr",
   "version": "2026.3.9",
   "description": "Jarvis Nostr channel plugin for NIP-04 encrypted DMs",
   "type": "module",
@@ -7,7 +7,7 @@
     "nostr-tools": "^2.23.3",
     "zod": "^4.3.6"
   },
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ],
@@ -22,7 +22,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@openclaw/nostr",
+      "npmSpec": "@jarvis/nostr",
       "localPath": "extensions/nostr",
       "defaultChoice": "npm"
     },

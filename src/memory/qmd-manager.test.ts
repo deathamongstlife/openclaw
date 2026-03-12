@@ -139,7 +139,7 @@ describe("QmdMemoryManager", () => {
     // Only workspace must exist for configured collection paths; state paths are
     // created lazily by manager code when needed.
     await fs.mkdir(workspaceDir);
-    process.env.OPENCLAW_STATE_DIR = stateDir;
+    process.env.JARVIS_STATE_DIR = stateDir;
     cfg = {
       agents: {
         list: [{ id: agentId, default: true, workspace: workspaceDir }],
@@ -157,9 +157,9 @@ describe("QmdMemoryManager", () => {
 
   afterEach(() => {
     vi.useRealTimers();
-    delete process.env.OPENCLAW_STATE_DIR;
-    delete (globalThis as Record<string, unknown>).__openclawMcporterDaemonStart;
-    delete (globalThis as Record<string, unknown>).__openclawMcporterColdStartWarned;
+    delete process.env.JARVIS_STATE_DIR;
+    delete (globalThis as Record<string, unknown>).__jarvisMcporterDaemonStart;
+    delete (globalThis as Record<string, unknown>).__jarvisMcporterColdStartWarned;
   });
 
   it("debounces back-to-back sync calls", async () => {

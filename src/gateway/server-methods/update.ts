@@ -1,6 +1,6 @@
 import { loadConfig } from "../../config/config.js";
 import { extractDeliveryInfo } from "../../config/sessions.js";
-import { resolveJarvisPackageRoot } from "../../infra/openclaw-root.js";
+import { resolveJarvisPackageRoot } from "../../infra/jarvis-root.js";
 import {
   formatDoctorNonInteractiveHint,
   type RestartSentinelPayload,

@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/zalo";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/zalo";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/zalo";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/zalo";
 import { zaloDock, zaloPlugin } from "./src/channel.js";
 import { setZaloRuntime } from "./src/runtime.js";
 

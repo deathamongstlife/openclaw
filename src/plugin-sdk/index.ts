@@ -375,7 +375,7 @@ export type {
   WindowsSpawnProgram,
   WindowsSpawnResolution,
 } from "./windows-spawn.js";
-export { resolvePreferredJarvisTmpDir } from "../infra/tmp-openclaw-dir.js";
+export { resolvePreferredJarvisTmpDir } from "../infra/tmp-jarvis-dir.js";
 export {
   runPluginCommandWithTimeout,
   type PluginCommandRunOptions,

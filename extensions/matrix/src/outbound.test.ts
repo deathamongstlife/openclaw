@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/matrix";
+import type { JarvisConfig } from "jarvis/plugin-sdk/matrix";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mocks = vi.hoisted(() => ({

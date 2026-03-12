@@ -8,7 +8,7 @@ title: "setup"
 
 # `jarvis setup`
 
-Initialize `~/.openclaw/openclaw.json` and the agent workspace.
+Initialize `~/.jarvis/jarvis.json` and the agent workspace.
 
 Related:
 
@@ -19,7 +19,7 @@ Related:
 
 ```bash
 jarvis setup
-jarvis setup --workspace ~/.openclaw/workspace
+jarvis setup --workspace ~/.jarvis/workspace
 ```
 
 To run the wizard via setup:

@@ -1,11 +1,11 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/mattermost";
+import type { JarvisConfig } from "jarvis/plugin-sdk/mattermost";
 import {
   evaluateSenderGroupAccessForPolicy,
   isDangerousNameMatchingEnabled,
   resolveAllowlistMatchSimple,
   resolveControlCommandGate,
   resolveEffectiveAllowFromLists,
-} from "openclaw/plugin-sdk/mattermost";
+} from "jarvis/plugin-sdk/mattermost";
 import type { ResolvedMattermostAccount } from "./accounts.js";
 import type { MattermostChannel } from "./client.js";
 

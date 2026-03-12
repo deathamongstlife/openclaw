@@ -2,7 +2,7 @@ import type {
   ChannelAccountSnapshot,
   ChannelGatewayContext,
   JarvisConfig,
-} from "openclaw/plugin-sdk/test-utils";
+} from "jarvis/plugin-sdk/test-utils";
 import { vi } from "vitest";
 import { createRuntimeEnv } from "./runtime-env.js";
 

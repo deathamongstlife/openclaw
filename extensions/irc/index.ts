@@ -1,5 +1,5 @@
-import type { ChannelPlugin, JarvisPluginApi } from "openclaw/plugin-sdk/irc";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/irc";
+import type { ChannelPlugin, JarvisPluginApi } from "jarvis/plugin-sdk/irc";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/irc";
 import { ircPlugin } from "./src/channel.js";
 import { setIrcRuntime } from "./src/runtime.js";
 

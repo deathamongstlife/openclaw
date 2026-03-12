@@ -1,10 +1,10 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/discord";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/discord";
 import {
   autoBindSpawnedDiscordSubagent,
   listThreadBindingsBySessionKey,
   resolveDiscordAccount,
   unbindThreadBindingsBySessionKey,
-} from "openclaw/plugin-sdk/discord";
+} from "jarvis/plugin-sdk/discord";
 
 function summarizeError(err: unknown): string {
   if (err instanceof Error) {

@@ -186,7 +186,7 @@ describe("routeReply", () => {
   it("applies responsePrefix when routing", async () => {
     mocks.sendMessageSlack.mockClear();
     const cfg = {
-      messages: { responsePrefix: "[openclaw]" },
+      messages: { responsePrefix: "[jarvis]" },
     } as unknown as JarvisConfig;
     await routeReply({
       payload: { text: "hi" },
@@ -196,7 +196,7 @@ describe("routeReply", () => {
     });
     expect(mocks.sendMessageSlack).toHaveBeenCalledWith(
       "channel:C123",
-      "[openclaw] hi",
+      "[jarvis] hi",
       expect.any(Object),
     );
   });

@@ -1,4 +1,4 @@
-import type { AnyAgentTool, JarvisPluginApi } from "openclaw/plugin-sdk/feishu";
+import type { AnyAgentTool, JarvisPluginApi } from "jarvis/plugin-sdk/feishu";
 
 type ToolContextLike = {
   agentAccountId?: string;

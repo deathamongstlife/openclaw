@@ -1,12 +1,12 @@
 {
-  "name": "@openclaw/synology-chat",
+  "name": "@jarvis/synology-chat",
   "version": "2026.3.9",
   "description": "Synology Chat channel plugin for Jarvis",
   "type": "module",
   "dependencies": {
     "zod": "^4.3.6"
   },
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ],
@@ -20,7 +20,7 @@
       "order": 90
     },
     "install": {
-      "npmSpec": "@openclaw/synology-chat",
+      "npmSpec": "@jarvis/synology-chat",
       "localPath": "extensions/synology-chat",
       "defaultChoice": "npm"
     }

@@ -4,16 +4,16 @@ Everything is ready to push to GitLab and deploy to your VPS.
 
 ## ✅ Completed Tasks
 
-### 1. Complete Rebranding (OpenClaw → Jarvis)
+### 1. Complete Rebranding (Jarvis → Jarvis)
 
 - **Files changed:** 2,765
 - **Total replacements:** 30,620+
 - **Scope:**
   - ✅ All code references
-  - ✅ npm package names (`@openclaw/*` → `@jarvis/*`)
-  - ✅ Domain names (`openclaw.ai` → `jarvis.allyapp.cc`)
-  - ✅ Environment variables (`OPENCLAW_*` → `JARVIS_*`)
-  - ✅ Binary names (`openclaw-*` → `jarvis-*`)
+  - ✅ npm package names (`@jarvis/*` → `@jarvis/*`)
+  - ✅ Domain names (`jarvis.ai` → `jarvis.allyapp.cc`)
+  - ✅ Environment variables (`JARVIS_*` → `JARVIS_*`)
+  - ✅ Binary names (`jarvis-*` → `jarvis-*`)
   - ✅ Documentation
   - ✅ README and contributing guides
 
@@ -104,6 +104,7 @@ sudo bash deploy-jarvis-caddy.sh
 ```
 
 The script will:
+
 - Copy files to `/var/www/jarvis/`
 - Backup your Caddyfile
 - Add Jarvis configuration
@@ -155,11 +156,12 @@ After deployment, these will be live:
 **Branch:** `readme-jarvis-rebrand`
 **Commits ready:** 3
 
-1. Complete OpenClaw → Jarvis rebranding and VPS deployment setup
+1. Complete Jarvis → Jarvis rebranding and VPS deployment setup
 2. Add comprehensive GitLab CI/CD configuration
 3. Add GitLab push instructions
 
 **To push:**
+
 ```bash
 git push gitlab readme-jarvis-rebrand
 ```
@@ -176,6 +178,7 @@ After pushing, the pipeline will automatically:
 6. ✅ Deploy to GitLab Pages (on main branch)
 
 **Manual jobs available:**
+
 - Docker build and push
 - npm package publishing
 
@@ -183,13 +186,13 @@ View pipeline: `https://git.allyapp.cc/everest/j.a.r.v.i.s/-/pipelines`
 
 ## 📚 Quick Reference
 
-| Task | Command |
-|------|---------|
-| Deploy to VPS | `sudo bash deploy-jarvis-caddy.sh` |
-| Push to GitLab | `git push gitlab readme-jarvis-rebrand` |
-| Check Caddy logs | `sudo journalctl -u caddy -f` |
-| Reload Caddy | `sudo systemctl reload caddy` |
-| Test DNS | `dig docs.jarvis.allyapp.cc +short` |
+| Task             | Command                                  |
+| ---------------- | ---------------------------------------- |
+| Deploy to VPS    | `sudo bash deploy-jarvis-caddy.sh`       |
+| Push to GitLab   | `git push gitlab readme-jarvis-rebrand`  |
+| Check Caddy logs | `sudo journalctl -u caddy -f`            |
+| Reload Caddy     | `sudo systemctl reload caddy`            |
+| Test DNS         | `dig docs.jarvis.allyapp.cc +short`      |
 | View CI pipeline | Visit GitLab project → CI/CD → Pipelines |
 
 ## 🆘 Need Help?

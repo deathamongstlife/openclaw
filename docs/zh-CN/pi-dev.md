@@ -58,11 +58,11 @@ scripts/pi/run-tests.sh --live
 
 ## 完全重置
 
-状态存储在 Jarvis 状态目录下。默认为 `~/.openclaw`。如果设置了 `OPENCLAW_STATE_DIR`，则使用该目录。
+状态存储在 Jarvis 状态目录下。默认为 `~/.jarvis`。如果设置了 `JARVIS_STATE_DIR`，则使用该目录。
 
 要重置所有内容：
 
-- `openclaw.json` 用于配置
+- `jarvis.json` 用于配置
 - `credentials/` 用于认证配置文件和 token
 - `agents/<agentId>/sessions/` 用于智能体会话历史
 - `agents/<agentId>/sessions.json` 用于会话索引
@@ -73,5 +73,5 @@ scripts/pi/run-tests.sh --live
 
 ## 参考资料
 
-- https://docs.openclaw.ai/testing
-- https://docs.openclaw.ai/start/getting-started
+- https://docs.jarvis.ai/testing
+- https://docs.jarvis.ai/start/getting-started

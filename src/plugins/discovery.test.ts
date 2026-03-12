@@ -9,7 +9,7 @@ import { clearPluginDiscoveryCache, discoverJarvisPlugins } from "./discovery.js
 const tempDirs: string[] = [];
 
 function makeTempDir() {
-  const dir = path.join(os.tmpdir(), `openclaw-plugins-${randomUUID()}`);
+  const dir = path.join(os.tmpdir(), `jarvis-plugins-${randomUUID()}`);
   fs.mkdirSync(dir, { recursive: true });
   tempDirs.push(dir);
   return dir;
@@ -18,9 +18,9 @@ function makeTempDir() {
 async function withStateDir<T>(stateDir: string, fn: () => Promise<T>) {
   return await withEnvAsync(
     {
-      OPENCLAW_STATE_DIR: stateDir,
+      JARVIS_STATE_DIR: stateDir,
       CLAWDBOT_STATE_DIR: undefined,
-      OPENCLAW_BUNDLED_PLUGINS_DIR: "/nonexistent/bundled/plugins",
+      JARVIS_BUNDLED_PLUGINS_DIR: "/nonexistent/bundled/plugins",
     },
     fn,
   );
@@ -44,7 +44,7 @@ function writePluginPackageManifest(params: {
     path.join(params.packageDir, "package.json"),
     JSON.stringify({
       name: params.packageName,
-      openclaw: { extensions: params.extensions },
+      jarvis: { extensions: params.extensions },
     }),
     "utf-8",
   );
@@ -76,7 +76,7 @@ describe("discoverJarvisPlugins", () => {
     fs.mkdirSync(globalExt, { recursive: true });
     fs.writeFileSync(path.join(globalExt, "alpha.ts"), "export default function () {}", "utf-8");
 
-    const workspaceExt = path.join(workspaceDir, ".openclaw", "extensions");
+    const workspaceExt = path.join(workspaceDir, ".jarvis", "extensions");
     fs.mkdirSync(workspaceExt, { recursive: true });
     fs.writeFileSync(path.join(workspaceExt, "beta.ts"), "export default function () {}", "utf-8");
 
@@ -158,7 +158,7 @@ describe("discoverJarvisPlugins", () => {
 
     writePluginPackageManifest({
       packageDir: globalExt,
-      packageName: "@openclaw/voice-call",
+      packageName: "@jarvis/voice-call",
       extensions: ["./src/index.ts"],
     });
     fs.writeFileSync(
@@ -182,7 +182,7 @@ describe("discoverJarvisPlugins", () => {
 
     writePluginPackageManifest({
       packageDir: packDir,
-      packageName: "@openclaw/demo-plugin-dir",
+      packageName: "@jarvis/demo-plugin-dir",
       extensions: ["./index.js"],
     });
     fs.writeFileSync(path.join(packDir, "index.js"), "module.exports = {}", "utf-8");
@@ -202,7 +202,7 @@ describe("discoverJarvisPlugins", () => {
 
     writePluginPackageManifest({
       packageDir: globalExt,
-      packageName: "@openclaw/escape-pack",
+      packageName: "@jarvis/escape-pack",
       extensions: ["../../outside.js"],
     });
     fs.writeFileSync(outside, "export default function () {}", "utf-8");
@@ -229,7 +229,7 @@ describe("discoverJarvisPlugins", () => {
 
     writePluginPackageManifest({
       packageDir: globalExt,
-      packageName: "@openclaw/pack",
+      packageName: "@jarvis/pack",
       extensions: ["./linked/escape.ts"],
     });
 
@@ -262,7 +262,7 @@ describe("discoverJarvisPlugins", () => {
 
     writePluginPackageManifest({
       packageDir: globalExt,
-      packageName: "@openclaw/pack",
+      packageName: "@jarvis/pack",
       extensions: ["./escape.ts"],
     });
 
@@ -289,8 +289,8 @@ describe("discoverJarvisPlugins", () => {
     fs.writeFileSync(
       outsideManifest,
       JSON.stringify({
-        name: "@openclaw/pack",
-        openclaw: { extensions: ["./entry.ts"] },
+        name: "@jarvis/pack",
+        jarvis: { extensions: ["./entry.ts"] },
       }),
       "utf-8",
     );
@@ -361,7 +361,7 @@ describe("discoverJarvisPlugins", () => {
 
     const first = await withEnvAsync(
       {
-        OPENCLAW_PLUGIN_DISCOVERY_CACHE_MS: "5000",
+        JARVIS_PLUGIN_DISCOVERY_CACHE_MS: "5000",
       },
       async () => withStateDir(stateDir, async () => discoverJarvisPlugins({})),
     );
@@ -371,7 +371,7 @@ describe("discoverJarvisPlugins", () => {
 
     const second = await withEnvAsync(
       {
-        OPENCLAW_PLUGIN_DISCOVERY_CACHE_MS: "5000",
+        JARVIS_PLUGIN_DISCOVERY_CACHE_MS: "5000",
       },
       async () => withStateDir(stateDir, async () => discoverJarvisPlugins({})),
     );
@@ -381,7 +381,7 @@ describe("discoverJarvisPlugins", () => {
 
     const third = await withEnvAsync(
       {
-        OPENCLAW_PLUGIN_DISCOVERY_CACHE_MS: "5000",
+        JARVIS_PLUGIN_DISCOVERY_CACHE_MS: "5000",
       },
       async () => withStateDir(stateDir, async () => discoverJarvisPlugins({})),
     );

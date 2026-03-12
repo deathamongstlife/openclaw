@@ -116,13 +116,13 @@ jarvis nodes camera clip --node <id> --no-audio
 
 macOS 配套应用暴露一个复选框：
 
-- **设置 → 通用 → 允许相机**（`openclaw.cameraEnabled`）
+- **设置 → 通用 → 允许相机**（`jarvis.cameraEnabled`）
   - 默认：**关闭**
   - 关闭时：相机请求返回"用户已禁用相机"。
 
 ### CLI 辅助工具（节点调用）
 
-使用主 `openclaw` CLI 在 macOS 节点上调用相机命令。
+使用主 `jarvis` CLI 在 macOS 节点上调用相机命令。
 
 示例：
 

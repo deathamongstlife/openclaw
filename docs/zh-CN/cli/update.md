@@ -30,7 +30,7 @@ jarvis update --channel dev
 jarvis update --tag beta
 jarvis update --no-restart
 jarvis update --json
-openclaw --update
+jarvis --update
 ```
 
 ## 选项
@@ -66,7 +66,7 @@ jarvis update status --timeout 10
 
 当你显式切换渠道（`--channel ...`）时，Jarvis 也会保持安装方式一致：
 
-- `dev` → 确保存在 git 检出（默认：`~/openclaw`，可通过 `OPENCLAW_GIT_DIR` 覆盖），更新它，并从该检出安装全局 CLI。
+- `dev` → 确保存在 git 检出（默认：`~/jarvis`，可通过 `JARVIS_GIT_DIR` 覆盖），更新它，并从该检出安装全局 CLI。
 - `stable`/`beta` → 使用匹配的 dist-tag 从 npm 安装。
 
 ## Git 检出流程
@@ -91,7 +91,7 @@ jarvis update status --timeout 10
 
 ## `--update` 简写
 
-`openclaw --update` 会重写为 `jarvis update`（便于 shell 和启动脚本使用）。
+`jarvis --update` 会重写为 `jarvis update`（便于 shell 和启动脚本使用）。
 
 ## 另请参阅
 

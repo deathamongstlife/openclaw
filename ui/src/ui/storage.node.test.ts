@@ -42,15 +42,15 @@ function setControlUiBasePath(value: string | undefined) {
       "window",
       value == null
         ? ({} as Window & typeof globalThis)
-        : ({ __OPENCLAW_CONTROL_UI_BASE_PATH__: value } as Window & typeof globalThis),
+        : ({ __JARVIS_CONTROL_UI_BASE_PATH__: value } as Window & typeof globalThis),
     );
     return;
   }
   if (value == null) {
-    delete window.__OPENCLAW_CONTROL_UI_BASE_PATH__;
+    delete window.__JARVIS_CONTROL_UI_BASE_PATH__;
     return;
   }
-  Object.defineProperty(window, "__OPENCLAW_CONTROL_UI_BASE_PATH__", {
+  Object.defineProperty(window, "__JARVIS_CONTROL_UI_BASE_PATH__", {
     value,
     writable: true,
     configurable: true,
@@ -85,21 +85,21 @@ describe("loadSettings default gateway URL derivation", () => {
       host: "gateway.example:8443",
       pathname: "/ignored/path",
     });
-    setControlUiBasePath(" /openclaw/ ");
+    setControlUiBasePath(" /jarvis/ ");
 
     const { loadSettings } = await import("./storage.ts");
-    expect(loadSettings().gatewayUrl).toBe(expectedGatewayUrl("/openclaw"));
+    expect(loadSettings().gatewayUrl).toBe(expectedGatewayUrl("/jarvis"));
   });
 
   it("infers base path from nested pathname when configured base path is not set", async () => {
     setTestLocation({
       protocol: "http:",
       host: "gateway.example:18789",
-      pathname: "/apps/openclaw/chat",
+      pathname: "/apps/jarvis/chat",
     });
 
     const { loadSettings } = await import("./storage.ts");
-    expect(loadSettings().gatewayUrl).toBe(expectedGatewayUrl("/apps/openclaw"));
+    expect(loadSettings().gatewayUrl).toBe(expectedGatewayUrl("/apps/jarvis"));
   });
 
   it("ignores and scrubs legacy persisted tokens", async () => {
@@ -108,11 +108,11 @@ describe("loadSettings default gateway URL derivation", () => {
       host: "gateway.example:8443",
       pathname: "/",
     });
-    sessionStorage.setItem("openclaw.control.token.v1", "legacy-session-token");
+    sessionStorage.setItem("jarvis.control.token.v1", "legacy-session-token");
     localStorage.setItem(
-      "openclaw.control.settings.v1",
+      "jarvis.control.settings.v1",
       JSON.stringify({
-        gatewayUrl: "wss://gateway.example:8443/openclaw",
+        gatewayUrl: "wss://gateway.example:8443/jarvis",
         token: "persisted-token",
         sessionKey: "agent",
       }),
@@ -120,12 +120,12 @@ describe("loadSettings default gateway URL derivation", () => {
 
     const { loadSettings } = await import("./storage.ts");
     expect(loadSettings()).toMatchObject({
-      gatewayUrl: "wss://gateway.example:8443/openclaw",
+      gatewayUrl: "wss://gateway.example:8443/jarvis",
       token: "",
       sessionKey: "agent",
     });
-    expect(JSON.parse(localStorage.getItem("openclaw.control.settings.v1") ?? "{}")).toEqual({
-      gatewayUrl: "wss://gateway.example:8443/openclaw",
+    expect(JSON.parse(localStorage.getItem("jarvis.control.settings.v1") ?? "{}")).toEqual({
+      gatewayUrl: "wss://gateway.example:8443/jarvis",
       sessionKey: "agent",
       lastActiveSessionKey: "agent",
       theme: "system",
@@ -147,7 +147,7 @@ describe("loadSettings default gateway URL derivation", () => {
 
     const { loadSettings, saveSettings } = await import("./storage.ts");
     saveSettings({
-      gatewayUrl: "wss://gateway.example:8443/openclaw",
+      gatewayUrl: "wss://gateway.example:8443/jarvis",
       token: "session-token",
       sessionKey: "main",
       lastActiveSessionKey: "main",
@@ -160,7 +160,7 @@ describe("loadSettings default gateway URL derivation", () => {
     });
 
     expect(loadSettings()).toMatchObject({
-      gatewayUrl: "wss://gateway.example:8443/openclaw",
+      gatewayUrl: "wss://gateway.example:8443/jarvis",
       token: "session-token",
     });
   });
@@ -174,7 +174,7 @@ describe("loadSettings default gateway URL derivation", () => {
 
     const { loadSettings, saveSettings } = await import("./storage.ts");
     saveSettings({
-      gatewayUrl: "wss://gateway.example:8443/openclaw",
+      gatewayUrl: "wss://gateway.example:8443/jarvis",
       token: "gateway-a-token",
       sessionKey: "main",
       lastActiveSessionKey: "main",
@@ -187,9 +187,9 @@ describe("loadSettings default gateway URL derivation", () => {
     });
 
     localStorage.setItem(
-      "openclaw.control.settings.v1",
+      "jarvis.control.settings.v1",
       JSON.stringify({
-        gatewayUrl: "wss://other-gateway.example:8443/openclaw",
+        gatewayUrl: "wss://other-gateway.example:8443/jarvis",
         sessionKey: "main",
         lastActiveSessionKey: "main",
         theme: "system",
@@ -202,7 +202,7 @@ describe("loadSettings default gateway URL derivation", () => {
     );
 
     expect(loadSettings()).toMatchObject({
-      gatewayUrl: "wss://other-gateway.example:8443/openclaw",
+      gatewayUrl: "wss://other-gateway.example:8443/jarvis",
       token: "",
     });
   });
@@ -216,7 +216,7 @@ describe("loadSettings default gateway URL derivation", () => {
 
     const { loadSettings, saveSettings } = await import("./storage.ts");
     saveSettings({
-      gatewayUrl: "wss://gateway.example:8443/openclaw",
+      gatewayUrl: "wss://gateway.example:8443/jarvis",
       token: "memory-only-token",
       sessionKey: "main",
       lastActiveSessionKey: "main",
@@ -228,12 +228,12 @@ describe("loadSettings default gateway URL derivation", () => {
       navGroupsCollapsed: {},
     });
     expect(loadSettings()).toMatchObject({
-      gatewayUrl: "wss://gateway.example:8443/openclaw",
+      gatewayUrl: "wss://gateway.example:8443/jarvis",
       token: "memory-only-token",
     });
 
-    expect(JSON.parse(localStorage.getItem("openclaw.control.settings.v1") ?? "{}")).toEqual({
-      gatewayUrl: "wss://gateway.example:8443/openclaw",
+    expect(JSON.parse(localStorage.getItem("jarvis.control.settings.v1") ?? "{}")).toEqual({
+      gatewayUrl: "wss://gateway.example:8443/jarvis",
       sessionKey: "main",
       lastActiveSessionKey: "main",
       theme: "system",
@@ -255,7 +255,7 @@ describe("loadSettings default gateway URL derivation", () => {
 
     const { loadSettings, saveSettings } = await import("./storage.ts");
     saveSettings({
-      gatewayUrl: "wss://gateway.example:8443/openclaw",
+      gatewayUrl: "wss://gateway.example:8443/jarvis",
       token: "stale-token",
       sessionKey: "main",
       lastActiveSessionKey: "main",
@@ -267,7 +267,7 @@ describe("loadSettings default gateway URL derivation", () => {
       navGroupsCollapsed: {},
     });
     saveSettings({
-      gatewayUrl: "wss://gateway.example:8443/openclaw",
+      gatewayUrl: "wss://gateway.example:8443/jarvis",
       token: "",
       sessionKey: "main",
       lastActiveSessionKey: "main",

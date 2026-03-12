@@ -17,7 +17,7 @@ detects existing installs, upgrades in place, and runs `jarvis doctor` when
 needed.
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://jarvis.ai/install.sh | bash
 ```
 
 Notes:
@@ -26,12 +26,12 @@ Notes:
 - For **source installs**, use:
 
   ```bash
-  curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git --no-onboard
+  curl -fsSL https://jarvis.ai/install.sh | bash -s -- --install-method git --no-onboard
   ```
 
   The installer will `git pull --rebase` **only** if the repo is clean.
 
-- For **global installs**, the script uses `npm install -g openclaw@latest` under the hood.
+- For **global installs**, the script uses `npm install -g jarvis@latest` under the hood.
 - Legacy note: `clawdbot` remains available as a compatibility shim.
 
 ## Before you update
@@ -39,20 +39,20 @@ Notes:
 - Know how you installed: **global** (npm/pnpm) vs **from source** (git clone).
 - Know how your Gateway is running: **foreground terminal** vs **supervised service** (launchd/systemd).
 - Snapshot your tailoring:
-  - Config: `~/.openclaw/openclaw.json`
-  - Credentials: `~/.openclaw/credentials/`
-  - Workspace: `~/.openclaw/workspace`
+  - Config: `~/.jarvis/jarvis.json`
+  - Credentials: `~/.jarvis/credentials/`
+  - Workspace: `~/.jarvis/workspace`
 
 ## Update (global install)
 
 Global install (pick one):
 
 ```bash
-npm i -g openclaw@latest
+npm i -g jarvis@latest
 ```
 
 ```bash
-pnpm add -g openclaw@latest
+pnpm add -g jarvis@latest
 ```
 
 We do **not** recommend Bun for the Gateway runtime (WhatsApp/Telegram bugs).
@@ -161,9 +161,9 @@ jarvis health
 
 Notes:
 
-- `pnpm build` matters when you run the packaged `openclaw` binary ([`openclaw.mjs`](https://github.com/openclaw/openclaw/blob/main/openclaw.mjs)) or use Node to run `dist/`.
-- If you run from a repo checkout without a global install, use `pnpm openclaw ...` for CLI commands.
-- If you run directly from TypeScript (`pnpm openclaw ...`), a rebuild is usually unnecessary, but **config migrations still apply** → run doctor.
+- `pnpm build` matters when you run the packaged `jarvis` binary ([`jarvis.mjs`](https://github.com/jarvis/jarvis/blob/main/jarvis.mjs)) or use Node to run `dist/`.
+- If you run from a repo checkout without a global install, use `pnpm jarvis ...` for CLI commands.
+- If you run directly from TypeScript (`pnpm jarvis ...`), a rebuild is usually unnecessary, but **config migrations still apply** → run doctor.
 - Switching between global and git installs is easy: install the other flavor, then run `jarvis doctor` so the gateway service entrypoint is rewritten to the current install.
 
 ## Always Run: `jarvis doctor`
@@ -196,7 +196,7 @@ jarvis logs --follow
 
 If you’re supervised:
 
-- macOS launchd (app-bundled LaunchAgent): `launchctl kickstart -k gui/$UID/ai.openclaw.gateway` (use `ai.openclaw.<profile>`; legacy `com.openclaw.*` still works)
+- macOS launchd (app-bundled LaunchAgent): `launchctl kickstart -k gui/$UID/ai.jarvis.gateway` (use `ai.jarvis.<profile>`; legacy `com.jarvis.*` still works)
 - Linux systemd user service: `systemctl --user restart jarvis-gateway[-<profile>].service`
 - Windows (WSL2): `systemctl --user restart jarvis-gateway[-<profile>].service`
   - `launchctl`/`systemctl` only work if the service is installed; otherwise run `jarvis gateway install`.
@@ -210,11 +210,11 @@ Runbook + exact service labels: [Gateway runbook](/gateway)
 Install a known-good version (replace `<version>` with the last working one):
 
 ```bash
-npm i -g openclaw@<version>
+npm i -g jarvis@<version>
 ```
 
 ```bash
-pnpm add -g openclaw@<version>
+pnpm add -g jarvis@<version>
 ```
 
 Tip: to see the current published version, run `npm view jarvis version`.

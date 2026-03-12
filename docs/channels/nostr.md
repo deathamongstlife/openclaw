@@ -29,13 +29,13 @@ You can always override the choice in the prompt.
 ### Manual install
 
 ```bash
-jarvis plugins install @openclaw/nostr
+jarvis plugins install @jarvis/nostr
 ```
 
 Use a local checkout (dev workflows):
 
 ```bash
-jarvis plugins install --link <path-to-openclaw>/extensions/nostr
+jarvis plugins install --link <path-to-jarvis>/extensions/nostr
 ```
 
 Restart the Gateway after installing or enabling plugins.
@@ -93,14 +93,14 @@ Example:
     "nostr": {
       "privateKey": "${NOSTR_PRIVATE_KEY}",
       "profile": {
-        "name": "openclaw",
+        "name": "jarvis",
         "displayName": "Jarvis",
         "about": "Personal assistant DM bot",
         "picture": "https://example.com/avatar.png",
         "banner": "https://example.com/banner.png",
         "website": "https://example.com",
-        "nip05": "openclaw@example.com",
-        "lud16": "openclaw@example.com"
+        "nip05": "jarvis@example.com",
+        "lud16": "jarvis@example.com"
       }
     }
   }

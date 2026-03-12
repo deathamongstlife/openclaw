@@ -23,8 +23,8 @@ Recommended operator loop:
 ```bash
 jarvis secrets audit --check
 jarvis secrets configure
-jarvis secrets apply --from /tmp/openclaw-secrets-plan.json --dry-run
-jarvis secrets apply --from /tmp/openclaw-secrets-plan.json
+jarvis secrets apply --from /tmp/jarvis-secrets-plan.json --dry-run
+jarvis secrets apply --from /tmp/jarvis-secrets-plan.json
 jarvis secrets audit --check
 jarvis secrets reload
 ```
@@ -61,7 +61,7 @@ Scan Jarvis state for:
 
 - plaintext secret storage
 - unresolved refs
-- precedence drift (`auth-profiles.json` credentials shadowing `openclaw.json` refs)
+- precedence drift (`auth-profiles.json` credentials shadowing `jarvis.json` refs)
 - generated `agents/*/agent/models.json` residues (provider `apiKey` values and sensitive provider headers)
 - legacy residues (legacy auth store entries, OAuth reminders)
 
@@ -96,7 +96,7 @@ Build provider and SecretRef changes interactively, run preflight, and optionall
 
 ```bash
 jarvis secrets configure
-jarvis secrets configure --plan-out /tmp/openclaw-secrets-plan.json
+jarvis secrets configure --plan-out /tmp/jarvis-secrets-plan.json
 jarvis secrets configure --apply --yes
 jarvis secrets configure --providers-only
 jarvis secrets configure --skip-provider-setup
@@ -120,7 +120,7 @@ Notes:
 
 - Requires an interactive TTY.
 - You cannot combine `--providers-only` with `--skip-provider-setup`.
-- `configure` targets secret-bearing fields in `openclaw.json` plus `auth-profiles.json` for the selected agent scope.
+- `configure` targets secret-bearing fields in `jarvis.json` plus `auth-profiles.json` for the selected agent scope.
 - `configure` supports creating new `auth-profiles.json` mappings directly in the picker flow.
 - Canonical supported surface: [SecretRef Credential Surface](/reference/secretref-credential-surface).
 - It performs preflight resolution before apply.
@@ -140,9 +140,9 @@ Exec provider safety note:
 Apply or preflight a plan generated previously:
 
 ```bash
-jarvis secrets apply --from /tmp/openclaw-secrets-plan.json
-jarvis secrets apply --from /tmp/openclaw-secrets-plan.json --dry-run
-jarvis secrets apply --from /tmp/openclaw-secrets-plan.json --json
+jarvis secrets apply --from /tmp/jarvis-secrets-plan.json
+jarvis secrets apply --from /tmp/jarvis-secrets-plan.json --dry-run
+jarvis secrets apply --from /tmp/jarvis-secrets-plan.json --json
 ```
 
 Plan contract details (allowed target paths, validation rules, and failure semantics):
@@ -151,10 +151,10 @@ Plan contract details (allowed target paths, validation rules, and failure seman
 
 What `apply` may update:
 
-- `openclaw.json` (SecretRef targets + provider upserts/deletes)
+- `jarvis.json` (SecretRef targets + provider upserts/deletes)
 - `auth-profiles.json` (provider-target scrubbing)
 - legacy `auth.json` residues
-- `~/.openclaw/.env` known secret keys whose values were migrated
+- `~/.jarvis/.env` known secret keys whose values were migrated
 
 ## Why no rollback backups
 

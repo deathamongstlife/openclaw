@@ -97,7 +97,7 @@ Jarvis 附带 pi-ai 目录。这些提供商**不需要** `models.providers` 配
 - Gemini CLI OAuth 作为捆绑插件提供（`google-gemini-cli-auth`，默认禁用）。
   - 启用：`jarvis plugins enable google-gemini-cli-auth`
   - 登录：`jarvis models auth login --provider google-gemini-cli --set-default`
-  - 注意：你**不需要**将客户端 ID 或密钥粘贴到 `openclaw.json` 中。CLI 登录流程将令牌存储在 Gateway 网关主机的认证配置文件中。
+  - 注意：你**不需要**将客户端 ID 或密钥粘贴到 `jarvis.json` 中。CLI 登录流程将令牌存储在 Gateway 网关主机的认证配置文件中。
 
 ### Z.AI (GLM)
 

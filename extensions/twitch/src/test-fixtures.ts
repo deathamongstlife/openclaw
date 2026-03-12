@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/twitch";
+import type { JarvisConfig } from "jarvis/plugin-sdk/twitch";
 import { afterEach, beforeEach, vi } from "vitest";
 
 export const BASE_TWITCH_TEST_ACCOUNT = {

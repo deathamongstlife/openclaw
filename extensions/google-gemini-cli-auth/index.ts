@@ -3,15 +3,15 @@ import {
   emptyPluginConfigSchema,
   type JarvisPluginApi,
   type ProviderAuthContext,
-} from "openclaw/plugin-sdk/google-gemini-cli-auth";
+} from "jarvis/plugin-sdk/google-gemini-cli-auth";
 import { loginGeminiCliOAuth } from "./oauth.js";
 
 const PROVIDER_ID = "google-gemini-cli";
 const PROVIDER_LABEL = "Gemini CLI OAuth";
 const DEFAULT_MODEL = "google-gemini-cli/gemini-3.1-pro-preview";
 const ENV_VARS = [
-  "OPENCLAW_GEMINI_OAUTH_CLIENT_ID",
-  "OPENCLAW_GEMINI_OAUTH_CLIENT_SECRET",
+  "JARVIS_GEMINI_OAUTH_CLIENT_ID",
+  "JARVIS_GEMINI_OAUTH_CLIENT_SECRET",
   "GEMINI_CLI_OAUTH_CLIENT_ID",
   "GEMINI_CLI_OAUTH_CLIENT_SECRET",
 ];

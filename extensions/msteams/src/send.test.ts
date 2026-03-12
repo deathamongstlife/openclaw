@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/msteams";
+import type { JarvisConfig } from "jarvis/plugin-sdk/msteams";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { sendMessageMSTeams } from "./send.js";
 
@@ -11,7 +11,7 @@ const mockState = vi.hoisted(() => ({
   sendMSTeamsMessages: vi.fn(),
 }));
 
-vi.mock("openclaw/plugin-sdk/msteams", () => ({
+vi.mock("jarvis/plugin-sdk/msteams", () => ({
   loadOutboundMediaFromUrl: mockState.loadOutboundMediaFromUrl,
 }));
 

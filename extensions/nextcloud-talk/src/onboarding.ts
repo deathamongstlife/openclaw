@@ -13,7 +13,7 @@ import {
   type ChannelOnboardingDmPolicy,
   type JarvisConfig,
   type WizardPrompter,
-} from "openclaw/plugin-sdk/nextcloud-talk";
+} from "jarvis/plugin-sdk/nextcloud-talk";
 import {
   listNextcloudTalkAccountIds,
   resolveDefaultNextcloudTalkAccountId,

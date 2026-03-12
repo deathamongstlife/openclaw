@@ -241,7 +241,7 @@ describe("registerAgentCommands", () => {
       "--emoji",
       ":lobster:",
       "--avatar",
-      "https://example.com/openclaw.png",
+      "https://example.com/jarvis.png",
       "--json",
     ]);
     expect(agentsSetIdentityCommandMock).toHaveBeenCalledWith(
@@ -253,7 +253,7 @@ describe("registerAgentCommands", () => {
         name: "Jarvis",
         theme: "ops",
         emoji: ":lobster:",
-        avatar: "https://example.com/openclaw.png",
+        avatar: "https://example.com/jarvis.png",
         json: true,
       },
       runtime,

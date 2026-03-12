@@ -17,7 +17,7 @@ x-i18n:
 
 ## 手动登录（推荐）
 
-当网站需要登录时，请在**主机**浏览器配置文件（openclaw 浏览器）中**手动登录**。
+当网站需要登录时，请在**主机**浏览器配置文件（jarvis 浏览器）中**手动登录**。
 
 **不要**将你的凭证提供给模型。自动登录通常会触发反机器人防御并可能锁定账户。
 
@@ -25,7 +25,7 @@ x-i18n:
 
 ## 使用哪个 Chrome 配置文件？
 
-Jarvis 控制一个**专用的 Chrome 配置文件**（名为 `openclaw`，橙色调 UI）。这与你的日常浏览器配置文件是分开的。
+Jarvis 控制一个**专用的 Chrome 配置文件**（名为 `jarvis`，橙色调 UI）。这与你的日常浏览器配置文件是分开的。
 
 两种简单的访问方式：
 
@@ -37,7 +37,7 @@ jarvis browser start
 jarvis browser open https://x.com
 ```
 
-如果你有多个配置文件，传入 `--browser-profile <name>`（默认是 `openclaw`）。
+如果你有多个配置文件，传入 `--browser-profile <name>`（默认是 `jarvis`）。
 
 ## X/Twitter：推荐流程
 
@@ -69,7 +69,7 @@ jarvis browser open https://x.com
 然后定位主机浏览器：
 
 ```bash
-jarvis browser open https://x.com --browser-profile openclaw --target host
+jarvis browser open https://x.com --browser-profile jarvis --target host
 ```
 
 或者为发布更新的智能体禁用沙箱隔离。

@@ -13,7 +13,7 @@ Status: experimental. DMs are supported; group handling is available with explic
 
 Zalo ships as a plugin and is not bundled with the core install.
 
-- Install via CLI: `jarvis plugins install @openclaw/zalo`
+- Install via CLI: `jarvis plugins install @jarvis/zalo`
 - Or select **Zalo** during onboarding and confirm the install prompt
 - Details: [Plugins](/tools/plugin)
 
@@ -21,7 +21,7 @@ Zalo ships as a plugin and is not bundled with the core install.
 
 1. Install the Zalo plugin:
    - From a source checkout: `jarvis plugins install ./extensions/zalo`
-   - From npm (if published): `jarvis plugins install @openclaw/zalo`
+   - From npm (if published): `jarvis plugins install @jarvis/zalo`
    - Or pick **Zalo** in onboarding and confirm the install prompt
 2. Set the token:
    - Env: `ZALO_BOT_TOKEN=...`

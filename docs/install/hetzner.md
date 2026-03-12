@@ -30,7 +30,7 @@ See [Security](/gateway/security) and [VPS hosting](/vps).
 - Rent a small Linux server (Hetzner VPS)
 - Install Docker (isolated app runtime)
 - Start the Jarvis Gateway in Docker
-- Persist `~/.openclaw` + `~/.openclaw/workspace` on the host (survives restarts/rebuilds)
+- Persist `~/.jarvis` + `~/.jarvis/workspace` on the host (survives restarts/rebuilds)
 - Access the Control UI from your laptop via an SSH tunnel
 
 The Gateway can be accessed via:
@@ -107,8 +107,8 @@ docker compose version
 ## 3) Clone the Jarvis repository
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
+git clone https://github.com/jarvis/jarvis.git
+cd jarvis
 ```
 
 This guide assumes you will build a custom image to guarantee binary persistence.
@@ -121,10 +121,10 @@ Docker containers are ephemeral.
 All long-lived state must live on the host.
 
 ```bash
-mkdir -p /root/.openclaw/workspace
+mkdir -p /root/.jarvis/workspace
 
 # Set ownership to the container user (uid 1000):
-chown -R 1000:1000 /root/.openclaw
+chown -R 1000:1000 /root/.jarvis
 ```
 
 ---
@@ -134,16 +134,16 @@ chown -R 1000:1000 /root/.openclaw
 Create `.env` in the repository root.
 
 ```bash
-OPENCLAW_IMAGE=openclaw:latest
-OPENCLAW_GATEWAY_TOKEN=change-me-now
-OPENCLAW_GATEWAY_BIND=lan
-OPENCLAW_GATEWAY_PORT=18789
+JARVIS_IMAGE=jarvis:latest
+JARVIS_GATEWAY_TOKEN=change-me-now
+JARVIS_GATEWAY_BIND=lan
+JARVIS_GATEWAY_PORT=18789
 
-OPENCLAW_CONFIG_DIR=/root/.openclaw
-OPENCLAW_WORKSPACE_DIR=/root/.openclaw/workspace
+JARVIS_CONFIG_DIR=/root/.jarvis
+JARVIS_WORKSPACE_DIR=/root/.jarvis/workspace
 
 GOG_KEYRING_PASSWORD=change-me-now
-XDG_CONFIG_HOME=/home/node/.openclaw
+XDG_CONFIG_HOME=/home/node/.jarvis
 ```
 
 Generate strong secrets:
@@ -163,7 +163,7 @@ Create or update `docker-compose.yml`.
 ```yaml
 services:
   jarvis-gateway:
-    image: ${OPENCLAW_IMAGE}
+    image: ${JARVIS_IMAGE}
     build: .
     restart: unless-stopped
     env_file:
@@ -172,28 +172,28 @@ services:
       - HOME=/home/node
       - NODE_ENV=production
       - TERM=xterm-256color
-      - OPENCLAW_GATEWAY_BIND=${OPENCLAW_GATEWAY_BIND}
-      - OPENCLAW_GATEWAY_PORT=${OPENCLAW_GATEWAY_PORT}
-      - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
+      - JARVIS_GATEWAY_BIND=${JARVIS_GATEWAY_BIND}
+      - JARVIS_GATEWAY_PORT=${JARVIS_GATEWAY_PORT}
+      - JARVIS_GATEWAY_TOKEN=${JARVIS_GATEWAY_TOKEN}
       - GOG_KEYRING_PASSWORD=${GOG_KEYRING_PASSWORD}
       - XDG_CONFIG_HOME=${XDG_CONFIG_HOME}
       - PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     volumes:
-      - ${OPENCLAW_CONFIG_DIR}:/home/node/.openclaw
-      - ${OPENCLAW_WORKSPACE_DIR}:/home/node/.openclaw/workspace
+      - ${JARVIS_CONFIG_DIR}:/home/node/.jarvis
+      - ${JARVIS_WORKSPACE_DIR}:/home/node/.jarvis/workspace
     ports:
       # Recommended: keep the Gateway loopback-only on the VPS; access via SSH tunnel.
       # To expose it publicly, remove the `127.0.0.1:` prefix and firewall accordingly.
-      - "127.0.0.1:${OPENCLAW_GATEWAY_PORT}:18789"
+      - "127.0.0.1:${JARVIS_GATEWAY_PORT}:18789"
     command:
       [
         "node",
         "dist/index.js",
         "gateway",
         "--bind",
-        "${OPENCLAW_GATEWAY_BIND}",
+        "${JARVIS_GATEWAY_BIND}",
         "--port",
-        "${OPENCLAW_GATEWAY_PORT}",
+        "${JARVIS_GATEWAY_PORT}",
         "--allow-unconfigured",
       ]
 ```
@@ -321,18 +321,18 @@ Paste your gateway token.
 Jarvis runs in Docker, but Docker is not the source of truth.
 All long-lived state must survive restarts, rebuilds, and reboots.
 
-| Component           | Location                          | Persistence mechanism  | Notes                            |
-| ------------------- | --------------------------------- | ---------------------- | -------------------------------- |
-| Gateway config      | `/home/node/.openclaw/`           | Host volume mount      | Includes `openclaw.json`, tokens |
-| Model auth profiles | `/home/node/.openclaw/`           | Host volume mount      | OAuth tokens, API keys           |
-| Skill configs       | `/home/node/.openclaw/skills/`    | Host volume mount      | Skill-level state                |
-| Agent workspace     | `/home/node/.openclaw/workspace/` | Host volume mount      | Code and agent artifacts         |
-| WhatsApp session    | `/home/node/.openclaw/`           | Host volume mount      | Preserves QR login               |
-| Gmail keyring       | `/home/node/.openclaw/`           | Host volume + password | Requires `GOG_KEYRING_PASSWORD`  |
-| External binaries   | `/usr/local/bin/`                 | Docker image           | Must be baked at build time      |
-| Node runtime        | Container filesystem              | Docker image           | Rebuilt every image build        |
-| OS packages         | Container filesystem              | Docker image           | Do not install at runtime        |
-| Docker container    | Ephemeral                         | Restartable            | Safe to destroy                  |
+| Component           | Location                        | Persistence mechanism  | Notes                           |
+| ------------------- | ------------------------------- | ---------------------- | ------------------------------- |
+| Gateway config      | `/home/node/.jarvis/`           | Host volume mount      | Includes `jarvis.json`, tokens  |
+| Model auth profiles | `/home/node/.jarvis/`           | Host volume mount      | OAuth tokens, API keys          |
+| Skill configs       | `/home/node/.jarvis/skills/`    | Host volume mount      | Skill-level state               |
+| Agent workspace     | `/home/node/.jarvis/workspace/` | Host volume mount      | Code and agent artifacts        |
+| WhatsApp session    | `/home/node/.jarvis/`           | Host volume mount      | Preserves QR login              |
+| Gmail keyring       | `/home/node/.jarvis/`           | Host volume + password | Requires `GOG_KEYRING_PASSWORD` |
+| External binaries   | `/usr/local/bin/`               | Docker image           | Must be baked at build time     |
+| Node runtime        | Container filesystem            | Docker image           | Rebuilt every image build       |
+| OS packages         | Container filesystem            | Docker image           | Do not install at runtime       |
+| Docker container    | Ephemeral                       | Restartable            | Safe to destroy                 |
 
 ---
 
@@ -348,8 +348,8 @@ For teams preferring infrastructure-as-code workflows, a community-maintained Te
 
 **Repositories:**
 
-- Infrastructure: [openclaw-terraform-hetzner](https://github.com/andreesg/openclaw-terraform-hetzner)
-- Docker config: [openclaw-docker-config](https://github.com/andreesg/openclaw-docker-config)
+- Infrastructure: [jarvis-terraform-hetzner](https://github.com/andreesg/jarvis-terraform-hetzner)
+- Docker config: [jarvis-docker-config](https://github.com/andreesg/jarvis-docker-config)
 
 This approach complements the Docker setup above with reproducible deployments, version-controlled infrastructure, and automated disaster recovery.
 

@@ -29,7 +29,7 @@ x-i18n:
 - [文档目录](/start/docs-directory)
 - [配置](/gateway/configuration)
 - [配置示例](/gateway/configuration-examples)
-- [Jarvis 助手](/start/openclaw)
+- [Jarvis 助手](/start/jarvis)
 - [展示](/start/showcase)
 - [背景故事](/start/lore)
 

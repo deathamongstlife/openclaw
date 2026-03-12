@@ -1,1 +1,1 @@
-export { withFileLock } from "openclaw/plugin-sdk/msteams";
+export { withFileLock } from "jarvis/plugin-sdk/msteams";

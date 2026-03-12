@@ -43,9 +43,9 @@ The hooks system allows you to:
 
 Jarvis ships with four bundled hooks that are automatically discovered:
 
-- **💾 session-memory**: Saves session context to your agent workspace (default `~/.openclaw/workspace/memory/`) when you issue `/new`
+- **💾 session-memory**: Saves session context to your agent workspace (default `~/.jarvis/workspace/memory/`) when you issue `/new`
 - **📎 bootstrap-extra-files**: Injects additional workspace bootstrap files from configured glob/path patterns during `agent:bootstrap`
-- **📝 command-logger**: Logs all command events to `~/.openclaw/logs/commands.log`
+- **📝 command-logger**: Logs all command events to `~/.jarvis/logs/commands.log`
 - **🚀 boot-md**: Runs `BOOT.md` when the gateway starts (requires internal hooks enabled)
 
 List available hooks:
@@ -81,8 +81,8 @@ During onboarding (`jarvis onboard`), you'll be prompted to enable recommended h
 Hooks are automatically discovered from three directories (in order of precedence):
 
 1. **Workspace hooks**: `<workspace>/hooks/` (per-agent, highest precedence)
-2. **Managed hooks**: `~/.openclaw/hooks/` (user-installed, shared across workspaces)
-3. **Bundled hooks**: `<openclaw>/dist/hooks/bundled/` (shipped with Jarvis)
+2. **Managed hooks**: `~/.jarvis/hooks/` (user-installed, shared across workspaces)
+3. **Bundled hooks**: `<jarvis>/dist/hooks/bundled/` (shipped with Jarvis)
 
 Managed hook directories can be either a **single hook** or a **hook pack** (package directory).
 
@@ -96,7 +96,7 @@ my-hook/
 
 ## Hook Packs (npm/archives)
 
-Hook packs are standard npm packages that export one or more hooks via `openclaw.hooks` in
+Hook packs are standard npm packages that export one or more hooks via `jarvis.hooks` in
 `package.json`. Install them with:
 
 ```bash
@@ -116,15 +116,15 @@ Example `package.json`:
 {
   "name": "@acme/my-hooks",
   "version": "0.1.0",
-  "openclaw": {
+  "jarvis": {
     "hooks": ["./hooks/my-hook", "./hooks/other-hook"]
   }
 }
 ```
 
 Each entry points to a hook directory containing `HOOK.md` and `handler.ts` (or `index.ts`).
-Hook packs can ship dependencies; they will be installed under `~/.openclaw/hooks/<id>`.
-Each `openclaw.hooks` entry must stay inside the package directory after symlink
+Hook packs can ship dependencies; they will be installed under `~/.jarvis/hooks/<id>`.
+Each `jarvis.hooks` entry must stay inside the package directory after symlink
 resolution; entries that escape are rejected.
 
 Security note: `jarvis hooks install` installs dependencies with `npm install --ignore-scripts`
@@ -141,9 +141,9 @@ The `HOOK.md` file contains metadata in YAML frontmatter plus Markdown documenta
 ---
 name: my-hook
 description: "Short description of what this hook does"
-homepage: https://docs.openclaw.ai/automation/hooks#my-hook
+homepage: https://docs.jarvis.ai/automation/hooks#my-hook
 metadata:
-  { "openclaw": { "emoji": "🔗", "events": ["command:new"], "requires": { "bins": ["node"] } } }
+  { "jarvis": { "emoji": "🔗", "events": ["command:new"], "requires": { "bins": ["node"] } } }
 ---
 
 # My Hook
@@ -167,7 +167,7 @@ No configuration needed.
 
 ### Metadata Fields
 
-The `metadata.openclaw` object supports:
+The `metadata.jarvis` object supports:
 
 - **`emoji`**: Display emoji for CLI (e.g., `"💾"`)
 - **`events`**: Array of events to listen for (e.g., `["command:new", "command:reset"]`)
@@ -384,13 +384,13 @@ Planned event types:
 ### 1. Choose Location
 
 - **Workspace hooks** (`<workspace>/hooks/`): Per-agent, highest precedence
-- **Managed hooks** (`~/.openclaw/hooks/`): Shared across workspaces
+- **Managed hooks** (`~/.jarvis/hooks/`): Shared across workspaces
 
 ### 2. Create Directory Structure
 
 ```bash
-mkdir -p ~/.openclaw/hooks/my-hook
-cd ~/.openclaw/hooks/my-hook
+mkdir -p ~/.jarvis/hooks/my-hook
+cd ~/.jarvis/hooks/my-hook
 ```
 
 ### 3. Create HOOK.md
@@ -399,7 +399,7 @@ cd ~/.openclaw/hooks/my-hook
 ---
 name: my-hook
 description: "Does something useful"
-metadata: { "openclaw": { "emoji": "🎯", "events": ["command:new"] } }
+metadata: { "jarvis": { "emoji": "🎯", "events": ["command:new"] } }
 ---
 
 # My Custom Hook
@@ -577,7 +577,7 @@ Saves session context to memory when you issue `/new`.
 
 **Requirements**: `workspace.dir` must be configured
 
-**Output**: `<workspace>/memory/YYYY-MM-DD-slug.md` (defaults to `~/.openclaw/workspace`)
+**Output**: `<workspace>/memory/YYYY-MM-DD-slug.md` (defaults to `~/.jarvis/workspace`)
 
 **What it does**:
 
@@ -657,7 +657,7 @@ Logs all command events to a centralized audit file.
 
 **Requirements**: None
 
-**Output**: `~/.openclaw/logs/commands.log`
+**Output**: `~/.jarvis/logs/commands.log`
 
 **What it does**:
 
@@ -676,13 +676,13 @@ Logs all command events to a centralized audit file.
 
 ```bash
 # View recent commands
-tail -n 20 ~/.openclaw/logs/commands.log
+tail -n 20 ~/.jarvis/logs/commands.log
 
 # Pretty-print with jq
-cat ~/.openclaw/logs/commands.log | jq .
+cat ~/.jarvis/logs/commands.log | jq .
 
 # Filter by action
-grep '"action":"new"' ~/.openclaw/logs/commands.log | jq .
+grep '"action":"new"' ~/.jarvis/logs/commands.log | jq .
 ```
 
 **Enable**:
@@ -766,13 +766,13 @@ const handler: HookHandler = async (event) => {
 Specify exact events in metadata when possible:
 
 ```yaml
-metadata: { "openclaw": { "events": ["command:new"] } } # Specific
+metadata: { "jarvis": { "events": ["command:new"] } } # Specific
 ```
 
 Rather than:
 
 ```yaml
-metadata: { "openclaw": { "events": ["command"] } } # General - more overhead
+metadata: { "jarvis": { "events": ["command"] } } # General - more overhead
 ```
 
 ## Debugging
@@ -828,7 +828,7 @@ Monitor gateway logs to see hook execution:
 ./scripts/clawlog.sh -f
 
 # Other platforms
-tail -f ~/.openclaw/gateway.log
+tail -f ~/.jarvis/gateway.log
 ```
 
 ### Test Hooks Directly
@@ -908,14 +908,14 @@ Session reset
 1. Check directory structure:
 
    ```bash
-   ls -la ~/.openclaw/hooks/my-hook/
+   ls -la ~/.jarvis/hooks/my-hook/
    # Should show: HOOK.md, handler.ts
    ```
 
 2. Verify HOOK.md format:
 
    ```bash
-   cat ~/.openclaw/hooks/my-hook/HOOK.md
+   cat ~/.jarvis/hooks/my-hook/HOOK.md
    # Should have YAML frontmatter with name and metadata
    ```
 
@@ -993,8 +993,8 @@ node -e "import('./path/to/handler.ts').then(console.log)"
 1. Create hook directory:
 
    ```bash
-   mkdir -p ~/.openclaw/hooks/my-hook
-   mv ./hooks/handlers/my-handler.ts ~/.openclaw/hooks/my-hook/handler.ts
+   mkdir -p ~/.jarvis/hooks/my-hook
+   mv ./hooks/handlers/my-handler.ts ~/.jarvis/hooks/my-hook/handler.ts
    ```
 
 2. Create HOOK.md:
@@ -1003,7 +1003,7 @@ node -e "import('./path/to/handler.ts').then(console.log)"
    ---
    name: my-hook
    description: "My custom hook"
-   metadata: { "openclaw": { "emoji": "🎯", "events": ["command:new"] } }
+   metadata: { "jarvis": { "emoji": "🎯", "events": ["command:new"] } }
    ---
 
    # My Hook
@@ -1044,6 +1044,6 @@ node -e "import('./path/to/handler.ts').then(console.log)"
 ## See Also
 
 - [CLI Reference: hooks](/cli/hooks)
-- [Bundled Hooks README](https://github.com/openclaw/openclaw/tree/main/src/hooks/bundled)
+- [Bundled Hooks README](https://github.com/jarvis/jarvis/tree/main/src/hooks/bundled)
 - [Webhook Hooks](/automation/webhook)
 - [Configuration](/gateway/configuration#hooks)

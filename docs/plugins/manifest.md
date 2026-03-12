@@ -6,9 +6,9 @@ read_when:
 title: "Plugin Manifest"
 ---
 
-# Plugin manifest (openclaw.plugin.json)
+# Plugin manifest (jarvis.plugin.json)
 
-Every plugin **must** ship a `openclaw.plugin.json` file in the **plugin root**.
+Every plugin **must** ship a `jarvis.plugin.json` file in the **plugin root**.
 Jarvis uses this manifest to validate configuration **without executing plugin
 code**. Missing or invalid manifests are treated as plugin errors and block
 config validation.

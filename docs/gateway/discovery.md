@@ -56,7 +56,7 @@ Troubleshooting and beacon details: [Bonjour](/gateway/bonjour).
 #### Service beacon details
 
 - Service types:
-  - `_openclaw-gw._tcp` (gateway transport beacon)
+  - `_jarvis-gw._tcp` (gateway transport beacon)
 - TXT keys (non-secret):
   - `role=gateway`
   - `lanHost=<hostname>.local`
@@ -65,7 +65,7 @@ Troubleshooting and beacon details: [Bonjour](/gateway/bonjour).
   - `gatewayTls=1` (only when TLS is enabled)
   - `gatewayTlsSha256=<sha256>` (only when TLS is enabled and fingerprint is available)
   - `canvasPort=<port>` (canvas host port; currently the same as `gatewayPort` when the canvas host is enabled)
-  - `cliPath=<path>` (optional; absolute path to a runnable `openclaw` entrypoint or binary)
+  - `cliPath=<path>` (optional; absolute path to a runnable `jarvis` entrypoint or binary)
   - `tailnetDns=<magicdns>` (optional hint; auto-detected when Tailscale is available)
 
 Security notes:
@@ -77,11 +77,11 @@ Security notes:
 
 Disable/override:
 
-- `OPENCLAW_DISABLE_BONJOUR=1` disables advertising.
-- `gateway.bind` in `~/.openclaw/openclaw.json` controls the Gateway bind mode.
-- `OPENCLAW_SSH_PORT` overrides the SSH port advertised in TXT (defaults to 22).
-- `OPENCLAW_TAILNET_DNS` publishes a `tailnetDns` hint (MagicDNS).
-- `OPENCLAW_CLI_PATH` overrides the advertised CLI path.
+- `JARVIS_DISABLE_BONJOUR=1` disables advertising.
+- `gateway.bind` in `~/.jarvis/jarvis.json` controls the Gateway bind mode.
+- `JARVIS_SSH_PORT` overrides the SSH port advertised in TXT (defaults to 22).
+- `JARVIS_TAILNET_DNS` publishes a `tailnetDns` hint (MagicDNS).
+- `JARVIS_CLI_PATH` overrides the advertised CLI path.
 
 ### 2) Tailnet (cross-network)
 

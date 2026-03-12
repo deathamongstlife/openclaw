@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/memory-lancedb",
+  "name": "@jarvis/memory-lancedb",
   "version": "2026.3.9",
   "private": true,
   "description": "Jarvis LanceDB-backed long-term memory plugin with auto-recall/capture",
@@ -9,7 +9,7 @@
     "@sinclair/typebox": "0.34.48",
     "openai": "^6.27.0"
   },
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ]

@@ -1,10 +1,10 @@
 {
-  "name": "@openclaw/slack",
+  "name": "@jarvis/slack",
   "version": "2026.3.9",
   "private": true,
   "description": "Jarvis Slack channel plugin",
   "type": "module",
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ]

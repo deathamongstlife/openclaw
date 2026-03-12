@@ -1,0 +1,130 @@
+{
+	email admin@allyapp.cc
+}
+
+git.allyapp.cc {
+	request_body max_size 8GB
+	reverse_proxy 127.0.0.1:8929
+}
+
+ai.allyapp.cc {
+	reverse_proxy 127.0.0.1:18789
+}
+
+i.allyapp.cc {
+	reverse_proxy 127.0.0.1:3000
+}
+
+pcapi.allyapp.cc {
+	reverse_proxy 127.0.0.1:4000
+}
+
+pc.allyapp.cc {
+	reverse_proxy 127.0.0.1:3002
+}
+
+mail.allyapp.cc {
+	@root path /
+	redir @root /iredadmin/ 302
+	reverse_proxy https://127.0.0.1:8443 {
+		header_up Host {host}
+		header_up X-Forwarded-Proto https
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+sentry.allyapp.cc {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:9000
+}
+
+cloud.allyapp.cc {
+	handle /.well-known/carddav {
+		redir /remote.php/dav 301
+	}
+	handle /.well-known/caldav {
+		redir /remote.php/dav 301
+	}
+	handle /.well-known/webfinger {
+		reverse_proxy https://127.0.0.1:8444 {
+			transport http {
+				tls_insecure_skip_verify
+			}
+			header_up Host {host}
+			header_up X-Forwarded-Proto https
+			header_up X-Forwarded-Port 443
+		}
+	}
+	handle /.well-known/nodeinfo {
+		reverse_proxy https://127.0.0.1:8444 {
+			transport http {
+				tls_insecure_skip_verify
+			}
+			header_up Host {host}
+			header_up X-Forwarded-Proto https
+			header_up X-Forwarded-Port 443
+		}
+	}
+	reverse_proxy https://127.0.0.1:8444 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+		header_up Host {host}
+		header_up X-Forwarded-Proto https
+		header_up X-Forwarded-Port 443
+	}
+}
+
+# Jarvis Configuration - Cloudflare Proxy Compatible
+# Uses Let's Encrypt with Cloudflare DNS validation
+
+# Jarvis Documentation
+docs.jarvis.allyapp.cc {
+	root * /var/www/jarvis/docs
+	file_server
+	encode gzip
+	try_files {path} {path}.html {path}/ =404
+
+	header {
+		X-Frame-Options "SAMEORIGIN"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+	}
+
+	handle_errors {
+		@404 {
+			expression {http.error.status_code} == 404
+		}
+		rewrite @404 /404.html
+		file_server
+	}
+
+	log {
+		output file /var/log/caddy/jarvis-docs.log
+	}
+}
+
+# Jarvis Install Script & Landing Page
+jarvis.allyapp.cc {
+	root * /var/www/jarvis/public
+	file_server
+	encode gzip
+
+	handle /install.sh {
+		root * /var/www/jarvis
+		file_server
+		header Content-Type text/plain
+		header Cache-Control "no-cache, must-revalidate"
+	}
+
+	header {
+		X-Frame-Options "SAMEORIGIN"
+		X-Content-Type-Options "nosniff"
+	}
+
+	log {
+		output file /var/log/caddy/jarvis-install.log
+	}
+}

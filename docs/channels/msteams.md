@@ -24,7 +24,7 @@ Explainable: keeps core installs lighter and lets MS Teams dependencies update i
 Install via CLI (npm registry):
 
 ```bash
-jarvis plugins install @openclaw/msteams
+jarvis plugins install @jarvis/msteams
 ```
 
 Local checkout (when running from a git repo):
@@ -145,7 +145,7 @@ Example:
 2. Create an **Azure Bot** (App ID + secret + tenant ID).
 3. Build a **Teams app package** that references the bot and includes the RSC permissions below.
 4. Upload/install the Teams app into a team (or personal scope for DMs).
-5. Configure `msteams` in `~/.openclaw/openclaw.json` (or env vars) and start the gateway.
+5. Configure `msteams` in `~/.jarvis/jarvis.json` (or env vars) and start the gateway.
 6. The gateway listens for Bot Framework webhook traffic on `/api/messages` by default.
 
 ## Azure Bot Setup (Prerequisites)
@@ -157,14 +157,14 @@ Before configuring Jarvis, you need to create an Azure Bot resource.
 1. Go to [Create Azure Bot](https://portal.azure.com/#create/Microsoft.AzureBot)
 2. Fill in the **Basics** tab:
 
-   | Field              | Value                                                    |
-   | ------------------ | -------------------------------------------------------- |
-   | **Bot handle**     | Your bot name, e.g., `openclaw-msteams` (must be unique) |
-   | **Subscription**   | Select your Azure subscription                           |
-   | **Resource group** | Create new or use existing                               |
-   | **Pricing tier**   | **Free** for dev/testing                                 |
-   | **Type of App**    | **Single Tenant** (recommended - see note below)         |
-   | **Creation type**  | **Create new Microsoft App ID**                          |
+   | Field              | Value                                                  |
+   | ------------------ | ------------------------------------------------------ |
+   | **Bot handle**     | Your bot name, e.g., `jarvis-msteams` (must be unique) |
+   | **Subscription**   | Select your Azure subscription                         |
+   | **Resource group** | Create new or use existing                             |
+   | **Pricing tier**   | **Free** for dev/testing                               |
+   | **Type of App**    | **Single Tenant** (recommended - see note below)       |
+   | **Creation type**  | **Create new Microsoft App ID**                        |
 
 > **Deprecation notice:** Creation of new multi-tenant bots was deprecated after 2025-07-31. Use **Single Tenant** for new bots.
 
@@ -241,7 +241,7 @@ This is often easier than hand-editing JSON manifests.
 ## Setup (minimal text-only)
 
 1. **Install the Microsoft Teams plugin**
-   - From npm: `jarvis plugins install @openclaw/msteams`
+   - From npm: `jarvis plugins install @jarvis/msteams`
    - From a local checkout: `jarvis plugins install ./extensions/msteams`
 
 2. **Bot registration**
@@ -604,7 +604,7 @@ Uploaded files are stored in a `/JarvisShared/` folder in the configured SharePo
 Jarvis sends Teams polls as Adaptive Cards (there is no native Teams poll API).
 
 - CLI: `jarvis message poll --channel msteams --target conversation:<id> ...`
-- Votes are recorded by the gateway in `~/.openclaw/msteams-polls.json`.
+- Votes are recorded by the gateway in `~/.jarvis/msteams-polls.json`.
 - The gateway must stay online to record votes.
 - Polls do not auto-post result summaries yet (inspect the store file if needed).
 

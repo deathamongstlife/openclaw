@@ -21,7 +21,7 @@ capabilities to the agent as a node.
 - Exposes macOS‑only tools (Canvas, Camera, Screen Recording, `system.run`).
 - Starts the local node host service in **remote** mode (launchd), and stops it in **local** mode.
 - Optionally hosts **PeekabooBridge** for UI automation.
-- Installs the global CLI (`openclaw`) via npm/pnpm on request (bun not recommended for the Gateway runtime).
+- Installs the global CLI (`jarvis`) via npm/pnpm on request (bun not recommended for the Gateway runtime).
 
 ## Local vs remote mode
 
@@ -34,15 +34,15 @@ capabilities to the agent as a node.
 
 ## Launchd control
 
-The app manages a per‑user LaunchAgent labeled `ai.openclaw.gateway`
-(or `ai.openclaw.<profile>` when using `--profile`/`OPENCLAW_PROFILE`; legacy `com.openclaw.*` still unloads).
+The app manages a per‑user LaunchAgent labeled `ai.jarvis.gateway`
+(or `ai.jarvis.<profile>` when using `--profile`/`JARVIS_PROFILE`; legacy `com.jarvis.*` still unloads).
 
 ```bash
-launchctl kickstart -k gui/$UID/ai.openclaw.gateway
-launchctl bootout gui/$UID/ai.openclaw.gateway
+launchctl kickstart -k gui/$UID/ai.jarvis.gateway
+launchctl bootout gui/$UID/ai.jarvis.gateway
 ```
 
-Replace the label with `ai.openclaw.<profile>` when running a named profile.
+Replace the label with `ai.jarvis.<profile>` when running a named profile.
 
 If the LaunchAgent isn’t installed, enable it from the app or run
 `jarvis gateway install`.
@@ -78,7 +78,7 @@ Gateway -> Node Service (WS)
 Security + ask + allowlist are stored locally on the Mac in:
 
 ```
-~/.openclaw/exec-approvals.json
+~/.jarvis/exec-approvals.json
 ```
 
 Example:
@@ -111,14 +111,14 @@ Notes:
 
 ## Deep links
 
-The app registers the `openclaw://` URL scheme for local actions.
+The app registers the `jarvis://` URL scheme for local actions.
 
-### `openclaw://agent`
+### `jarvis://agent`
 
 Triggers a Gateway `agent` request.
 
 ```bash
-open 'openclaw://agent?message=Hello%20from%20deep%20link'
+open 'jarvis://agent?message=Hello%20from%20deep%20link'
 ```
 
 Query parameters:
@@ -152,7 +152,7 @@ sessions and credentials.
 Prefer a local non-synced state path such as:
 
 ```bash
-OPENCLAW_STATE_DIR=~/.openclaw
+JARVIS_STATE_DIR=~/.jarvis
 ```
 
 If `jarvis doctor` detects state under:
@@ -175,8 +175,8 @@ logic that the macOS app uses, without launching the app.
 
 ```bash
 cd apps/macos
-swift run openclaw-mac connect --json
-swift run openclaw-mac discover --timeout 3000 --json
+swift run jarvis-mac connect --json
+swift run jarvis-mac discover --timeout 3000 --json
 ```
 
 Connect options:

@@ -5,7 +5,7 @@ import {
   readNumberParam,
   readReactionParams,
   readStringParam,
-} from "openclaw/plugin-sdk/matrix";
+} from "jarvis/plugin-sdk/matrix";
 import {
   deleteMatrixMessage,
   editMatrixMessage,

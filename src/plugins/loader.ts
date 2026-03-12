@@ -5,7 +5,7 @@ import { createJiti } from "jiti";
 import type { JarvisConfig } from "../config/config.js";
 import type { GatewayRequestHandler } from "../gateway/server-methods/types.js";
 import { openBoundaryFileSync } from "../infra/boundary-file-read.js";
-import { resolveJarvisPackageRootSync } from "../infra/openclaw-root.js";
+import { resolveJarvisPackageRootSync } from "../infra/jarvis-root.js";
 import { createSubsystemLogger } from "../logging/subsystem.js";
 import { resolveUserPath } from "../utils.js";
 import { clearPluginCommands } from "./commands.js";
@@ -151,7 +151,7 @@ const resolvePluginSdkScopedAliasMap = (): Record<string, string> => {
       distFile: `${subpath}.js`,
     });
     if (resolved) {
-      aliasMap[`openclaw/plugin-sdk/${subpath}`] = resolved;
+      aliasMap[`jarvis/plugin-sdk/${subpath}`] = resolved;
     }
   }
   return aliasMap;
@@ -542,7 +542,7 @@ export function loadJarvisPlugins(options: PluginLoadOptions = {}): PluginRegist
     }
     const pluginSdkAlias = resolvePluginSdkAlias();
     const aliasMap = {
-      ...(pluginSdkAlias ? { "openclaw/plugin-sdk": pluginSdkAlias } : {}),
+      ...(pluginSdkAlias ? { "jarvis/plugin-sdk": pluginSdkAlias } : {}),
       ...resolvePluginSdkScopedAliasMap(),
     };
     jitiLoader = createJiti(import.meta.url, {

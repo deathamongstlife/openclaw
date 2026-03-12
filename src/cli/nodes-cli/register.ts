@@ -24,7 +24,7 @@ export function registerNodesCli(program: Command) {
           ["jarvis nodes pairing pending", "Show pending node pairing requests."],
           ['jarvis nodes run --node <id> --raw "uname -a"', "Run a shell command on a node."],
           ["jarvis nodes camera snap --node <id>", "Capture a photo from a node camera."],
-        ])}\n\n${theme.muted("Docs:")} ${formatDocsLink("/cli/nodes", "docs.openclaw.ai/cli/nodes")}\n`,
+        ])}\n\n${theme.muted("Docs:")} ${formatDocsLink("/cli/nodes", "docs.jarvis.ai/cli/nodes")}\n`,
     );
 
   registerNodesStatusCommands(nodes);

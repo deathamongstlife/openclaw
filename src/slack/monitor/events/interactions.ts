@@ -11,7 +11,7 @@ import {
 } from "./interactions.modal.js";
 
 // Prefix for Jarvis-generated action IDs to scope our handler
-const OPENCLAW_ACTION_PREFIX = "openclaw:";
+const JARVIS_ACTION_PREFIX = "jarvis:";
 const SLACK_INTERACTION_EVENT_PREFIX = "Slack interaction: ";
 const REDACTED_INTERACTION_VALUE = "[redacted]";
 const SLACK_INTERACTION_EVENT_MAX_CHARS = 2400;
@@ -461,7 +461,7 @@ export function registerSlackInteractionEvents(params: { ctx: SlackMonitorContex
   // Only matches action_ids that start with our prefix to avoid interfering
   // with other Slack integrations or future features
   ctx.app.action(
-    new RegExp(`^${OPENCLAW_ACTION_PREFIX}`),
+    new RegExp(`^${JARVIS_ACTION_PREFIX}`),
     async (args: SlackActionMiddlewareArgs) => {
       const { ack, body, action, respond } = args;
       const typedBody = body as unknown as {
@@ -640,7 +640,7 @@ export function registerSlackInteractionEvents(params: { ctx: SlackMonitorContex
   if (typeof ctx.app.view !== "function") {
     return;
   }
-  const modalMatcher = new RegExp(`^${OPENCLAW_ACTION_PREFIX}`);
+  const modalMatcher = new RegExp(`^${JARVIS_ACTION_PREFIX}`);
 
   // Handle Jarvis modal submissions with callback_ids scoped by our prefix.
   registerModalLifecycleHandler({

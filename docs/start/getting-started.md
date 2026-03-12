@@ -32,7 +32,7 @@ Check your Node version with `node --version` if you are unsure.
     <Tabs>
       <Tab title="macOS/Linux">
         ```bash
-        curl -fsSL https://openclaw.ai/install.sh | bash
+        curl -fsSL https://jarvis.ai/install.sh | bash
         ```
         <img
   src="/assets/install-script.svg"
@@ -42,7 +42,7 @@ Check your Node version with `node --version` if you are unsure.
       </Tab>
       <Tab title="Windows (PowerShell)">
         ```powershell
-        iwr -useb https://openclaw.ai/install.ps1 | iex
+        iwr -useb https://jarvis.ai/install.ps1 | iex
         ```
       </Tab>
     </Tabs>
@@ -105,9 +105,9 @@ If the Control UI loads, your Gateway is ready for use.
 
 If you run Jarvis as a service account or want custom config/state locations:
 
-- `OPENCLAW_HOME` sets the home directory used for internal path resolution.
-- `OPENCLAW_STATE_DIR` overrides the state directory.
-- `OPENCLAW_CONFIG_PATH` overrides the config file path.
+- `JARVIS_HOME` sets the home directory used for internal path resolution.
+- `JARVIS_STATE_DIR` overrides the state directory.
+- `JARVIS_CONFIG_PATH` overrides the config file path.
 
 Full environment variable reference: [Environment vars](/help/environment).
 

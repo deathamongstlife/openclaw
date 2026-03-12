@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/feishu";
+import type { JarvisConfig } from "jarvis/plugin-sdk/feishu";
 import { describe, expect, it, vi } from "vitest";
 
 const probeFeishuMock = vi.hoisted(() => vi.fn());

@@ -4,17 +4,17 @@
 
 #include "Config/Version.xcconfig"
 
-OPENCLAW_CODE_SIGN_STYLE = Manual
-OPENCLAW_DEVELOPMENT_TEAM = Y5PE65HELJ
+JARVIS_CODE_SIGN_STYLE = Manual
+JARVIS_DEVELOPMENT_TEAM = Y5PE65HELJ
 
-OPENCLAW_APP_BUNDLE_ID = ai.openclaw.client
-OPENCLAW_SHARE_BUNDLE_ID = ai.openclaw.client.share
-OPENCLAW_WATCH_APP_BUNDLE_ID = ai.openclaw.client.watchkitapp
-OPENCLAW_WATCH_EXTENSION_BUNDLE_ID = ai.openclaw.client.watchkitapp.extension
-OPENCLAW_ACTIVITY_WIDGET_BUNDLE_ID = ai.openclaw.client.activitywidget
+JARVIS_APP_BUNDLE_ID = ai.jarvis.client
+JARVIS_SHARE_BUNDLE_ID = ai.jarvis.client.share
+JARVIS_WATCH_APP_BUNDLE_ID = ai.jarvis.client.watchkitapp
+JARVIS_WATCH_EXTENSION_BUNDLE_ID = ai.jarvis.client.watchkitapp.extension
+JARVIS_ACTIVITY_WIDGET_BUNDLE_ID = ai.jarvis.client.activitywidget
 
-OPENCLAW_APP_PROFILE = ai.openclaw.client Development
-OPENCLAW_SHARE_PROFILE = ai.openclaw.client.share Development
+JARVIS_APP_PROFILE = ai.jarvis.client Development
+JARVIS_SHARE_PROFILE = ai.jarvis.client.share Development
 
 // Keep local includes after defaults: xcconfig is evaluated top-to-bottom,
 // so later assignments in local files override the defaults above.

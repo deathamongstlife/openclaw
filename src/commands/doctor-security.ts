@@ -55,7 +55,7 @@ export async function noteSecurityWarnings(cfg: JarvisConfig) {
   if (cfg.approvals?.exec?.enabled === false) {
     warnings.push(
       "- Note: approvals.exec.enabled=false disables approval forwarding only.",
-      "  Host exec gating still comes from ~/.openclaw/exec-approvals.json.",
+      "  Host exec gating still comes from ~/.jarvis/exec-approvals.json.",
       `  Check local policy with: ${formatCliCommand("jarvis approvals get --gateway")}`,
     );
   }
@@ -99,7 +99,7 @@ export async function noteSecurityWarnings(cfg: JarvisConfig) {
   const saferRemoteAccessLines = [
     "  Safer remote access: keep bind loopback and use Tailscale Serve/Funnel or an SSH tunnel.",
     "  Example tunnel: ssh -N -L 18789:127.0.0.1:18789 user@gateway-host",
-    "  Docs: https://docs.openclaw.ai/gateway/remote",
+    "  Docs: https://docs.jarvis.ai/gateway/remote",
   ];
 
   if (isExposed) {

@@ -42,7 +42,7 @@ Voice Call 插件运行在 **Gateway 网关进程内部**。
 ### 选项 A：从 npm 安装（推荐）
 
 ```bash
-jarvis plugins install @openclaw/voice-call
+jarvis plugins install @jarvis/voice-call
 ```
 
 之后重启 Gateway 网关。

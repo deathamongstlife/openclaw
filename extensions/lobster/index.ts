@@ -2,7 +2,7 @@ import type {
   AnyAgentTool,
   JarvisPluginApi,
   JarvisPluginToolFactory,
-} from "openclaw/plugin-sdk/lobster";
+} from "jarvis/plugin-sdk/lobster";
 import { createLobsterTool } from "./src/lobster-tool.js";
 
 export default function register(api: JarvisPluginApi) {

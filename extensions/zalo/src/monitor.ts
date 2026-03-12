@@ -1,9 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import type {
-  MarkdownTableMode,
-  JarvisConfig,
-  OutboundReplyPayload,
-} from "openclaw/plugin-sdk/zalo";
+import type { MarkdownTableMode, JarvisConfig, OutboundReplyPayload } from "jarvis/plugin-sdk/zalo";
 import {
   createTypingCallbacks,
   createScopedPairingAccess,
@@ -19,7 +15,7 @@ import {
   resolveWebhookPath,
   waitForAbortSignal,
   warnMissingProviderGroupPolicyFallbackOnce,
-} from "openclaw/plugin-sdk/zalo";
+} from "jarvis/plugin-sdk/zalo";
 import type { ResolvedZaloAccount } from "./accounts.js";
 import {
   ZaloApiError,

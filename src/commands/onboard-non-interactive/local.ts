@@ -132,7 +132,7 @@ export async function runNonInteractiveOnboardingLocal(params: {
 
   if (!opts.json) {
     runtime.log(
-      `Tip: run \`${formatCliCommand("jarvis configure --section web")}\` to store your Brave API key for web_search. Docs: https://docs.openclaw.ai/tools/web`,
+      `Tip: run \`${formatCliCommand("jarvis configure --section web")}\` to store your Brave API key for web_search. Docs: https://docs.jarvis.ai/tools/web`,
     );
   }
 }

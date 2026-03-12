@@ -103,7 +103,7 @@ describe.skipIf(isWindows)("restart-stale-pids", () => {
       expect(pids).not.toContain(process.pid);
     });
 
-    it("excludes pids whose command does not include 'openclaw'", () => {
+    it("excludes pids whose command does not include 'jarvis'", () => {
       const otherPid = process.pid + 2;
       mockSpawnSync.mockReturnValue({
         error: null,
@@ -678,8 +678,8 @@ describe.skipIf(isWindows)("restart-stale-pids", () => {
   // parsePidsFromLsofOutput — branch-coverage for mid-loop && short-circuits
   // -------------------------------------------------------------------------
   describe("parsePidsFromLsofOutput — branch coverage (lines 67-69)", () => {
-    it("skips a mid-loop entry when the command does not include 'openclaw'", () => {
-      // Exercises the false branch of currentCmd.toLowerCase().includes("openclaw")
+    it("skips a mid-loop entry when the command does not include 'jarvis'", () => {
+      // Exercises the false branch of currentCmd.toLowerCase().includes("jarvis")
       // inside the mid-loop flush: a non-jarvis cmd between two entries must not
       // be pushed, but the following jarvis entry still must be.
       const stalePid = process.pid + 700;

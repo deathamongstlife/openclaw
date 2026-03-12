@@ -1,5 +1,5 @@
 ---
-summary: "Jarvis CLI reference for `openclaw` commands, subcommands, and options"
+summary: "Jarvis CLI reference for `jarvis` commands, subcommands, and options"
 read_when:
   - Adding or modifying CLI commands or options
   - Documenting new command surfaces
@@ -61,8 +61,8 @@ This page describes the current CLI behavior. If commands change, update this do
 
 ## Global flags
 
-- `--dev`: isolate state under `~/.openclaw-dev` and shift default ports.
-- `--profile <name>`: isolate state under `~/.openclaw-<name>`.
+- `--dev`: isolate state under `~/.jarvis-dev` and shift default ports.
+- `--profile <name>`: isolate state under `~/.jarvis-<name>`.
 - `--no-color`: disable ANSI colors.
 - `--update`: shorthand for `jarvis update` (source installs only).
 - `-V`, `--version`, `-v`: print version and exit.
@@ -93,7 +93,7 @@ Palette source of truth: `src/terminal/palette.ts` (aka “lobster seam”).
 ## Command tree
 
 ```
-openclaw [--dev] [--profile <name>] <command>
+jarvis [--dev] [--profile <name>] <command>
   setup
   onboard
   configure
@@ -316,7 +316,7 @@ Initialize config + workspace.
 
 Options:
 
-- `--workspace <dir>`: agent workspace path (default `~/.openclaw/workspace`).
+- `--workspace <dir>`: agent workspace path (default `~/.jarvis/workspace`).
 - `--wizard`: run the onboarding wizard.
 - `--non-interactive`: run wizard without prompts.
 - `--mode <local|remote>`: wizard mode.
@@ -1019,7 +1019,7 @@ Subcommands:
 
 Auth notes:
 
-- `node` resolves gateway auth from env/config (no `--token`/`--password` flags): `OPENCLAW_GATEWAY_TOKEN` / `OPENCLAW_GATEWAY_PASSWORD`, then `gateway.auth.*`. In local mode, node host intentionally ignores `gateway.remote.*`; in `gateway.mode=remote`, `gateway.remote.*` participates per remote precedence rules.
+- `node` resolves gateway auth from env/config (no `--token`/`--password` flags): `JARVIS_GATEWAY_TOKEN` / `JARVIS_GATEWAY_PASSWORD`, then `gateway.auth.*`. In local mode, node host intentionally ignores `gateway.remote.*`; in `gateway.mode=remote`, `gateway.remote.*` participates per remote precedence rules.
 - Legacy `CLAWDBOT_GATEWAY_*` env vars are intentionally ignored for node-host auth resolution.
 
 ## Nodes

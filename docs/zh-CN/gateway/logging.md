@@ -24,9 +24,9 @@ Jarvis 有两个日志"界面"：
 
 ## 基于文件的日志记录器
 
-- 默认滚动日志文件位于 `/tmp/openclaw/` 下（每天一个文件）：`openclaw-YYYY-MM-DD.log`
+- 默认滚动日志文件位于 `/tmp/jarvis/` 下（每天一个文件）：`jarvis-YYYY-MM-DD.log`
   - 日期使用 Gateway 网关主机的本地时区。
-- 日志文件路径和级别可以通过 `~/.openclaw/openclaw.json` 配置：
+- 日志文件路径和级别可以通过 `~/.jarvis/jarvis.json` 配置：
   - `logging.file`
   - `logging.level`
 

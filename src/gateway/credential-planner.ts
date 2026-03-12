@@ -67,7 +67,7 @@ export function trimToUndefined(value: unknown): string | undefined {
 
 /**
  * Like trimToUndefined but also rejects unresolved env var placeholders (e.g. `${VAR}`).
- * This prevents literal placeholder strings like `${OPENCLAW_GATEWAY_TOKEN}` from being
+ * This prevents literal placeholder strings like `${JARVIS_GATEWAY_TOKEN}` from being
  * accepted as valid credentials when the referenced env var is missing.
  * Note: legitimate credential values containing literal `${UPPER_CASE}` patterns will
  * also be rejected, but this is an extremely unlikely edge case.
@@ -84,11 +84,7 @@ export function readGatewayTokenEnv(
   env: NodeJS.ProcessEnv = process.env,
   includeLegacyEnv = true,
 ): string | undefined {
-  return readGatewayEnv(
-    env,
-    ["OPENCLAW_GATEWAY_TOKEN", "CLAWDBOT_GATEWAY_TOKEN"],
-    includeLegacyEnv,
-  );
+  return readGatewayEnv(env, ["JARVIS_GATEWAY_TOKEN", "CLAWDBOT_GATEWAY_TOKEN"], includeLegacyEnv);
 }
 
 export function readGatewayPasswordEnv(
@@ -97,7 +93,7 @@ export function readGatewayPasswordEnv(
 ): string | undefined {
   return readGatewayEnv(
     env,
-    ["OPENCLAW_GATEWAY_PASSWORD", "CLAWDBOT_GATEWAY_PASSWORD"],
+    ["JARVIS_GATEWAY_PASSWORD", "CLAWDBOT_GATEWAY_PASSWORD"],
     includeLegacyEnv,
   );
 }

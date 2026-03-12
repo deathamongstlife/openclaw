@@ -29,9 +29,9 @@ function makeBrowserState(): BrowserServerState {
       noSandbox: false,
       attachOnly: false,
       ssrfPolicy: { allowPrivateNetwork: true },
-      defaultProfile: "openclaw",
+      defaultProfile: "jarvis",
       profiles: {
-        openclaw: { cdpPort: 18800, color: "#FF4500" },
+        jarvis: { cdpPort: 18800, color: "#FF4500" },
       },
     },
     profiles: new Map(),
@@ -46,7 +46,7 @@ function mockLaunchedChrome(
   launchJarvisChrome.mockResolvedValue({
     pid,
     exe: { kind: "chromium", path: "/usr/bin/chromium" },
-    userDataDir: "/tmp/openclaw-test",
+    userDataDir: "/tmp/jarvis-test",
     cdpPort: 18800,
     startedAt: Date.now(),
     proc,
@@ -64,7 +64,7 @@ function setupEnsureBrowserAvailableHarness() {
 
   const state = makeBrowserState();
   const ctx = createBrowserRouteContext({ getState: () => state });
-  const profile = ctx.forProfile("openclaw");
+  const profile = ctx.forProfile("jarvis");
 
   return { launchJarvisChrome, stopJarvisChrome, isChromeCdpReady, profile };
 }

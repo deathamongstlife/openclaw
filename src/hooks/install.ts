@@ -115,11 +115,11 @@ export function resolveHookInstallDir(hookId: string, hooksDir?: string): string
 async function ensureJarvisHooks(manifest: HookPackageManifest) {
   const hooks = manifest[MANIFEST_KEY]?.hooks;
   if (!Array.isArray(hooks)) {
-    throw new Error("package.json missing openclaw.hooks");
+    throw new Error("package.json missing jarvis.hooks");
   }
   const list = hooks.map((e) => (typeof e === "string" ? e.trim() : "")).filter(Boolean);
   if (list.length === 0) {
-    throw new Error("package.json openclaw.hooks is empty");
+    throw new Error("package.json jarvis.hooks is empty");
   }
   return list;
 }
@@ -265,7 +265,7 @@ async function installHookPackageFromDir(
     if (!isPathInside(params.packageDir, hookDir)) {
       return {
         ok: false,
-        error: `openclaw.hooks entry escapes package directory: ${entry}`,
+        error: `jarvis.hooks entry escapes package directory: ${entry}`,
       };
     }
     await validateHookDir(hookDir);
@@ -276,7 +276,7 @@ async function installHookPackageFromDir(
     ) {
       return {
         ok: false,
-        error: `openclaw.hooks entry resolves outside package directory: ${entry}`,
+        error: `jarvis.hooks entry resolves outside package directory: ${entry}`,
       };
     }
     const hookName = await resolveHookNameFromDir(hookDir);
@@ -385,7 +385,7 @@ export async function installHooksFromArchive(
 
   return await withExtractedArchiveRoot({
     archivePath,
-    tempDirPrefix: "openclaw-hook-",
+    tempDirPrefix: "jarvis-hook-",
     timeoutMs,
     logger,
     onExtracted: async (rootDir) =>
@@ -420,7 +420,7 @@ export async function installHooksFromNpmSpec(params: {
 
   logger.info?.(`Downloading ${spec.trim()}…`);
   return await installFromValidatedNpmSpecArchive({
-    tempDirPrefix: "openclaw-hook-pack-",
+    tempDirPrefix: "jarvis-hook-pack-",
     spec,
     timeoutMs,
     expectedIntegrity: params.expectedIntegrity,

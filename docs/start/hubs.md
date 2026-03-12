@@ -26,7 +26,7 @@ Use these hubs to discover every page, including deep dives and reference docs t
 - [Docs directory](/start/docs-directory)
 - [Configuration](/gateway/configuration)
 - [Configuration examples](/gateway/configuration-examples)
-- [Jarvis assistant](/start/openclaw)
+- [Jarvis assistant](/start/jarvis)
 - [Showcase](/start/showcase)
 - [Lore](/start/lore)
 

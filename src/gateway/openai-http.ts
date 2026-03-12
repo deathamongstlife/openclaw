@@ -428,7 +428,7 @@ export async function handleOpenAiHttpRequest(
 
   const payload = coerceRequest(handled.body);
   const stream = Boolean(payload.stream);
-  const model = typeof payload.model === "string" ? payload.model : "openclaw";
+  const model = typeof payload.model === "string" ? payload.model : "jarvis";
   const user = typeof payload.user === "string" ? payload.user : undefined;
 
   const { sessionKey, messageChannel } = resolveGatewayRequestContext({

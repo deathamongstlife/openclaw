@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/twitch";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/twitch";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/twitch";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/twitch";
 import { twitchPlugin } from "./src/plugin.js";
 import { setTwitchRuntime } from "./src/runtime.js";
 

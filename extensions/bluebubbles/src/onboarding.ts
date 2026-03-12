@@ -4,7 +4,7 @@ import type {
   JarvisConfig,
   DmPolicy,
   WizardPrompter,
-} from "openclaw/plugin-sdk/bluebubbles";
+} from "jarvis/plugin-sdk/bluebubbles";
 import {
   DEFAULT_ACCOUNT_ID,
   formatDocsLink,
@@ -13,7 +13,7 @@ import {
   patchScopedAccountConfig,
   resolveAccountIdForConfigure,
   setTopLevelChannelDmPolicyWithAllowFrom,
-} from "openclaw/plugin-sdk/bluebubbles";
+} from "jarvis/plugin-sdk/bluebubbles";
 import {
   listBlueBubblesAccountIds,
   resolveBlueBubblesAccount,

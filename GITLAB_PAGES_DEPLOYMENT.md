@@ -102,6 +102,7 @@ build:check:
 ### For GitLab.com
 
 1. **Push the `.gitlab-ci.yml` file:**
+
    ```bash
    git add .gitlab-ci.yml
    git commit -m "Add GitLab Pages configuration"
@@ -142,6 +143,7 @@ If GitLab Pages is not enabled on your instance:
    ```
 
    Reconfigure GitLab:
+
    ```bash
    sudo gitlab-ctl reconfigure
    sudo gitlab-ctl restart
@@ -260,10 +262,12 @@ curl -fsSL https://jarvis.allyapp.cc/install.sh | bash
 If you want separate deployments:
 
 ### Project 1: jarvis (main repo)
+
 - Deploys docs to `docs.jarvis.allyapp.cc`
 - `.gitlab-ci.yml` deploys `/docs` folder
 
 ### Project 2: jarvis-installer
+
 - Deploys install script to `jarvis.allyapp.cc`
 - Contains only `install.sh` and `CNAME`
 
@@ -278,7 +282,7 @@ cd ../jarvis-installer
 git init
 
 # Add install script
-cp ../openclaw/install.sh .
+cp ../jarvis/install.sh .
 echo "jarvis.allyapp.cc" > CNAME
 
 # Create .gitlab-ci.yml
@@ -314,20 +318,29 @@ Create `docs/404.html`:
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>404 - Page Not Found | Jarvis</title>
-  <style>
-    body { font-family: system-ui; text-align: center; padding: 50px; }
-    h1 { color: #ff4d4d; }
-    a { color: #ff4d4d; text-decoration: none; }
-  </style>
-</head>
-<body>
-  <h1>404 - Page Not Found</h1>
-  <p>The page you're looking for doesn't exist.</p>
-  <a href="/">← Back to Documentation</a>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>404 - Page Not Found | Jarvis</title>
+    <style>
+      body {
+        font-family: system-ui;
+        text-align: center;
+        padding: 50px;
+      }
+      h1 {
+        color: #ff4d4d;
+      }
+      a {
+        color: #ff4d4d;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>404 - Page Not Found</h1>
+    <p>The page you're looking for doesn't exist.</p>
+    <a href="/">← Back to Documentation</a>
+  </body>
 </html>
 ```
 
@@ -346,21 +359,24 @@ Create `public/_redirects`:
 ### Pipeline Fails
 
 **Check pipeline logs:**
+
 1. Go to CI/CD → Pipelines
 2. Click on failed pipeline
 3. Click on failed job
 4. Read error messages
 
 **Common issues:**
+
 - Missing `public/` directory
 - Artifacts not properly configured
 - Permissions issues
 
 **Fix:**
+
 ```yaml
 pages:
   script:
-    - mkdir -p public  # Ensure directory exists
+    - mkdir -p public # Ensure directory exists
     - cp -r docs/* public/ || echo "No docs to copy"
 ```
 
@@ -379,6 +395,7 @@ pages:
 ### Custom Domain Not Working
 
 1. **Verify DNS:**
+
    ```bash
    dig docs.jarvis.allyapp.cc
    # Should return GitLab Pages IP or CNAME
@@ -406,6 +423,7 @@ If you want both `jarvis.allyapp.cc` AND `docs.jarvis.allyapp.cc`:
 1. **Add both domains in Settings → Pages → New Domain**
 
 2. **Configure DNS for both:**
+
    ```dns
    CNAME  jarvis        <username>.gitlab.io
    CNAME  docs.jarvis   <username>.gitlab.io
@@ -444,6 +462,7 @@ Set up monitoring for:
 7. ✅ Test deployment
 
 Your Jarvis docs and install script will be live at:
+
 - 📚 Docs: `https://docs.jarvis.allyapp.cc`
 - 📥 Install: `https://jarvis.allyapp.cc/install.sh`
 

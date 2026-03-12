@@ -130,10 +130,7 @@ export class SandboxCleanupManager {
   /**
    * Cleanup a specific container
    */
-  async cleanupContainer(
-    containerName: string,
-    options: { force?: boolean } = {},
-  ): Promise<void> {
+  async cleanupContainer(containerName: string, options: { force?: boolean } = {}): Promise<void> {
     logger.info("Cleaning up container", { name: containerName, force: options.force });
 
     try {
@@ -210,7 +207,7 @@ export class SandboxCleanupManager {
       await execDocker(["stop", "-t", String(timeoutSec), containerName], {
         allowFailure: true,
       });
-    } catch (err) {
+    } catch {
       logger.warn("Stop failed, forcing kill", { name: containerName });
       await execDocker(["kill", containerName], { allowFailure: true });
     }
@@ -239,14 +236,7 @@ export class SandboxCleanupManager {
    */
   private async listSandboxContainers(): Promise<Array<{ name: string; lastUsedMs: number }>> {
     const result = await execDocker(
-      [
-        "ps",
-        "-a",
-        "--filter",
-        "label=openclaw.sandboxBrowser=1",
-        "--format",
-        "{{.Names}}",
-      ],
+      ["ps", "-a", "--filter", "label=jarvis.sandboxBrowser=1", "--format", "{{.Names}}"],
       { allowFailure: true },
     );
 
@@ -282,7 +272,7 @@ export class SandboxCleanupManager {
       const updatedEntries = registry.entries.filter((e) => e.containerName !== containerName);
       await updateBrowserRegistry({
         entries: updatedEntries,
-      } as any);
+      });
     } catch (err) {
       logger.warn("Failed to update registry after cleanup", { error: String(err) });
     }

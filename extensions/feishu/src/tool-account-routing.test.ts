@@ -1,4 +1,4 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/feishu";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/feishu";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import { registerFeishuBitableTools } from "./bitable.js";
 import { registerFeishuDriveTools } from "./drive.js";

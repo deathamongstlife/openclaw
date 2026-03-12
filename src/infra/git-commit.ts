@@ -3,7 +3,7 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { resolveGitHeadPath } from "./git-root.js";
-import { resolveJarvisPackageRootSync } from "./openclaw-root.js";
+import { resolveJarvisPackageRootSync } from "./jarvis-root.js";
 
 const formatCommit = (value?: string | null) => {
   if (!value) {

@@ -6,7 +6,7 @@ import {
   formatAllowFromLowercase,
   mapAllowFromEntries,
   runPassiveAccountLifecycle,
-} from "openclaw/plugin-sdk/compat";
+} from "jarvis/plugin-sdk/compat";
 import {
   applyAccountNameToChannelSection,
   buildBaseChannelStatusSummary,
@@ -20,7 +20,7 @@ import {
   type ChannelPlugin,
   type JarvisConfig,
   type ChannelSetupInput,
-} from "openclaw/plugin-sdk/nextcloud-talk";
+} from "jarvis/plugin-sdk/nextcloud-talk";
 import {
   listNextcloudTalkAccountIds,
   resolveDefaultNextcloudTalkAccountId,

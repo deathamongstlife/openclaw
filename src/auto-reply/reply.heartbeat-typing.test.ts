@@ -19,7 +19,7 @@ vi.mock("../web/session.js", () => webMocks);
 import { getReplyFromConfig } from "./reply.js";
 
 const { withTempHome } = createTempHomeHarness({
-  prefix: "openclaw-typing-",
+  prefix: "jarvis-typing-",
   beforeEachCase: () => runEmbeddedPiAgentMock.mockClear(),
 });
 
@@ -46,7 +46,7 @@ describe("getReplyFromConfig typing (heartbeat)", () => {
   }
 
   beforeEach(() => {
-    vi.stubEnv("OPENCLAW_TEST_FAST", "1");
+    vi.stubEnv("JARVIS_TEST_FAST", "1");
   });
 
   it("starts typing for normal runs", async () => {

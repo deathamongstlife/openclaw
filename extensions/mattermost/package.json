@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/mattermost",
+  "name": "@jarvis/mattermost",
   "version": "2026.3.9",
   "description": "Jarvis Mattermost channel plugin",
   "type": "module",
@@ -7,7 +7,7 @@
     "ws": "^8.19.0",
     "zod": "^4.3.6"
   },
-  "openclaw": {
+  "jarvis": {
     "extensions": [
       "./index.ts"
     ],
@@ -21,7 +21,7 @@
       "order": 65
     },
     "install": {
-      "npmSpec": "@openclaw/mattermost",
+      "npmSpec": "@jarvis/mattermost",
       "localPath": "extensions/mattermost",
       "defaultChoice": "npm"
     }

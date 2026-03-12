@@ -343,7 +343,7 @@ export async function runConfigFile(opts: { runtime?: RuntimeEnv }) {
 
 export async function runConfigValidate(opts: { json?: boolean; runtime?: RuntimeEnv } = {}) {
   const runtime = opts.runtime ?? defaultRuntime;
-  let outputPath = CONFIG_PATH ?? "openclaw.json";
+  let outputPath = CONFIG_PATH ?? "jarvis.json";
 
   try {
     const snapshot = await readConfigFileSnapshot();
@@ -401,7 +401,7 @@ export function registerConfigCli(program: Command) {
     .addHelpText(
       "after",
       () =>
-        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/config", "docs.openclaw.ai/cli/config")}\n`,
+        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/config", "docs.jarvis.ai/cli/config")}\n`,
     )
     .option(
       "--section <section>",

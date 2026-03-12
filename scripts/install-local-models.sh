@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# OpenClaw Local Models Installation Script
+# Jarvis Local Models Installation Script
 # Automatically installs Ollama and sets up local AI models
 #
 
@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 # Configuration
 OLLAMA_URL="https://ollama.com"
 DEFAULT_MODEL="llama3.2:3b"
-OPENCLAW_CONFIG="${HOME}/.openclaw/config.json"
+JARVIS_CONFIG="${HOME}/.jarvis/config.json"
 
 # Helper functions
 log_info() {
@@ -227,27 +227,27 @@ test_model() {
   fi
 }
 
-# Configure OpenClaw
-configure_openclaw() {
+# Configure Jarvis
+configure_jarvis() {
   local model=$1
-  log_info "Configuring OpenClaw to use $model..."
+  log_info "Configuring Jarvis to use $model..."
 
-  # Check if OpenClaw is installed
-  if ! command -v openclaw &> /dev/null; then
-    log_warning "OpenClaw CLI not found"
-    log_info "Install OpenClaw first: npm install -g openclaw"
+  # Check if Jarvis is installed
+  if ! command -v jarvis &> /dev/null; then
+    log_warning "Jarvis CLI not found"
+    log_info "Install Jarvis first: npm install -g jarvis"
     log_info "Then configure manually with: jarvis config set agents.defaults.model ollama/$model"
     return 0
   fi
 
   # Create config directory if it doesn't exist
-  mkdir -p "$(dirname "$OPENCLAW_CONFIG")"
+  mkdir -p "$(dirname "$JARVIS_CONFIG")"
 
   # Set default model
   if jarvis config set agents.defaults.model "ollama/$model" 2>/dev/null; then
-    log_success "OpenClaw configured to use $model"
+    log_success "Jarvis configured to use $model"
   else
-    log_warning "Failed to configure OpenClaw automatically"
+    log_warning "Failed to configure Jarvis automatically"
     log_info "Configure manually with: jarvis config set agents.defaults.model ollama/$model"
   fi
 }
@@ -266,7 +266,7 @@ list_models() {
 main() {
   echo ""
   echo "╔═══════════════════════════════════════════════════════════╗"
-  echo "║         OpenClaw Local Models Installer                  ║"
+  echo "║         Jarvis Local Models Installer                  ║"
   echo "║         Automated AI Model Setup                         ║"
   echo "╚═══════════════════════════════════════════════════════════╝"
   echo ""
@@ -367,8 +367,8 @@ main() {
     test_model "$RECOMMENDED_MODEL"
   fi
 
-  # Step 8: Configure OpenClaw
-  configure_openclaw "$RECOMMENDED_MODEL"
+  # Step 8: Configure Jarvis
+  configure_jarvis "$RECOMMENDED_MODEL"
 
   # Step 9: Summary
   echo ""
@@ -379,12 +379,12 @@ main() {
   log_success "Local models are ready to use!"
   echo ""
   log_info "Quick Start:"
-  echo "  • Use OpenClaw CLI: jarvis message send 'Hello!'"
+  echo "  • Use Jarvis CLI: jarvis message send 'Hello!'"
   echo "  • Pull more models: ollama pull llama3.3:70b"
   echo "  • List models: ollama list"
   echo "  • Start Ollama: ollama serve"
   echo ""
-  log_info "Documentation: https://docs.openclaw.ai/local-models"
+  log_info "Documentation: https://docs.jarvis.ai/local-models"
   echo ""
 }
 

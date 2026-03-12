@@ -176,8 +176,8 @@ function buildDocsSection(params: { docsPath?: string; isMinimal: boolean; readT
   return [
     "## Documentation",
     `Jarvis docs: ${docsPath}`,
-    "Mirror: https://docs.openclaw.ai",
-    "Source: https://github.com/openclaw/openclaw",
+    "Mirror: https://docs.jarvis.ai",
+    "Source: https://github.com/jarvis/jarvis",
     "Community: https://discord.com/invite/clawd",
     "Find new skills: https://clawhub.com",
     "For Jarvis behavior, commands, config, or architecture: consult local docs first.",

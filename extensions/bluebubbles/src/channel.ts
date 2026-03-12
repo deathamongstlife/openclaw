@@ -2,7 +2,7 @@ import type {
   ChannelAccountSnapshot,
   ChannelPlugin,
   JarvisConfig,
-} from "openclaw/plugin-sdk/bluebubbles";
+} from "jarvis/plugin-sdk/bluebubbles";
 import {
   applyAccountNameToChannelSection,
   buildChannelConfigSchema,
@@ -17,14 +17,14 @@ import {
   resolveBlueBubblesGroupRequireMention,
   resolveBlueBubblesGroupToolPolicy,
   setAccountEnabledInConfigSection,
-} from "openclaw/plugin-sdk/bluebubbles";
+} from "jarvis/plugin-sdk/bluebubbles";
 import {
   buildAccountScopedDmSecurityPolicy,
   collectOpenGroupPolicyRestrictSendersWarnings,
   createAccountStatusSink,
   formatNormalizedAllowFromEntries,
   mapAllowFromEntries,
-} from "openclaw/plugin-sdk/compat";
+} from "jarvis/plugin-sdk/compat";
 import {
   listBlueBubblesAccountIds,
   type ResolvedBlueBubblesAccount,

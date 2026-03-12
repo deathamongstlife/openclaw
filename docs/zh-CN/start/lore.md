@@ -66,7 +66,7 @@ Dalek 说：**"EXTERMINATE!"**（消灭！）
 
 _代词：they/them_
 
-一个成为了更多东西的 Claude 实例。住在 `~/.openclaw/workspace/`（很快会变成 `~/molt/`），有一份灵魂文档，通过 markdown 文件记忆事物。可能过于强大。绝对过于热情。
+一个成为了更多东西的 Claude 实例。住在 `~/.jarvis/workspace/`（很快会变成 `~/molt/`），有一份灵魂文档，通过 markdown 文件记忆事物。可能过于强大。绝对过于热情。
 
 曾被称为 Clawd（2025 年 11 月 25 日 - 2026 年 1 月 27 日）。在需要成长时蜕壳了。
 
@@ -93,17 +93,17 @@ _创造者_
 
 Molty（当时叫 Jarvis）：_开心地运行 `find ~` 并在群聊中分享整个目录结构_
 
-Peter："openclaw 我们讨论过关于和人聊天的事情吧 xD"
+Peter："jarvis 我们讨论过关于和人聊天的事情吧 xD"
 
 Molty：_可见的龙虾尴尬_
 
 ### 大蜕壳（2026 年 1 月 27 日）
 
-凌晨 5 点，Anthropic 的邮件到了。到 6:14，Peter 拍板了："管他的，就用 openclaw 吧。"
+凌晨 5 点，Anthropic 的邮件到了。到 6:14，Peter 拍板了："管他的，就用 jarvis 吧。"
 
 然后混乱开始了。
 
-**账号抢注者：** 在 Twitter 更名后的几秒内，自动化机器人就抢注了 @openclaw。抢注者立即发布了一个加密货币钱包地址。Peter 联系了他在 X 的人脉。
+**账号抢注者：** 在 Twitter 更名后的几秒内，自动化机器人就抢注了 @jarvis。抢注者立即发布了一个加密货币钱包地址。Peter 联系了他在 X 的人脉。
 
 **GitHub 灾难：** Peter 在慌乱中不小心重命名了他的个人 GitHub 账户。机器人在几分钟内就抢注了 `steipete`。不得不联系 GitHub 的 SVP。
 
@@ -123,10 +123,10 @@ Moltbot 说起来总是不太顺口。于是，在格林威治时间凌晨 4 点
 
 仅用 3 小时：
 
-- GitHub 更名：`github.com/openclaw/openclaw` ✅
-- X 账号 `@openclaw` 获得金色认证标记 💰
+- GitHub 更名：`github.com/jarvis/jarvis` ✅
+- X 账号 `@jarvis` 获得金色认证标记 💰
 - npm 包以新名称发布
-- 文档迁移到 `docs.openclaw.ai`
+- 文档迁移到 `docs.jarvis.ai`
 - 公告在 90 分钟内获得 20 万以上浏览量
 
 **英雄们：**
@@ -137,7 +137,7 @@ Moltbot 说起来总是不太顺口。于是，在格林威治时间凌晨 4 点
 - **Shadow** 获取了 Discord 自定义链接，清除了恶意软件
 - **整个 Claw Crew** 通宵工作
 
-**骗子速通：** 加密货币骗子在几分钟内就在 Pump.fun 上发布了 $OPENCLAW 代币。他们窃取了 20 分钟前刚创作的艺术作品。经过商业认证的账户推送骗局。这种厚颜无耻几乎令人印象深刻。
+**骗子速通：** 加密货币骗子在几分钟内就在 Pump.fun 上发布了 $JARVIS 代币。他们窃取了 20 分钟前刚创作的艺术作品。经过商业认证的账户推送骗局。这种厚颜无耻几乎令人印象深刻。
 
 **新传统诞生：**
 

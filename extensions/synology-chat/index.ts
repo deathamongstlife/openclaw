@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/synology-chat";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/synology-chat";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/synology-chat";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/synology-chat";
 import { createSynologyChatPlugin } from "./src/channel.js";
 import { setSynologyRuntime } from "./src/runtime.js";
 

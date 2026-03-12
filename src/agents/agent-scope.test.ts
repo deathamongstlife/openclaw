@@ -33,7 +33,7 @@ describe("resolveAgentConfig", () => {
   it("should return undefined when agent id does not exist", () => {
     const cfg: JarvisConfig = {
       agents: {
-        list: [{ id: "main", workspace: "~/openclaw" }],
+        list: [{ id: "main", workspace: "~/jarvis" }],
       },
     };
     const result = resolveAgentConfig(cfg, "nonexistent");
@@ -47,8 +47,8 @@ describe("resolveAgentConfig", () => {
           {
             id: "main",
             name: "Main Agent",
-            workspace: "~/openclaw",
-            agentDir: "~/.openclaw/agents/main",
+            workspace: "~/jarvis",
+            agentDir: "~/.jarvis/agents/main",
             model: "anthropic/claude-opus-4",
           },
         ],
@@ -57,8 +57,8 @@ describe("resolveAgentConfig", () => {
     const result = resolveAgentConfig(cfg, "main");
     expect(result).toEqual({
       name: "Main Agent",
-      workspace: "~/openclaw",
-      agentDir: "~/.openclaw/agents/main",
+      workspace: "~/jarvis",
+      agentDir: "~/.jarvis/agents/main",
       model: "anthropic/claude-opus-4",
       identity: undefined,
       groupChat: undefined,
@@ -326,7 +326,7 @@ describe("resolveAgentConfig", () => {
         list: [
           {
             id: "work",
-            workspace: "~/openclaw-work",
+            workspace: "~/jarvis-work",
             sandbox: {
               mode: "all",
               scope: "agent",
@@ -354,7 +354,7 @@ describe("resolveAgentConfig", () => {
         list: [
           {
             id: "restricted",
-            workspace: "~/openclaw-restricted",
+            workspace: "~/jarvis-restricted",
             tools: {
               allow: ["read"],
               deny: ["exec", "write", "edit"],
@@ -384,7 +384,7 @@ describe("resolveAgentConfig", () => {
         list: [
           {
             id: "family",
-            workspace: "~/openclaw-family",
+            workspace: "~/jarvis-family",
             sandbox: {
               mode: "all",
               scope: "agent",
@@ -405,37 +405,37 @@ describe("resolveAgentConfig", () => {
   it("should normalize agent id", () => {
     const cfg: JarvisConfig = {
       agents: {
-        list: [{ id: "main", workspace: "~/openclaw" }],
+        list: [{ id: "main", workspace: "~/jarvis" }],
       },
     };
     // Should normalize to "main" (default)
     const result = resolveAgentConfig(cfg, "");
     expect(result).toBeDefined();
-    expect(result?.workspace).toBe("~/openclaw");
+    expect(result?.workspace).toBe("~/jarvis");
   });
 
-  it("uses OPENCLAW_HOME for default agent workspace", () => {
-    const home = path.join(path.sep, "srv", "openclaw-home");
-    vi.stubEnv("OPENCLAW_HOME", home);
+  it("uses JARVIS_HOME for default agent workspace", () => {
+    const home = path.join(path.sep, "srv", "jarvis-home");
+    vi.stubEnv("JARVIS_HOME", home);
 
     const workspace = resolveAgentWorkspaceDir({} as JarvisConfig, "main");
-    expect(workspace).toBe(path.join(path.resolve(home), ".openclaw", "workspace"));
+    expect(workspace).toBe(path.join(path.resolve(home), ".jarvis", "workspace"));
   });
 
-  it("uses OPENCLAW_HOME for default agentDir", () => {
-    const home = path.join(path.sep, "srv", "openclaw-home");
-    vi.stubEnv("OPENCLAW_HOME", home);
-    // Clear state dir so it falls back to OPENCLAW_HOME
-    vi.stubEnv("OPENCLAW_STATE_DIR", "");
+  it("uses JARVIS_HOME for default agentDir", () => {
+    const home = path.join(path.sep, "srv", "jarvis-home");
+    vi.stubEnv("JARVIS_HOME", home);
+    // Clear state dir so it falls back to JARVIS_HOME
+    vi.stubEnv("JARVIS_STATE_DIR", "");
 
     const agentDir = resolveAgentDir({} as JarvisConfig, "main");
-    expect(agentDir).toBe(path.join(path.resolve(home), ".openclaw", "agents", "main", "agent"));
+    expect(agentDir).toBe(path.join(path.resolve(home), ".jarvis", "agents", "main", "agent"));
   });
 });
 
 describe("resolveAgentIdByWorkspacePath", () => {
   it("returns the most specific workspace match for a directory", () => {
-    const workspaceRoot = `/tmp/openclaw-agent-scope-${Date.now()}-root`;
+    const workspaceRoot = `/tmp/jarvis-agent-scope-${Date.now()}-root`;
     const opsWorkspace = `${workspaceRoot}/projects/ops`;
     const cfg: JarvisConfig = {
       agents: {
@@ -450,7 +450,7 @@ describe("resolveAgentIdByWorkspacePath", () => {
   });
 
   it("returns undefined when directory has no matching workspace", () => {
-    const workspaceRoot = `/tmp/openclaw-agent-scope-${Date.now()}-root`;
+    const workspaceRoot = `/tmp/jarvis-agent-scope-${Date.now()}-root`;
     const cfg: JarvisConfig = {
       agents: {
         list: [
@@ -461,12 +461,12 @@ describe("resolveAgentIdByWorkspacePath", () => {
     };
 
     expect(
-      resolveAgentIdByWorkspacePath(cfg, `/tmp/openclaw-agent-scope-${Date.now()}-unrelated`),
+      resolveAgentIdByWorkspacePath(cfg, `/tmp/jarvis-agent-scope-${Date.now()}-unrelated`),
     ).toBeUndefined();
   });
 
   it("matches workspace paths through symlink aliases", () => {
-    const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-agent-scope-"));
+    const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "jarvis-agent-scope-"));
     const realWorkspaceRoot = path.join(tempRoot, "real-root");
     const realOpsWorkspace = path.join(realWorkspaceRoot, "projects", "ops");
     const aliasWorkspaceRoot = path.join(tempRoot, "alias-root");
@@ -501,7 +501,7 @@ describe("resolveAgentIdByWorkspacePath", () => {
 
 describe("resolveAgentIdsByWorkspacePath", () => {
   it("returns matching workspaces ordered by specificity", () => {
-    const workspaceRoot = `/tmp/openclaw-agent-scope-${Date.now()}-root`;
+    const workspaceRoot = `/tmp/jarvis-agent-scope-${Date.now()}-root`;
     const opsWorkspace = `${workspaceRoot}/projects/ops`;
     const opsDevWorkspace = `${opsWorkspace}/dev`;
     const cfg: JarvisConfig = {

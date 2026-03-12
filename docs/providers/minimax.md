@@ -52,7 +52,7 @@ You will be prompted to select an endpoint:
 - **Global** - International users (`api.minimax.io`)
 - **CN** - Users in China (`api.minimaxi.com`)
 
-See [MiniMax OAuth plugin README](https://github.com/openclaw/openclaw/tree/main/extensions/minimax-portal-auth) for details.
+See [MiniMax OAuth plugin README](https://github.com/jarvis/jarvis/tree/main/extensions/minimax-portal-auth) for details.
 
 ### MiniMax M2.5 (API key)
 
@@ -130,7 +130,7 @@ Example below uses Opus as a concrete primary; swap to your preferred latest-gen
 We have seen strong results with MiniMax M2.5 on powerful hardware (e.g. a
 desktop/server) using LM Studio's local server.
 
-Configure manually via `openclaw.json`:
+Configure manually via `jarvis.json`:
 
 ```json5
 {

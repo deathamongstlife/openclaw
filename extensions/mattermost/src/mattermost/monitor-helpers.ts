@@ -2,8 +2,8 @@ import {
   formatInboundFromLabel as formatInboundFromLabelShared,
   resolveThreadSessionKeys as resolveThreadSessionKeysShared,
   type JarvisConfig,
-} from "openclaw/plugin-sdk/mattermost";
-export { createDedupeCache, rawDataToString } from "openclaw/plugin-sdk/mattermost";
+} from "jarvis/plugin-sdk/mattermost";
+export { createDedupeCache, rawDataToString } from "jarvis/plugin-sdk/mattermost";
 
 export type ResponsePrefixContext = {
   model?: string;

@@ -1,16 +1,18 @@
 # Jarvis Documentation Deployment Guide
 
-This guide explains how to deploy Jarvis documentation to `docs.jarvis.allyapp.cc` following OpenClaw's documentation pattern.
+This guide explains how to deploy Jarvis documentation to `docs.jarvis.allyapp.cc` following Jarvis's documentation pattern.
 
 ## Overview
 
 The Jarvis documentation will be hosted at:
+
 - **Docs URL:** `https://docs.jarvis.allyapp.cc`
 - **Install Script:** `https://jarvis.allyapp.cc/install.sh`
 
 ## Option 1: GitHub Pages (Recommended)
 
 ### Prerequisites
+
 - GitHub repository: `deathamongstlife/jarvis`
 - Domain: `jarvis.allyapp.cc` with DNS access
 
@@ -26,6 +28,7 @@ The Jarvis documentation will be hosted at:
 ### Step 2: Configure Custom Domain
 
 1. In GitHub Pages settings, add custom domain:
+
    ```
    docs.jarvis.allyapp.cc
    ```
@@ -53,6 +56,7 @@ TTL: 3600
 ### Step 4: Verify CNAME File
 
 The `docs/CNAME` file should contain:
+
 ```
 docs.jarvis.allyapp.cc
 ```
@@ -64,6 +68,7 @@ docs.jarvis.allyapp.cc
 Create a separate repo or use the same repo with a different branch for `jarvis.allyapp.cc`:
 
 **Option A: Same Repo, Different Branch**
+
 ```bash
 # Create gh-pages branch for root domain
 git checkout --orphan gh-pages
@@ -76,16 +81,18 @@ git push origin gh-pages
 ```
 
 Then in GitHub Pages settings:
+
 - Set source branch to `gh-pages`
 - Add custom domain: `jarvis.allyapp.cc`
 
 **Option B: Separate Repo**
 Create a new repo `jarvis-installer`:
+
 ```bash
 mkdir jarvis-installer
 cd jarvis-installer
 echo "jarvis.allyapp.cc" > CNAME
-cp /path/to/openclaw/install.sh .
+cp /path/to/jarvis/install.sh .
 git init
 git add .
 git commit -m "Initial commit"
@@ -95,9 +102,9 @@ git push -u origin main
 
 Enable GitHub Pages for that repo with custom domain `jarvis.allyapp.cc`.
 
-## Option 2: Mintlify (Like OpenClaw)
+## Option 2: Mintlify (Like Jarvis)
 
-OpenClaw appears to use Mintlify for documentation hosting. To use Mintlify:
+Jarvis appears to use Mintlify for documentation hosting. To use Mintlify:
 
 ### Step 1: Install Mintlify
 
@@ -148,11 +155,7 @@ Create `docs/mint.json`:
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": [
-        "install/getting-started",
-        "start/tutorial",
-        "start/faq"
-      ]
+      "pages": ["install/getting-started", "start/tutorial", "start/faq"]
     },
     {
       "group": "Channels",
@@ -167,11 +170,7 @@ Create `docs/mint.json`:
     },
     {
       "group": "Configuration",
-      "pages": [
-        "config/reference",
-        "config/models",
-        "config/routing"
-      ]
+      "pages": ["config/reference", "config/models", "config/routing"]
     }
   ],
   "footerSocials": {
@@ -189,6 +188,7 @@ Create `docs/mint.json`:
 4. Mintlify will provide DNS records to add
 
 Typical Mintlify DNS setup:
+
 ```dns
 Type: CNAME
 Name: docs.jarvis.allyapp.cc
@@ -201,7 +201,8 @@ TTL: 3600
 Update all doc references in the codebase to point to the new domain.
 
 Already done by the rebranding script:
-- ✅ `docs.openclaw.ai` → `docs.jarvis.allyapp.cc`
+
+- ✅ `docs.jarvis.ai` → `docs.jarvis.allyapp.cc`
 
 ## Option 3: Static Site Deployment (Netlify/Vercel)
 
@@ -226,6 +227,7 @@ Already done by the rebranding script:
    - Netlify provides DNS records
 
 3. **DNS Configuration:**
+
 ```dns
 Type: CNAME
 Name: docs.jarvis.allyapp.cc
@@ -250,6 +252,7 @@ TTL: 3600
    - Set custom domain: `docs.jarvis.allyapp.cc`
 
 3. **DNS:**
+
 ```dns
 Type: CNAME
 Name: docs.jarvis.allyapp.cc
@@ -361,12 +364,14 @@ server {
 ## Recommended Approach
 
 **For Quick Setup:** Use **GitHub Pages** (Option 1)
+
 - ✅ Free
 - ✅ Easy to configure
 - ✅ Automatic HTTPS
 - ✅ Good performance with CDN
 
 **For Professional Documentation:** Use **Mintlify** (Option 2)
+
 - ✅ Beautiful UI
 - ✅ Search functionality
 - ✅ Versioning support
@@ -403,6 +408,7 @@ sudo certbot --nginx -d jarvis.allyapp.cc -d docs.jarvis.allyapp.cc
 ## Monitoring
 
 Set up monitoring for:
+
 - [ ] SSL certificate expiration
 - [ ] DNS resolution
 - [ ] Website uptime
@@ -420,6 +426,7 @@ Set up monitoring for:
 ## Troubleshooting
 
 ### DNS not resolving
+
 ```bash
 # Check DNS propagation
 dig docs.jarvis.allyapp.cc
@@ -430,11 +437,13 @@ cat docs/CNAME
 ```
 
 ### 404 on GitHub Pages
+
 - Verify CNAME file exists in `/docs` directory
 - Check GitHub Pages settings
 - Wait for deployment (can take 5-10 minutes)
 
 ### SSL issues
+
 - GitHub Pages: Automatic after DNS verification
 - Custom server: Run certbot
 - Mintlify/Netlify/Vercel: Automatic

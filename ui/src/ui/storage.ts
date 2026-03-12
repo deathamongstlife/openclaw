@@ -1,6 +1,6 @@
-const KEY = "openclaw.control.settings.v1";
-const LEGACY_TOKEN_SESSION_KEY = "openclaw.control.token.v1";
-const TOKEN_SESSION_KEY_PREFIX = "openclaw.control.token.v1:";
+const KEY = "jarvis.control.settings.v1";
+const LEGACY_TOKEN_SESSION_KEY = "jarvis.control.token.v1";
+const TOKEN_SESSION_KEY_PREFIX = "jarvis.control.token.v1:";
 
 type PersistedUiSettings = Omit<UiSettings, "token"> & { token?: never };
 
@@ -93,8 +93,8 @@ export function loadSettings(): UiSettings {
     const proto = location.protocol === "https:" ? "wss" : "ws";
     const configured =
       typeof window !== "undefined" &&
-      typeof window.__OPENCLAW_CONTROL_UI_BASE_PATH__ === "string" &&
-      window.__OPENCLAW_CONTROL_UI_BASE_PATH__.trim();
+      typeof window.__JARVIS_CONTROL_UI_BASE_PATH__ === "string" &&
+      window.__JARVIS_CONTROL_UI_BASE_PATH__.trim();
     const basePath = configured
       ? normalizeBasePath(configured)
       : inferBasePathFromPathname(location.pathname);

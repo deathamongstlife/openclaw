@@ -71,10 +71,10 @@ curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
 apt install -y nodejs
 
 # Install Jarvis
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://jarvis.ai/install.sh | bash
 
 # Verify
-openclaw --version
+jarvis --version
 ```
 
 ## 4) Run Onboarding
@@ -198,13 +198,13 @@ htop
 
 All state lives in:
 
-- `~/.openclaw/` — config, credentials, session data
-- `~/.openclaw/workspace/` — workspace (SOUL.md, memory, etc.)
+- `~/.jarvis/` — config, credentials, session data
+- `~/.jarvis/workspace/` — workspace (SOUL.md, memory, etc.)
 
 These survive reboots. Back them up periodically:
 
 ```bash
-tar -czvf openclaw-backup.tar.gz ~/.openclaw ~/.openclaw/workspace
+tar -czvf jarvis-backup.tar.gz ~/.jarvis ~/.jarvis/workspace
 ```
 
 ---
@@ -236,7 +236,7 @@ For the full setup guide, see [Oracle Cloud](/platforms/oracle). For signup tips
 ```bash
 jarvis gateway status
 jarvis doctor --non-interactive
-journalctl -u openclaw --no-pager -n 50
+journalctl -u jarvis --no-pager -n 50
 ```
 
 ### Port already in use

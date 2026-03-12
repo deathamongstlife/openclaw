@@ -49,5 +49,5 @@ Use one of these (all supported):
 
 The service target depends on OS:
 
-- macOS: LaunchAgent (`ai.openclaw.gateway` or `ai.openclaw.<profile>`; legacy `com.openclaw.*`)
+- macOS: LaunchAgent (`ai.jarvis.gateway` or `ai.jarvis.<profile>`; legacy `com.jarvis.*`)
 - Linux/WSL2: systemd user service (`jarvis-gateway[-<profile>].service`)

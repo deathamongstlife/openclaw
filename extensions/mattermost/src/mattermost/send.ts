@@ -1,4 +1,4 @@
-import { loadOutboundMediaFromUrl, type JarvisConfig } from "openclaw/plugin-sdk/mattermost";
+import { loadOutboundMediaFromUrl, type JarvisConfig } from "jarvis/plugin-sdk/mattermost";
 import { getMattermostRuntime } from "../runtime.js";
 import { resolveMattermostAccount } from "./accounts.js";
 import {

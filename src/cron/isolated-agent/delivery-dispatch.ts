@@ -157,7 +157,7 @@ function isTransientDirectCronDeliveryError(error: unknown): boolean {
 }
 
 function resolveDirectCronRetryDelaysMs(): readonly number[] {
-  return process.env.OPENCLAW_TEST_FAST === "1" ? [8, 16, 32] : [5_000, 10_000, 20_000];
+  return process.env.JARVIS_TEST_FAST === "1" ? [8, 16, 32] : [5_000, 10_000, 20_000];
 }
 
 async function retryTransientDirectCronDelivery<T>(params: {

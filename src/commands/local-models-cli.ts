@@ -2,11 +2,10 @@
  * CLI commands for local model management.
  */
 
-import { Command } from "commander";
 import chalk from "chalk";
+import { Command } from "commander";
 import {
   getSystemInfo,
-  getModelRecommendations,
   installModel,
   uninstallModel,
   listInstalledModels,
@@ -15,28 +14,18 @@ import {
   LOCAL_MODEL_CATALOG,
   type ModelInstallationProgress,
 } from "../agents/local-models/index.js";
-import { createSubsystemLogger } from "../logging/subsystem.js";
-
-const log = createSubsystemLogger("local-models-cli");
 
 /**
  * Format bytes to human-readable size.
  */
 function formatBytes(bytes: number): string {
-  if (bytes === 0) return "0 B";
+  if (bytes === 0) {
+    return "0 B";
+  }
   const k = 1024;
   const sizes = ["B", "KB", "MB", "GB", "TB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return `${Number.parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
-}
-
-/**
- * Format duration in milliseconds to human-readable time.
- */
-function formatDuration(ms: number): string {
-  if (ms < 1000) return `${ms}ms`;
-  if (ms < 60000) return `${(ms / 1000).toFixed(1)}s`;
-  return `${(ms / 60000).toFixed(1)}m`;
 }
 
 /**
@@ -75,7 +64,7 @@ function showProgress(progress: ModelInstallationProgress): void {
 async function infoCommand(): Promise<void> {
   console.log(chalk.blue.bold("\n🖥️  System Information\n"));
 
-  const { resources, formattedResources, recommendations, installedModels } = await getSystemInfo();
+  const { formattedResources, recommendations, installedModels } = await getSystemInfo();
 
   console.log(formattedResources);
   console.log();

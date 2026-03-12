@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/tlon";
+import type { JarvisConfig } from "jarvis/plugin-sdk/tlon";
 
 export type TlonResolvedAccount = {
   accountId: string;

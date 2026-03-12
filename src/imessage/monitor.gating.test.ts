@@ -19,7 +19,7 @@ function baseCfg(): JarvisConfig {
     },
     session: { mainKey: "main" },
     messages: {
-      groupChat: { mentionPatterns: ["@openclaw"] },
+      groupChat: { mentionPatterns: ["@jarvis"] },
     },
   } as unknown as JarvisConfig;
 }

@@ -7,7 +7,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 async function makeTempDir(label: string): Promise<string> {
-  return fs.mkdtemp(path.join(os.tmpdir(), `openclaw-${label}-`));
+  return fs.mkdtemp(path.join(os.tmpdir(), `jarvis-${label}-`));
 }
 
 async function makeFakeGitRepo(
@@ -194,11 +194,11 @@ describe("git commit resolution", () => {
       { cwd: hostRepo },
     );
 
-    const packageRoot = path.join(hostRepo, "node_modules", "openclaw");
+    const packageRoot = path.join(hostRepo, "node_modules", "jarvis");
     await fs.mkdir(path.join(packageRoot, "dist"), { recursive: true });
     await fs.writeFile(
       path.join(packageRoot, "package.json"),
-      JSON.stringify({ name: "openclaw", version: "2026.3.9" }),
+      JSON.stringify({ name: "jarvis", version: "2026.3.9" }),
       "utf-8",
     );
     const moduleUrl = pathToFileURL(path.join(packageRoot, "dist", "entry.js")).href;

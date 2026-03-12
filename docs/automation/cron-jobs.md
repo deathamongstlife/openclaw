@@ -22,7 +22,7 @@ Troubleshooting: [/automation/troubleshooting](/automation/troubleshooting)
 ## TL;DR
 
 - Cron runs **inside the Gateway** (not inside the model).
-- Jobs persist under `~/.openclaw/cron/` so restarts don’t lose schedules.
+- Jobs persist under `~/.jarvis/cron/` so restarts don’t lose schedules.
 - Two execution styles:
   - **Main session**: enqueue a system event, then run on the next heartbeat.
   - **Isolated**: run a dedicated agent turn in `cron:<jobId>`, with delivery (announce by default or none).
@@ -69,7 +69,7 @@ For the canonical JSON shapes and examples, see [JSON schema for tool calls](/au
 
 ## Where cron jobs are stored
 
-Cron jobs are persisted on the Gateway host at `~/.openclaw/cron/jobs.json` by default.
+Cron jobs are persisted on the Gateway host at `~/.jarvis/cron/jobs.json` by default.
 The Gateway loads the file into memory and writes it back on changes, so manual edits
 are only safe when the Gateway is stopped. Prefer `jarvis cron add/edit` or the cron
 tool call API for changes.
@@ -360,8 +360,8 @@ Notes:
 
 ## Storage & history
 
-- Job store: `~/.openclaw/cron/jobs.json` (Gateway-managed JSON).
-- Run history: `~/.openclaw/cron/runs/<jobId>.jsonl` (JSONL, auto-pruned by size and line count).
+- Job store: `~/.jarvis/cron/jobs.json` (Gateway-managed JSON).
+- Run history: `~/.jarvis/cron/runs/<jobId>.jsonl` (JSONL, auto-pruned by size and line count).
 - Isolated cron run sessions in `sessions.json` are pruned by `cron.sessionRetention` (default `24h`; set `false` to disable).
 - Override store path: `cron.store` in config.
 
@@ -404,7 +404,7 @@ Configure `cron.retry` to override these defaults (see [Configuration](/automati
 {
   cron: {
     enabled: true, // default true
-    store: "~/.openclaw/cron/jobs.json",
+    store: "~/.jarvis/cron/jobs.json",
     maxConcurrentRuns: 1, // default 1
     // Optional: override retry policy for one-shot jobs
     retry: {
@@ -441,7 +441,7 @@ Webhook behavior:
 Disable cron entirely:
 
 - `cron.enabled: false` (config)
-- `OPENCLAW_SKIP_CRON=1` (env)
+- `JARVIS_SKIP_CRON=1` (env)
 
 ## Maintenance
 
@@ -661,7 +661,7 @@ jarvis system event --mode now --text "Next heartbeat: check battery."
 
 ### “Nothing runs”
 
-- Check cron is enabled: `cron.enabled` and `OPENCLAW_SKIP_CRON`.
+- Check cron is enabled: `cron.enabled` and `JARVIS_SKIP_CRON`.
 - Check the Gateway is running continuously (cron runs inside the Gateway process).
 - For `cron` schedules: confirm timezone (`--tz`) vs the host timezone.
 

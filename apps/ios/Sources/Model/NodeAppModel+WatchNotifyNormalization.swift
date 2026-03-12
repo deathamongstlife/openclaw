@@ -2,7 +2,7 @@ import Foundation
 import JarvisKit
 
 extension NodeAppModel {
-    static func normalizeWatchNotifyParams(_ params: OpenClawWatchNotifyParams) -> OpenClawWatchNotifyParams {
+    static func normalizeWatchNotifyParams(_ params: JarvisWatchNotifyParams) -> JarvisWatchNotifyParams {
         var normalized = params
         normalized.title = params.title.trimmingCharacters(in: .whitespacesAndNewlines)
         normalized.body = params.body.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -22,15 +22,15 @@ extension NodeAppModel {
     }
 
     static func normalizeWatchActions(
-        _ actions: [OpenClawWatchAction]?,
+        _ actions: [JarvisWatchAction]?,
         kind: String?,
-        promptId: String?) -> [OpenClawWatchAction]
+        promptId: String?) -> [JarvisWatchAction]
     {
-        let provided = (actions ?? []).compactMap { action -> OpenClawWatchAction? in
+        let provided = (actions ?? []).compactMap { action -> JarvisWatchAction? in
             let id = action.id.trimmingCharacters(in: .whitespacesAndNewlines)
             let label = action.label.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !id.isEmpty, !label.isEmpty else { return nil }
-            return OpenClawWatchAction(
+            return JarvisWatchAction(
                 id: id,
                 label: label,
                 style: self.trimmedOrNil(action.style))
@@ -47,24 +47,24 @@ extension NodeAppModel {
         let normalizedKind = kind?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ?? ""
         if normalizedKind.contains("approval") || normalizedKind.contains("approve") {
             return [
-                OpenClawWatchAction(id: "approve", label: "Approve"),
-                OpenClawWatchAction(id: "decline", label: "Decline", style: "destructive"),
-                OpenClawWatchAction(id: "open_phone", label: "Open iPhone"),
-                OpenClawWatchAction(id: "escalate", label: "Escalate"),
+                JarvisWatchAction(id: "approve", label: "Approve"),
+                JarvisWatchAction(id: "decline", label: "Decline", style: "destructive"),
+                JarvisWatchAction(id: "open_phone", label: "Open iPhone"),
+                JarvisWatchAction(id: "escalate", label: "Escalate"),
             ]
         }
 
         return [
-            OpenClawWatchAction(id: "done", label: "Done"),
-            OpenClawWatchAction(id: "snooze_10m", label: "Snooze 10m"),
-            OpenClawWatchAction(id: "open_phone", label: "Open iPhone"),
-            OpenClawWatchAction(id: "escalate", label: "Escalate"),
+            JarvisWatchAction(id: "done", label: "Done"),
+            JarvisWatchAction(id: "snooze_10m", label: "Snooze 10m"),
+            JarvisWatchAction(id: "open_phone", label: "Open iPhone"),
+            JarvisWatchAction(id: "escalate", label: "Escalate"),
         ]
     }
 
     static func normalizedWatchRisk(
-        _ risk: OpenClawWatchRisk?,
-        priority: OpenClawNotificationPriority?) -> OpenClawWatchRisk?
+        _ risk: JarvisWatchRisk?,
+        priority: JarvisNotificationPriority?) -> JarvisWatchRisk?
     {
         if let risk { return risk }
         switch priority {
@@ -80,8 +80,8 @@ extension NodeAppModel {
     }
 
     static func normalizedWatchPriority(
-        _ priority: OpenClawNotificationPriority?,
-        risk: OpenClawWatchRisk?) -> OpenClawNotificationPriority?
+        _ priority: JarvisNotificationPriority?,
+        risk: JarvisWatchRisk?) -> JarvisNotificationPriority?
     {
         if let priority { return priority }
         switch risk {

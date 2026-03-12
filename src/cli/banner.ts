@@ -62,8 +62,8 @@ export function formatCliBannerLine(version: string, options: BannerOptions = {}
   const commitLabel = commit ?? "unknown";
   const tagline = pickTagline({ ...options, mode: resolveTaglineMode(options) });
   const rich = options.richTty ?? isRich();
-  const title = "🦞 Jarvis";
-  const prefix = "🦞 ";
+  const title = "⚡ JARVIS";
+  const prefix = "⚡ ";
   const columns = options.columns ?? process.stdout.columns ?? 120;
   const plainBaseLine = `${title} ${version} (${commitLabel})`;
   const plainFullLine = tagline ? `${plainBaseLine} — ${tagline}` : plainBaseLine;
@@ -97,42 +97,44 @@ export function formatCliBannerLine(version: string, options: BannerOptions = {}
   return `${line1}\n${line2}`;
 }
 
-const LOBSTER_ASCII = [
-  "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
-  "██░▄▄▄░██░▄▄░██░▄▄▄██░▀██░██░▄▄▀██░████░▄▄▀██░███░██",
-  "██░███░██░▀▀░██░▄▄▄██░█░█░██░█████░████░▀▀░██░█░█░██",
-  "██░▀▀▀░██░█████░▀▀▀██░██▄░██░▀▀▄██░▀▀░█░██░██▄▀▄▀▄██",
-  "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀",
-  "                  🦞 OPENCLAW 🦞                    ",
+const JARVIS_ASCII = [
+  "╔════════════════════════════════════════════════════╗",
+  "║     ██╗ █████╗ ██████╗ ██╗   ██╗██╗███████╗      ║",
+  "║     ██║██╔══██╗██╔══██╗██║   ██║██║██╔════╝      ║",
+  "║     ██║███████║██████╔╝██║   ██║██║███████╗      ║",
+  "║██   ██║██╔══██║██╔══██╗╚██╗ ██╔╝██║╚════██║      ║",
+  "║╚█████╔╝██║  ██║██║  ██║ ╚████╔╝ ██║███████║      ║",
+  "║ ╚════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚══════╝      ║",
+  "║           Just A Rather Very Intelligent System    ║",
+  "╚════════════════════════════════════════════════════╝",
   " ",
 ];
 
 export function formatCliBannerArt(options: BannerOptions = {}): string {
   const rich = options.richTty ?? isRich();
   if (!rich) {
-    return LOBSTER_ASCII.join("\n");
+    return JARVIS_ASCII.join("\n");
   }
 
   const colorChar = (ch: string) => {
     if (ch === "█") {
       return theme.accentBright(ch);
     }
-    if (ch === "░") {
-      return theme.accentDim(ch);
-    }
-    if (ch === "▀") {
+    if (ch === "║" || ch === "═" || ch === "╔" || ch === "╗" || ch === "╚" || ch === "╝") {
       return theme.accent(ch);
     }
-    return theme.muted(ch);
+    if (ch === "╗" || ch === "╝" || ch === "╚" || ch === "╔") {
+      return theme.accentBright(ch);
+    }
+    return theme.info(ch);
   };
 
-  const colored = LOBSTER_ASCII.map((line) => {
-    if (line.includes("OPENCLAW")) {
+  const colored = JARVIS_ASCII.map((line) => {
+    if (line.includes("Just A Rather")) {
       return (
-        theme.muted("              ") +
-        theme.accent("🦞") +
-        theme.info(" OPENCLAW ") +
-        theme.accent("🦞")
+        theme.accent("║           ") +
+        theme.muted("Just A Rather Very Intelligent System    ") +
+        theme.accent("║")
       );
     }
     return splitGraphemes(line).map(colorChar).join("");

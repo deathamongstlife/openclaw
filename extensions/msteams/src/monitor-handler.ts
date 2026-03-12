@@ -1,4 +1,4 @@
-import type { JarvisConfig, RuntimeEnv } from "openclaw/plugin-sdk/msteams";
+import type { JarvisConfig, RuntimeEnv } from "jarvis/plugin-sdk/msteams";
 import type { MSTeamsConversationStore } from "./conversation-store.js";
 import { buildFileInfoCard, parseFileConsentInvoke, uploadToConsentUrl } from "./file-consent.js";
 import { normalizeMSTeamsConversationId } from "./inbound.js";

@@ -48,8 +48,8 @@ jarvis acp client
 # Point the spawned bridge at a remote Gateway
 jarvis acp client --server-args --url wss://gateway-host:18789 --token <token>
 
-# Override the server command (default: openclaw)
-jarvis acp client --server "node" --server-args openclaw.mjs acp --url ws://127.0.0.1:19001
+# Override the server command (default: jarvis)
+jarvis acp client --server "node" --server-args jarvis.mjs acp --url ws://127.0.0.1:19001
 ```
 
 ## 如何使用
@@ -96,7 +96,7 @@ jarvis acp --session agent:qa:bug-123
   "agent_servers": {
     "Jarvis ACP": {
       "type": "custom",
-      "command": "openclaw",
+      "command": "jarvis",
       "args": ["acp"],
       "env": {}
     }
@@ -111,7 +111,7 @@ jarvis acp --session agent:qa:bug-123
   "agent_servers": {
     "Jarvis ACP": {
       "type": "custom",
-      "command": "openclaw",
+      "command": "jarvis",
       "args": [
         "acp",
         "--url",
@@ -167,7 +167,7 @@ jarvis acp --session agent:qa:bug-123
 ### `acp client` 选项
 
 - `--cwd <dir>`：ACP 会话的工作目录。
-- `--server <command>`：ACP 服务器命令（默认：`openclaw`）。
+- `--server <command>`：ACP 服务器命令（默认：`jarvis`）。
 - `--server-args <args...>`：传递给 ACP 服务器的额外参数。
 - `--server-verbose`：启用 ACP 服务器的详细日志。
 - `--verbose, -v`：详细客户端日志。

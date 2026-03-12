@@ -144,7 +144,7 @@ else
     echo "Looking for repository..."
 
     # Common locations to check
-    for dir in "$ACTUAL_HOME/jarvis" "$ACTUAL_HOME/openclaw" "/opt/jarvis" "$(pwd)"; do
+    for dir in "$ACTUAL_HOME/jarvis" "$ACTUAL_HOME/jarvis" "/opt/jarvis" "$(pwd)"; do
         if [ -f "$dir/install.sh" ] && [ -d "$dir/docs" ]; then
             REPO_DIR="$dir"
             echo -e "${GREEN}✓${NC} Found repository at $REPO_DIR"

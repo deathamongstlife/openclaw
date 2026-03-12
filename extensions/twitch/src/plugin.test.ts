@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/twitch";
+import type { JarvisConfig } from "jarvis/plugin-sdk/twitch";
 import { describe, expect, it } from "vitest";
 import { twitchPlugin } from "./plugin.js";
 

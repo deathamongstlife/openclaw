@@ -23,7 +23,7 @@ import {
   type ConfigSchemaResponse,
 } from "../../config/schema.js";
 import { extractDeliveryInfo } from "../../config/sessions.js";
-import type { JarvisConfig } from "../../config/types.openclaw.js";
+import type { JarvisConfig } from "../../config/types.jarvis.js";
 import {
   formatDoctorNonInteractiveHint,
   type RestartSentinelPayload,

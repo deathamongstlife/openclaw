@@ -45,9 +45,9 @@ vi.mock("../daemon/service-audit.js", () => ({
       environmentValueSources?: Record<string, "inline" | "file">;
     } | null,
   ) =>
-    command?.environmentValueSources?.OPENCLAW_GATEWAY_TOKEN === "file"
+    command?.environmentValueSources?.JARVIS_GATEWAY_TOKEN === "file"
       ? undefined
-      : command?.environment?.OPENCLAW_GATEWAY_TOKEN?.trim() || undefined,
+      : command?.environment?.JARVIS_GATEWAY_TOKEN?.trim() || undefined,
   SERVICE_AUDIT_CODES: {
     gatewayEntrypointMismatch: "gateway-entrypoint-mismatch",
   },
@@ -103,7 +103,7 @@ async function runRepair(cfg: JarvisConfig) {
 
 const gatewayProgramArguments = [
   "/usr/bin/node",
-  "/usr/local/bin/openclaw",
+  "/usr/local/bin/jarvis",
   "gateway",
   "--port",
   "18789",
@@ -113,7 +113,7 @@ function setupGatewayTokenRepairScenario() {
   mocks.readCommand.mockResolvedValue({
     programArguments: gatewayProgramArguments,
     environment: {
-      OPENCLAW_GATEWAY_TOKEN: "stale-token",
+      JARVIS_GATEWAY_TOKEN: "stale-token",
     },
   });
   mocks.auditGatewayServiceConfig.mockResolvedValue({
@@ -121,7 +121,7 @@ function setupGatewayTokenRepairScenario() {
     issues: [
       {
         code: "gateway-token-mismatch",
-        message: "Gateway service OPENCLAW_GATEWAY_TOKEN does not match gateway.auth.token",
+        message: "Gateway service JARVIS_GATEWAY_TOKEN does not match gateway.auth.token",
         level: "recommended",
       },
     ],
@@ -140,7 +140,7 @@ describe("maybeRepairGatewayServiceConfig", () => {
     mocks.resolveGatewayAuthTokenForService.mockImplementation(async (cfg: JarvisConfig, env) => {
       const configToken =
         typeof cfg.gateway?.auth?.token === "string" ? cfg.gateway.auth.token.trim() : undefined;
-      const envToken = env.OPENCLAW_GATEWAY_TOKEN?.trim() || undefined;
+      const envToken = env.JARVIS_GATEWAY_TOKEN?.trim() || undefined;
       return { token: configToken || envToken };
     });
   });
@@ -179,8 +179,8 @@ describe("maybeRepairGatewayServiceConfig", () => {
     expect(mocks.install).toHaveBeenCalledTimes(1);
   });
 
-  it("uses OPENCLAW_GATEWAY_TOKEN when config token is missing", async () => {
-    await withEnvAsync({ OPENCLAW_GATEWAY_TOKEN: "env-token" }, async () => {
+  it("uses JARVIS_GATEWAY_TOKEN when config token is missing", async () => {
+    await withEnvAsync({ JARVIS_GATEWAY_TOKEN: "env-token" }, async () => {
       setupGatewayTokenRepairScenario();
 
       const cfg: JarvisConfig = {
@@ -222,7 +222,7 @@ describe("maybeRepairGatewayServiceConfig", () => {
     mocks.readCommand.mockResolvedValue({
       programArguments: gatewayProgramArguments,
       environment: {
-        OPENCLAW_GATEWAY_TOKEN: "stale-token",
+        JARVIS_GATEWAY_TOKEN: "stale-token",
       },
     });
     mocks.auditGatewayServiceConfig.mockResolvedValue({
@@ -243,7 +243,7 @@ describe("maybeRepairGatewayServiceConfig", () => {
           token: {
             source: "env",
             provider: "default",
-            id: "OPENCLAW_GATEWAY_TOKEN",
+            id: "JARVIS_GATEWAY_TOKEN",
           },
         },
       },
@@ -267,7 +267,7 @@ describe("maybeRepairGatewayServiceConfig", () => {
   it("falls back to embedded service token when config and env tokens are missing", async () => {
     await withEnvAsync(
       {
-        OPENCLAW_GATEWAY_TOKEN: undefined,
+        JARVIS_GATEWAY_TOKEN: undefined,
         CLAWDBOT_GATEWAY_TOKEN: undefined,
       },
       async () => {
@@ -312,17 +312,17 @@ describe("maybeRepairGatewayServiceConfig", () => {
   it("does not persist EnvironmentFile-backed service tokens into config", async () => {
     await withEnvAsync(
       {
-        OPENCLAW_GATEWAY_TOKEN: undefined,
+        JARVIS_GATEWAY_TOKEN: undefined,
         CLAWDBOT_GATEWAY_TOKEN: undefined,
       },
       async () => {
         mocks.readCommand.mockResolvedValue({
           programArguments: gatewayProgramArguments,
           environment: {
-            OPENCLAW_GATEWAY_TOKEN: "env-file-token",
+            JARVIS_GATEWAY_TOKEN: "env-file-token",
           },
           environmentValueSources: {
-            OPENCLAW_GATEWAY_TOKEN: "file",
+            JARVIS_GATEWAY_TOKEN: "file",
           },
         });
         mocks.auditGatewayServiceConfig.mockResolvedValue({

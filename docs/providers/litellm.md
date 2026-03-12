@@ -39,7 +39,7 @@ litellm --model claude-opus-4-6
 ```bash
 export LITELLM_API_KEY="your-litellm-key"
 
-openclaw
+jarvis
 ```
 
 That's it. Jarvis now routes through LiteLLM.
@@ -100,7 +100,7 @@ curl -X POST "http://localhost:4000/key/generate" \
   -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "key_alias": "openclaw",
+    "key_alias": "jarvis",
     "max_budget": 50.00,
     "budget_duration": "monthly"
   }'

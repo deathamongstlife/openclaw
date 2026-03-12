@@ -47,7 +47,7 @@ function buildSlackManifest(botName: string) {
       },
       slash_commands: [
         {
-          command: "/openclaw",
+          command: "/jarvis",
           description: "Send a message to Jarvis",
           should_escape: false,
         },

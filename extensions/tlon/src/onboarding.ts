@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/tlon";
+import type { JarvisConfig } from "jarvis/plugin-sdk/tlon";
 import {
   formatDocsLink,
   patchScopedAccountConfig,
@@ -6,7 +6,7 @@ import {
   DEFAULT_ACCOUNT_ID,
   type ChannelOnboardingAdapter,
   type WizardPrompter,
-} from "openclaw/plugin-sdk/tlon";
+} from "jarvis/plugin-sdk/tlon";
 import { buildTlonAccountFields } from "./account-fields.js";
 import type { TlonResolvedAccount } from "./types.js";
 import { listTlonAccountIds, resolveTlonAccount } from "./types.js";

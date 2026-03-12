@@ -58,10 +58,10 @@ function candidateBinDirs(opts: EnsureJarvisPathOpts): { prepend: string[]; appe
   const prepend: string[] = [];
   const append: string[] = [];
 
-  // Bundled macOS app: `openclaw` lives next to the executable (process.execPath).
+  // Bundled macOS app: `jarvis` lives next to the executable (process.execPath).
   try {
     const execDir = path.dirname(execPath);
-    const siblingCli = path.join(execDir, "openclaw");
+    const siblingCli = path.join(execDir, "jarvis");
     if (isExecutable(siblingCli)) {
       prepend.push(execDir);
     }
@@ -73,10 +73,10 @@ function candidateBinDirs(opts: EnsureJarvisPathOpts): { prepend: string[]; appe
   // disabled by default; if an operator explicitly enables it, only append (never prepend).
   const allowProjectLocalBin =
     opts.allowProjectLocalBin === true ||
-    isTruthyEnvValue(process.env.OPENCLAW_ALLOW_PROJECT_LOCAL_BIN);
+    isTruthyEnvValue(process.env.JARVIS_ALLOW_PROJECT_LOCAL_BIN);
   if (allowProjectLocalBin) {
     const localBinDir = path.join(cwd, "node_modules", ".bin");
-    if (isExecutable(path.join(localBinDir, "openclaw"))) {
+    if (isExecutable(path.join(localBinDir, "jarvis"))) {
       append.push(localBinDir);
     }
   }
@@ -106,14 +106,14 @@ function candidateBinDirs(opts: EnsureJarvisPathOpts): { prepend: string[]; appe
 }
 
 /**
- * Best-effort PATH bootstrap so skills that require the `openclaw` CLI can run
+ * Best-effort PATH bootstrap so skills that require the `jarvis` CLI can run
  * under launchd/minimal environments (and inside the macOS app bundle).
  */
 export function ensureJarvisCliOnPath(opts: EnsureJarvisPathOpts = {}) {
-  if (isTruthyEnvValue(process.env.OPENCLAW_PATH_BOOTSTRAPPED)) {
+  if (isTruthyEnvValue(process.env.JARVIS_PATH_BOOTSTRAPPED)) {
     return;
   }
-  process.env.OPENCLAW_PATH_BOOTSTRAPPED = "1";
+  process.env.JARVIS_PATH_BOOTSTRAPPED = "1";
 
   const existing = opts.pathEnv ?? process.env.PATH ?? "";
   const { prepend, append } = candidateBinDirs(opts);

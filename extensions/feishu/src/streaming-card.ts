@@ -3,7 +3,7 @@
  */
 
 import type { Client } from "@larksuiteoapi/node-sdk";
-import { fetchWithSsrFGuard } from "openclaw/plugin-sdk/feishu";
+import { fetchWithSsrFGuard } from "jarvis/plugin-sdk/feishu";
 import type { FeishuDomain } from "./types.js";
 
 type Credentials = { appId: string; appSecret: string; domain?: FeishuDomain };
@@ -178,7 +178,10 @@ export class FeishuStreamingSession {
     return Promise.race([
       promise,
       new Promise<T>((_, reject) =>
-        setTimeout(() => reject(new Error(`${operation} timed out after ${timeoutMs}ms`)), timeoutMs)
+        setTimeout(
+          () => reject(new Error(`${operation} timed out after ${timeoutMs}ms`)),
+          timeoutMs,
+        ),
       ),
     ]);
   }
@@ -195,7 +198,7 @@ export class FeishuStreamingSession {
       this.circuitBreakerOpen = true;
       this.fallbackToRegularMessages = true;
       this.log?.(
-        `Circuit breaker OPEN after ${this.state.failureCount} failures - falling back to regular messages`
+        `Circuit breaker OPEN after ${this.state.failureCount} failures - falling back to regular messages`,
       );
     } else if (now - this.state.lastFailureTime >= CIRCUIT_BREAKER_RESET_MS) {
       this.circuitBreakerOpen = false;
@@ -210,7 +213,9 @@ export class FeishuStreamingSession {
     }
     this.state.failureCount += 1;
     this.state.lastFailureTime = Date.now();
-    this.log?.(`Streaming failure ${this.state.failureCount}/${CIRCUIT_BREAKER_THRESHOLD}: ${String(error)}`);
+    this.log?.(
+      `Streaming failure ${this.state.failureCount}/${CIRCUIT_BREAKER_THRESHOLD}: ${String(error)}`,
+    );
     this.checkCircuitBreaker();
   }
 
@@ -264,7 +269,7 @@ export class FeishuStreamingSession {
     const { response: createRes, release: releaseCreate } = await this.withTimeout(
       createCardPromise,
       CARD_API_TIMEOUT_MS,
-      "Card creation"
+      "Card creation",
     ).catch((error) => {
       this.recordFailure(error);
       throw error;

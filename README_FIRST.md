@@ -41,7 +41,7 @@ A record: jarvis → 85.10.205.112
 
 ## What's Been Done
 
-✅ **Complete rebranding:** OpenClaw → Jarvis (2,765 files)
+✅ **Complete rebranding:** Jarvis → Jarvis (2,765 files)
 ✅ **GitLab CI/CD:** Comprehensive pipeline configured
 ✅ **VPS scripts:** Automated deployment ready
 ✅ **Documentation:** Complete guides created
@@ -49,23 +49,25 @@ A record: jarvis → 85.10.205.112
 
 ## Files You Need
 
-| File | Purpose |
-|------|---------|
-| `FINAL_SUMMARY.md` | **START HERE** - Complete overview |
-| `DEPLOY_NOW.md` | Quick deployment guide |
-| `PUSH_TO_GITLAB.md` | Push instructions |
-| `DNS_SETUP.md` | DNS configuration |
-| `deploy-jarvis-caddy.sh` | VPS deployment script |
-| `push-to-gitlab.sh` | GitLab push helper |
+| File                     | Purpose                            |
+| ------------------------ | ---------------------------------- |
+| `FINAL_SUMMARY.md`       | **START HERE** - Complete overview |
+| `DEPLOY_NOW.md`          | Quick deployment guide             |
+| `PUSH_TO_GITLAB.md`      | Push instructions                  |
+| `DNS_SETUP.md`           | DNS configuration                  |
+| `deploy-jarvis-caddy.sh` | VPS deployment script              |
+| `push-to-gitlab.sh`      | GitLab push helper                 |
 
 ## After Deployment
 
 Your URLs will be:
+
 - 🏠 https://jarvis.allyapp.cc
 - 📥 https://jarvis.allyapp.cc/install.sh
 - 📚 https://docs.jarvis.allyapp.cc
 
 **Install command:**
+
 ```bash
 curl -fsSL https://jarvis.allyapp.cc/install.sh | bash
 ```

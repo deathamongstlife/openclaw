@@ -5,7 +5,7 @@
  * They support dependency injection via the `deps` parameter for testability.
  */
 
-import type { JarvisConfig } from "openclaw/plugin-sdk/twitch";
+import type { JarvisConfig } from "jarvis/plugin-sdk/twitch";
 import { getClientManager as getRegistryClientManager } from "./client-manager-registry.js";
 import { DEFAULT_ACCOUNT_ID, getAccountConfig } from "./config.js";
 import { resolveTwitchToken } from "./token.js";
@@ -42,7 +42,7 @@ export interface SendMessageResult {
  * const result = await sendMessageTwitchInternal(
  *   "#mychannel",
  *   "Hello Twitch!",
- *   openclawConfig,
+ *   jarvisConfig,
  *   "default",
  *   true,
  *   console,

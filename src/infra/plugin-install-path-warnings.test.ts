@@ -13,26 +13,26 @@ describe("plugin install path warnings", () => {
       pluginId: "matrix",
       install: {
         source: "path",
-        sourcePath: "/tmp/openclaw-matrix-missing",
-        installPath: "/tmp/openclaw-matrix-missing",
+        sourcePath: "/tmp/jarvis-matrix-missing",
+        installPath: "/tmp/jarvis-matrix-missing",
       },
     });
 
     expect(issue).toEqual({
       kind: "missing-path",
       pluginId: "matrix",
-      path: "/tmp/openclaw-matrix-missing",
+      path: "/tmp/jarvis-matrix-missing",
     });
     expect(
       formatPluginInstallPathIssue({
         issue: issue!,
         pluginLabel: "Matrix",
-        defaultInstallCommand: "jarvis plugins install @openclaw/matrix",
+        defaultInstallCommand: "jarvis plugins install @jarvis/matrix",
         repoInstallCommand: "jarvis plugins install ./extensions/matrix",
       }),
     ).toEqual([
-      "Matrix is installed from a custom path that no longer exists: /tmp/openclaw-matrix-missing",
-      'Reinstall with "jarvis plugins install @openclaw/matrix".',
+      "Matrix is installed from a custom path that no longer exists: /tmp/jarvis-matrix-missing",
+      'Reinstall with "jarvis plugins install @jarvis/matrix".',
       'If you are running from a repo checkout, you can also use "jarvis plugins install ./extensions/matrix".',
     ]);
   });

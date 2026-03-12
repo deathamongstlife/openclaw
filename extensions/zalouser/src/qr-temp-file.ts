@@ -1,6 +1,6 @@
 import fsp from "node:fs/promises";
 import path from "node:path";
-import { resolvePreferredJarvisTmpDir } from "openclaw/plugin-sdk/zalouser";
+import { resolvePreferredJarvisTmpDir } from "jarvis/plugin-sdk/zalouser";
 
 export async function writeQrDataUrlToTempFile(
   qrDataUrl: string,
@@ -15,7 +15,7 @@ export async function writeQrDataUrlToTempFile(
   const safeProfile = profile.replace(/[^a-zA-Z0-9_-]+/g, "-") || "default";
   const filePath = path.join(
     resolvePreferredJarvisTmpDir(),
-    `openclaw-zalouser-qr-${safeProfile}.png`,
+    `jarvis-zalouser-qr-${safeProfile}.png`,
   );
   await fsp.writeFile(filePath, Buffer.from(base64, "base64"));
   return filePath;

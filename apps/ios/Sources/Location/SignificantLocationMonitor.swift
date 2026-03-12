@@ -9,7 +9,7 @@ import JarvisKit
 enum SignificantLocationMonitor {
     static func startIfNeeded(
         locationService: any LocationServicing,
-        locationMode: OpenClawLocationMode,
+        locationMode: JarvisLocationMode,
         gateway: GatewayNodeSession,
         beforeSend: (@MainActor @Sendable () async -> Void)? = nil
     ) {

@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import type { JarvisPluginApi, JarvisPluginService } from "openclaw/plugin-sdk/phone-control";
+import type { JarvisPluginApi, JarvisPluginService } from "jarvis/plugin-sdk/phone-control";
 
 type ArmGroup = "camera" | "screen" | "writes" | "all";
 

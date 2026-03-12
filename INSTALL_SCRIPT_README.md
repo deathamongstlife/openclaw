@@ -1,6 +1,6 @@
 # Jarvis Install Script
 
-The Jarvis installer has been successfully rebranded from OpenClaw.
+The Jarvis installer has been successfully rebranded from Jarvis.
 
 ## Location
 
@@ -56,6 +56,7 @@ https://jarvis.ai/install.sh
 If you already have a website at `jarvis.ai`, configure your web server to serve `install.sh`:
 
 **Nginx example:**
+
 ```nginx
 location = /install.sh {
     alias /path/to/jarvis/install.sh;
@@ -64,6 +65,7 @@ location = /install.sh {
 ```
 
 **Apache example:**
+
 ```apache
 Alias /install.sh /path/to/jarvis/install.sh
 <Files "install.sh">
@@ -74,6 +76,7 @@ Alias /install.sh /path/to/jarvis/install.sh
 ### Option 3: GitHub Pages / CDN
 
 You can also serve it from:
+
 - GitHub Pages: `https://deathamongstlife.github.io/jarvis/install.sh`
 - CDN (jsDelivr): `https://cdn.jsdelivr.net/gh/deathamongstlife/jarvis@main/install.sh`
 
@@ -89,14 +92,14 @@ bash install.sh
 bash install.sh --help
 ```
 
-## Changes from OpenClaw
+## Changes from Jarvis
 
 All references have been updated:
 
-- ✅ `openclaw.ai` → `jarvis.ai`
-- ✅ `OpenClaw` → `Jarvis`
-- ✅ `openclaw` → `jarvis`
-- ✅ `OPENCLAW_*` → `JARVIS_*` (environment variables)
+- ✅ `jarvis.ai` → `jarvis.ai`
+- ✅ `Jarvis` → `Jarvis`
+- ✅ `jarvis` → `jarvis`
+- ✅ `JARVIS_*` → `JARVIS_*` (environment variables)
 - ✅ Default tagline: "All your chats, one Jarvis."
 
 ## Next Steps
@@ -109,6 +112,7 @@ All references have been updated:
 ## Security Notes
 
 The installer:
+
 - ✅ Uses HTTPS with TLS 1.2+ enforcement
 - ✅ Verifies checksums for downloaded binaries
 - ✅ Has retry logic with exponential backoff
@@ -118,6 +122,7 @@ The installer:
 ## Maintenance
 
 When updating the installer:
+
 1. Test thoroughly on fresh macOS and Linux systems
 2. Update version numbers if needed
 3. Verify all URLs point to `jarvis.ai`

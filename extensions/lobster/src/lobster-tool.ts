@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
 import path from "node:path";
 import { Type } from "@sinclair/typebox";
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/lobster";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/lobster";
 import { resolveWindowsLobsterSpawn } from "./windows-spawn.js";
 
 type LobsterEnvelope =

@@ -12,8 +12,8 @@ Most setups should use one Gateway because a single Gateway can handle multiple 
 
 ## Isolation checklist (required)
 
-- `OPENCLAW_CONFIG_PATH` — per-instance config file
-- `OPENCLAW_STATE_DIR` — per-instance sessions, creds, caches
+- `JARVIS_CONFIG_PATH` — per-instance config file
+- `JARVIS_STATE_DIR` — per-instance sessions, creds, caches
 - `agents.defaults.workspace` — per-instance workspace root
 - `gateway.port` (or `--port`) — unique per instance
 - Derived ports (browser/canvas) must not overlap
@@ -22,23 +22,23 @@ If these are shared, you will hit config races and port conflicts.
 
 ## Recommended: profiles (`--profile`)
 
-Profiles auto-scope `OPENCLAW_STATE_DIR` + `OPENCLAW_CONFIG_PATH` and suffix service names.
+Profiles auto-scope `JARVIS_STATE_DIR` + `JARVIS_CONFIG_PATH` and suffix service names.
 
 ```bash
 # main
-openclaw --profile main setup
-openclaw --profile main gateway --port 18789
+jarvis --profile main setup
+jarvis --profile main gateway --port 18789
 
 # rescue
-openclaw --profile rescue setup
-openclaw --profile rescue gateway --port 19001
+jarvis --profile rescue setup
+jarvis --profile rescue gateway --port 19001
 ```
 
 Per-profile services:
 
 ```bash
-openclaw --profile main gateway install
-openclaw --profile rescue gateway install
+jarvis --profile main gateway install
+jarvis --profile rescue gateway install
 ```
 
 ## Rescue-bot guide
@@ -63,7 +63,7 @@ jarvis onboard
 jarvis gateway install
 
 # Rescue bot (isolated profile + ports)
-openclaw --profile rescue onboard
+jarvis --profile rescue onboard
 # Notes:
 # - workspace name will be postfixed with -rescue per default
 # - Port should be at least 18789 + 20 Ports,
@@ -71,12 +71,12 @@ openclaw --profile rescue onboard
 # - rest of the onboarding is the same as normal
 
 # To install the service (if not happened automatically during onboarding)
-openclaw --profile rescue gateway install
+jarvis --profile rescue gateway install
 ```
 
 ## Port mapping (derived)
 
-Base port = `gateway.port` (or `OPENCLAW_GATEWAY_PORT` / `--port`).
+Base port = `gateway.port` (or `JARVIS_GATEWAY_PORT` / `--port`).
 
 - browser control service port = base + 2 (loopback only)
 - canvas host is served on the Gateway HTTP server (same port as `gateway.port`)
@@ -94,19 +94,19 @@ If you override any of these in config or env, you must keep them unique per ins
 ## Manual env example
 
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/main.json \
-OPENCLAW_STATE_DIR=~/.openclaw-main \
+JARVIS_CONFIG_PATH=~/.jarvis/main.json \
+JARVIS_STATE_DIR=~/.jarvis-main \
 jarvis gateway --port 18789
 
-OPENCLAW_CONFIG_PATH=~/.openclaw/rescue.json \
-OPENCLAW_STATE_DIR=~/.openclaw-rescue \
+JARVIS_CONFIG_PATH=~/.jarvis/rescue.json \
+JARVIS_STATE_DIR=~/.jarvis-rescue \
 jarvis gateway --port 19001
 ```
 
 ## Quick checks
 
 ```bash
-openclaw --profile main status
-openclaw --profile rescue status
-openclaw --profile rescue browser status
+jarvis --profile main status
+jarvis --profile rescue status
+jarvis --profile rescue browser status
 ```

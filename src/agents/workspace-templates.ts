@@ -1,6 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { resolveJarvisPackageRoot } from "../infra/openclaw-root.js";
+import { resolveJarvisPackageRoot } from "../infra/jarvis-root.js";
 import { pathExists } from "../utils.js";
 
 const FALLBACK_TEMPLATE_DIR = path.resolve(

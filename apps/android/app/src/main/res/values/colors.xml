@@ -1,3 +1,9 @@
 <resources>
-    <color name="ic_launcher_background">#DD1A08</color>
+    <!-- JARVIS Theme - Arc Reactor Blue -->
+    <color name="ic_launcher_background">#001529</color>
+    <color name="jarvis_accent">#00D9FF</color>
+    <color name="jarvis_accent_bright">#4FC3F7</color>
+    <color name="jarvis_accent_dim">#0088FF</color>
+    <color name="jarvis_background">#001529</color>
+    <color name="jarvis_surface">#0A1929</color>
 </resources>

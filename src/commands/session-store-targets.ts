@@ -1,6 +1,6 @@
 import { listAgentIds, resolveDefaultAgentId } from "../agents/agent-scope.js";
 import { resolveStorePath } from "../config/sessions.js";
-import type { JarvisConfig } from "../config/types.openclaw.js";
+import type { JarvisConfig } from "../config/types.jarvis.js";
 import { normalizeAgentId } from "../routing/session-key.js";
 import type { RuntimeEnv } from "../runtime.js";
 

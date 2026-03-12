@@ -10,7 +10,7 @@ import {
   type ChannelOnboardingDmPolicy,
   type DmPolicy,
   type WizardPrompter,
-} from "openclaw/plugin-sdk/irc";
+} from "jarvis/plugin-sdk/irc";
 import { listIrcAccountIds, resolveDefaultIrcAccountId, resolveIrcAccount } from "./accounts.js";
 import {
   isChannelTarget,
@@ -344,7 +344,7 @@ export const ircOnboardingAdapter: ChannelOnboardingAdapter = {
       const username = String(
         await prompter.text({
           message: "IRC username",
-          initialValue: resolved.config.username || nick || "openclaw",
+          initialValue: resolved.config.username || nick || "jarvis",
           validate: (value) => (String(value ?? "").trim() ? undefined : "Required"),
         }),
       ).trim();
@@ -359,7 +359,7 @@ export const ircOnboardingAdapter: ChannelOnboardingAdapter = {
 
       const channelsRaw = await prompter.text({
         message: "Auto-join IRC channels (optional, comma-separated)",
-        placeholder: "#openclaw, #ops",
+        placeholder: "#jarvis, #ops",
         initialValue: (resolved.config.channels ?? []).join(", "),
       });
       const channels = [
@@ -389,7 +389,7 @@ export const ircOnboardingAdapter: ChannelOnboardingAdapter = {
       label: "IRC channels",
       currentPolicy: afterConfig.config.groupPolicy ?? "allowlist",
       currentEntries: Object.keys(afterConfig.config.groups ?? {}),
-      placeholder: "#openclaw, #ops, *",
+      placeholder: "#jarvis, #ops, *",
       updatePrompt: Boolean(afterConfig.config.groups),
     });
     if (accessConfig) {

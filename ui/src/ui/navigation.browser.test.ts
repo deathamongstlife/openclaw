@@ -33,22 +33,22 @@ describe("control UI routing", () => {
   });
 
   it("infers nested base paths", async () => {
-    const app = mountApp("/apps/openclaw/cron");
+    const app = mountApp("/apps/jarvis/cron");
     await app.updateComplete;
 
-    expect(app.basePath).toBe("/apps/openclaw");
+    expect(app.basePath).toBe("/apps/jarvis");
     expect(app.tab).toBe("cron");
-    expect(window.location.pathname).toBe("/apps/openclaw/cron");
+    expect(window.location.pathname).toBe("/apps/jarvis/cron");
   });
 
   it("honors explicit base path overrides", async () => {
-    window.__OPENCLAW_CONTROL_UI_BASE_PATH__ = "/openclaw";
-    const app = mountApp("/openclaw/sessions");
+    window.__JARVIS_CONTROL_UI_BASE_PATH__ = "/jarvis";
+    const app = mountApp("/jarvis/sessions");
     await app.updateComplete;
 
-    expect(app.basePath).toBe("/openclaw");
+    expect(app.basePath).toBe("/jarvis");
     expect(app.tab).toBe("sessions");
-    expect(window.location.pathname).toBe("/openclaw/sessions");
+    expect(window.location.pathname).toBe("/jarvis/sessions");
   });
 
   it("updates the URL when clicking nav items", async () => {
@@ -151,7 +151,7 @@ describe("control UI routing", () => {
     await app.updateComplete;
 
     expect(app.settings.token).toBe("");
-    expect(JSON.parse(localStorage.getItem("openclaw.control.settings.v1") ?? "{}").token).toBe(
+    expect(JSON.parse(localStorage.getItem("jarvis.control.settings.v1") ?? "{}").token).toBe(
       undefined,
     );
     expect(window.location.pathname).toBe("/ui/overview");
@@ -169,17 +169,17 @@ describe("control UI routing", () => {
 
   it("hydrates token from URL hash when settings already set", async () => {
     localStorage.setItem(
-      "openclaw.control.settings.v1",
-      JSON.stringify({ token: "existing-token", gatewayUrl: "wss://gateway.example/openclaw" }),
+      "jarvis.control.settings.v1",
+      JSON.stringify({ token: "existing-token", gatewayUrl: "wss://gateway.example/jarvis" }),
     );
     const app = mountApp("/ui/overview#token=abc123");
     await app.updateComplete;
 
     expect(app.settings.token).toBe("abc123");
-    expect(JSON.parse(localStorage.getItem("openclaw.control.settings.v1") ?? "{}")).toMatchObject({
-      gatewayUrl: "wss://gateway.example/openclaw",
+    expect(JSON.parse(localStorage.getItem("jarvis.control.settings.v1") ?? "{}")).toMatchObject({
+      gatewayUrl: "wss://gateway.example/jarvis",
     });
-    expect(JSON.parse(localStorage.getItem("openclaw.control.settings.v1") ?? "{}").token).toBe(
+    expect(JSON.parse(localStorage.getItem("jarvis.control.settings.v1") ?? "{}").token).toBe(
       undefined,
     );
     expect(window.location.pathname).toBe("/ui/overview");
@@ -191,7 +191,7 @@ describe("control UI routing", () => {
     await app.updateComplete;
 
     expect(app.settings.token).toBe("abc123");
-    expect(JSON.parse(localStorage.getItem("openclaw.control.settings.v1") ?? "{}").token).toBe(
+    expect(JSON.parse(localStorage.getItem("jarvis.control.settings.v1") ?? "{}").token).toBe(
       undefined,
     );
     expect(window.location.pathname).toBe("/ui/overview");
@@ -206,21 +206,19 @@ describe("control UI routing", () => {
       'input[placeholder="ws://100.x.y.z:18789"]',
     );
     expect(gatewayUrlInput).not.toBeNull();
-    gatewayUrlInput!.value = "wss://other-gateway.example/openclaw";
+    gatewayUrlInput!.value = "wss://other-gateway.example/jarvis";
     gatewayUrlInput!.dispatchEvent(new Event("input", { bubbles: true }));
     await app.updateComplete;
 
-    expect(app.settings.gatewayUrl).toBe("wss://other-gateway.example/openclaw");
+    expect(app.settings.gatewayUrl).toBe("wss://other-gateway.example/jarvis");
     expect(app.settings.token).toBe("");
   });
 
   it("keeps a hash token pending until the gateway URL change is confirmed", async () => {
-    const app = mountApp(
-      "/ui/overview?gatewayUrl=wss://other-gateway.example/openclaw#token=abc123",
-    );
+    const app = mountApp("/ui/overview?gatewayUrl=wss://other-gateway.example/jarvis#token=abc123");
     await app.updateComplete;
 
-    expect(app.settings.gatewayUrl).not.toBe("wss://other-gateway.example/openclaw");
+    expect(app.settings.gatewayUrl).not.toBe("wss://other-gateway.example/jarvis");
     expect(app.settings.token).toBe("");
 
     const confirmButton = Array.from(app.querySelectorAll<HTMLButtonElement>("button")).find(
@@ -230,7 +228,7 @@ describe("control UI routing", () => {
     confirmButton?.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
     await app.updateComplete;
 
-    expect(app.settings.gatewayUrl).toBe("wss://other-gateway.example/openclaw");
+    expect(app.settings.gatewayUrl).toBe("wss://other-gateway.example/jarvis");
     expect(app.settings.token).toBe("abc123");
     expect(window.location.search).toBe("");
     expect(window.location.hash).toBe("");
@@ -245,7 +243,7 @@ describe("control UI routing", () => {
     await refreshed.updateComplete;
 
     expect(refreshed.settings.token).toBe("abc123");
-    expect(JSON.parse(localStorage.getItem("openclaw.control.settings.v1") ?? "{}").token).toBe(
+    expect(JSON.parse(localStorage.getItem("jarvis.control.settings.v1") ?? "{}").token).toBe(
       undefined,
     );
   });

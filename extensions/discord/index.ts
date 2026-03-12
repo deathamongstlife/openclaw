@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/discord";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/discord";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/discord";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/discord";
 import { discordPlugin } from "./src/channel.js";
 import { setDiscordRuntime } from "./src/runtime.js";
 import { registerDiscordSubagentHooks } from "./src/subagent-hooks.js";

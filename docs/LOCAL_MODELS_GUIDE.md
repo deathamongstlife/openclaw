@@ -17,10 +17,11 @@ Jarvis supports running AI models locally on your machine, providing:
 ### One-Command Installation
 
 ```bash
-curl -fsSL https://openclaw.ai/install-local.sh | bash
+curl -fsSL https://jarvis.ai/install-local.sh | bash
 ```
 
 This script will:
+
 1. Install Ollama (if not present)
 2. Detect your system resources
 3. Recommend and install an appropriate model
@@ -79,44 +80,47 @@ Jarvis includes pre-configured support for popular local models:
 
 ### Small Models (4-8GB RAM)
 
-| Model | Size | Best For | Context |
-|-------|------|----------|---------|
-| **Llama 3.2 3B** | 3B | Fast responses, efficient systems | 128K |
-| **DeepSeek R1 8B** | 8B | Reasoning tasks | 64K |
-| **Llama 3.1 8B** | 8B | General purpose, balanced | 128K |
+| Model              | Size | Best For                          | Context |
+| ------------------ | ---- | --------------------------------- | ------- |
+| **Llama 3.2 3B**   | 3B   | Fast responses, efficient systems | 128K    |
+| **DeepSeek R1 8B** | 8B   | Reasoning tasks                   | 64K     |
+| **Llama 3.1 8B**   | 8B   | General purpose, balanced         | 128K    |
 
 ### Medium Models (16-32GB RAM)
 
-| Model | Size | Best For | Context |
-|-------|------|----------|---------|
-| **Phi-4 14B** | 14B | Reasoning, efficient performance | 16K |
-| **Mistral Small 22B** | 22B | Balanced quality and speed | 32K |
-| **Gemma 2 27B** | 27B | Instruction following | 8K |
+| Model                 | Size | Best For                         | Context |
+| --------------------- | ---- | -------------------------------- | ------- |
+| **Phi-4 14B**         | 14B  | Reasoning, efficient performance | 16K     |
+| **Mistral Small 22B** | 22B  | Balanced quality and speed       | 32K     |
+| **Gemma 2 27B**       | 27B  | Instruction following            | 8K      |
 
 ### Large Models (48GB+ RAM)
 
-| Model | Size | Best For | Context |
-|-------|------|----------|---------|
-| **Llama 3.3 70B** | 70B | Highest quality, best reasoning | 128K |
-| **Qwen 2.5 72B** | 72B | Multilingual, coding | 128K |
+| Model             | Size | Best For                        | Context |
+| ----------------- | ---- | ------------------------------- | ------- |
+| **Llama 3.3 70B** | 70B  | Highest quality, best reasoning | 128K    |
+| **Qwen 2.5 72B**  | 72B  | Multilingual, coding            | 128K    |
 
 ## System Requirements
 
 ### Hardware Recommendations
 
 **Minimum (CPU-only):**
+
 - 8GB RAM
 - 4 CPU cores
 - 20GB disk space
 - Recommended: Llama 3.2 3B
 
 **Recommended (CPU-only):**
+
 - 16GB RAM
 - 8 CPU cores
 - 50GB disk space
 - Recommended: Phi-4 14B or Llama 3.1 8B
 
 **High-End (GPU-accelerated):**
+
 - 32GB+ RAM
 - 24GB+ VRAM (NVIDIA/AMD GPU)
 - 100GB disk space
@@ -127,12 +131,14 @@ Jarvis includes pre-configured support for popular local models:
 Jarvis automatically detects and uses GPU acceleration when available:
 
 **Supported GPUs:**
+
 - NVIDIA (CUDA) - RTX 3090/4090, A100, H100
 - AMD (ROCm) - RX 7900 XTX, MI250, MI300
 - Apple Silicon - M1/M2/M3 (Metal)
 - Intel Arc (experimental)
 
 **VRAM Requirements:**
+
 - 3B models: 2-4GB VRAM
 - 8B models: 4-8GB VRAM
 - 14B models: 8-12GB VRAM
@@ -142,13 +148,13 @@ Jarvis automatically detects and uses GPU acceleration when available:
 
 Quantization reduces model size and memory requirements while maintaining quality:
 
-| Quantization | Size Reduction | Quality | Use Case |
-|-------------|----------------|---------|----------|
-| **FP16** | Baseline | 100% | Maximum quality, research |
-| **Q8_0** | 50% | ~99% | High quality, recommended for GPU |
-| **Q5_K_M** | 65% | ~98% | Balanced quality/size |
-| **Q4_K_M** | 75% | ~95% | Standard, best compatibility |
-| **Q4_0** | 75% | ~93% | Smallest, CPU-friendly |
+| Quantization | Size Reduction | Quality | Use Case                          |
+| ------------ | -------------- | ------- | --------------------------------- |
+| **FP16**     | Baseline       | 100%    | Maximum quality, research         |
+| **Q8_0**     | 50%            | ~99%    | High quality, recommended for GPU |
+| **Q5_K_M**   | 65%            | ~98%    | Balanced quality/size             |
+| **Q4_K_M**   | 75%            | ~95%    | Standard, best compatibility      |
+| **Q4_0**     | 75%            | ~93%    | Smallest, CPU-friendly            |
 
 ### Choosing Quantization
 
@@ -173,6 +179,7 @@ Jarvis supports multiple local model backends:
 **Status:** ✅ Fully Supported
 
 **Features:**
+
 - Easy installation and management
 - Automatic model downloads
 - GPU acceleration (CUDA, Metal, ROCm)
@@ -180,6 +187,7 @@ Jarvis supports multiple local model backends:
 - Model library with popular models
 
 **Usage:**
+
 ```bash
 # Install models
 ollama pull llama3.3:70b
@@ -222,7 +230,7 @@ curl http://localhost:11434/api/tags
 
 ### Jarvis Config
 
-Configure local models in `~/.openclaw/config.json`:
+Configure local models in `~/.jarvis/config.json`:
 
 ```json
 {
@@ -322,6 +330,7 @@ jarvis config set agents.defaults.model ollama/my-custom-model
 ### Performance Tuning
 
 **CPU Optimization:**
+
 ```bash
 # Set thread count
 export OMP_NUM_THREADS=8
@@ -332,6 +341,7 @@ ollama run llama3.2:3b --num-thread 8
 ```
 
 **GPU Optimization:**
+
 ```bash
 # Partial GPU offloading (if VRAM is limited)
 export OLLAMA_NUM_GPU=20  # Offload 20 layers to GPU
@@ -347,6 +357,7 @@ export CUDA_VISIBLE_DEVICES=0,1
 **Symptom:** "Out of memory" or model fails to start
 
 **Solution:**
+
 1. Check available RAM: `free -h` (Linux) or Activity Monitor (macOS)
 2. Try a smaller model or lower quantization
 3. Close other applications
@@ -357,6 +368,7 @@ export CUDA_VISIBLE_DEVICES=0,1
 **Symptom:** Responses take too long
 
 **Solution:**
+
 1. Check GPU is detected: `nvidia-smi` or `system_profiler SPDisplaysDataType`
 2. Verify GPU acceleration: Look for "metal" or "cuda" in ollama logs
 3. Use a smaller model for faster responses
@@ -367,6 +379,7 @@ export CUDA_VISIBLE_DEVICES=0,1
 **Symptom:** "Failed to connect to Ollama"
 
 **Solution:**
+
 ```bash
 # Check if Ollama is running
 curl http://localhost:11434/api/tags
@@ -383,6 +396,7 @@ sudo ufw allow 11434
 **Symptom:** Download interrupted or fails
 
 **Solution:**
+
 ```bash
 # Resume download
 ollama pull llama3.2:3b
@@ -407,11 +421,11 @@ df -h
 
 **Scenario:** 1M tokens/month
 
-| Provider | Cost/Month | Local Model | Savings |
-|----------|------------|-------------|---------|
-| OpenAI GPT-4 | $150 | Llama 3.3 70B | $150/mo |
-| Anthropic Claude | $120 | Qwen 2.5 72B | $120/mo |
-| Google Gemini | $70 | Phi-4 14B | $70/mo |
+| Provider         | Cost/Month | Local Model   | Savings |
+| ---------------- | ---------- | ------------- | ------- |
+| OpenAI GPT-4     | $150       | Llama 3.3 70B | $150/mo |
+| Anthropic Claude | $120       | Qwen 2.5 72B  | $120/mo |
+| Google Gemini    | $70        | Phi-4 14B     | $70/mo  |
 
 **Break-even:** Hardware costs typically pay for themselves in 2-4 months.
 
@@ -453,7 +467,7 @@ jarvis local-models status
 - **Ollama Models:** https://ollama.com/library
 - **Model Leaderboard:** https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard
 - **Quantization Guide:** https://github.com/ggerganov/llama.cpp/blob/master/examples/quantize/README.md
-- **Hardware Recommendations:** https://docs.openclaw.ai/hardware
+- **Hardware Recommendations:** https://docs.jarvis.ai/hardware
 
 ## Next Steps
 

@@ -23,8 +23,8 @@ Uses the Gateway auth configuration. Send a bearer token:
 
 Notes:
 
-- When `gateway.auth.mode="token"`, use `gateway.auth.token` (or `OPENCLAW_GATEWAY_TOKEN`).
-- When `gateway.auth.mode="password"`, use `gateway.auth.password` (or `OPENCLAW_GATEWAY_PASSWORD`).
+- When `gateway.auth.mode="token"`, use `gateway.auth.token` (or `JARVIS_GATEWAY_TOKEN`).
+- When `gateway.auth.mode="password"`, use `gateway.auth.password` (or `JARVIS_GATEWAY_PASSWORD`).
 - If `gateway.auth.rateLimit` is configured and too many auth failures occur, the endpoint returns `429` with `Retry-After`.
 
 ## Request body
@@ -83,8 +83,8 @@ You can customize this deny list via `gateway.tools`:
 
 To help group policies resolve context, you can optionally set:
 
-- `x-openclaw-message-channel: <channel>` (example: `slack`, `telegram`)
-- `x-openclaw-account-id: <accountId>` (when multiple accounts exist)
+- `x-jarvis-message-channel: <channel>` (example: `slack`, `telegram`)
+- `x-jarvis-account-id: <accountId>` (when multiple accounts exist)
 
 ## Responses
 

@@ -73,7 +73,7 @@ describe("doctor command", () => {
       findLegacyGatewayServices.mockResolvedValueOnce([
         {
           platform: "darwin",
-          label: "com.steipete.openclaw.gateway",
+          label: "com.steipete.jarvis.gateway",
           detail: "loaded",
         },
       ]);
@@ -88,9 +88,9 @@ describe("doctor command", () => {
   );
 
   it("offers to update first for git checkouts", async () => {
-    delete process.env.OPENCLAW_UPDATE_IN_PROGRESS;
+    delete process.env.JARVIS_UPDATE_IN_PROGRESS;
 
-    const root = "/tmp/openclaw";
+    const root = "/tmp/jarvis";
     resolveJarvisPackageRoot.mockResolvedValueOnce(root);
     runCommandWithTimeout.mockResolvedValueOnce({
       stdout: `${root}\n`,

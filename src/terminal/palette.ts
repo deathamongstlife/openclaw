@@ -1,12 +1,15 @@
-// Lobster palette tokens for CLI/UI theming. "lobster seam" == use this palette.
+// JARVIS palette tokens for CLI/UI theming. "JARVIS seam" == use this palette.
 // Keep in sync with docs/cli/index.md (CLI palette section).
-export const LOBSTER_PALETTE = {
-  accent: "#FF5A2D",
-  accentBright: "#FF7A3D",
-  accentDim: "#D14A22",
-  info: "#FF8A5B",
-  success: "#2FBF71",
-  warn: "#FFB020",
-  error: "#E23D2D",
-  muted: "#8B7F77",
+export const JARVIS_PALETTE = {
+  accent: "#00D9FF",
+  accentBright: "#4FC3F7",
+  accentDim: "#0088FF",
+  info: "#00B8D4",
+  success: "#00E676",
+  warn: "#FFB300",
+  error: "#FF1744",
+  muted: "#607D8B",
 } as const;
+
+// Legacy export for backward compatibility
+export const LOBSTER_PALETTE = JARVIS_PALETTE;

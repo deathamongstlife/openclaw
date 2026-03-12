@@ -112,14 +112,14 @@ sudo sysctl -p
 ### Option A: Standard Install (Recommended)
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://jarvis.ai/install.sh | bash
 ```
 
 ### Option B: Hackable Install (For tinkering)
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
+git clone https://github.com/jarvis/jarvis.git
+cd jarvis
 npm install
 npm run build
 npm link
@@ -147,10 +147,10 @@ Follow the wizard:
 jarvis status
 
 # Check service
-sudo systemctl status openclaw
+sudo systemctl status jarvis
 
 # View logs
-journalctl -u openclaw -f
+journalctl -u jarvis -f
 ```
 
 ## 9) Access the Dashboard
@@ -174,7 +174,7 @@ sudo tailscale up
 
 # Update config
 jarvis config set gateway.bind tailnet
-sudo systemctl restart openclaw
+sudo systemctl restart jarvis
 ```
 
 ---
@@ -197,10 +197,10 @@ See [Pi USB boot guide](https://www.raspberrypi.com/documentation/computers/rasp
 On lower-power Pi hosts, enable Node's module compile cache so repeated CLI runs are faster:
 
 ```bash
-grep -q 'NODE_COMPILE_CACHE=/var/tmp/openclaw-compile-cache' ~/.bashrc || cat >> ~/.bashrc <<'EOF' # pragma: allowlist secret
-export NODE_COMPILE_CACHE=/var/tmp/openclaw-compile-cache
-mkdir -p /var/tmp/openclaw-compile-cache
-export OPENCLAW_NO_RESPAWN=1
+grep -q 'NODE_COMPILE_CACHE=/var/tmp/jarvis-compile-cache' ~/.bashrc || cat >> ~/.bashrc <<'EOF' # pragma: allowlist secret
+export NODE_COMPILE_CACHE=/var/tmp/jarvis-compile-cache
+mkdir -p /var/tmp/jarvis-compile-cache
+export JARVIS_NO_RESPAWN=1
 EOF
 source ~/.bashrc
 ```
@@ -209,7 +209,7 @@ Notes:
 
 - `NODE_COMPILE_CACHE` speeds up subsequent runs (`status`, `health`, `--help`).
 - `/var/tmp` survives reboots better than `/tmp`.
-- `OPENCLAW_NO_RESPAWN=1` avoids extra startup cost from CLI self-respawn.
+- `JARVIS_NO_RESPAWN=1` avoids extra startup cost from CLI self-respawn.
 - First run warms the cache; later runs benefit most.
 
 ### systemd startup tuning (optional)
@@ -218,13 +218,13 @@ If this Pi is mostly running Jarvis, add a service drop-in to reduce restart
 jitter and keep startup env stable:
 
 ```bash
-sudo systemctl edit openclaw
+sudo systemctl edit jarvis
 ```
 
 ```ini
 [Service]
-Environment=OPENCLAW_NO_RESPAWN=1
-Environment=NODE_COMPILE_CACHE=/var/tmp/openclaw-compile-cache
+Environment=JARVIS_NO_RESPAWN=1
+Environment=NODE_COMPILE_CACHE=/var/tmp/jarvis-compile-cache
 Restart=always
 RestartSec=2
 TimeoutStartSec=90
@@ -234,7 +234,7 @@ Then apply:
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl restart openclaw
+sudo systemctl restart jarvis
 ```
 
 If possible, keep Jarvis state/cache on SSD-backed storage to avoid SD-card
@@ -322,13 +322,13 @@ The onboarding wizard sets this up, but to verify:
 
 ```bash
 # Check service is enabled
-sudo systemctl is-enabled openclaw
+sudo systemctl is-enabled jarvis
 
 # Enable if not
-sudo systemctl enable openclaw
+sudo systemctl enable jarvis
 
 # Start on boot
-sudo systemctl start openclaw
+sudo systemctl start jarvis
 ```
 
 ---
@@ -355,12 +355,12 @@ free -h
 
 ```bash
 # Check logs
-journalctl -u openclaw --no-pager -n 100
+journalctl -u jarvis --no-pager -n 100
 
 # Common fix: rebuild
-cd ~/openclaw  # if using hackable install
+cd ~/jarvis  # if using hackable install
 npm run build
-sudo systemctl restart openclaw
+sudo systemctl restart jarvis
 ```
 
 ### ARM Binary Issues

@@ -4,13 +4,13 @@ import {
   isTrustedProxyAddress,
   resolveClientIp,
   type JarvisConfig,
-} from "openclaw/plugin-sdk/mattermost";
+} from "jarvis/plugin-sdk/mattermost";
 import { getMattermostRuntime } from "../runtime.js";
 import { updateMattermostPost, type MattermostClient } from "./client.js";
 
 const INTERACTION_MAX_BODY_BYTES = 64 * 1024;
 const INTERACTION_BODY_TIMEOUT_MS = 10_000;
-const SIGNED_CHANNEL_ID_CONTEXT_KEY = "__openclaw_channel_id";
+const SIGNED_CHANNEL_ID_CONTEXT_KEY = "__jarvis_channel_id";
 
 /**
  * Mattermost interactive message callback payload.
@@ -162,7 +162,7 @@ const interactionSecrets = new Map<string, string>();
 let defaultInteractionSecret: string | undefined;
 
 function deriveInteractionSecret(botToken: string): string {
-  return createHmac("sha256", "openclaw-mattermost-interactions").update(botToken).digest("hex");
+  return createHmac("sha256", "jarvis-mattermost-interactions").update(botToken).digest("hex");
 }
 
 export function setInteractionSecret(accountIdOrBotToken: string, botToken?: string): void {

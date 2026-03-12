@@ -32,7 +32,7 @@ case "$AUTH_STATUS" in
         "$SCRIPT_DIR/claude-auth-status.sh" full
         exit 0
         ;;
-    CLAUDE_EXPIRING|OPENCLAW_EXPIRING|CLAWDBOT_EXPIRING)
+    CLAUDE_EXPIRING|JARVIS_EXPIRING|CLAWDBOT_EXPIRING)
         echo -e "${YELLOW}Auth is expiring soon.${NC}"
         echo ""
         ;;
@@ -70,10 +70,10 @@ if claude setup-token; then
     "$SCRIPT_DIR/claude-auth-status.sh" full
 
     # Restart jarvis service if running
-    if systemctl --user is-active openclaw >/dev/null 2>&1; then
+    if systemctl --user is-active jarvis >/dev/null 2>&1; then
         echo ""
         echo "Restarting jarvis service..."
-        systemctl --user restart openclaw
+        systemctl --user restart jarvis
         echo -e "${GREEN}Service restarted.${NC}"
     fi
 else

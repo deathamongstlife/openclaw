@@ -14,7 +14,7 @@ describe("resolveGatewayTokenForDriftCheck", () => {
         },
       } as JarvisConfig,
       env: {
-        OPENCLAW_GATEWAY_TOKEN: "env-token",
+        JARVIS_GATEWAY_TOKEN: "env-token",
       } as NodeJS.ProcessEnv,
     });
 
@@ -33,12 +33,12 @@ describe("resolveGatewayTokenForDriftCheck", () => {
           gateway: {
             mode: "local",
             auth: {
-              token: { source: "env", provider: "default", id: "OPENCLAW_GATEWAY_TOKEN" },
+              token: { source: "env", provider: "default", id: "JARVIS_GATEWAY_TOKEN" },
             },
           },
         } as JarvisConfig,
         env: {
-          OPENCLAW_GATEWAY_TOKEN: "env-token",
+          JARVIS_GATEWAY_TOKEN: "env-token",
         } as NodeJS.ProcessEnv,
       }),
     ).toThrow(/gateway\.auth\.token/i);

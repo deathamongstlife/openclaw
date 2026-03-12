@@ -10,9 +10,9 @@ import { createAcpConnection, createAcpGateway } from "./translator.test-helpers
 describe("acp prompt cwd prefix", () => {
   async function runPromptWithCwd(cwd: string) {
     const pinnedHome = os.homedir();
-    const previousJarvisHome = process.env.OPENCLAW_HOME;
+    const previousJarvisHome = process.env.JARVIS_HOME;
     const previousHome = process.env.HOME;
-    delete process.env.OPENCLAW_HOME;
+    delete process.env.JARVIS_HOME;
     process.env.HOME = pinnedHome;
 
     const sessionStore = createInMemorySessionStore();
@@ -48,9 +48,9 @@ describe("acp prompt cwd prefix", () => {
       return requestSpy;
     } finally {
       if (previousJarvisHome === undefined) {
-        delete process.env.OPENCLAW_HOME;
+        delete process.env.JARVIS_HOME;
       } else {
-        process.env.OPENCLAW_HOME = previousJarvisHome;
+        process.env.JARVIS_HOME = previousJarvisHome;
       }
       if (previousHome === undefined) {
         delete process.env.HOME;
@@ -61,22 +61,22 @@ describe("acp prompt cwd prefix", () => {
   }
 
   it("redacts home directory in prompt prefix", async () => {
-    const requestSpy = await runPromptWithCwd(path.join(os.homedir(), "openclaw-test"));
+    const requestSpy = await runPromptWithCwd(path.join(os.homedir(), "jarvis-test"));
     expect(requestSpy).toHaveBeenCalledWith(
       "chat.send",
       expect.objectContaining({
-        message: expect.stringMatching(/\[Working directory: ~[\\/]openclaw-test\]/),
+        message: expect.stringMatching(/\[Working directory: ~[\\/]jarvis-test\]/),
       }),
       { expectFinal: true },
     );
   });
 
   it("keeps backslash separators when cwd uses them", async () => {
-    const requestSpy = await runPromptWithCwd(`${os.homedir()}\\openclaw-test`);
+    const requestSpy = await runPromptWithCwd(`${os.homedir()}\\jarvis-test`);
     expect(requestSpy).toHaveBeenCalledWith(
       "chat.send",
       expect.objectContaining({
-        message: expect.stringContaining("[Working directory: ~\\openclaw-test]"),
+        message: expect.stringContaining("[Working directory: ~\\jarvis-test]"),
       }),
       { expectFinal: true },
     );
@@ -87,7 +87,7 @@ describe("acp prompt cwd prefix", () => {
     sessionStore.createSession({
       sessionId: "session-1",
       sessionKey: "agent:main:main",
-      cwd: path.join(os.homedir(), "openclaw-test"),
+      cwd: path.join(os.homedir(), "jarvis-test"),
     });
 
     const requestSpy = vi.fn(async (method: string) => {
@@ -120,7 +120,7 @@ describe("acp prompt cwd prefix", () => {
           kind: "external_user",
           originSessionId: "session-1",
           sourceChannel: "acp",
-          sourceTool: "openclaw_acp",
+          sourceTool: "jarvis_acp",
         },
         systemProvenanceReceipt: undefined,
       }),
@@ -133,7 +133,7 @@ describe("acp prompt cwd prefix", () => {
     sessionStore.createSession({
       sessionId: "session-1",
       sessionKey: "agent:main:main",
-      cwd: path.join(os.homedir(), "openclaw-test"),
+      cwd: path.join(os.homedir(), "jarvis-test"),
     });
 
     const requestSpy = vi.fn(async (method: string) => {
@@ -166,7 +166,7 @@ describe("acp prompt cwd prefix", () => {
           kind: "external_user",
           originSessionId: "session-1",
           sourceChannel: "acp",
-          sourceTool: "openclaw_acp",
+          sourceTool: "jarvis_acp",
         },
         systemProvenanceReceipt: expect.stringContaining("[Source Receipt]"),
       }),
@@ -175,7 +175,7 @@ describe("acp prompt cwd prefix", () => {
     expect(requestSpy).toHaveBeenCalledWith(
       "chat.send",
       expect.objectContaining({
-        systemProvenanceReceipt: expect.stringContaining("bridge=openclaw-acp"),
+        systemProvenanceReceipt: expect.stringContaining("bridge=jarvis-acp"),
       }),
       { expectFinal: true },
     );

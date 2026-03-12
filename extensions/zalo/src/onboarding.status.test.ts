@@ -1,4 +1,4 @@
-import type { JarvisConfig } from "openclaw/plugin-sdk/zalo";
+import type { JarvisConfig } from "jarvis/plugin-sdk/zalo";
 import { describe, expect, it } from "vitest";
 import { zaloOnboardingAdapter } from "./onboarding.js";
 

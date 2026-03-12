@@ -1,4 +1,4 @@
-import type { AcpRuntime, JarvisPluginServiceContext } from "openclaw/plugin-sdk/acpx";
+import type { AcpRuntime, JarvisPluginServiceContext } from "jarvis/plugin-sdk/acpx";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { AcpRuntimeError } from "../../../src/acp/runtime/errors.js";
 import {

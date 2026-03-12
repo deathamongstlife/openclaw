@@ -14,7 +14,7 @@ import {
   type OutboundReplyPayload,
   type JarvisConfig,
   type RuntimeEnv,
-} from "openclaw/plugin-sdk/nextcloud-talk";
+} from "jarvis/plugin-sdk/nextcloud-talk";
 import type { ResolvedNextcloudTalkAccount } from "./accounts.js";
 import {
   normalizeNextcloudTalkAllowlist,

@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/imessage";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/imessage";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/imessage";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/imessage";
 import { imessagePlugin } from "./src/channel.js";
 import { setIMessageRuntime } from "./src/runtime.js";
 

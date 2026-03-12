@@ -1,5 +1,5 @@
-import type { JarvisPluginApi } from "openclaw/plugin-sdk/googlechat";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/googlechat";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/googlechat";
+import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/googlechat";
 import { googlechatDock, googlechatPlugin } from "./src/channel.js";
 import { setGoogleChatRuntime } from "./src/runtime.js";
 

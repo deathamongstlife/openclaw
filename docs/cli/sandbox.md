@@ -72,8 +72,8 @@ jarvis sandbox recreate --all --force        # Skip confirmation
 
 ```bash
 # Pull new image
-docker pull openclaw-sandbox:latest
-docker tag openclaw-sandbox:latest openclaw-sandbox:bookworm-slim
+docker pull jarvis-sandbox:latest
+docker tag jarvis-sandbox:latest jarvis-sandbox:bookworm-slim
 
 # Update config to use new image
 # Edit config: agents.defaults.sandbox.docker.image (or agents.list[].sandbox.docker.image)
@@ -121,7 +121,7 @@ Gateway’s container naming and avoids mismatches when scope/session keys chang
 
 ## Configuration
 
-Sandbox settings live in `~/.openclaw/openclaw.json` under `agents.defaults.sandbox` (per-agent overrides go in `agents.list[].sandbox`):
+Sandbox settings live in `~/.jarvis/jarvis.json` under `agents.defaults.sandbox` (per-agent overrides go in `agents.list[].sandbox`):
 
 ```jsonc
 {
@@ -131,8 +131,8 @@ Sandbox settings live in `~/.openclaw/openclaw.json` under `agents.defaults.sand
         "mode": "all", // off, non-main, all
         "scope": "agent", // session, agent, shared
         "docker": {
-          "image": "openclaw-sandbox:bookworm-slim",
-          "containerPrefix": "openclaw-sbx-",
+          "image": "jarvis-sandbox:bookworm-slim",
+          "containerPrefix": "jarvis-sbx-",
           // ... more Docker options
         },
         "prune": {

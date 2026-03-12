@@ -1,4 +1,4 @@
-import OpenClawProtocol
+import JarvisProtocol
 
 /// Server-push messages from the gateway websocket.
 ///

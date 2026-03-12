@@ -3,7 +3,7 @@ name: voice-call
 description: Start voice calls via the Jarvis voice-call plugin.
 metadata:
   {
-    "openclaw":
+    "jarvis":
       {
         "emoji": "📞",
         "skillKey": "voice-call",

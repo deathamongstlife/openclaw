@@ -9,13 +9,13 @@ title: "Jarvis"
 
 <p align="center">
     <img
-        src="/assets/openclaw-logo-text-dark.png"
+        src="/assets/jarvis-logo-text-dark.png"
         alt="Jarvis"
         width="500"
         class="dark:hidden"
     />
     <img
-        src="/assets/openclaw-logo-text.png"
+        src="/assets/jarvis-logo-text.png"
         alt="Jarvis"
         width="500"
         class="hidden dark:block"
@@ -98,7 +98,7 @@ The Gateway is the single source of truth for sessions, routing, and channel con
 <Steps>
   <Step title="Install Jarvis">
     ```bash
-    npm install -g openclaw@latest
+    npm install -g jarvis@latest
     ```
   </Step>
   <Step title="Onboard and install the service">
@@ -124,12 +124,12 @@ Open the browser Control UI after the Gateway starts.
 - Remote access: [Web surfaces](/web) and [Tailscale](/gateway/tailscale)
 
 <p align="center">
-  <img src="/whatsapp-openclaw.jpg" alt="Jarvis" width="420" />
+  <img src="/whatsapp-jarvis.jpg" alt="Jarvis" width="420" />
 </p>
 
 ## Configuration (optional)
 
-Config lives at `~/.openclaw/openclaw.json`.
+Config lives at `~/.jarvis/jarvis.json`.
 
 - If you **do nothing**, Jarvis uses the bundled Pi binary in RPC mode with per-sender sessions.
 - If you want to lock it down, start with `channels.whatsapp.allowFrom` and (for groups) mention rules.
@@ -144,7 +144,7 @@ Example:
       groups: { "*": { requireMention: true } },
     },
   },
-  messages: { groupChat: { mentionPatterns: ["@openclaw"] } },
+  messages: { groupChat: { mentionPatterns: ["@jarvis"] } },
 }
 ```
 

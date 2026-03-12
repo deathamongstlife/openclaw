@@ -222,7 +222,7 @@ const readUsageFromSessionLog = (
       model?: string;
     }
   | undefined => {
-  // Transcripts are stored at the session file path (fallback: ~/.openclaw/sessions/<SessionId>.jsonl)
+  // Transcripts are stored at the session file path (fallback: ~/.jarvis/sessions/<SessionId>.jsonl)
   if (!sessionId) {
     return undefined;
   }
@@ -385,10 +385,7 @@ const formatMediaUnderstandingLine = (decisions?: ReadonlyArray<MediaUnderstandi
   return `📎 Media: ${parts.join(" · ")}`;
 };
 
-const formatVoiceModeLine = (
-  config?: JarvisConfig,
-  sessionEntry?: SessionEntry,
-): string | null => {
+const formatVoiceModeLine = (config?: JarvisConfig, sessionEntry?: SessionEntry): string | null => {
   if (!config) {
     return null;
   }

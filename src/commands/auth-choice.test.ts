@@ -68,8 +68,8 @@ type StoredAuthProfile = {
 
 describe("applyAuthChoice", () => {
   const lifecycle = createAuthTestLifecycle([
-    "OPENCLAW_STATE_DIR",
-    "OPENCLAW_AGENT_DIR",
+    "JARVIS_STATE_DIR",
+    "JARVIS_AGENT_DIR",
     "PI_CODING_AGENT_DIR",
     "ANTHROPIC_API_KEY",
     "OPENROUTER_API_KEY",
@@ -96,7 +96,7 @@ describe("applyAuthChoice", () => {
     if (activeStateDir) {
       await fs.rm(activeStateDir, { recursive: true, force: true });
     }
-    const env = await setupAuthTestEnv("openclaw-auth-");
+    const env = await setupAuthTestEnv("jarvis-auth-");
     activeStateDir = env.stateDir;
     lifecycle.setStateDir(env.stateDir);
   }
@@ -802,7 +802,7 @@ describe("applyAuthChoice", () => {
           providers: {
             filemain: {
               source: "file",
-              path: "/tmp/openclaw-missing-secrets.json",
+              path: "/tmp/jarvis-missing-secrets.json",
               mode: "json",
             },
           },

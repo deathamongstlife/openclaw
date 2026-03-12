@@ -68,16 +68,14 @@ describe("shared/frontmatter", () => {
 
   test("resolveJarvisManifestBlock parses JSON5 metadata and picks jarvis block", () => {
     const frontmatter = {
-      metadata: "{ openclaw: { foo: 1, bar: 'baz' } }",
+      metadata: "{ jarvis: { foo: 1, bar: 'baz' } }",
     };
     expect(resolveJarvisManifestBlock({ frontmatter })).toEqual({ foo: 1, bar: "baz" });
   });
 
   test("resolveJarvisManifestBlock returns undefined for invalid input", () => {
     expect(resolveJarvisManifestBlock({ frontmatter: {} })).toBeUndefined();
-    expect(
-      resolveJarvisManifestBlock({ frontmatter: { metadata: "not-json5" } }),
-    ).toBeUndefined();
+    expect(resolveJarvisManifestBlock({ frontmatter: { metadata: "not-json5" } })).toBeUndefined();
     expect(
       resolveJarvisManifestBlock({ frontmatter: { metadata: "{ nope: { a: 1 } }" } }),
     ).toBeUndefined();

@@ -18,7 +18,7 @@ Back to the main browser docs: [Browser](/tools/browser).
 
 ## Which Chrome profile is used?
 
-Jarvis controls a **dedicated Chrome profile** (named `openclaw`, orange‑tinted UI). This is separate from your daily browser profile.
+Jarvis controls a **dedicated Chrome profile** (named `jarvis`, orange‑tinted UI). This is separate from your daily browser profile.
 
 Two easy ways to access it:
 
@@ -30,7 +30,7 @@ jarvis browser start
 jarvis browser open https://x.com
 ```
 
-If you have multiple profiles, pass `--browser-profile <name>` (the default is `openclaw`).
+If you have multiple profiles, pass `--browser-profile <name>` (the default is `jarvis`).
 
 ## X/Twitter: recommended flow
 
@@ -61,7 +61,7 @@ If the agent is sandboxed, the browser tool defaults to the sandbox. To allow ho
 Then target the host browser:
 
 ```bash
-jarvis browser open https://x.com --browser-profile openclaw --target host
+jarvis browser open https://x.com --browser-profile jarvis --target host
 ```
 
 Or disable sandboxing for the agent that posts updates.

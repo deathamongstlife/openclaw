@@ -204,8 +204,7 @@ function buildSessionPresentation(params: {
       id: ACP_THOUGHT_LEVEL_CONFIG_ID,
       name: "Thought level",
       category: "thought_level",
-      description:
-        "Controls how much deliberate reasoning Jarvis requests from the Gateway model.",
+      description: "Controls how much deliberate reasoning Jarvis requests from the Gateway model.",
       currentValue: currentModeId,
       values: availableLevelIds,
     }),
@@ -306,7 +305,7 @@ function buildSystemInputProvenance(originSessionId: string) {
     kind: "external_user" as const,
     originSessionId,
     sourceChannel: "acp",
-    sourceTool: "openclaw_acp",
+    sourceTool: "jarvis_acp",
   };
 }
 
@@ -317,7 +316,7 @@ function buildSystemProvenanceReceipt(params: {
 }) {
   return [
     "[Source Receipt]",
-    "bridge=openclaw-acp",
+    "bridge=jarvis-acp",
     `originHost=${os.hostname()}`,
     `originCwd=${shortenHomePath(params.cwd)}`,
     `acpSessionId=${params.sessionId}`,

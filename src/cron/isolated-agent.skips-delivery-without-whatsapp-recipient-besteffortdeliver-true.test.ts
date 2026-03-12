@@ -436,8 +436,8 @@ describe("runCronIsolatedAgentTurn", () => {
   });
 
   it("retries transient text direct delivery failures before succeeding", async () => {
-    const previousFastMode = process.env.OPENCLAW_TEST_FAST;
-    process.env.OPENCLAW_TEST_FAST = "1";
+    const previousFastMode = process.env.JARVIS_TEST_FAST;
+    process.env.JARVIS_TEST_FAST = "1";
     try {
       await withTelegramAnnounceFixture(
         async ({ home, storePath, deps }) => {
@@ -477,9 +477,9 @@ describe("runCronIsolatedAgentTurn", () => {
       );
     } finally {
       if (previousFastMode === undefined) {
-        delete process.env.OPENCLAW_TEST_FAST;
+        delete process.env.JARVIS_TEST_FAST;
       } else {
-        process.env.OPENCLAW_TEST_FAST = previousFastMode;
+        process.env.JARVIS_TEST_FAST = previousFastMode;
       }
     }
   });

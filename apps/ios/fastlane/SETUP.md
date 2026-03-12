@@ -25,14 +25,14 @@ This writes these auth variables in `apps/ios/fastlane/.env`:
 ```bash
 ASC_KEY_ID=YOUR_KEY_ID
 ASC_ISSUER_ID=YOUR_ISSUER_ID
-ASC_KEYCHAIN_SERVICE=openclaw-asc-key
+ASC_KEYCHAIN_SERVICE=jarvis-asc-key
 ASC_KEYCHAIN_ACCOUNT=YOUR_MAC_USERNAME
 ```
 
 Optional app targeting variables (helpful if Fastlane cannot auto-resolve app by bundle):
 
 ```bash
-ASC_APP_IDENTIFIER=ai.openclaw.client
+ASC_APP_IDENTIFIER=ai.jarvis.client
 # or
 ASC_APP_ID=YOUR_APP_STORE_CONNECT_APP_ID
 ```

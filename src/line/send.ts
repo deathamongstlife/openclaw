@@ -1,6 +1,6 @@
 import { messagingApi } from "@line/bot-sdk";
 import { loadConfig } from "../config/config.js";
-import type { JarvisConfig } from "../config/types.openclaw.js";
+import type { JarvisConfig } from "../config/types.jarvis.js";
 import { logVerbose } from "../globals.js";
 import { recordChannelActivity } from "../infra/channel-activity.js";
 import { resolveLineAccount } from "./accounts.js";

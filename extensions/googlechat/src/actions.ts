@@ -2,7 +2,7 @@ import type {
   ChannelMessageActionAdapter,
   ChannelMessageActionName,
   JarvisConfig,
-} from "openclaw/plugin-sdk/googlechat";
+} from "jarvis/plugin-sdk/googlechat";
 import {
   createActionGate,
   extractToolSend,
@@ -10,7 +10,7 @@ import {
   readNumberParam,
   readReactionParams,
   readStringParam,
-} from "openclaw/plugin-sdk/googlechat";
+} from "jarvis/plugin-sdk/googlechat";
 import { listEnabledGoogleChatAccounts, resolveGoogleChatAccount } from "./accounts.js";
 import {
   createGoogleChatReaction,

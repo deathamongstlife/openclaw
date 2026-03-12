@@ -2,7 +2,7 @@ import JarvisKit
 import SwiftUI
 import Testing
 import UIKit
-@testable import OpenClaw
+@testable import Jarvis
 
 @Suite struct SwiftUIRenderSmokeTests {
     @MainActor private static func host(_ view: some View) -> UIWindow {
@@ -75,7 +75,7 @@ import UIKit
     }
 
     @Test @MainActor func voiceWakeToastBuildsAViewHierarchy() {
-        let root = VoiceWakeToast(command: "openclaw: do something")
+        let root = VoiceWakeToast(command: "jarvis: do something")
         _ = Self.host(root)
     }
 }
