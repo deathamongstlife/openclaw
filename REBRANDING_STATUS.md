@@ -7,6 +7,13 @@
 - ✅ Discord implementation with dual permission checking
 - ✅ GitLab CI/CD configuration migrated
 - ✅ Installation guide created (INSTALL_FROM_SOURCE.md)
+- ✅ Binary renamed: openclaw.mjs → jarvis.mjs
+- ✅ Podman env renamed: openclaw.podman.env → jarvis.podman.env
+- ✅ package.json fully rebranded (name, bin, URLs)
+- ✅ Android package name: ai.openclaw.app → ai.jarvis.app
+- ✅ iOS bundle ID prefix: ai.openclaw → ai.jarvis
+- ✅ .pre-commit-config.yaml updated (cache paths and header)
+- ✅ Quick-start installation script created (install-jarvis.sh)
 
 ## ⚠️ Still References "openclaw"
 
@@ -222,13 +229,13 @@ For your first complete build from source:
 | Discord Skill | ✅ Complete | - |
 | GitLab CI | ✅ Complete | - |
 | Installation Guide | ✅ Complete | - |
-| package.json | ⚠️ Partial | 🔴 High |
-| Binary name | ⚠️ openclaw.mjs | 🔴 High |
+| package.json | ✅ Complete | - |
+| Binary name | ✅ jarvis.mjs | - |
 | AGENTS.md | ⚠️ Not done | 🟡 Medium |
-| Android package | ⚠️ Not done | 🟡 Medium |
-| iOS bundle ID | ⚠️ Not done | 🟡 Medium |
+| Android package | ✅ Complete | - |
+| iOS bundle ID | ✅ Complete | - |
 | Config paths | ⚠️ ~/.openclaw/ | 🟢 Low |
-| Cache paths | ⚠️ Not done | 🟢 Low |
+| Cache paths | ✅ Complete | - |
 
 ---
 
