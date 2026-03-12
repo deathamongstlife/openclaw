@@ -38,7 +38,7 @@ plugins {
 }
 
 android {
-    namespace = "ai.openclaw.app"
+    namespace = "ai.jarvis.app"
     compileSdk = 36
 
     // Release signing is local-only; keep the keystore path and passwords out of the repo.
@@ -60,7 +60,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "ai.openclaw.app"
+        applicationId = "ai.jarvis.app"
         minSdk = 31
         targetSdk = 36
         versionCode = 202603090

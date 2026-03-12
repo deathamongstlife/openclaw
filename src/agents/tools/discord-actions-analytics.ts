@@ -1,4 +1,5 @@
 import type { AgentToolResult } from "@mariozechner/pi-agent-core";
+import { ChannelType } from "discord-api-types/v10";
 import type { DiscordActionConfig } from "../../config/config.js";
 import {
   fetchRoleInfoDiscord,
@@ -19,8 +20,8 @@ async function handleChannelActivity(
   const daysBack = readNumberParam(params, "daysBack", { integer: true }) ?? 7;
 
   const messages = accountId
-    ? await readMessagesDiscord({ channelId, limit }, { accountId })
-    : await readMessagesDiscord({ channelId, limit });
+    ? await readMessagesDiscord(channelId, { limit }, { accountId })
+    : await readMessagesDiscord(channelId, { limit });
 
   const cutoff = Date.now() - daysBack * 24 * 60 * 60 * 1000;
   const recentMessages = messages.filter((msg) => {
@@ -42,12 +43,12 @@ async function handleChannelActivity(
   }
 
   const topUsers = Array.from(userCounts.entries())
-    .sort((a, b) => b[1] - a[1])
+    .toSorted((a, b) => b[1] - a[1])
     .slice(0, 10)
     .map(([userId, count]) => ({ userId, messageCount: count }));
 
   const peakHours = Array.from(hourCounts.entries())
-    .sort((a, b) => b[1] - a[1])
+    .toSorted((a, b) => b[1] - a[1])
     .slice(0, 5)
     .map(([hour, count]) => ({ hour, messageCount: count }));
 
@@ -82,11 +83,14 @@ async function handleFindInactiveChannels(
     [];
 
   for (const channel of channels) {
-    if ("type" in channel && (channel.type === 0 || channel.type === 5)) {
+    if (
+      "type" in channel &&
+      (channel.type === ChannelType.GuildText || channel.type === ChannelType.GuildAnnouncement)
+    ) {
       try {
         const messages = accountId
-          ? await readMessagesDiscord({ channelId: channel.id, limit: 1 }, { accountId })
-          : await readMessagesDiscord({ channelId: channel.id, limit: 1 });
+          ? await readMessagesDiscord(channel.id, { limit: 1 }, { accountId })
+          : await readMessagesDiscord(channel.id, { limit: 1 });
 
         if (messages.length === 0) {
           inactiveChannels.push({
@@ -134,12 +138,13 @@ async function handleSuggestChannelOrg(
     ? await listGuildChannelsDiscord(guildId, { accountId })
     : await listGuildChannelsDiscord(guildId);
 
-  const categories = channels.filter((ch) => "type" in ch && ch.type === 4);
-  const textChannels = channels.filter((ch) => "type" in ch && ch.type === 0);
-  const voiceChannels = channels.filter((ch) => "type" in ch && ch.type === 2);
+  const categories = channels.filter((ch) => "type" in ch && ch.type === ChannelType.GuildCategory);
+  const textChannels = channels.filter((ch) => "type" in ch && ch.type === ChannelType.GuildText);
+  const voiceChannels = channels.filter((ch) => "type" in ch && ch.type === ChannelType.GuildVoice);
 
   const uncategorized = channels.filter(
-    (ch) => "parent_id" in ch && !ch.parent_id && "type" in ch && ch.type !== 4,
+    (ch) =>
+      "parent_id" in ch && !ch.parent_id && "type" in ch && ch.type !== ChannelType.GuildCategory,
   );
 
   const suggestions: string[] = [];
@@ -202,7 +207,7 @@ async function handleRoleHierarchy(
     ? await fetchRoleInfoDiscord(guildId, { accountId })
     : await fetchRoleInfoDiscord(guildId);
 
-  const sortedRoles = roles.sort((a, b) => b.position - a.position);
+  const sortedRoles = roles.toSorted((a, b) => b.position - a.position);
 
   const hierarchy = sortedRoles.map((role) => ({
     id: role.id,
@@ -243,7 +248,9 @@ async function handleRoleConflicts(
   }> = [];
 
   const ADMINISTRATOR = 0x8n;
-  const adminRoles = roles.filter((role) => (BigInt(role.permissions) & ADMINISTRATOR) === ADMINISTRATOR);
+  const adminRoles = roles.filter(
+    (role) => (BigInt(role.permissions) & ADMINISTRATOR) === ADMINISTRATOR,
+  );
 
   if (adminRoles.length > 3) {
     conflicts.push({
@@ -300,7 +307,9 @@ async function handleSuggestRoleOpt(
   const userRoles = roles.filter((r) => !r.managed);
 
   if (userRoles.length > 50) {
-    suggestions.push(`${userRoles.length} user-created roles. Consider consolidating similar roles.`);
+    suggestions.push(
+      `${userRoles.length} user-created roles. Consider consolidating similar roles.`,
+    );
   }
 
   const hoistedRoles = roles.filter((r) => r.hoist);
@@ -343,8 +352,8 @@ async function handleMemberActivity(
   const limit = readNumberParam(params, "limit", { integer: true }) ?? 100;
 
   const messages = accountId
-    ? await readMessagesDiscord({ channelId, limit }, { accountId })
-    : await readMessagesDiscord({ channelId, limit });
+    ? await readMessagesDiscord(channelId, { limit }, { accountId })
+    : await readMessagesDiscord(channelId, { limit });
 
   const userMessages = messages.filter((msg) => msg.author?.id === userId);
 
@@ -361,8 +370,8 @@ async function handleMemberActivity(
   }
 
   const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const mostActiveDay = Array.from(dayDistribution.entries()).sort((a, b) => b[1] - a[1])[0];
-  const mostActiveHour = Array.from(hourDistribution.entries()).sort((a, b) => b[1] - a[1])[0];
+  const mostActiveDay = Array.from(dayDistribution.entries()).toSorted((a, b) => b[1] - a[1])[0];
+  const mostActiveHour = Array.from(hourDistribution.entries()).toSorted((a, b) => b[1] - a[1])[0];
 
   return jsonResult({
     ok: true,
@@ -370,8 +379,8 @@ async function handleMemberActivity(
     channelId,
     totalMessages: userMessages.length,
     averageMessageLength:
-      userMessages.reduce((sum, msg) => sum + (msg.content?.length ?? 0), 0) / userMessages.length ||
-      0,
+      userMessages.reduce((sum, msg) => sum + (msg.content?.length ?? 0), 0) /
+        userMessages.length || 0,
     mostActiveDay: mostActiveDay ? dayNames[mostActiveDay[0]] : "Unknown",
     mostActiveHour: mostActiveHour ? `${mostActiveHour[0]}:00` : "Unknown",
   });
@@ -382,7 +391,7 @@ async function handleMemberActivity(
  */
 async function handleJoinLeaveStats(
   params: Record<string, unknown>,
-  accountId?: string,
+  _accountId?: string,
 ): Promise<AgentToolResult<unknown>> {
   const guildId = readStringParam(params, "guildId", { required: true });
 
@@ -405,8 +414,8 @@ async function handleTopContributors(
   const topCount = readNumberParam(params, "topCount", { integer: true }) ?? 10;
 
   const messages = accountId
-    ? await readMessagesDiscord({ channelId, limit }, { accountId })
-    : await readMessagesDiscord({ channelId, limit });
+    ? await readMessagesDiscord(channelId, { limit }, { accountId })
+    : await readMessagesDiscord(channelId, { limit });
 
   const userStats = new Map<
     string,
@@ -428,7 +437,7 @@ async function handleTopContributors(
   }
 
   const topContributors = Array.from(userStats.entries())
-    .sort((a, b) => b[1].messageCount - a[1].messageCount)
+    .toSorted((a, b) => b[1].messageCount - a[1].messageCount)
     .slice(0, topCount)
     .map(([userId, stats]) => ({
       userId,
