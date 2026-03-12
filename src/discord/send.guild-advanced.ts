@@ -161,7 +161,9 @@ export async function editMemberDiscord(
     body.roles = payload.roleIds;
   }
 
-  return (await rest.patch(Routes.guildMember(payload.guildId, payload.userId), { body })) as APIGuildMember;
+  return (await rest.patch(Routes.guildMember(payload.guildId, payload.userId), {
+    body,
+  })) as APIGuildMember;
 }
 
 export async function searchMembersDiscord(
@@ -318,9 +320,13 @@ export async function editVoiceChannelDiscord(
 }
 
 export async function fetchVoiceActivityDiscord(
-  guildId: string,
-  opts: DiscordReactOpts = {},
+  _guildId: string,
+  _opts: DiscordReactOpts = {},
 ): Promise<APIVoiceState[]> {
-  const rest = resolveDiscordRest(opts);
-  return (await rest.get(Routes.guildVoiceStates(guildId))) as APIVoiceState[];
+  // Note: Discord API doesn't provide a bulk endpoint for all voice states
+  // This would need to be implemented differently, e.g., by fetching guild members
+  // and checking their voice state individually using Routes.guildVoiceState(guildId, userId)
+  throw new Error(
+    "Bulk voice state fetching not supported by Discord API. Use Routes.guildVoiceState(guildId, userId) for individual users.",
+  );
 }
