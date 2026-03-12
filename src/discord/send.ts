@@ -79,3 +79,56 @@ export type {
   DiscordTimeoutTarget,
 } from "./send.types.js";
 export { DiscordSendError } from "./send.types.js";
+export {
+  createRoleDiscord,
+  createVoiceChannelDiscord,
+  deleteRoleDiscord,
+  deleteScheduledEventDiscord,
+  editGuildDiscord,
+  editMemberDiscord,
+  editRoleDiscord,
+  editScheduledEventDiscord,
+  editVoiceChannelDiscord,
+  fetchAuditLogDiscord,
+  fetchGuildSettingsDiscord,
+  fetchVoiceActivityDiscord,
+  searchMembersDiscord,
+} from "./send.guild-advanced.js";
+export type {
+  DiscordAuditLogQuery,
+  DiscordGuildEdit,
+  DiscordMemberEdit,
+  DiscordMemberSearch,
+  DiscordRoleCreate,
+  DiscordRoleDelete,
+  DiscordRoleEdit,
+  DiscordScheduledEventDelete,
+  DiscordScheduledEventEdit,
+  DiscordVoiceChannelCreate,
+  DiscordVoiceChannelEdit,
+} from "./send.guild-advanced.js";
+export {
+  bulkDeleteMessagesDiscord,
+  createAutoModRuleDiscord,
+  deleteAutoModRuleDiscord,
+  editAutoModRuleDiscord,
+  listAutoModRulesDiscord,
+} from "./send.moderation-advanced.js";
+export type {
+  DiscordAutoModRuleCreate,
+  DiscordAutoModRuleDelete,
+  DiscordAutoModRuleEdit,
+  DiscordBulkDelete,
+} from "./send.moderation-advanced.js";
+export {
+  createWebhookDiscord,
+  deleteWebhookDiscord,
+  editWebhookDiscord,
+  executeWebhookDiscord,
+  listWebhooksDiscord,
+} from "./send.webhooks.js";
+export type {
+  DiscordWebhookCreate,
+  DiscordWebhookEdit,
+  DiscordWebhookExecute,
+} from "./send.webhooks.js";

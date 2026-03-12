@@ -97,6 +97,26 @@ export type DiscordActionConfig = {
   channels?: boolean;
   /** Enable bot presence/activity changes (default: false). */
   presence?: boolean;
+  /** Enable server/guild management operations (default: true). */
+  serverManagement?: boolean;
+  /** Enable audit log access (default: true). */
+  auditLog?: boolean;
+  /** Enable member management operations (default: true). */
+  memberManagement?: boolean;
+  /** Enable role management operations (default: true). */
+  roleManagement?: boolean;
+  /** Enable automod rule management (default: true). */
+  autoModeration?: boolean;
+  /** Enable bulk moderation operations (default: true). */
+  bulkModeration?: boolean;
+  /** Enable warning system (default: true). */
+  warnings?: boolean;
+  /** Enable voice channel management (default: true). */
+  voiceManagement?: boolean;
+  /** Enable webhook management (default: true). */
+  webhookManagement?: boolean;
+  /** Enable analytics and insights features (default: true). */
+  analytics?: boolean;
 };
 
 export type DiscordIntentsConfig = {
