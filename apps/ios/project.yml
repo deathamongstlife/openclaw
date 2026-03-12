@@ -1,6 +1,6 @@
 name: OpenClaw
 options:
-  bundleIdPrefix: ai.openclaw
+  bundleIdPrefix: ai.jarvis
   deploymentTarget:
     iOS: "18.0"
   xcodeVersion: "16.0"
