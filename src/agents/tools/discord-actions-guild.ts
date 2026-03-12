@@ -11,6 +11,7 @@ import {
   fetchMemberInfoDiscord,
   fetchRoleInfoDiscord,
   fetchVoiceStatusDiscord,
+  hasAnyGuildPermissionDiscord,
   listGuildChannelsDiscord,
   listGuildEmojisDiscord,
   listScheduledEventsDiscord,
@@ -21,6 +22,22 @@ import {
   uploadEmojiDiscord,
   uploadStickerDiscord,
 } from "../../discord/send.js";
+import {
+  createRoleDiscord,
+  createVoiceChannelDiscord,
+  deleteRoleDiscord,
+  deleteScheduledEventDiscord,
+  editGuildDiscord,
+  editMemberDiscord,
+  editRoleDiscord,
+  editScheduledEventDiscord,
+  editVoiceChannelDiscord,
+  fetchAuditLogDiscord,
+  fetchGuildSettingsDiscord,
+  fetchVoiceActivityDiscord,
+  searchMembersDiscord,
+} from "../../discord/send.guild-advanced.js";
+import { PermissionFlagsBits } from "discord-api-types/v10";
 import {
   type ActionGate,
   jsonResult,
@@ -499,6 +516,288 @@ export async function handleDiscordGuildAction(
         await removeChannelPermissionDiscord(channelId, targetId);
       }
       return jsonResult({ ok: true });
+    }
+    case "serverSettings": {
+      if (!isActionEnabled("serverManagement")) {
+        throw new Error("Discord server management is disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const settings = accountId
+        ? await fetchGuildSettingsDiscord(guildId, { accountId })
+        : await fetchGuildSettingsDiscord(guildId);
+      return jsonResult({ ok: true, settings });
+    }
+    case "serverEdit": {
+      if (!isActionEnabled("serverManagement")) {
+        throw new Error("Discord server management is disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const name = readStringParam(params, "name");
+      const iconUrl = readStringParam(params, "iconUrl");
+      const verificationLevel = readNumberParam(params, "verificationLevel", { integer: true });
+      const defaultMessageNotifications = readNumberParam(params, "defaultMessageNotifications", {
+        integer: true,
+      });
+      const senderUserId = readStringParam(params, "senderUserId");
+
+      if (senderUserId) {
+        const hasPermission = await hasAnyGuildPermissionDiscord(
+          guildId,
+          senderUserId,
+          [PermissionFlagsBits.ManageGuild],
+          accountId ? { accountId } : undefined,
+        );
+        if (!hasPermission) {
+          throw new Error("Missing permission: MANAGE_GUILD required for this action");
+        }
+      }
+
+      const guild = accountId
+        ? await editGuildDiscord(
+            { guildId, name, iconUrl, verificationLevel, defaultMessageNotifications },
+            { accountId },
+          )
+        : await editGuildDiscord({ guildId, name, iconUrl, verificationLevel, defaultMessageNotifications });
+      return jsonResult({ ok: true, guild });
+    }
+    case "auditLog": {
+      if (!isActionEnabled("auditLog")) {
+        throw new Error("Discord audit log access is disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const actionType = readNumberParam(params, "actionType", { integer: true });
+      const userId = readStringParam(params, "userId");
+      const limit = readNumberParam(params, "limit", { integer: true }) ?? 50;
+      const senderUserId = readStringParam(params, "senderUserId");
+
+      if (senderUserId) {
+        const hasPermission = await hasAnyGuildPermissionDiscord(
+          guildId,
+          senderUserId,
+          [PermissionFlagsBits.ViewAuditLog],
+          accountId ? { accountId } : undefined,
+        );
+        if (!hasPermission) {
+          throw new Error("Missing permission: VIEW_AUDIT_LOG required for this action");
+        }
+      }
+
+      const entries = accountId
+        ? await fetchAuditLogDiscord({ guildId, actionType, userId, limit }, { accountId })
+        : await fetchAuditLogDiscord({ guildId, actionType, userId, limit });
+      return jsonResult({ ok: true, entries });
+    }
+    case "memberEdit": {
+      if (!isActionEnabled("memberManagement")) {
+        throw new Error("Discord member management is disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const userId = readStringParam(params, "userId", { required: true });
+      const nickname = readStringParam(params, "nickname");
+      const roleIds = readStringArrayParam(params, "roleIds");
+      const senderUserId = readStringParam(params, "senderUserId");
+
+      if (senderUserId) {
+        const hasPermission = await hasAnyGuildPermissionDiscord(
+          guildId,
+          senderUserId,
+          [PermissionFlagsBits.ManageNicknames, PermissionFlagsBits.ManageRoles],
+          accountId ? { accountId } : undefined,
+        );
+        if (!hasPermission) {
+          throw new Error(
+            "Missing permission: MANAGE_NICKNAMES or MANAGE_ROLES required for this action",
+          );
+        }
+      }
+
+      const member = accountId
+        ? await editMemberDiscord({ guildId, userId, nickname, roleIds }, { accountId })
+        : await editMemberDiscord({ guildId, userId, nickname, roleIds });
+      return jsonResult({ ok: true, member });
+    }
+    case "memberSearch": {
+      if (!isActionEnabled("memberInfo")) {
+        throw new Error("Discord member info is disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const query = readStringParam(params, "query", { required: true });
+      const limit = readNumberParam(params, "limit", { integer: true }) ?? 10;
+
+      const members = accountId
+        ? await searchMembersDiscord({ guildId, query, limit }, { accountId })
+        : await searchMembersDiscord({ guildId, query, limit });
+      return jsonResult({ ok: true, members });
+    }
+    case "roleCreate": {
+      if (!isActionEnabled("roleManagement")) {
+        throw new Error("Discord role management is disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const name = readStringParam(params, "name", { required: true });
+      const permissions = readStringParam(params, "permissions");
+      const color = readNumberParam(params, "color", { integer: true });
+      const hoist = params.hoist as boolean | undefined;
+      const mentionable = params.mentionable as boolean | undefined;
+      const senderUserId = readStringParam(params, "senderUserId");
+
+      if (senderUserId) {
+        const hasPermission = await hasAnyGuildPermissionDiscord(
+          guildId,
+          senderUserId,
+          [PermissionFlagsBits.ManageRoles],
+          accountId ? { accountId } : undefined,
+        );
+        if (!hasPermission) {
+          throw new Error("Missing permission: MANAGE_ROLES required for this action");
+        }
+      }
+
+      const role = accountId
+        ? await createRoleDiscord(
+            { guildId, name, permissions, color, hoist, mentionable },
+            { accountId },
+          )
+        : await createRoleDiscord({ guildId, name, permissions, color, hoist, mentionable });
+      return jsonResult({ ok: true, role });
+    }
+    case "roleEdit": {
+      if (!isActionEnabled("roleManagement")) {
+        throw new Error("Discord role management is disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const roleId = readStringParam(params, "roleId", { required: true });
+      const name = readStringParam(params, "name");
+      const permissions = readStringParam(params, "permissions");
+      const color = readNumberParam(params, "color", { integer: true });
+      const position = readNumberParam(params, "position", { integer: true });
+      const hoist = params.hoist as boolean | undefined;
+      const mentionable = params.mentionable as boolean | undefined;
+      const senderUserId = readStringParam(params, "senderUserId");
+
+      if (senderUserId) {
+        const hasPermission = await hasAnyGuildPermissionDiscord(
+          guildId,
+          senderUserId,
+          [PermissionFlagsBits.ManageRoles],
+          accountId ? { accountId } : undefined,
+        );
+        if (!hasPermission) {
+          throw new Error("Missing permission: MANAGE_ROLES required for this action");
+        }
+      }
+
+      const role = accountId
+        ? await editRoleDiscord(
+            { guildId, roleId, name, permissions, color, position, hoist, mentionable },
+            { accountId },
+          )
+        : await editRoleDiscord({ guildId, roleId, name, permissions, color, position, hoist, mentionable });
+      return jsonResult({ ok: true, role });
+    }
+    case "roleDelete": {
+      if (!isActionEnabled("roleManagement")) {
+        throw new Error("Discord role management is disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const roleId = readStringParam(params, "roleId", { required: true });
+      const senderUserId = readStringParam(params, "senderUserId");
+
+      if (senderUserId) {
+        const hasPermission = await hasAnyGuildPermissionDiscord(
+          guildId,
+          senderUserId,
+          [PermissionFlagsBits.ManageRoles],
+          accountId ? { accountId } : undefined,
+        );
+        if (!hasPermission) {
+          throw new Error("Missing permission: MANAGE_ROLES required for this action");
+        }
+      }
+
+      if (accountId) {
+        await deleteRoleDiscord({ guildId, roleId }, { accountId });
+      } else {
+        await deleteRoleDiscord({ guildId, roleId });
+      }
+      return jsonResult({ ok: true });
+    }
+    case "eventEdit": {
+      if (!isActionEnabled("events")) {
+        throw new Error("Discord events are disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const eventId = readStringParam(params, "eventId", { required: true });
+      const name = readStringParam(params, "name");
+      const description = readStringParam(params, "description");
+      const startTime = readStringParam(params, "startTime");
+      const endTime = readStringParam(params, "endTime");
+      const status = readNumberParam(params, "status", { integer: true });
+
+      const event = accountId
+        ? await editScheduledEventDiscord(
+            { guildId, eventId, name, description, startTime, endTime, status },
+            { accountId },
+          )
+        : await editScheduledEventDiscord({ guildId, eventId, name, description, startTime, endTime, status });
+      return jsonResult({ ok: true, event });
+    }
+    case "eventDelete": {
+      if (!isActionEnabled("events")) {
+        throw new Error("Discord events are disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const eventId = readStringParam(params, "eventId", { required: true });
+
+      if (accountId) {
+        await deleteScheduledEventDiscord({ guildId, eventId }, { accountId });
+      } else {
+        await deleteScheduledEventDiscord({ guildId, eventId });
+      }
+      return jsonResult({ ok: true });
+    }
+    case "voiceCreate": {
+      if (!isActionEnabled("voiceManagement")) {
+        throw new Error("Discord voice management is disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+      const name = readStringParam(params, "name", { required: true });
+      const parentId = readStringParam(params, "parentId");
+      const bitrate = readNumberParam(params, "bitrate", { integer: true });
+      const userLimit = readNumberParam(params, "userLimit", { integer: true });
+
+      const channel = accountId
+        ? await createVoiceChannelDiscord(
+            { guildId, name, parentId, bitrate, userLimit },
+            { accountId },
+          )
+        : await createVoiceChannelDiscord({ guildId, name, parentId, bitrate, userLimit });
+      return jsonResult({ ok: true, channel });
+    }
+    case "voiceEdit": {
+      if (!isActionEnabled("voiceManagement")) {
+        throw new Error("Discord voice management is disabled.");
+      }
+      const channelId = readStringParam(params, "channelId", { required: true });
+      const name = readStringParam(params, "name");
+      const bitrate = readNumberParam(params, "bitrate", { integer: true });
+      const userLimit = readNumberParam(params, "userLimit", { integer: true });
+
+      const channel = accountId
+        ? await editVoiceChannelDiscord({ channelId, name, bitrate, userLimit }, { accountId })
+        : await editVoiceChannelDiscord({ channelId, name, bitrate, userLimit });
+      return jsonResult({ ok: true, channel });
+    }
+    case "voiceActivity": {
+      if (!isActionEnabled("voiceStatus")) {
+        throw new Error("Discord voice status is disabled.");
+      }
+      const guildId = readStringParam(params, "guildId", { required: true });
+
+      const activity = accountId
+        ? await fetchVoiceActivityDiscord(guildId, { accountId })
+        : await fetchVoiceActivityDiscord(guildId);
+      return jsonResult({ ok: true, activity });
     }
     default:
       throw new Error(`Unknown action: ${action}`);
