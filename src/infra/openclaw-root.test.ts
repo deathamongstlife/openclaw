@@ -89,12 +89,12 @@ vi.mock("node:fs/promises", async (importOriginal) => {
   return { ...wrapped, default: wrapped };
 });
 
-describe("resolveOpenClawPackageRoot", () => {
-  let resolveOpenClawPackageRoot: typeof import("./openclaw-root.js").resolveOpenClawPackageRoot;
-  let resolveOpenClawPackageRootSync: typeof import("./openclaw-root.js").resolveOpenClawPackageRootSync;
+describe("resolveJarvisPackageRoot", () => {
+  let resolveJarvisPackageRoot: typeof import("./openclaw-root.js").resolveJarvisPackageRoot;
+  let resolveJarvisPackageRootSync: typeof import("./openclaw-root.js").resolveJarvisPackageRootSync;
 
   beforeAll(async () => {
-    ({ resolveOpenClawPackageRoot, resolveOpenClawPackageRootSync } =
+    ({ resolveJarvisPackageRoot, resolveJarvisPackageRootSync } =
       await import("./openclaw-root.js"));
   });
 
@@ -110,7 +110,7 @@ describe("resolveOpenClawPackageRoot", () => {
     const pkgRoot = path.join(project, "node_modules", "openclaw");
     setFile(path.join(pkgRoot, "package.json"), JSON.stringify({ name: "openclaw" }));
 
-    expect(resolveOpenClawPackageRootSync({ argv1 })).toBe(pkgRoot);
+    expect(resolveJarvisPackageRootSync({ argv1 })).toBe(pkgRoot);
   });
 
   it("resolves package root via symlinked argv1", async () => {
@@ -120,7 +120,7 @@ describe("resolveOpenClawPackageRoot", () => {
     state.realpaths.set(abs(bin), abs(path.join(realPkg, "openclaw.mjs")));
     setFile(path.join(realPkg, "package.json"), JSON.stringify({ name: "openclaw" }));
 
-    expect(resolveOpenClawPackageRootSync({ argv1: bin })).toBe(realPkg);
+    expect(resolveJarvisPackageRootSync({ argv1: bin })).toBe(realPkg);
   });
 
   it("falls back when argv1 realpath throws", async () => {
@@ -130,7 +130,7 @@ describe("resolveOpenClawPackageRoot", () => {
     state.realpathErrors.add(abs(argv1));
     setFile(path.join(pkgRoot, "package.json"), JSON.stringify({ name: "openclaw" }));
 
-    expect(resolveOpenClawPackageRootSync({ argv1 })).toBe(pkgRoot);
+    expect(resolveJarvisPackageRootSync({ argv1 })).toBe(pkgRoot);
   });
 
   it("prefers moduleUrl candidates", async () => {
@@ -138,36 +138,36 @@ describe("resolveOpenClawPackageRoot", () => {
     setFile(path.join(pkgRoot, "package.json"), JSON.stringify({ name: "openclaw" }));
     const moduleUrl = pathToFileURL(path.join(pkgRoot, "dist", "index.js")).toString();
 
-    expect(resolveOpenClawPackageRootSync({ moduleUrl })).toBe(pkgRoot);
+    expect(resolveJarvisPackageRootSync({ moduleUrl })).toBe(pkgRoot);
   });
 
   it("ignores invalid moduleUrl values and falls back to cwd", async () => {
     const pkgRoot = fx("invalid-moduleurl");
     setFile(path.join(pkgRoot, "package.json"), JSON.stringify({ name: "openclaw" }));
 
-    expect(resolveOpenClawPackageRootSync({ moduleUrl: "not-a-file-url", cwd: pkgRoot })).toBe(
+    expect(resolveJarvisPackageRootSync({ moduleUrl: "not-a-file-url", cwd: pkgRoot })).toBe(
       pkgRoot,
     );
     await expect(
-      resolveOpenClawPackageRoot({ moduleUrl: "not-a-file-url", cwd: pkgRoot }),
+      resolveJarvisPackageRoot({ moduleUrl: "not-a-file-url", cwd: pkgRoot }),
     ).resolves.toBe(pkgRoot);
   });
 
-  it("returns null for non-openclaw package roots", async () => {
+  it("returns null for non-jarvis package roots", async () => {
     const pkgRoot = fx("not-openclaw");
     setFile(path.join(pkgRoot, "package.json"), JSON.stringify({ name: "not-openclaw" }));
 
-    expect(resolveOpenClawPackageRootSync({ cwd: pkgRoot })).toBeNull();
+    expect(resolveJarvisPackageRootSync({ cwd: pkgRoot })).toBeNull();
   });
 
   it("async resolver matches sync behavior", async () => {
     const pkgRoot = fx("async");
     setFile(path.join(pkgRoot, "package.json"), JSON.stringify({ name: "openclaw" }));
 
-    await expect(resolveOpenClawPackageRoot({ cwd: pkgRoot })).resolves.toBe(pkgRoot);
+    await expect(resolveJarvisPackageRoot({ cwd: pkgRoot })).resolves.toBe(pkgRoot);
   });
 
   it("async resolver returns null when no package roots exist", async () => {
-    await expect(resolveOpenClawPackageRoot({ cwd: fx("missing") })).resolves.toBeNull();
+    await expect(resolveJarvisPackageRoot({ cwd: fx("missing") })).resolves.toBeNull();
   });
 });

@@ -1,6 +1,6 @@
-# OpenClaw Coding Standards & Conventions
+# Jarvis Coding Standards & Conventions
 
-**Purpose**: This document defines coding standards, patterns, and best practices for OpenClaw development.
+**Purpose**: This document defines coding standards, patterns, and best practices for Jarvis development.
 **Audience**: AI coding assistants (Claude), contributors, and maintainers.
 
 ---
@@ -52,7 +52,7 @@ import type { Express } from "express";
 
 // 3. Internal imports (relative paths)
 import { resolveSessionPath } from "../sessions/utils.js";
-import type { OpenClawConfig } from "../config/types.js";
+import type { JarvisConfig } from "../config/types.js";
 import { logger } from "../infra/logger.js";
 
 // 4. Type-only imports separated when possible
@@ -88,7 +88,7 @@ All channel implementations follow the plugin pattern:
 
 ```typescript
 // extensions/[channel]/index.ts
-import type { OpenClawPluginApi } from "openclaw/plugin-sdk";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk";
 
 export default {
   id: "my-channel",
@@ -96,7 +96,7 @@ export default {
   description: "Integration for My Channel",
   configSchema: myChannelConfigSchema(),
 
-  register(api: OpenClawPluginApi) {
+  register(api: JarvisPluginApi) {
     // Set up runtime context
     setChannelRuntime(api.runtime);
 
@@ -142,10 +142,10 @@ export class MyService {
 ### Error Handling Pattern
 
 ```typescript
-import { OpenClawError, ErrorCode } from "../infra/errors.js";
+import { JarvisError, ErrorCode } from "../infra/errors.js";
 
 // Custom error types
-export class SessionNotFoundError extends OpenClawError {
+export class SessionNotFoundError extends JarvisError {
   constructor(sessionKey: string) {
     super({
       code: ErrorCode.SESSION_NOT_FOUND,
@@ -164,7 +164,7 @@ export async function loadSession(key: string): Promise<Session> {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") {
       throw new SessionNotFoundError(key);
     }
-    throw new OpenClawError({
+    throw new JarvisError({
       code: ErrorCode.SESSION_LOAD_FAILED,
       message: "Failed to load session",
       context: { key },
@@ -617,7 +617,7 @@ logger.info("Discord bot authenticated", {
 });
 
 // ✅ GOOD: Mask sensitive data in API responses
-function sanitizeConfig(config: OpenClawConfig): Sanitized<OpenClawConfig> {
+function sanitizeConfig(config: JarvisConfig): Sanitized<JarvisConfig> {
   return {
     ...config,
     channels: {
@@ -863,4 +863,4 @@ Run `pnpm check` before committing.
 ---
 
 **Last Updated**: 2026-03-11
-**Maintained By**: OpenClaw Team
+**Maintained By**: Jarvis Team

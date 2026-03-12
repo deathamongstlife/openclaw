@@ -1,7 +1,7 @@
 ---
-summary: "Uninstall OpenClaw completely (CLI, service, state, workspace)"
+summary: "Uninstall Jarvis completely (CLI, service, state, workspace)"
 read_when:
-  - You want to remove OpenClaw from a machine
+  - You want to remove Jarvis from a machine
   - The gateway service is still running after uninstall
 title: "Uninstall"
 ---
@@ -18,14 +18,14 @@ Two paths:
 Recommended: use the built-in uninstaller:
 
 ```bash
-openclaw uninstall
+jarvis uninstall
 ```
 
 Non-interactive (automation / npx):
 
 ```bash
-openclaw uninstall --all --yes --non-interactive
-npx -y openclaw uninstall --all --yes --non-interactive
+jarvis uninstall --all --yes --non-interactive
+npx -y jarvis uninstall --all --yes --non-interactive
 ```
 
 Manual steps (same result):
@@ -33,13 +33,13 @@ Manual steps (same result):
 1. Stop the gateway service:
 
 ```bash
-openclaw gateway stop
+jarvis gateway stop
 ```
 
 2. Uninstall the gateway service (launchd/systemd/schtasks):
 
 ```bash
-openclaw gateway uninstall
+jarvis gateway uninstall
 ```
 
 3. Delete state + config:
@@ -67,7 +67,7 @@ bun remove -g openclaw
 6. If you installed the macOS app:
 
 ```bash
-rm -rf /Applications/OpenClaw.app
+rm -rf /Applications/Jarvis.app
 ```
 
 Notes:
@@ -92,21 +92,21 @@ If you used a profile, replace the label and plist name with `ai.openclaw.<profi
 
 ### Linux (systemd user unit)
 
-Default unit name is `openclaw-gateway.service` (or `openclaw-gateway-<profile>.service`):
+Default unit name is `jarvis-gateway.service` (or `jarvis-gateway-<profile>.service`):
 
 ```bash
-systemctl --user disable --now openclaw-gateway.service
-rm -f ~/.config/systemd/user/openclaw-gateway.service
+systemctl --user disable --now jarvis-gateway.service
+rm -f ~/.config/systemd/user/jarvis-gateway.service
 systemctl --user daemon-reload
 ```
 
 ### Windows (Scheduled Task)
 
-Default task name is `OpenClaw Gateway` (or `OpenClaw Gateway (<profile>)`).
+Default task name is `Jarvis Gateway` (or `Jarvis Gateway (<profile>)`).
 The task script lives under your state dir.
 
 ```powershell
-schtasks /Delete /F /TN "OpenClaw Gateway"
+schtasks /Delete /F /TN "Jarvis Gateway"
 Remove-Item -Force "$env:USERPROFILE\.openclaw\gateway.cmd"
 ```
 

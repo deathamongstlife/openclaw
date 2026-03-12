@@ -46,7 +46,7 @@ send_notification() {
         # Check if we can still use openclaw
         if "$SCRIPT_DIR/claude-auth-status.sh" simple 2>/dev/null | grep -q "OK\|EXPIRING"; then
             echo "Sending via OpenClaw to $NOTIFY_PHONE..."
-            openclaw send --to "$NOTIFY_PHONE" --message "$message" 2>/dev/null || true
+            jarvis send --to "$NOTIFY_PHONE" --message "$message" 2>/dev/null || true
         fi
     fi
 

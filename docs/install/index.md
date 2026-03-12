@@ -1,5 +1,5 @@
 ---
-summary: "Install OpenClaw — installer script, npm/pnpm, from source, Docker, and more"
+summary: "Install Jarvis — installer script, npm/pnpm, from source, Docker, and more"
 read_when:
   - You need an install method other than the Getting Started quickstart
   - You want to deploy to a cloud platform
@@ -18,17 +18,17 @@ Already followed [Getting Started](/start/getting-started)? You're all set — t
 - `pnpm` only if you build from source
 
 <Note>
-On Windows, we strongly recommend running OpenClaw under [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install).
+On Windows, we strongly recommend running Jarvis under [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install).
 </Note>
 
 ## Install methods
 
 <Tip>
-The **installer script** is the recommended way to install OpenClaw. It handles Node detection, installation, and onboarding in one step.
+The **installer script** is the recommended way to install Jarvis. It handles Node detection, installation, and onboarding in one step.
 </Tip>
 
 <Warning>
-For VPS/cloud hosts, avoid third-party "1-click" marketplace images when possible. Prefer a clean base OS image (for example Ubuntu LTS), then install OpenClaw yourself with the installer script.
+For VPS/cloud hosts, avoid third-party "1-click" marketplace images when possible. Prefer a clean base OS image (for example Ubuntu LTS), then install Jarvis yourself with the installer script.
 </Warning>
 
 <AccordionGroup>
@@ -76,7 +76,7 @@ For VPS/cloud hosts, avoid third-party "1-click" marketplace images when possibl
       <Tab title="npm">
         ```bash
         npm install -g openclaw@latest
-        openclaw onboard --install-daemon
+        jarvis onboard --install-daemon
         ```
 
         <Accordion title="sharp build errors?">
@@ -93,7 +93,7 @@ For VPS/cloud hosts, avoid third-party "1-click" marketplace images when possibl
         ```bash
         pnpm add -g openclaw@latest
         pnpm approve-builds -g        # approve openclaw, node-llama-cpp, sharp, etc.
-        openclaw onboard --install-daemon
+        jarvis onboard --install-daemon
         ```
 
         <Note>
@@ -109,7 +109,7 @@ For VPS/cloud hosts, avoid third-party "1-click" marketplace images when possibl
 
     <Steps>
       <Step title="Clone and build">
-        Clone the [OpenClaw repo](https://github.com/openclaw/openclaw) and build:
+        Clone the [Jarvis repo](https://github.com/openclaw/openclaw) and build:
 
         ```bash
         git clone https://github.com/openclaw/openclaw.git
@@ -130,7 +130,7 @@ For VPS/cloud hosts, avoid third-party "1-click" marketplace images when possibl
       </Step>
       <Step title="Run onboarding">
         ```bash
-        openclaw onboard --install-daemon
+        jarvis onboard --install-daemon
         ```
       </Step>
     </Steps>
@@ -165,9 +165,9 @@ For VPS/cloud hosts, avoid third-party "1-click" marketplace images when possibl
 Verify everything is working:
 
 ```bash
-openclaw doctor         # check for config issues
-openclaw status         # gateway status
-openclaw dashboard      # open the browser UI
+jarvis doctor         # check for config issues
+jarvis status         # gateway status
+jarvis dashboard      # open the browser UI
 ```
 
 If you need custom runtime paths, use:
@@ -207,12 +207,12 @@ Then open a new terminal (or `rehash` in zsh / `hash -r` in bash).
 
 <CardGroup cols={3}>
   <Card title="Updating" href="/install/updating" icon="refresh-cw">
-    Keep OpenClaw up to date.
+    Keep Jarvis up to date.
   </Card>
   <Card title="Migrating" href="/install/migrating" icon="arrow-right">
     Move to a new machine.
   </Card>
   <Card title="Uninstall" href="/install/uninstall" icon="trash-2">
-    Remove OpenClaw completely.
+    Remove Jarvis completely.
   </Card>
 </CardGroup>

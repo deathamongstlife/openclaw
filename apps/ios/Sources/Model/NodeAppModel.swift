@@ -1,5 +1,5 @@
 import OpenClawChatUI
-import OpenClawKit
+import JarvisKit
 import OpenClawProtocol
 import Observation
 import os
@@ -927,7 +927,7 @@ final class NodeAppModel {
             return BridgeInvokeResponse(id: req.id, ok: true, payloadJSON: json)
 
         case OpenClawCanvasA2UICommand.push.rawValue, OpenClawCanvasA2UICommand.pushJSONL.rawValue:
-            let messages: [OpenClawKit.AnyCodable]
+            let messages: [JarvisKit.AnyCodable]
             if command == OpenClawCanvasA2UICommand.pushJSONL.rawValue {
                 let params = try Self.decodeParams(OpenClawCanvasA2UIPushJSONLParams.self, from: req.paramsJSON)
                 messages = try OpenClawCanvasA2UIJSONL.decodeMessagesFromJSONL(params.jsonl)

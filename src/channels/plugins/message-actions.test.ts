@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import type { OpenClawConfig } from "../../config/config.js";
+import type { JarvisConfig } from "../../config/config.js";
 import { setActivePluginRegistry } from "../../plugins/runtime.js";
 import {
   createChannelTestPluginBase,
@@ -66,22 +66,22 @@ describe("message action capability checks", () => {
   it("aggregates buttons/card support across plugins", () => {
     activateMessageActionTestRegistry();
 
-    expect(supportsChannelMessageButtons({} as OpenClawConfig)).toBe(true);
-    expect(supportsChannelMessageCards({} as OpenClawConfig)).toBe(true);
+    expect(supportsChannelMessageButtons({} as JarvisConfig)).toBe(true);
+    expect(supportsChannelMessageCards({} as JarvisConfig)).toBe(true);
   });
 
   it("checks per-channel capabilities", () => {
     activateMessageActionTestRegistry();
 
     expect(
-      supportsChannelMessageButtonsForChannel({ cfg: {} as OpenClawConfig, channel: "discord" }),
+      supportsChannelMessageButtonsForChannel({ cfg: {} as JarvisConfig, channel: "discord" }),
     ).toBe(true);
     expect(
-      supportsChannelMessageButtonsForChannel({ cfg: {} as OpenClawConfig, channel: "telegram" }),
+      supportsChannelMessageButtonsForChannel({ cfg: {} as JarvisConfig, channel: "telegram" }),
     ).toBe(false);
     expect(
-      supportsChannelMessageCardsForChannel({ cfg: {} as OpenClawConfig, channel: "telegram" }),
+      supportsChannelMessageCardsForChannel({ cfg: {} as JarvisConfig, channel: "telegram" }),
     ).toBe(true);
-    expect(supportsChannelMessageCardsForChannel({ cfg: {} as OpenClawConfig })).toBe(false);
+    expect(supportsChannelMessageCardsForChannel({ cfg: {} as JarvisConfig })).toBe(false);
   });
 });

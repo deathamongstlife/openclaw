@@ -14,28 +14,28 @@ Use this page for scheduler and delivery issues (`cron` + `heartbeat`).
 ## Command ladder
 
 ```bash
-openclaw status
-openclaw gateway status
-openclaw logs --follow
-openclaw doctor
-openclaw channels status --probe
+jarvis status
+jarvis gateway status
+jarvis logs --follow
+jarvis doctor
+jarvis channels status --probe
 ```
 
 Then run automation checks:
 
 ```bash
-openclaw cron status
-openclaw cron list
-openclaw system heartbeat last
+jarvis cron status
+jarvis cron list
+jarvis system heartbeat last
 ```
 
 ## Cron not firing
 
 ```bash
-openclaw cron status
-openclaw cron list
-openclaw cron runs --id <jobId> --limit 20
-openclaw logs --follow
+jarvis cron status
+jarvis cron list
+jarvis cron runs --id <jobId> --limit 20
+jarvis logs --follow
 ```
 
 Good output looks like:
@@ -53,10 +53,10 @@ Common signatures:
 ## Cron fired but no delivery
 
 ```bash
-openclaw cron runs --id <jobId> --limit 20
-openclaw cron list
-openclaw channels status --probe
-openclaw logs --follow
+jarvis cron runs --id <jobId> --limit 20
+jarvis cron list
+jarvis channels status --probe
+jarvis logs --follow
 ```
 
 Good output looks like:
@@ -74,10 +74,10 @@ Common signatures:
 ## Heartbeat suppressed or skipped
 
 ```bash
-openclaw system heartbeat last
-openclaw logs --follow
-openclaw config get agents.defaults.heartbeat
-openclaw channels status --probe
+jarvis system heartbeat last
+jarvis logs --follow
+jarvis config get agents.defaults.heartbeat
+jarvis channels status --probe
 ```
 
 Good output looks like:
@@ -95,11 +95,11 @@ Common signatures:
 ## Timezone and activeHours gotchas
 
 ```bash
-openclaw config get agents.defaults.heartbeat.activeHours
-openclaw config get agents.defaults.heartbeat.activeHours.timezone
-openclaw config get agents.defaults.userTimezone || echo "agents.defaults.userTimezone not set"
-openclaw cron list
-openclaw logs --follow
+jarvis config get agents.defaults.heartbeat.activeHours
+jarvis config get agents.defaults.heartbeat.activeHours.timezone
+jarvis config get agents.defaults.userTimezone || echo "agents.defaults.userTimezone not set"
+jarvis cron list
+jarvis logs --follow
 ```
 
 Quick rules:

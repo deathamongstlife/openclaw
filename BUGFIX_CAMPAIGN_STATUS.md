@@ -1,4 +1,4 @@
-# OpenClaw → J.A.R.V.I.S. Bug Fix Campaign
+# Jarvis → J.A.R.V.I.S. Bug Fix Campaign
 
 **Campaign Started**: 2026-03-11 16:38 UTC
 **Status**: IN PROGRESS - 8 Agents Working in Parallel
@@ -153,7 +153,7 @@
 1. **Monitor agent progress** (ongoing)
 2. **Collect completed fixes** (when agents finish)
 3. **Apply all code changes**
-4. **Build and test OpenClaw**
+4. **Build and test Jarvis**
 5. **Create comprehensive changelog**
 6. **Fork to J.A.R.V.I.S.**
 7. **Deploy and verify**
@@ -166,7 +166,7 @@
 - Agents are adding comprehensive error handling
 - Logging and validation being improved throughout
 - Tests being added where applicable
-- Code following OpenClaw coding standards
+- Code following Jarvis coding standards
 
 ---
 

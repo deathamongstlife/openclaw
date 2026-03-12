@@ -352,7 +352,7 @@ export const ircOnboardingAdapter: ChannelOnboardingAdapter = {
       const realname = String(
         await prompter.text({
           message: "IRC real name",
-          initialValue: resolved.config.realname || "OpenClaw",
+          initialValue: resolved.config.realname || "Jarvis",
           validate: (value) => (String(value ?? "").trim() ? undefined : "Required"),
         }),
       ).trim();
@@ -422,7 +422,7 @@ export const ircOnboardingAdapter: ChannelOnboardingAdapter = {
     await prompter.note(
       [
         "Next: restart gateway and verify status.",
-        "Command: openclaw channels status --probe",
+        "Command: jarvis channels status --probe",
         `Docs: ${formatDocsLink("/channels/irc", "channels/irc")}`,
       ].join("\n"),
       "IRC next steps",

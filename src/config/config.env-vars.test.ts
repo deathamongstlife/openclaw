@@ -9,26 +9,26 @@ import {
   createConfigRuntimeEnv,
 } from "./env-vars.js";
 import { withEnvOverride, withTempHome } from "./test-helpers.js";
-import type { OpenClawConfig } from "./types.js";
+import type { JarvisConfig } from "./types.js";
 
 describe("config env vars", () => {
   it("applies env vars from env block when missing", async () => {
     await withEnvOverride({ OPENROUTER_API_KEY: undefined }, async () => {
-      applyConfigEnvVars({ env: { vars: { OPENROUTER_API_KEY: "config-key" } } } as OpenClawConfig);
+      applyConfigEnvVars({ env: { vars: { OPENROUTER_API_KEY: "config-key" } } } as JarvisConfig);
       expect(process.env.OPENROUTER_API_KEY).toBe("config-key");
     });
   });
 
   it("does not override existing env vars", async () => {
     await withEnvOverride({ OPENROUTER_API_KEY: "existing-key" }, async () => {
-      applyConfigEnvVars({ env: { vars: { OPENROUTER_API_KEY: "config-key" } } } as OpenClawConfig);
+      applyConfigEnvVars({ env: { vars: { OPENROUTER_API_KEY: "config-key" } } } as JarvisConfig);
       expect(process.env.OPENROUTER_API_KEY).toBe("existing-key");
     });
   });
 
   it("applies env vars from env.vars when missing", async () => {
     await withEnvOverride({ GROQ_API_KEY: undefined }, async () => {
-      applyConfigEnvVars({ env: { vars: { GROQ_API_KEY: "gsk-config" } } } as OpenClawConfig);
+      applyConfigEnvVars({ env: { vars: { GROQ_API_KEY: "gsk-config" } } } as JarvisConfig);
       expect(process.env.GROQ_API_KEY).toBe("gsk-config");
     });
   });
@@ -37,7 +37,7 @@ describe("config env vars", () => {
     await withEnvOverride({ OPENROUTER_API_KEY: undefined }, async () => {
       const merged = createConfigRuntimeEnv({
         env: { vars: { OPENROUTER_API_KEY: "config-key" } },
-      } as OpenClawConfig);
+      } as JarvisConfig);
       expect(merged.OPENROUTER_API_KEY).toBe("config-key");
       expect(process.env.OPENROUTER_API_KEY).toBeUndefined();
     });
@@ -64,14 +64,14 @@ describe("config env vars", () => {
             },
           },
         };
-        const entries = collectConfigRuntimeEnvVars(config as OpenClawConfig);
+        const entries = collectConfigRuntimeEnvVars(config as JarvisConfig);
         expect(entries.BASH_ENV).toBeUndefined();
         expect(entries.SHELL).toBeUndefined();
         expect(entries.HOME).toBeUndefined();
         expect(entries.ZDOTDIR).toBeUndefined();
         expect(entries.OPENROUTER_API_KEY).toBe("config-key");
 
-        applyConfigEnvVars(config as OpenClawConfig);
+        applyConfigEnvVars(config as JarvisConfig);
         expect(process.env.BASH_ENV).toBeUndefined();
         expect(process.env.SHELL).toBeUndefined();
         expect(process.env.HOME).toBeUndefined();
@@ -92,7 +92,7 @@ describe("config env vars", () => {
           "NOT-PORTABLE": "bad",
         },
       };
-      const entries = collectConfigRuntimeEnvVars(config as OpenClawConfig);
+      const entries = collectConfigRuntimeEnvVars(config as JarvisConfig);
       expect(entries.OPENROUTER_API_KEY).toBe("config-key");
       expect(entries[" BAD KEY"]).toBeUndefined();
       expect(entries["NOT-PORTABLE"]).toBeUndefined();
@@ -109,7 +109,7 @@ describe("config env vars", () => {
         await fs.mkdir(stateDir, { recursive: true });
         await fs.writeFile(path.join(stateDir, ".env"), "BRAVE_API_KEY=from-dotenv\n", "utf-8");
 
-        const config: OpenClawConfig = {
+        const config: JarvisConfig = {
           tools: {
             web: {
               search: {
@@ -120,12 +120,12 @@ describe("config env vars", () => {
         };
 
         loadDotEnv({ quiet: true });
-        const first = resolveConfigEnvVars(config, process.env) as OpenClawConfig;
+        const first = resolveConfigEnvVars(config, process.env) as JarvisConfig;
         expect(first.tools?.web?.search?.apiKey).toBe("from-dotenv");
 
         delete process.env.BRAVE_API_KEY;
         loadDotEnv({ quiet: true });
-        const second = resolveConfigEnvVars(config, process.env) as OpenClawConfig;
+        const second = resolveConfigEnvVars(config, process.env) as JarvisConfig;
         expect(second.tools?.web?.search?.apiKey).toBe("from-dotenv");
       });
     });

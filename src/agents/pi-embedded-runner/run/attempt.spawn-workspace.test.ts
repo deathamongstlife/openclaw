@@ -102,7 +102,7 @@ vi.mock("../skills-runtime.js", () => ({
 }));
 
 vi.mock("../../docs-path.js", () => ({
-  resolveOpenClawDocsPath: async () => undefined,
+  resolveJarvisDocsPath: async () => undefined,
 }));
 
 vi.mock("../../pi-project-settings.js", () => ({

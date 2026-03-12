@@ -5,7 +5,7 @@ import {
   fetchOllamaModels,
   resolveOllamaApiBase,
 } from "../agents/ollama-models.js";
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import type { RuntimeEnv } from "../runtime.js";
 import { WizardCancelledError, type WizardPrompter } from "../wizard/prompts.js";
 import { isRemoteEnvironment } from "./oauth-env.js";
@@ -244,10 +244,10 @@ function buildOllamaModelsConfig(modelNames: string[]) {
 }
 
 function applyOllamaProviderConfig(
-  cfg: OpenClawConfig,
+  cfg: JarvisConfig,
   baseUrl: string,
   modelNames: string[],
-): OpenClawConfig {
+): JarvisConfig {
   return {
     ...cfg,
     models: {
@@ -279,10 +279,10 @@ async function storeOllamaCredential(agentDir?: string): Promise<void> {
  * Model selection is handled by the standard model picker downstream.
  */
 export async function promptAndConfigureOllama(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   prompter: WizardPrompter;
   agentDir?: string;
-}): Promise<{ config: OpenClawConfig; defaultModelId: string }> {
+}): Promise<{ config: JarvisConfig; defaultModelId: string }> {
   const { prompter } = params;
 
   // 1. Prompt base URL
@@ -393,10 +393,10 @@ export async function promptAndConfigureOllama(params: {
 
 /** Non-interactive: auto-discover models and configure provider. */
 export async function configureOllamaNonInteractive(params: {
-  nextConfig: OpenClawConfig;
+  nextConfig: JarvisConfig;
   opts: OnboardOptions;
   runtime: RuntimeEnv;
-}): Promise<OpenClawConfig> {
+}): Promise<JarvisConfig> {
   const { opts, runtime } = params;
   const configuredBaseUrl = (opts.customBaseUrl?.trim() || OLLAMA_DEFAULT_BASE_URL).replace(
     /\/+$/,
@@ -486,7 +486,7 @@ export async function configureOllamaNonInteractive(params: {
 
 /** Pull the configured default Ollama model if it isn't already available locally. */
 export async function ensureOllamaModelPulled(params: {
-  config: OpenClawConfig;
+  config: JarvisConfig;
   prompter: WizardPrompter;
 }): Promise<void> {
   const modelCfg = params.config.agents?.defaults?.model;

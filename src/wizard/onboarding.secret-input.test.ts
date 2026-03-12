@@ -1,15 +1,15 @@
 import { describe, expect, it } from "vitest";
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { resolveOnboardingSecretInputString } from "./onboarding.secret-input.js";
 
-function makeConfig(): OpenClawConfig {
+function makeConfig(): JarvisConfig {
   return {
     secrets: {
       providers: {
         default: { source: "env" },
       },
     },
-  } as OpenClawConfig;
+  } as JarvisConfig;
 }
 
 describe("resolveOnboardingSecretInputString", () => {

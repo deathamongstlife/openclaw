@@ -90,7 +90,7 @@ async function main() {
     maxProtocol: 3,
     client: {
       id: "cli",
-      displayName: "openclaw ios node e2e",
+      displayName: "jarvis ios node e2e",
       version: "dev",
       platform: "dev",
       mode: "cli",
@@ -154,7 +154,7 @@ async function main() {
     {
       id: "system.notify",
       command: "system.notify",
-      params: { title: "OpenClaw E2E", body: `ios-node-e2e @ ${isoNow()}`, delivery: "system" },
+      params: { title: "Jarvis E2E", body: `ios-node-e2e @ ${isoNow()}`, delivery: "system" },
     },
     {
       id: "contacts.search",

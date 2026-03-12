@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This document outlines the complete strategy for forking OpenClaw into J.A.R.V.I.S. (Just A Rather Very Intelligent System), maintaining all 102+ critical bug fixes while establishing an independent development path.
+This document outlines the complete strategy for forking Jarvis into J.A.R.V.I.S. (Just A Rather Very Intelligent System), maintaining all 102+ critical bug fixes while establishing an independent development path.
 
 ## 1. Repository Setup
 
@@ -10,7 +10,7 @@ This document outlines the complete strategy for forking OpenClaw into J.A.R.V.I
 
 ```bash
 # Step 1: Fork on GitHub
-# Go to: https://github.com/openclaw/openclaw
+# Go to: https://github.com/deathamongstlife/jarvis
 # Click "Fork" → Create new organization "jarvis-ai" (or use personal account)
 # Repository name: "jarvis"
 
@@ -19,7 +19,7 @@ git clone https://github.com/YOUR_USERNAME/jarvis.git
 cd jarvis
 
 # Step 3: Add upstream remote
-git remote add upstream https://github.com/openclaw/openclaw.git
+git remote add upstream https://github.com/deathamongstlife/jarvis.git
 git remote -v
 
 # Step 4: Create development branch
@@ -54,7 +54,7 @@ Configure on GitHub Settings → Branches:
 package.json                           - name, description, repository URLs
 apps/android/app/build.gradle.kts     - applicationId, versionName
 apps/ios/Sources/Info.plist           - CFBundleIdentifier, CFBundleName
-apps/macos/Sources/OpenClaw/Resources/Info.plist - Bundle IDs
+apps/macos/Sources/Jarvis/Resources/Info.plist - Bundle IDs
 ```
 
 #### Documentation
@@ -107,39 +107,39 @@ replace_in_file() {
 }
 
 # Package name changes
-replace_in_file "package.json" '"name": "openclaw"' '"name": "jarvis"'
-replace_in_file "package.json" '"openclaw"' '"jarvis"'
-replace_in_file "package.json" 'openclaw/openclaw' 'jarvis-ai/jarvis'
+replace_in_file "package.json" '"name": "jarvis"' '"name": "jarvis"'
+replace_in_file "package.json" '"jarvis"' '"jarvis"'
+replace_in_file "package.json" 'jarvis/jarvis' 'jarvis-ai/jarvis'
 
 # Android app ID
 replace_in_file "apps/android/app/build.gradle.kts" \
-  'applicationId = "ai.openclaw.app"' \
+  'applicationId = "ai.jarvis.app"' \
   'applicationId = "ai.jarvis.app"'
 
 # iOS bundle ID
 replace_in_file "apps/ios/Sources/Info.plist" \
-  'ai.openclaw.app' \
+  'ai.jarvis.app' \
   'ai.jarvis.app'
 
 # macOS bundle ID
-replace_in_file "apps/macos/Sources/OpenClaw/Resources/Info.plist" \
-  'ai.openclaw' \
+replace_in_file "apps/macos/Sources/Jarvis/Resources/Info.plist" \
+  'ai.jarvis' \
   'ai.jarvis'
 
 # Update all markdown files
 find docs -name "*.md" -type f | while read -r file; do
-  replace_in_file "$file" "OpenClaw" "J.A.R.V.I.S."
-  replace_in_file "$file" "openclaw" "jarvis"
+  replace_in_file "$file" "Jarvis" "J.A.R.V.I.S."
+  replace_in_file "$file" "jarvis" "jarvis"
 done
 
 # Update README
-replace_in_file "README.md" "OpenClaw" "J.A.R.V.I.S."
-replace_in_file "README.md" "openclaw/openclaw" "jarvis-ai/jarvis"
+replace_in_file "README.md" "Jarvis" "J.A.R.V.I.S."
+replace_in_file "README.md" "jarvis/jarvis" "jarvis-ai/jarvis"
 
 # Update GitHub templates
 find .github -name "*.yml" -o -name "*.md" | while read -r file; do
-  replace_in_file "$file" "OpenClaw" "J.A.R.V.I.S."
-  replace_in_file "$file" "openclaw/openclaw" "jarvis-ai/jarvis"
+  replace_in_file "$file" "Jarvis" "J.A.R.V.I.S."
+  replace_in_file "$file" "jarvis/jarvis" "jarvis-ai/jarvis"
 done
 
 echo "✓ Rebranding complete!"
@@ -481,7 +481,7 @@ Follow Conventional Commits format.
 - `feature` - New feature request
 - `documentation` - Documentation improvements
 - `security` - Security-related issues
-- `upstream` - Related to OpenClaw upstream
+- `upstream` - Related to Jarvis upstream
 - `jarvis-specific` - J.A.R.V.I.S.-only features
 
 **Issue Templates:**
@@ -563,11 +563,11 @@ git checkout main
 
 ### 11.1 License Compliance
 
-J.A.R.V.I.S. inherits OpenClaw's license (verify in LICENSE file).
+J.A.R.V.I.S. inherits Jarvis's license (verify in LICENSE file).
 
 **Requirements:**
 - Maintain original copyright notices
-- Attribute OpenClaw as upstream source
+- Attribute Jarvis as upstream source
 - Document all modifications
 - Comply with license terms
 
@@ -578,10 +578,10 @@ Add to README.md:
 ```markdown
 ## Attribution
 
-J.A.R.V.I.S. is a fork of [OpenClaw](https://github.com/openclaw/openclaw),
+J.A.R.V.I.S. is a fork of [Jarvis](https://github.com/deathamongstlife/jarvis),
 enhanced with 102+ critical bug fixes and advanced features.
 
-Original work Copyright (c) 2024 OpenClaw Contributors
+Original work Copyright (c) 2024 Jarvis Contributors
 Modifications Copyright (c) 2026 J.A.R.V.I.S. Team
 
 Licensed under [LICENSE TYPE] (see LICENSE file)
@@ -591,7 +591,7 @@ Licensed under [LICENSE TYPE] (see LICENSE file)
 
 ### 12.1 Pre-Fork Checklist
 
-- [x] Review all OpenClaw issues (102+ fixes applied)
+- [x] Review all Jarvis issues (102+ fixes applied)
 - [x] Document all changes (92+ KB documentation)
 - [x] Create comprehensive test suite
 - [x] Prepare rebranding scripts

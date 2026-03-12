@@ -1,6 +1,6 @@
 import Foundation
 import Observation
-import OpenClawKit
+import JarvisKit
 import OpenClawProtocol
 import SwiftUI
 
@@ -166,8 +166,8 @@ final class ControlChannel {
         timeoutMs: Double? = nil) async throws -> Data
     {
         do {
-            let rawParams = params?.reduce(into: [String: OpenClawKit.AnyCodable]()) {
-                $0[$1.key] = OpenClawKit.AnyCodable($1.value.base)
+            let rawParams = params?.reduce(into: [String: JarvisKit.AnyCodable]()) {
+                $0[$1.key] = JarvisKit.AnyCodable($1.value.base)
             }
             let data = try await GatewayConnection.shared.request(
                 method: method,
@@ -403,7 +403,7 @@ final class ControlChannel {
         if let dict = value.value as? [String: OpenClawProtocol.AnyCodable] {
             return dict
         }
-        if let dict = value.value as? [String: OpenClawKit.AnyCodable],
+        if let dict = value.value as? [String: JarvisKit.AnyCodable],
            let data = try? JSONEncoder().encode(dict),
            let decoded = try? JSONDecoder().decode([String: OpenClawProtocol.AnyCodable].self, from: data)
         {

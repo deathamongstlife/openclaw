@@ -39,7 +39,7 @@ Android connects directly to the Gateway WebSocket (default `ws://<host>:18789`)
 ### 1) Start the Gateway
 
 ```bash
-openclaw gateway --port 18789 --verbose
+jarvis gateway --port 18789 --verbose
 ```
 
 Confirm in logs you see something like:
@@ -89,9 +89,9 @@ After the first successful pairing, Android auto-reconnects on launch:
 On the gateway machine:
 
 ```bash
-openclaw devices list
-openclaw devices approve <requestId>
-openclaw devices reject <requestId>
+jarvis devices list
+jarvis devices approve <requestId>
+jarvis devices reject <requestId>
 ```
 
 Pairing details: [Pairing](/channels/pairing).
@@ -101,13 +101,13 @@ Pairing details: [Pairing](/channels/pairing).
 - Via nodes status:
 
   ```bash
-  openclaw nodes status
+  jarvis nodes status
   ```
 
 - Via Gateway:
 
   ```bash
-  openclaw gateway call node.list --params "{}"
+  jarvis gateway call node.list --params "{}"
   ```
 
 ### 6) Chat + history
@@ -131,7 +131,7 @@ Note: nodes load canvas from the Gateway HTTP server (same port as `gateway.port
 2. Navigate the node to it (LAN):
 
 ```bash
-openclaw nodes invoke --node "<Android Node>" --command canvas.navigate --params '{"url":"http://<gateway-hostname>.local:18789/__openclaw__/canvas/"}'
+jarvis nodes invoke --node "<Android Node>" --command canvas.navigate --params '{"url":"http://<gateway-hostname>.local:18789/__openclaw__/canvas/"}'
 ```
 
 Tailnet (optional): if both devices are on Tailscale, use a MagicDNS name or tailnet IP instead of `.local`, e.g. `http://<gateway-magicdns>:18789/__openclaw__/canvas/`.

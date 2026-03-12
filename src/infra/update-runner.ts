@@ -747,7 +747,7 @@ export async function runGatewayUpdate(opts: UpdateRunnerOptions = {}): Promise<
       .catch(() => false);
     if (!doctorEntryExists) {
       steps.push({
-        name: "openclaw doctor entry",
+        name: "jarvis doctor entry",
         command: `verify ${doctorEntry}`,
         cwd: gitRoot,
         durationMs: 0,
@@ -770,7 +770,7 @@ export async function runGatewayUpdate(opts: UpdateRunnerOptions = {}): Promise<
     const doctorNodePath = await resolveStableNodePath(process.execPath);
     const doctorArgv = [doctorNodePath, doctorEntry, "doctor", "--non-interactive", "--fix"];
     const doctorStep = await runStep(
-      step("openclaw doctor", doctorArgv, gitRoot, { OPENCLAW_UPDATE_IN_PROGRESS: "1" }),
+      step("jarvis doctor", doctorArgv, gitRoot, { OPENCLAW_UPDATE_IN_PROGRESS: "1" }),
     );
     steps.push(doctorStep);
 

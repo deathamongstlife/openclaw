@@ -20,7 +20,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-log.git", from: "1.8.0"),
         .package(url: "https://github.com/sparkle-project/Sparkle", from: "2.8.1"),
         .package(url: "https://github.com/steipete/Peekaboo.git", branch: "main"),
-        .package(path: "../shared/OpenClawKit"),
+        .package(path: "../shared/JarvisKit"),
         .package(path: "../../Swabble"),
     ],
     targets: [
@@ -33,7 +33,7 @@ let package = Package(
         .target(
             name: "OpenClawDiscovery",
             dependencies: [
-                .product(name: "OpenClawKit", package: "OpenClawKit"),
+                .product(name: "JarvisKit", package: "JarvisKit"),
             ],
             path: "Sources/OpenClawDiscovery",
             swiftSettings: [
@@ -44,9 +44,9 @@ let package = Package(
             dependencies: [
                 "OpenClawIPC",
                 "OpenClawDiscovery",
-                .product(name: "OpenClawKit", package: "OpenClawKit"),
-                .product(name: "OpenClawChatUI", package: "OpenClawKit"),
-                .product(name: "OpenClawProtocol", package: "OpenClawKit"),
+                .product(name: "JarvisKit", package: "JarvisKit"),
+                .product(name: "OpenClawChatUI", package: "JarvisKit"),
+                .product(name: "OpenClawProtocol", package: "JarvisKit"),
                 .product(name: "SwabbleKit", package: "swabble"),
                 .product(name: "MenuBarExtraAccess", package: "MenuBarExtraAccess"),
                 .product(name: "Subprocess", package: "swift-subprocess"),
@@ -69,8 +69,8 @@ let package = Package(
             name: "OpenClawMacCLI",
             dependencies: [
                 "OpenClawDiscovery",
-                .product(name: "OpenClawKit", package: "OpenClawKit"),
-                .product(name: "OpenClawProtocol", package: "OpenClawKit"),
+                .product(name: "JarvisKit", package: "JarvisKit"),
+                .product(name: "OpenClawProtocol", package: "JarvisKit"),
             ],
             path: "Sources/OpenClawMacCLI",
             swiftSettings: [
@@ -82,7 +82,7 @@ let package = Package(
                 "OpenClawIPC",
                 "OpenClaw",
                 "OpenClawDiscovery",
-                .product(name: "OpenClawProtocol", package: "OpenClawKit"),
+                .product(name: "OpenClawProtocol", package: "JarvisKit"),
                 .product(name: "SwabbleKit", package: "swabble"),
             ],
             swiftSettings: [

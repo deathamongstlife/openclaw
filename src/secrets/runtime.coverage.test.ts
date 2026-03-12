@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 import type { AuthProfileStore } from "../agents/auth-profiles.js";
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { getPath, setPathCreateStrict } from "./path-utils.js";
 import { clearSecretsRuntimeSnapshot, prepareSecretsRuntimeSnapshot } from "./runtime.js";
 import { listSecretTargetRegistryEntries } from "./target-registry.js";
@@ -24,8 +24,8 @@ function toConcretePathSegments(pathPattern: string): string[] {
   return out;
 }
 
-function buildConfigForOpenClawTarget(entry: SecretRegistryEntry, envId: string): OpenClawConfig {
-  const config = {} as OpenClawConfig;
+function buildConfigForJarvisTarget(entry: SecretRegistryEntry, envId: string): JarvisConfig {
+  const config = {} as JarvisConfig;
   const refTargetPath =
     entry.secretShape === "sibling_ref" && entry.refPathPattern // pragma: allowlist secret
       ? entry.refPathPattern
@@ -141,7 +141,7 @@ describe("secrets runtime target coverage", () => {
       const envId = `OPENCLAW_SECRET_TARGET_${index}`;
       const expectedValue = `resolved-${entry.id}`;
       const snapshot = await prepareSecretsRuntimeSnapshot({
-        config: buildConfigForOpenClawTarget(entry, envId),
+        config: buildConfigForJarvisTarget(entry, envId),
         env: { [envId]: expectedValue },
         agentDirs: ["/tmp/openclaw-agent-main"],
         loadAuthStore: () => ({ version: 1, profiles: {} }),
@@ -165,7 +165,7 @@ describe("secrets runtime target coverage", () => {
       const envId = `OPENCLAW_AUTH_SECRET_TARGET_${index}`;
       const expectedValue = `resolved-${entry.id}`;
       const snapshot = await prepareSecretsRuntimeSnapshot({
-        config: {} as OpenClawConfig,
+        config: {} as JarvisConfig,
         env: { [envId]: expectedValue },
         agentDirs: ["/tmp/openclaw-agent-main"],
         loadAuthStore: () => buildAuthStoreForTarget(entry, envId),

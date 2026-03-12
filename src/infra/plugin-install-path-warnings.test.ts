@@ -27,13 +27,13 @@ describe("plugin install path warnings", () => {
       formatPluginInstallPathIssue({
         issue: issue!,
         pluginLabel: "Matrix",
-        defaultInstallCommand: "openclaw plugins install @openclaw/matrix",
-        repoInstallCommand: "openclaw plugins install ./extensions/matrix",
+        defaultInstallCommand: "jarvis plugins install @openclaw/matrix",
+        repoInstallCommand: "jarvis plugins install ./extensions/matrix",
       }),
     ).toEqual([
       "Matrix is installed from a custom path that no longer exists: /tmp/openclaw-matrix-missing",
-      'Reinstall with "openclaw plugins install @openclaw/matrix".',
-      'If you are running from a repo checkout, you can also use "openclaw plugins install ./extensions/matrix".',
+      'Reinstall with "jarvis plugins install @openclaw/matrix".',
+      'If you are running from a repo checkout, you can also use "jarvis plugins install ./extensions/matrix".',
     ]);
   });
 

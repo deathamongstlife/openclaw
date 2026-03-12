@@ -1,7 +1,7 @@
-# OpenClaw Cron System Critical Fixes
+# Jarvis Cron System Critical Fixes
 
 ## Overview
-This document details the critical bugs found in the OpenClaw cron system and the fixes applied.
+This document details the critical bugs found in the Jarvis cron system and the fixes applied.
 
 ## Root Cause Analysis
 

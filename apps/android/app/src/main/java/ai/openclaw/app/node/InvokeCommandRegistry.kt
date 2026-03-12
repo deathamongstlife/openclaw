@@ -1,18 +1,18 @@
-package ai.openclaw.app.node
+package ai.jarvis.app.node
 
-import ai.openclaw.app.protocol.OpenClawCalendarCommand
-import ai.openclaw.app.protocol.OpenClawCanvasA2UICommand
-import ai.openclaw.app.protocol.OpenClawCanvasCommand
-import ai.openclaw.app.protocol.OpenClawCameraCommand
-import ai.openclaw.app.protocol.OpenClawCapability
-import ai.openclaw.app.protocol.OpenClawContactsCommand
-import ai.openclaw.app.protocol.OpenClawDeviceCommand
-import ai.openclaw.app.protocol.OpenClawLocationCommand
-import ai.openclaw.app.protocol.OpenClawMotionCommand
-import ai.openclaw.app.protocol.OpenClawNotificationsCommand
-import ai.openclaw.app.protocol.OpenClawPhotosCommand
-import ai.openclaw.app.protocol.OpenClawSmsCommand
-import ai.openclaw.app.protocol.OpenClawSystemCommand
+import ai.jarvis.app.protocol.OpenClawCalendarCommand
+import ai.jarvis.app.protocol.OpenClawCanvasA2UICommand
+import ai.jarvis.app.protocol.OpenClawCanvasCommand
+import ai.jarvis.app.protocol.OpenClawCameraCommand
+import ai.jarvis.app.protocol.OpenClawCapability
+import ai.jarvis.app.protocol.OpenClawContactsCommand
+import ai.jarvis.app.protocol.OpenClawDeviceCommand
+import ai.jarvis.app.protocol.OpenClawLocationCommand
+import ai.jarvis.app.protocol.OpenClawMotionCommand
+import ai.jarvis.app.protocol.OpenClawNotificationsCommand
+import ai.jarvis.app.protocol.OpenClawPhotosCommand
+import ai.jarvis.app.protocol.OpenClawSmsCommand
+import ai.jarvis.app.protocol.OpenClawSystemCommand
 
 data class NodeRuntimeFlags(
   val cameraEnabled: Boolean,

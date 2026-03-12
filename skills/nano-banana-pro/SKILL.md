@@ -61,5 +61,5 @@ Notes
 - Resolutions: `1K` (default), `2K`, `4K`.
 - Aspect ratios: `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`. Without `--aspect-ratio` / `-a`, the model picks freely - use this flag for avatars, profile pics, or consistent batch generation.
 - Use timestamps in filenames: `yyyy-mm-dd-hh-mm-ss-name.png`.
-- The script prints a `MEDIA:` line for OpenClaw to auto-attach on supported chat providers.
+- The script prints a `MEDIA:` line for Jarvis to auto-attach on supported chat providers.
 - Do not read the image back; report the saved path only.

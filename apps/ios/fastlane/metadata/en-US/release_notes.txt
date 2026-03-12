@@ -1,1 +1,1 @@
-First App Store release of OpenClaw for iPhone. Pair with your OpenClaw Gateway to use chat, voice, sharing, and device actions from iOS.
+First App Store release of Jarvis for iPhone. Pair with your Jarvis Gateway to use chat, voice, sharing, and device actions from iOS.

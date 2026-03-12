@@ -5,10 +5,10 @@ function mockContextModuleDeps(loadConfigImpl: () => unknown) {
     loadConfig: loadConfigImpl,
   }));
   vi.doMock("./models-config.js", () => ({
-    ensureOpenClawModelsJson: vi.fn(async () => {}),
+    ensureJarvisModelsJson: vi.fn(async () => {}),
   }));
   vi.doMock("./agent-paths.js", () => ({
-    resolveOpenClawAgentDir: () => "/tmp/openclaw-agent",
+    resolveJarvisAgentDir: () => "/tmp/openclaw-agent",
   }));
   vi.doMock("./pi-model-discovery.js", () => ({
     discoverAuthStorage: vi.fn(() => ({})),

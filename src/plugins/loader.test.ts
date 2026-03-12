@@ -30,7 +30,7 @@ const {
   __testing,
   createHookRunner,
   getGlobalHookRunner,
-  loadOpenClawPlugins,
+  loadJarvisPlugins,
   resetGlobalHookRunner,
 } = await importFreshPluginTestModules();
 
@@ -104,7 +104,7 @@ function loadBundledMemoryPluginRegistry(options?: {
 }) {
   if (!options && cachedBundledMemoryDir) {
     process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = cachedBundledMemoryDir;
-    return loadOpenClawPlugins({
+    return loadJarvisPlugins({
       cache: false,
       workspaceDir: cachedBundledMemoryDir,
       config: {
@@ -154,7 +154,7 @@ function loadBundledMemoryPluginRegistry(options?: {
   }
   process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = bundledDir;
 
-  return loadOpenClawPlugins({
+  return loadJarvisPlugins({
     cache: false,
     workspaceDir: bundledDir,
     config: {
@@ -180,7 +180,7 @@ function setupBundledTelegramPlugin() {
   process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = cachedBundledTelegramDir;
 }
 
-function expectTelegramLoaded(registry: ReturnType<typeof loadOpenClawPlugins>) {
+function expectTelegramLoaded(registry: ReturnType<typeof loadJarvisPlugins>) {
   const telegram = registry.plugins.find((entry) => entry.id === "telegram");
   expect(telegram?.status).toBe("loaded");
   expect(registry.channels.some((entry) => entry.plugin.id === "telegram")).toBe(true);
@@ -194,10 +194,10 @@ function loadRegistryFromSinglePlugin(params: {
   plugin: TempPlugin;
   pluginConfig?: Record<string, unknown>;
   includeWorkspaceDir?: boolean;
-  options?: Omit<Parameters<typeof loadOpenClawPlugins>[0], "cache" | "workspaceDir" | "config">;
+  options?: Omit<Parameters<typeof loadJarvisPlugins>[0], "cache" | "workspaceDir" | "config">;
 }) {
   const pluginConfig = params.pluginConfig ?? {};
-  return loadOpenClawPlugins({
+  return loadJarvisPlugins({
     cache: false,
     ...(params.includeWorkspaceDir === false ? {} : { workspaceDir: params.plugin.dir }),
     ...params.options,
@@ -283,7 +283,7 @@ afterAll(() => {
   }
 });
 
-describe("loadOpenClawPlugins", () => {
+describe("loadJarvisPlugins", () => {
   it("disables bundled plugins by default", () => {
     const bundledDir = makeTempDir();
     writePlugin({
@@ -294,7 +294,7 @@ describe("loadOpenClawPlugins", () => {
     });
     process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = bundledDir;
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       config: {
         plugins: {
@@ -310,7 +310,7 @@ describe("loadOpenClawPlugins", () => {
   it("loads bundled telegram plugin when enabled", () => {
     setupBundledTelegramPlugin();
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       workspaceDir: cachedBundledTelegramDir,
       config: {
@@ -329,7 +329,7 @@ describe("loadOpenClawPlugins", () => {
   it("loads bundled channel plugins when channels.<id>.enabled=true", () => {
     setupBundledTelegramPlugin();
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       workspaceDir: cachedBundledTelegramDir,
       config: {
@@ -350,7 +350,7 @@ describe("loadOpenClawPlugins", () => {
   it("still respects explicit disable via plugins.entries for bundled channels", () => {
     setupBundledTelegramPlugin();
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       workspaceDir: cachedBundledTelegramDir,
       config: {
@@ -402,7 +402,7 @@ describe("loadOpenClawPlugins", () => {
 };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       workspaceDir: plugin.dir,
       config: {
@@ -436,13 +436,13 @@ describe("loadOpenClawPlugins", () => {
       },
     };
 
-    const first = loadOpenClawPlugins(options);
+    const first = loadJarvisPlugins(options);
     expect(getGlobalHookRunner()).not.toBeNull();
 
     resetGlobalHookRunner();
     expect(getGlobalHookRunner()).toBeNull();
 
-    const second = loadOpenClawPlugins(options);
+    const second = loadJarvisPlugins(options);
     expect(second).toBe(first);
     expect(getGlobalHookRunner()).not.toBeNull();
 
@@ -739,7 +739,7 @@ describe("loadOpenClawPlugins", () => {
 } };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       config: {
         plugins: {
@@ -818,7 +818,7 @@ describe("loadOpenClawPlugins", () => {
       body: `module.exports = { id: "config-disable", register() {} };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       config: {
         plugins: {
@@ -961,7 +961,7 @@ describe("loadOpenClawPlugins", () => {
       body: `module.exports = { id: "memory-b", kind: "memory", register() {} };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       config: {
         plugins: {
@@ -1023,7 +1023,7 @@ describe("loadOpenClawPlugins", () => {
     );
     process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = bundledDir;
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       config: {
         plugins: {
@@ -1051,7 +1051,7 @@ describe("loadOpenClawPlugins", () => {
       body: `module.exports = { id: "memory-off", kind: "memory", register() {} };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       config: {
         plugins: {
@@ -1080,7 +1080,7 @@ describe("loadOpenClawPlugins", () => {
       body: `module.exports = { id: "shadow", register() {} };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       config: {
         plugins: {
@@ -1120,7 +1120,7 @@ describe("loadOpenClawPlugins", () => {
         filename: "index.cjs",
       });
 
-      const registry = loadOpenClawPlugins({
+      const registry = loadJarvisPlugins({
         cache: false,
         config: {
           plugins: {
@@ -1148,7 +1148,7 @@ describe("loadOpenClawPlugins", () => {
       body: `module.exports = { id: "warn-open-allow", register() {} };`,
     });
     const warnings: string[] = [];
-    loadOpenClawPlugins({
+    loadJarvisPlugins({
       cache: false,
       logger: createWarningLogger(warnings),
       config: {
@@ -1176,7 +1176,7 @@ describe("loadOpenClawPlugins", () => {
       });
 
       const warnings: string[] = [];
-      const registry = loadOpenClawPlugins({
+      const registry = loadJarvisPlugins({
         cache: false,
         logger: createWarningLogger(warnings),
         config: {
@@ -1210,7 +1210,7 @@ describe("loadOpenClawPlugins", () => {
       return;
     }
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       config: {
         plugins: {
@@ -1244,7 +1244,7 @@ describe("loadOpenClawPlugins", () => {
       throw err;
     }
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       config: {
         plugins: {
@@ -1291,7 +1291,7 @@ describe("loadOpenClawPlugins", () => {
     }
 
     process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = bundledDir;
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       workspaceDir: bundledDir,
       config: {
@@ -1358,8 +1358,8 @@ describe("loadOpenClawPlugins", () => {
       path.join(process.cwd(), "src", "plugins", "loader.ts"),
     ).href;
     const script = `
-      import { loadOpenClawPlugins } from ${JSON.stringify(loaderModuleUrl)};
-      const registry = loadOpenClawPlugins({
+      import { loadJarvisPlugins } from ${JSON.stringify(loaderModuleUrl)};
+      const registry = loadJarvisPlugins({
         cache: false,
         workspaceDir: ${JSON.stringify(plugin.dir)},
         config: {

@@ -1,5 +1,5 @@
 import os from "node:os";
-import type { OpenClawPluginApi } from "openclaw/plugin-sdk/device-pair";
+import type { JarvisPluginApi } from "openclaw/plugin-sdk/device-pair";
 import {
   approveDevicePairing,
   listDevicePairing,
@@ -86,7 +86,7 @@ function parsePositiveInteger(raw: string | undefined): number | null {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
 }
 
-function resolveGatewayPort(cfg: OpenClawPluginApi["config"]): number {
+function resolveGatewayPort(cfg: JarvisPluginApi["config"]): number {
   const envPort =
     parsePositiveInteger(process.env.OPENCLAW_GATEWAY_PORT?.trim()) ??
     parsePositiveInteger(process.env.CLAWDBOT_GATEWAY_PORT?.trim());
@@ -101,7 +101,7 @@ function resolveGatewayPort(cfg: OpenClawPluginApi["config"]): number {
 }
 
 function resolveScheme(
-  cfg: OpenClawPluginApi["config"],
+  cfg: JarvisPluginApi["config"],
   opts?: { forceSecure?: boolean },
 ): "ws" | "wss" {
   if (opts?.forceSecure) {
@@ -187,7 +187,7 @@ async function resolveTailnetHost(): Promise<string | null> {
   );
 }
 
-function resolveAuth(cfg: OpenClawPluginApi["config"]): ResolveAuthResult {
+function resolveAuth(cfg: JarvisPluginApi["config"]): ResolveAuthResult {
   const mode = cfg.gateway?.auth?.mode;
   const token =
     pickFirstDefined([
@@ -241,7 +241,7 @@ function resolveRequiredAuth(
     : { error: "Gateway auth is set to password, but no password is configured." };
 }
 
-async function resolveGatewayUrl(api: OpenClawPluginApi): Promise<ResolveUrlResult> {
+async function resolveGatewayUrl(api: JarvisPluginApi): Promise<ResolveUrlResult> {
   const cfg = api.config;
   const pluginCfg = (api.pluginConfig ?? {}) as DevicePairPluginConfig;
   const scheme = resolveScheme(cfg);
@@ -323,7 +323,7 @@ function formatSetupInstructions(): string {
   ].join("\n");
 }
 
-export default function register(api: OpenClawPluginApi) {
+export default function register(api: JarvisPluginApi) {
   registerPairingNotifierService(api);
 
   api.registerCommand({
@@ -436,7 +436,7 @@ export default function register(api: OpenClawPluginApi) {
             if (send) {
               await send(
                 target,
-                ["Scan this QR code with the OpenClaw iOS app:", "", "```", qrAscii, "```"].join(
+                ["Scan this QR code with the Jarvis iOS app:", "", "```", qrAscii, "```"].join(
                   "\n",
                 ),
                 {
@@ -490,7 +490,7 @@ export default function register(api: OpenClawPluginApi) {
         // WebUI + CLI/TUI: ASCII QR
         return {
           text: [
-            "Scan this QR code with the OpenClaw iOS app:",
+            "Scan this QR code with the Jarvis iOS app:",
             "",
             "```",
             qrAscii,

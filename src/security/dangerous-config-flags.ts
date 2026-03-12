@@ -1,6 +1,6 @@
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 
-export function collectEnabledInsecureOrDangerousFlags(cfg: OpenClawConfig): string[] {
+export function collectEnabledInsecureOrDangerousFlags(cfg: JarvisConfig): string[] {
   const enabledFlags: string[] = [];
   if (cfg.gateway?.controlUi?.allowInsecureAuth === true) {
     enabledFlags.push("gateway.controlUi.allowInsecureAuth=true");

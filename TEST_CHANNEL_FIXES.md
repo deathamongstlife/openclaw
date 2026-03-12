@@ -8,7 +8,7 @@ This document provides a comprehensive test plan for verifying the Feishu and MS
 ### Setup
 ```bash
 # Ensure Feishu is configured with valid credentials
-openclaw config get feishu
+jarvis config get feishu
 ```
 
 ### Test Case 1.1: Normal Streaming (Should Pass)
@@ -99,7 +99,7 @@ openclaw config get feishu
 ### Setup
 ```bash
 # Ensure MS Teams is configured
-openclaw config get msteams
+jarvis config get msteams
 ```
 
 ### Test Case 2.1: Named Entity Decoding
@@ -339,17 +339,17 @@ feishu[account-id] Circuit breaker RESET - retrying streaming
 
 echo "Testing Feishu streaming timeout..."
 
-# Start openclaw gateway in background
-openclaw gateway run --bind loopback --port 18789 &
+# Start jarvis gateway in background
+jarvis gateway run --bind loopback --port 18789 &
 GATEWAY_PID=$!
 
 sleep 5
 
 # Send test message
-openclaw message send --channel feishu --to <chat-id> --text "Generate a long response"
+jarvis message send --channel feishu --to <chat-id> --text "Generate a long response"
 
 # Monitor logs for 35 seconds
-timeout 35 tail -f /tmp/openclaw-gateway.log | grep -E "(timeout|circuit|failure)" &
+timeout 35 tail -f /tmp/jarvis-gateway.log | grep -E "(timeout|circuit|failure)" &
 
 # Wait for timeout or success
 sleep 40

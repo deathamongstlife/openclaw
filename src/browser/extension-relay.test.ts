@@ -952,7 +952,7 @@ describe("chrome extension relay server", () => {
           return;
         }
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ Browser: "OpenClaw/extension-relay" }));
+        res.end(JSON.stringify({ Browser: "Jarvis/extension-relay" }));
         return;
       }
       if (req.url?.startsWith("/extension/status")) {
@@ -1152,7 +1152,7 @@ describe("chrome extension relay server", () => {
     RELAY_TEST_TIMEOUT_MS,
   );
 
-  it("does not swallow EADDRINUSE when occupied port is not an openclaw relay", async () => {
+  it("does not swallow EADDRINUSE when occupied port is not an jarvis relay", async () => {
     const port = await getFreePort();
     const blocker = createServer((_, res) => {
       res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });

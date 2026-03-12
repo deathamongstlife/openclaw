@@ -2,7 +2,7 @@
   "name": "@openclaw/imessage",
   "version": "2026.3.9",
   "private": true,
-  "description": "OpenClaw iMessage channel plugin",
+  "description": "Jarvis iMessage channel plugin",
   "type": "module",
   "openclaw": {
     "extensions": [

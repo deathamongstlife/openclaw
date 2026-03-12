@@ -1,4 +1,4 @@
-package ai.openclaw.app.ui
+package ai.jarvis.app.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

@@ -2,7 +2,7 @@
 read_when:
   - 设置新机器
   - 你想要"最新最好的"而不破坏你的个人设置
-summary: 设置指南：在保持最新的同时保持你的 OpenClaw 设置个性化
+summary: 设置指南：在保持最新的同时保持你的 Jarvis 设置个性化
 title: 设置
 x-i18n:
   generated_at: "2026-02-03T07:54:27Z"
@@ -39,37 +39,37 @@ x-i18n:
 引导一次：
 
 ```bash
-openclaw setup
+jarvis setup
 ```
 
 在此仓库内部，使用本地 CLI 入口：
 
 ```bash
-openclaw setup
+jarvis setup
 ```
 
-如果你还没有全局安装，通过 `pnpm openclaw setup` 运行它。
+如果你还没有全局安装，通过 `pnpm jarvis setup` 运行它。
 
 ## 稳定工作流（macOS 应用优先）
 
-1. 安装并启动 **OpenClaw.app**（菜单栏）。
+1. 安装并启动 **Jarvis.app**（菜单栏）。
 2. 完成新手引导/权限检查清单（TCC 提示）。
 3. 确保 Gateway 网关是**本地**并正在运行（应用管理它）。
 4. 链接表面（示例：WhatsApp）：
 
 ```bash
-openclaw channels login
+jarvis channels login
 ```
 
 5. 完整性检查：
 
 ```bash
-openclaw health
+jarvis health
 ```
 
 如果你的构建版本中没有新手引导：
 
-- 运行 `openclaw setup`，然后 `openclaw channels login`，然后手动启动 Gateway 网关（`openclaw gateway`）。
+- 运行 `jarvis setup`，然后 `jarvis channels login`，然后手动启动 Gateway 网关（`jarvis gateway`）。
 
 ## 前沿工作流（在终端中运行 Gateway 网关）
 
@@ -94,7 +94,7 @@ pnpm gateway:watch
 
 ### 2) 将 macOS 应用指向你正在运行的 Gateway 网关
 
-在 **OpenClaw.app** 中：
+在 **Jarvis.app** 中：
 
 - 连接模式：**本地**
   应用将连接到在配置端口上运行的 Gateway 网关。
@@ -105,7 +105,7 @@ pnpm gateway:watch
 - 或通过 CLI：
 
 ```bash
-openclaw health
+jarvis health
 ```
 
 ### 常见陷阱
@@ -149,5 +149,5 @@ sudo loginctl enable-linger $USER
 - [Gateway 网关运行手册](/gateway)（标志、监督、端口）
 - [Gateway 网关配置](/gateway/configuration)（配置模式 + 示例）
 - [Discord](/channels/discord) 和 [Telegram](/channels/telegram)（回复标签 + replyToMode 设置）
-- [OpenClaw 助手设置](/start/openclaw)
+- [Jarvis 助手设置](/start/openclaw)
 - [macOS 应用](/platforms/macos)（Gateway 网关生命周期）

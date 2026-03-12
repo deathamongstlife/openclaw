@@ -123,8 +123,8 @@ jobs:
           cd apps/ios
           xcodegen generate
           xcodebuild build \
-            -project OpenClaw.xcodeproj \
-            -scheme OpenClaw \
+            -project Jarvis.xcodeproj \
+            -scheme Jarvis \
             -destination "generic/platform=iOS Simulator" \
             CODE_SIGNING_ALLOWED=NO
 

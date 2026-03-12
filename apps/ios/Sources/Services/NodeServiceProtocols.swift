@@ -1,6 +1,6 @@
 import CoreLocation
 import Foundation
-import OpenClawKit
+import JarvisKit
 import UIKit
 
 typealias OpenClawCameraSnapResult = (format: String, base64: String, width: Int, height: Int)

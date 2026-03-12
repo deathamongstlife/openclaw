@@ -1,4 +1,4 @@
-import type { LineChannelData, OpenClawPluginApi, ReplyPayload } from "openclaw/plugin-sdk/line";
+import type { LineChannelData, JarvisPluginApi, ReplyPayload } from "openclaw/plugin-sdk/line";
 import {
   createActionCard,
   createImageCard,
@@ -154,7 +154,7 @@ function parseCardArgs(argsStr: string): {
   return result;
 }
 
-export function registerLineCardCommand(api: OpenClawPluginApi): void {
+export function registerLineCardCommand(api: JarvisPluginApi): void {
   api.registerCommand({
     name: "card",
     description: "Send a rich card message (LINE).",

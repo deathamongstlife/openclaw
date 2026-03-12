@@ -1,4 +1,4 @@
-## OpenClaw Android App
+## Jarvis Android App
 
 Status: **extremely alpha**. The app is actively being rebuilt from the ground up.
 
@@ -116,7 +116,7 @@ Use `adb reverse` so Android `localhost:18789` tunnels to your laptop `localhost
 Terminal A (gateway):
 
 ```bash
-pnpm openclaw gateway --port 18789 --verbose
+pnpm jarvis gateway --port 18789 --verbose
 ```
 
 Terminal B (USB tunnel):
@@ -145,7 +145,7 @@ This app is native Kotlin + Jetpack Compose.
 1) Start the gateway (on your main machine):
 
 ```bash
-pnpm openclaw gateway --port 18789 --verbose
+pnpm jarvis gateway --port 18789 --verbose
 ```
 
 2) In the Android app:
@@ -156,8 +156,8 @@ pnpm openclaw gateway --port 18789 --verbose
 3) Approve pairing (on the gateway machine):
 
 ```bash
-openclaw devices list
-openclaw devices approve <requestId>
+jarvis devices list
+jarvis devices approve <requestId>
 ```
 
 More details: `docs/platforms/android.md`.
@@ -179,18 +179,18 @@ This suite assumes setup is already done manually. It does **not** install/run/p
 Pre-req checklist:
 
 1) Gateway is running and reachable from the Android app.
-2) Android app is connected to that gateway and `openclaw nodes status` shows it as paired + connected.
+2) Android app is connected to that gateway and `jarvis nodes status` shows it as paired + connected.
 3) App stays unlocked and in foreground for the whole run.
 4) Open the app **Screen** tab and keep it active during the run (canvas/A2UI commands require the canvas WebView attached there).
 5) Grant runtime permissions for capabilities you expect to pass (camera/mic/location/notification listener/location, etc.).
 6) No interactive system dialogs should be pending before test start.
-7) Canvas host is enabled and reachable from the device (do not run gateway with `OPENCLAW_SKIP_CANVAS_HOST=1`; startup logs should include `canvas host mounted at .../__openclaw__/`).
+7) Canvas host is enabled and reachable from the device (do not run gateway with `JARVIS_SKIP_CANVAS_HOST=1`; startup logs should include `canvas host mounted at .../__openclaw__/`).
 8) Local operator test client pairing is approved. If first run fails with `pairing required`, approve latest pending device pairing request, then rerun:
 9) For A2UI checks, keep the app on **Screen** tab; the node now auto-refreshes canvas capability once on first A2UI reachability failure (TTL-safe retry).
 
 ```bash
-openclaw devices list
-openclaw devices approve --latest
+jarvis devices list
+jarvis devices approve --latest
 ```
 
 Run:
@@ -201,10 +201,10 @@ pnpm android:test:integration
 
 Optional overrides:
 
-- `OPENCLAW_ANDROID_GATEWAY_URL=ws://...` (default: from your local OpenClaw config)
-- `OPENCLAW_ANDROID_GATEWAY_TOKEN=...`
-- `OPENCLAW_ANDROID_GATEWAY_PASSWORD=...`
-- `OPENCLAW_ANDROID_NODE_ID=...` or `OPENCLAW_ANDROID_NODE_NAME=...`
+- `JARVIS_ANDROID_GATEWAY_URL=ws://...` (default: from your local Jarvis config)
+- `JARVIS_ANDROID_GATEWAY_TOKEN=...`
+- `JARVIS_ANDROID_GATEWAY_PASSWORD=...`
+- `JARVIS_ANDROID_NODE_ID=...` or `JARVIS_ANDROID_NODE_NAME=...`
 
 What it does:
 
@@ -216,7 +216,7 @@ What it does:
 Common failure quick-fixes:
 
 - `pairing required` before tests start:
-  - approve pending device pairing (`openclaw devices approve --latest`) and rerun.
+  - approve pending device pairing (`jarvis devices approve --latest`) and rerun.
 - `A2UI host not reachable` / `A2UI_HOST_NOT_CONFIGURED`:
   - ensure gateway canvas host is running and reachable, keep the app on the **Screen** tab. The app will auto-refresh canvas capability once; if it still fails, reconnect app and rerun.
 - `NODE_BACKGROUND_UNAVAILABLE: canvas unavailable`:

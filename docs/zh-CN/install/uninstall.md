@@ -1,8 +1,8 @@
 ---
 read_when:
-  - 你想从机器上移除 OpenClaw
+  - 你想从机器上移除 Jarvis
   - 卸载后 Gateway 网关服务仍在运行
-summary: 完全卸载 OpenClaw（CLI、服务、状态、工作区）
+summary: 完全卸载 Jarvis（CLI、服务、状态、工作区）
 title: 卸载
 x-i18n:
   generated_at: "2026-02-03T07:50:10Z"
@@ -25,14 +25,14 @@ x-i18n:
 推荐：使用内置卸载程序：
 
 ```bash
-openclaw uninstall
+jarvis uninstall
 ```
 
 非交互式（自动化 / npx）：
 
 ```bash
-openclaw uninstall --all --yes --non-interactive
-npx -y openclaw uninstall --all --yes --non-interactive
+jarvis uninstall --all --yes --non-interactive
+npx -y jarvis uninstall --all --yes --non-interactive
 ```
 
 手动步骤（效果相同）：
@@ -40,13 +40,13 @@ npx -y openclaw uninstall --all --yes --non-interactive
 1. 停止 Gateway 网关服务：
 
 ```bash
-openclaw gateway stop
+jarvis gateway stop
 ```
 
 2. 卸载 Gateway 网关服务（launchd/systemd/schtasks）：
 
 ```bash
-openclaw gateway uninstall
+jarvis gateway uninstall
 ```
 
 3. 删除状态 + 配置：
@@ -74,7 +74,7 @@ bun remove -g openclaw
 6. 如果你安装了 macOS 应用：
 
 ```bash
-rm -rf /Applications/OpenClaw.app
+rm -rf /Applications/Jarvis.app
 ```
 
 注意事项：
@@ -99,21 +99,21 @@ rm -f ~/Library/LaunchAgents/bot.molt.gateway.plist
 
 ### Linux（systemd 用户单元）
 
-默认单元名称是 `openclaw-gateway.service`（或 `openclaw-gateway-<profile>.service`）：
+默认单元名称是 `jarvis-gateway.service`（或 `jarvis-gateway-<profile>.service`）：
 
 ```bash
-systemctl --user disable --now openclaw-gateway.service
-rm -f ~/.config/systemd/user/openclaw-gateway.service
+systemctl --user disable --now jarvis-gateway.service
+rm -f ~/.config/systemd/user/jarvis-gateway.service
 systemctl --user daemon-reload
 ```
 
 ### Windows（计划任务）
 
-默认任务名称是 `OpenClaw Gateway`（或 `OpenClaw Gateway (<profile>)`）。
+默认任务名称是 `Jarvis Gateway`（或 `Jarvis Gateway (<profile>)`）。
 任务脚本位于你的状态目录下。
 
 ```powershell
-schtasks /Delete /F /TN "OpenClaw Gateway"
+schtasks /Delete /F /TN "Jarvis Gateway"
 Remove-Item -Force "$env:USERPROFILE\.openclaw\gateway.cmd"
 ```
 

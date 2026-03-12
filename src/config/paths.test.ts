@@ -46,7 +46,7 @@ describe("state + config path candidates", () => {
     }
   }
 
-  function expectOpenClawHomeDefaults(env: NodeJS.ProcessEnv): void {
+  function expectJarvisHomeDefaults(env: NodeJS.ProcessEnv): void {
     const configuredHome = env.OPENCLAW_HOME;
     if (!configuredHome) {
       throw new Error("OPENCLAW_HOME must be set for this assertion helper");
@@ -70,7 +70,7 @@ describe("state + config path candidates", () => {
     const env = {
       OPENCLAW_HOME: "/srv/openclaw-home",
     } as NodeJS.ProcessEnv;
-    expectOpenClawHomeDefaults(env);
+    expectJarvisHomeDefaults(env);
   });
 
   it("prefers OPENCLAW_HOME over HOME for default state/config locations", () => {
@@ -78,7 +78,7 @@ describe("state + config path candidates", () => {
       OPENCLAW_HOME: "/srv/openclaw-home",
       HOME: "/home/other",
     } as NodeJS.ProcessEnv;
-    expectOpenClawHomeDefaults(env);
+    expectJarvisHomeDefaults(env);
   });
 
   it("orders default config candidates in a stable order", () => {
@@ -106,7 +106,7 @@ describe("state + config path candidates", () => {
     expect(candidates).toEqual(expected);
   });
 
-  it("prefers ~/.openclaw when it exists and legacy dir is missing", async () => {
+  it("prefers ~/.jarvis when it exists and legacy dir is missing", async () => {
     await withTempRoot("openclaw-state-", async (root) => {
       const newDir = path.join(root, ".openclaw");
       await fs.mkdir(newDir, { recursive: true });
@@ -115,7 +115,7 @@ describe("state + config path candidates", () => {
     });
   });
 
-  it("falls back to existing legacy state dir when ~/.openclaw is missing", async () => {
+  it("falls back to existing legacy state dir when ~/.jarvis is missing", async () => {
     await withTempRoot("openclaw-state-legacy-", async (root) => {
       const legacyDir = path.join(root, ".clawdbot");
       await fs.mkdir(legacyDir, { recursive: true });

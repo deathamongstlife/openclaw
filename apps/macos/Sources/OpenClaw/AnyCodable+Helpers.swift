@@ -1,6 +1,6 @@
 import Foundation
-import OpenClawKit
+import JarvisKit
 
-// Prefer the OpenClawKit wrapper to keep gateway request payloads consistent.
-typealias AnyCodable = OpenClawKit.AnyCodable
-typealias InstanceIdentity = OpenClawKit.InstanceIdentity
+// Prefer the JarvisKit wrapper to keep gateway request payloads consistent.
+typealias AnyCodable = JarvisKit.AnyCodable
+typealias InstanceIdentity = JarvisKit.InstanceIdentity

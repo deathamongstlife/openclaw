@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { withEnvAsync } from "../test-utils/env.js";
 import { resolveNodeHostGatewayCredentials } from "./runner.js";
 
-function createRemoteGatewayTokenRefConfig(tokenId: string): OpenClawConfig {
+function createRemoteGatewayTokenRefConfig(tokenId: string): JarvisConfig {
   return {
     secrets: {
       providers: {
@@ -16,7 +16,7 @@ function createRemoteGatewayTokenRefConfig(tokenId: string): OpenClawConfig {
         token: { source: "env", provider: "default", id: tokenId },
       },
     },
-  } as OpenClawConfig;
+  } as JarvisConfig;
 }
 
 describe("resolveNodeHostGatewayCredentials", () => {
@@ -26,7 +26,7 @@ describe("resolveNodeHostGatewayCredentials", () => {
         mode: "local",
         remote: { token: "remote-only-token" },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
 
     await withEnvAsync(
       {
@@ -54,7 +54,7 @@ describe("resolveNodeHostGatewayCredentials", () => {
           token: { source: "env", provider: "default", id: "MISSING_REMOTE_GATEWAY_TOKEN" },
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
 
     await withEnvAsync(
       {
@@ -133,7 +133,7 @@ describe("resolveNodeHostGatewayCredentials", () => {
           password: { source: "env", provider: "default", id: "MISSING_REMOTE_GATEWAY_PASSWORD" },
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
 
     await withEnvAsync(
       {

@@ -1,5 +1,5 @@
 import { spawn } from "node:child_process";
-import { triggerOpenClawRestart } from "./restart.js";
+import { triggerJarvisRestart } from "./restart.js";
 import { detectRespawnSupervisor } from "./supervisor-markers.js";
 
 type RespawnMode = "spawned" | "supervised" | "disabled" | "failed";
@@ -35,7 +35,7 @@ export function restartGatewayProcessWithFreshPid(): GatewayRespawnResult {
     // macOS launchd: Use explicit restart to avoid bootout race conditions.
     // Windows schtasks: Must use explicit restart.
     // Linux systemd: Explicit restart is more reliable than exit(0).
-    const restart = triggerOpenClawRestart();
+    const restart = triggerJarvisRestart();
     if (!restart.ok) {
       // If explicit restart failed but we're supervised, fall back to exit(0)
       // for launchd/systemd (they will restart us via KeepAlive/Restart=always)

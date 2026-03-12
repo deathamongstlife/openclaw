@@ -1,6 +1,6 @@
 import Foundation
 import Network
-import OpenClawKit
+import JarvisKit
 
 enum A2UIReadyState {
     case ready(String)

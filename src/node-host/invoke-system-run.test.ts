@@ -183,16 +183,16 @@ describe("handleSystemRunInvoke mac app exec host routing", () => {
     run: (ctx: { tempHome: string }) => Promise<T>;
   }): Promise<T> {
     const tempHome = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-exec-approvals-"));
-    const previousOpenClawHome = process.env.OPENCLAW_HOME;
+    const previousJarvisHome = process.env.OPENCLAW_HOME;
     process.env.OPENCLAW_HOME = tempHome;
     saveExecApprovals(params.approvals);
     try {
       return await params.run({ tempHome });
     } finally {
-      if (previousOpenClawHome === undefined) {
+      if (previousJarvisHome === undefined) {
         delete process.env.OPENCLAW_HOME;
       } else {
-        process.env.OPENCLAW_HOME = previousOpenClawHome;
+        process.env.OPENCLAW_HOME = previousJarvisHome;
       }
       fs.rmSync(tempHome, { recursive: true, force: true });
     }
@@ -993,7 +993,7 @@ describe("handleSystemRunInvoke mac app exec host routing", () => {
   });
 
   it("denies semicolon-chained shell payloads in allowlist mode without explicit approval", async () => {
-    const payloads = ["openclaw status; id", "openclaw status; cat /etc/passwd"];
+    const payloads = ["jarvis status; id", "jarvis status; cat /etc/passwd"];
     for (const payload of payloads) {
       const command =
         process.platform === "win32"

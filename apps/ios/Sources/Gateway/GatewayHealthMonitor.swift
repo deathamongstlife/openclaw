@@ -1,5 +1,5 @@
 import Foundation
-import OpenClawKit
+import JarvisKit
 
 @MainActor
 final class GatewayHealthMonitor {

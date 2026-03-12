@@ -1,7 +1,7 @@
 # Channel Bug Fixes - Implementation Summary
 
 ## Overview
-This document summarizes the critical bug fixes applied to channel-specific integrations in OpenClaw.
+This document summarizes the critical bug fixes applied to channel-specific integrations in Jarvis.
 
 ## Fixed Issues
 

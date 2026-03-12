@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { ensureAuthProfileStore, type AuthProfileStore } from "../agents/auth-profiles.js";
-import { loadConfig, type OpenClawConfig, writeConfigFile } from "../config/config.js";
+import { loadConfig, type JarvisConfig, writeConfigFile } from "../config/config.js";
 import { withTempHome } from "../config/home-env.test-harness.js";
 import {
   activateSecretsRuntimeSnapshot,
@@ -13,13 +13,13 @@ import {
   prepareSecretsRuntimeSnapshot,
 } from "./runtime.js";
 
-function asConfig(value: unknown): OpenClawConfig {
-  return value as OpenClawConfig;
+function asConfig(value: unknown): JarvisConfig {
+  return value as JarvisConfig;
 }
 
 const OPENAI_ENV_KEY_REF = { source: "env", provider: "default", id: "OPENAI_API_KEY" } as const;
 
-function createOpenAiFileModelsConfig(): NonNullable<OpenClawConfig["models"]> {
+function createOpenAiFileModelsConfig(): NonNullable<JarvisConfig["models"]> {
   return {
     providers: {
       openai: {
@@ -222,7 +222,7 @@ describe("secrets runtime snapshot", () => {
   });
 
   it("normalizes inline SecretRef object on token to tokenRef", async () => {
-    const config: OpenClawConfig = { models: {}, secrets: {} };
+    const config: JarvisConfig = { models: {}, secrets: {} };
     const snapshot = await prepareSecretsRuntimeSnapshot({
       config,
       env: { MY_TOKEN: "resolved-token-value" },
@@ -249,7 +249,7 @@ describe("secrets runtime snapshot", () => {
   });
 
   it("normalizes inline SecretRef object on key to keyRef", async () => {
-    const config: OpenClawConfig = { models: {}, secrets: {} };
+    const config: JarvisConfig = { models: {}, secrets: {} };
     const snapshot = await prepareSecretsRuntimeSnapshot({
       config,
       env: { MY_KEY: "resolved-key-value" },
@@ -276,7 +276,7 @@ describe("secrets runtime snapshot", () => {
   });
 
   it("keeps explicit keyRef when inline key SecretRef is also present", async () => {
-    const config: OpenClawConfig = { models: {}, secrets: {} };
+    const config: JarvisConfig = { models: {}, secrets: {} };
     const snapshot = await prepareSecretsRuntimeSnapshot({
       config,
       env: {
@@ -856,7 +856,7 @@ describe("secrets runtime snapshot", () => {
 
       const persistedConfig = JSON.parse(
         await fs.readFile(path.join(home, ".openclaw", "openclaw.json"), "utf8"),
-      ) as OpenClawConfig;
+      ) as JarvisConfig;
       expect(persistedConfig.tools?.web?.search?.gemini?.apiKey).toEqual({
         source: "env",
         provider: "default",

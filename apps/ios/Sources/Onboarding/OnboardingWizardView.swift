@@ -1,6 +1,6 @@
 import CoreImage
 import Combine
-import OpenClawKit
+import JarvisKit
 import PhotosUI
 import SwiftUI
 import UIKit

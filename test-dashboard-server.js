@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Simple HTTP server to test the OpenClaw dashboard
+ * Simple HTTP server to test the Jarvis dashboard
  * Serves the built UI from dist/control-ui/
  */
 

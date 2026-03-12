@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import type { OpenClawConfig } from "../../config/config.js";
+import type { JarvisConfig } from "../../config/config.js";
 import { clearPluginManifestRegistryCache } from "../../plugins/manifest-registry.js";
 import { writePluginWithSkill } from "../test-helpers/skill-plugin-fixtures.js";
 import { resolveEmbeddedRunSkillEntries } from "./skills-runtime.js";
@@ -45,7 +45,7 @@ describe("resolveEmbeddedRunSkillEntries (integration)", () => {
     process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = bundledPluginsDir;
     clearPluginManifestRegistryCache();
 
-    const config: OpenClawConfig = {
+    const config: JarvisConfig = {
       plugins: {
         entries: {
           diffs: { enabled: true },

@@ -10,7 +10,7 @@ import type {
   ChannelGroupContext,
   ChannelMessageActionAdapter,
   ChannelPlugin,
-  OpenClawConfig,
+  JarvisConfig,
   GroupToolPolicyConfig,
 } from "openclaw/plugin-sdk/zalouser";
 import {

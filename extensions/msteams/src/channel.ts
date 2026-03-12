@@ -5,7 +5,7 @@ import {
 import type {
   ChannelMessageActionName,
   ChannelPlugin,
-  OpenClawConfig,
+  JarvisConfig,
 } from "openclaw/plugin-sdk/msteams";
 import {
   buildProbeChannelStatusSummary,
@@ -110,7 +110,7 @@ export const msteamsPlugin: ChannelPlugin<ResolvedMSTeamsAccount> = {
       },
     }),
     deleteAccount: ({ cfg }) => {
-      const next = { ...cfg } as OpenClawConfig;
+      const next = { ...cfg } as JarvisConfig;
       const nextChannels = { ...cfg.channels };
       delete nextChannels.msteams;
       if (Object.keys(nextChannels).length > 0) {

@@ -1,6 +1,6 @@
 import Foundation
 import Observation
-import OpenClawKit
+import JarvisKit
 import OpenClawProtocol
 import SwiftUI
 
@@ -236,10 +236,10 @@ final class WorkActivityStore {
         return display.label
     }
 
-    private static func wrapToolArgs(_ args: [String: OpenClawProtocol.AnyCodable]?) -> OpenClawKit.AnyCodable? {
+    private static func wrapToolArgs(_ args: [String: OpenClawProtocol.AnyCodable]?) -> JarvisKit.AnyCodable? {
         guard let args else { return nil }
         let converted: [String: Any] = args.mapValues { self.unwrapJSONValue($0.value) }
-        return OpenClawKit.AnyCodable(converted)
+        return JarvisKit.AnyCodable(converted)
     }
 
     private static func unwrapJSONValue(_ value: Any) -> Any {

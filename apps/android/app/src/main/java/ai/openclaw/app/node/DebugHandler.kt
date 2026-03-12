@@ -1,9 +1,9 @@
-package ai.openclaw.app.node
+package ai.jarvis.app.node
 
 import android.content.Context
-import ai.openclaw.app.BuildConfig
-import ai.openclaw.app.gateway.DeviceIdentityStore
-import ai.openclaw.app.gateway.GatewaySession
+import ai.jarvis.app.BuildConfig
+import ai.jarvis.app.gateway.DeviceIdentityStore
+import ai.jarvis.app.gateway.GatewaySession
 import kotlinx.serialization.json.JsonPrimitive
 
 class DebugHandler(

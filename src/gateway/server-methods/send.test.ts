@@ -13,7 +13,7 @@ const mocks = vi.hoisted(() => ({
   resolveMessageChannelSelection: vi.fn(),
   sendPoll: vi.fn(async () => ({ messageId: "poll-1" })),
   getChannelPlugin: vi.fn(),
-  loadOpenClawPlugins: vi.fn(),
+  loadJarvisPlugins: vi.fn(),
 }));
 
 vi.mock("../../config/config.js", async () => {
@@ -63,7 +63,7 @@ vi.mock("../../config/plugin-auto-enable.js", () => ({
 }));
 
 vi.mock("../../plugins/loader.js", () => ({
-  loadOpenClawPlugins: mocks.loadOpenClawPlugins,
+  loadJarvisPlugins: mocks.loadJarvisPlugins,
 }));
 
 vi.mock("../../infra/outbound/targets.js", () => ({
@@ -551,7 +551,7 @@ describe("gateway send mirroring", () => {
       idempotencyKey: "idem-cold-telegram-thread",
     });
 
-    expect(mocks.loadOpenClawPlugins).toHaveBeenCalledTimes(1);
+    expect(mocks.loadJarvisPlugins).toHaveBeenCalledTimes(1);
     expect(mocks.deliverOutboundPayloads).toHaveBeenCalledWith(
       expect.objectContaining({
         channel: "telegram",

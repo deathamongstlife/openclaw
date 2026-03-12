@@ -22,7 +22,7 @@ import {
   resolveControlUiLinks,
 } from "../commands/onboard-helpers.js";
 import type { OnboardOptions } from "../commands/onboard-types.js";
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { resolveGatewayService } from "../daemon/service.js";
 import { isSystemdUserServiceAvailable } from "../daemon/systemd.js";
 import { ensureControlUiAssetsBuilt } from "../infra/control-ui-assets.js";
@@ -38,8 +38,8 @@ import type { WizardPrompter } from "./prompts.js";
 type FinalizeOnboardingOptions = {
   flow: WizardFlow;
   opts: OnboardOptions;
-  baseConfig: OpenClawConfig;
-  nextConfig: OpenClawConfig;
+  baseConfig: JarvisConfig;
+  nextConfig: JarvisConfig;
   workspaceDir: string;
   settings: GatewayWizardSettings;
   prompter: WizardPrompter;
@@ -348,10 +348,10 @@ export async function finalizeOnboardingWizard(
       [
         "Gateway token: shared auth for the Gateway + Control UI.",
         "Stored in: ~/.openclaw/openclaw.json (gateway.auth.token) or OPENCLAW_GATEWAY_TOKEN.",
-        `View token: ${formatCliCommand("openclaw config get gateway.auth.token")}`,
-        `Generate token: ${formatCliCommand("openclaw doctor --generate-gateway-token")}`,
+        `View token: ${formatCliCommand("jarvis config get gateway.auth.token")}`,
+        `Generate token: ${formatCliCommand("jarvis doctor --generate-gateway-token")}`,
         "Web UI keeps dashboard URL tokens in memory for the current tab and strips them from the URL after load.",
-        `Open the dashboard anytime: ${formatCliCommand("openclaw dashboard --no-open")}`,
+        `Open the dashboard anytime: ${formatCliCommand("jarvis dashboard --no-open")}`,
         "If prompted: paste the token into Control UI settings (or use the tokenized dashboard URL).",
       ].join("\n"),
       "Token",
@@ -400,8 +400,8 @@ export async function finalizeOnboardingWizard(
         [
           `Dashboard link (with token): ${authedUrl}`,
           controlUiOpened
-            ? "Opened in your browser. Keep that tab to control OpenClaw."
-            : "Copy/paste this URL in a browser on this machine to control OpenClaw.",
+            ? "Opened in your browser. Keep that tab to control Jarvis."
+            : "Copy/paste this URL in a browser on this machine to control Jarvis.",
           controlUiOpenHint,
         ]
           .filter(Boolean)
@@ -410,7 +410,7 @@ export async function finalizeOnboardingWizard(
       );
     } else {
       await prompter.note(
-        `When you're ready: ${formatCliCommand("openclaw dashboard --no-open")}`,
+        `When you're ready: ${formatCliCommand("jarvis dashboard --no-open")}`,
         "Later",
       );
     }
@@ -461,8 +461,8 @@ export async function finalizeOnboardingWizard(
       [
         `Dashboard link (with token): ${authedUrl}`,
         controlUiOpened
-          ? "Opened in your browser. Keep that tab to control OpenClaw."
-          : "Copy/paste this URL in a browser on this machine to control OpenClaw.",
+          ? "Opened in your browser. Keep that tab to control Jarvis."
+          : "Copy/paste this URL in a browser on this machine to control Jarvis.",
         controlUiOpenHint,
       ]
         .filter(Boolean)
@@ -505,7 +505,7 @@ export async function finalizeOnboardingWizard(
         [
           `Provider ${label} is selected but no API key was found.`,
           "web_search will not work until a key is added.",
-          `  ${formatCliCommand("openclaw configure --section web")}`,
+          `  ${formatCliCommand("jarvis configure --section web")}`,
           "",
           `Get your key at: ${entry?.signupUrl ?? "https://docs.openclaw.ai/tools/web"}`,
           "Docs: https://docs.openclaw.ai/tools/web",
@@ -516,7 +516,7 @@ export async function finalizeOnboardingWizard(
       await prompter.note(
         [
           `Web search (${label}) is configured but disabled.`,
-          `Re-enable: ${formatCliCommand("openclaw configure --section web")}`,
+          `Re-enable: ${formatCliCommand("jarvis configure --section web")}`,
           "",
           "Docs: https://docs.openclaw.ai/tools/web",
         ].join("\n"),
@@ -543,7 +543,7 @@ export async function finalizeOnboardingWizard(
       await prompter.note(
         [
           "Web search was skipped. You can enable it later:",
-          `  ${formatCliCommand("openclaw configure --section web")}`,
+          `  ${formatCliCommand("jarvis configure --section web")}`,
           "",
           "Docs: https://docs.openclaw.ai/tools/web",
         ].join("\n"),
@@ -559,10 +559,10 @@ export async function finalizeOnboardingWizard(
 
   await prompter.outro(
     controlUiOpened
-      ? "Onboarding complete. Dashboard opened; keep that tab to control OpenClaw."
+      ? "Onboarding complete. Dashboard opened; keep that tab to control Jarvis."
       : seededInBackground
         ? "Onboarding complete. Web UI seeded in the background; open it anytime with the dashboard link above."
-        : "Onboarding complete. Use the dashboard link above to control OpenClaw.",
+        : "Onboarding complete. Use the dashboard link above to control Jarvis.",
   );
 
   return { launchedTui };

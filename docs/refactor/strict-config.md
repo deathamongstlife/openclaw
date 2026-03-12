@@ -48,8 +48,8 @@ title: "Strict Config Validation"
 - Doctor runs **every time** config is loaded (dry-run by default).
 - If config invalid:
   - Print a summary + actionable errors.
-  - Instruct: `openclaw doctor --fix`.
-- `openclaw doctor --fix`:
+  - Instruct: `jarvis doctor --fix`.
+- `jarvis doctor --fix`:
   - Applies migrations.
   - Removes unknown keys.
   - Writes updated config.
@@ -58,14 +58,14 @@ title: "Strict Config Validation"
 
 Allowed (diagnostic-only):
 
-- `openclaw doctor`
-- `openclaw logs`
-- `openclaw health`
-- `openclaw help`
-- `openclaw status`
-- `openclaw gateway status`
+- `jarvis doctor`
+- `jarvis logs`
+- `jarvis health`
+- `jarvis help`
+- `jarvis status`
+- `jarvis gateway status`
 
-Everything else must hard-fail with: “Config invalid. Run `openclaw doctor --fix`.”
+Everything else must hard-fail with: “Config invalid. Run `jarvis doctor --fix`.”
 
 ## Error UX format
 

@@ -3,13 +3,13 @@
  * Addresses issue #43299 - Hot reload breaks on syntax errors
  */
 
-import type { OpenClawConfig } from "./types.js";
+import type { JarvisConfig } from "./types.js";
 import { validateConfigRelaxed, type ValidationResult } from "./validation-relaxed.js";
 
 export type HotReloadState = {
-  currentConfig: OpenClawConfig;
-  previousConfig: OpenClawConfig | null;
-  pendingConfig: OpenClawConfig | null;
+  currentConfig: JarvisConfig;
+  previousConfig: JarvisConfig | null;
+  pendingConfig: JarvisConfig | null;
   reloadInProgress: boolean;
   lastReloadTime: number;
   reloadCount: number;
@@ -40,8 +40,8 @@ function validateConfigForReload(config: unknown): ValidationResult {
 /**
  * Create config snapshot for rollback
  */
-function createConfigSnapshot(config: OpenClawConfig): OpenClawConfig {
-  return JSON.parse(JSON.stringify(config)) as OpenClawConfig;
+function createConfigSnapshot(config: JarvisConfig): JarvisConfig {
+  return JSON.parse(JSON.stringify(config)) as JarvisConfig;
 }
 
 /**
@@ -50,7 +50,7 @@ function createConfigSnapshot(config: OpenClawConfig): OpenClawConfig {
 export async function applyConfigHotReload(
   state: HotReloadState,
   newConfig: unknown,
-  onApply: (config: OpenClawConfig) => Promise<void>,
+  onApply: (config: JarvisConfig) => Promise<void>,
 ): Promise<HotReloadResult> {
   if (state.reloadInProgress) {
     return {
@@ -82,7 +82,7 @@ export async function applyConfigHotReload(
     }
 
     state.previousConfig = createConfigSnapshot(state.currentConfig);
-    state.pendingConfig = newConfig as OpenClawConfig;
+    state.pendingConfig = newConfig as JarvisConfig;
 
     try {
       await onApply(state.pendingConfig);
@@ -148,7 +148,7 @@ export async function applyConfigHotReload(
 /**
  * Initialize hot reload state
  */
-export function initializeHotReloadState(config: OpenClawConfig): HotReloadState {
+export function initializeHotReloadState(config: JarvisConfig): HotReloadState {
   return {
     currentConfig: config,
     previousConfig: null,
@@ -164,8 +164,8 @@ export function initializeHotReloadState(config: OpenClawConfig): HotReloadState
  * Get config diff
  */
 export function getConfigDiff(
-  oldConfig: OpenClawConfig,
-  newConfig: OpenClawConfig,
+  oldConfig: JarvisConfig,
+  newConfig: JarvisConfig,
 ): string[] {
   const changes: string[] = [];
 
@@ -216,7 +216,7 @@ export function getConfigDiff(
 /**
  * Check if reload is safe (no breaking changes)
  */
-export function isReloadSafe(oldConfig: OpenClawConfig, newConfig: OpenClawConfig): boolean {
+export function isReloadSafe(oldConfig: JarvisConfig, newConfig: JarvisConfig): boolean {
   const breakingChanges = [
     "gateway.port",
     "gateway.bind",

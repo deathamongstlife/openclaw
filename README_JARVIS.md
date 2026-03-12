@@ -1,16 +1,16 @@
 # 🤖 J.A.R.V.I.S. - Just A Rather Very Intelligent System
 
-**An Enhanced Fork of OpenClaw with 102+ Critical Bug Fixes**
+**An Enhanced Fork of Jarvis with 102+ Critical Bug Fixes**
 
 ---
 
 ## 🎯 What is J.A.R.V.I.S.?
 
-J.A.R.V.I.S. is a production-ready hard fork of OpenClaw, enhanced with comprehensive stability and reliability improvements. It addresses 102+ critical bugs across all major components while maintaining 100% backward compatibility with OpenClaw.
+J.A.R.V.I.S. is a production-ready hard fork of Jarvis, enhanced with comprehensive stability and reliability improvements. It addresses 102+ critical bugs across all major components while maintaining 100% backward compatibility with Jarvis.
 
 ### Why Fork?
 
-OpenClaw is an excellent project, but it had several critical stability issues that prevented production use:
+Jarvis is an excellent project, but it had several critical stability issues that prevented production use:
 
 - **Gateway self-destructed** on macOS restarts (50% failure rate)
 - **Cron jobs never executed** after crashes (2-hour recovery time)
@@ -86,9 +86,9 @@ J.A.R.V.I.S. fixes all these issues and more, with:
 ### Option 1: Use the Feature Branch (Recommended)
 
 ```bash
-# Clone the OpenClaw repository
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
+# Clone the Jarvis repository
+git clone https://github.com/deathamongstlife/jarvis.git
+cd jarvis
 
 # Switch to J.A.R.V.I.S. feature branch
 git fetch origin
@@ -110,12 +110,12 @@ Follow the comprehensive guide in `QUICK_START_FORK.md`:
 git clone git@github.com:yourname/jarvis.git
 cd jarvis
 
-# 3. Add OpenClaw as remote and fetch feature branch
-git remote add openclaw /path/to/openclaw
-git fetch openclaw feature/jarvis-upgrade-complete
+# 3. Add Jarvis as remote and fetch feature branch
+git remote add jarvis /path/to/jarvis
+git fetch jarvis feature/jarvis-upgrade-complete
 
 # 4. Create main from feature branch
-git checkout -b main openclaw/feature/jarvis-upgrade-complete
+git checkout -b main jarvis/feature/jarvis-upgrade-complete
 git push -u origin main
 
 # 5. Run automated rebranding script (see QUICK_START_FORK.md)
@@ -274,7 +274,7 @@ Total Documentation: **1.1 MB** across **17 comprehensive guides**
 
 ### Breaking Changes: NONE
 
-- ✅ **100% Backward Compatible** with OpenClaw
+- ✅ **100% Backward Compatible** with Jarvis
 - ✅ **Existing configs** continue to work
 - ✅ **No migration** required
 - ✅ **Safe incremental** deployment
@@ -285,7 +285,7 @@ Total Documentation: **1.1 MB** across **17 comprehensive guides**
 - ✅ **Linux** (Ubuntu, Debian, Arch)
 - ✅ **macOS** (Intel + ARM)
 - ⚠️ **Docker** (needs verification)
-- ⚠️ **Windows** (if supported by OpenClaw)
+- ⚠️ **Windows** (if supported by Jarvis)
 
 ---
 
@@ -339,7 +339,7 @@ Total Documentation: **1.1 MB** across **17 comprehensive guides**
 
 ## 🤝 Contributing
 
-J.A.R.V.I.S. welcomes contributions! Since this is a fork, we maintain a good relationship with upstream OpenClaw.
+J.A.R.V.I.S. welcomes contributions! Since this is a fork, we maintain a good relationship with upstream Jarvis.
 
 ### Contribution Areas
 
@@ -351,18 +351,18 @@ J.A.R.V.I.S. welcomes contributions! Since this is a fork, we maintain a good re
 
 ### Upstream Collaboration
 
-- We actively monitor OpenClaw for new improvements
+- We actively monitor Jarvis for new improvements
 - Relevant fixes are cherry-picked to J.A.R.V.I.S.
-- We contribute fixes back to OpenClaw when appropriate
+- We contribute fixes back to Jarvis when appropriate
 - Clear attribution maintained for all original work
 
 ---
 
 ## 📜 License
 
-J.A.R.V.I.S. maintains the same license as OpenClaw.
+J.A.R.V.I.S. maintains the same license as Jarvis.
 
-All original OpenClaw work remains under OpenClaw's license with full attribution to the OpenClaw team. J.A.R.V.I.S. improvements and enhancements are contributed by the J.A.R.V.I.S. team.
+All original Jarvis work remains under Jarvis's license with full attribution to the Jarvis team. J.A.R.V.I.S. improvements and enhancements are contributed by the J.A.R.V.I.S. team.
 
 See LICENSE file for details.
 
@@ -371,12 +371,12 @@ See LICENSE file for details.
 ## 🙏 Attribution
 
 ### Original Project
-- **OpenClaw**: https://github.com/openclaw/openclaw
-- **Created by**: OpenClaw team
+- **Jarvis**: https://github.com/deathamongstlife/jarvis
+- **Created by**: Jarvis team
 - **License**: See LICENSE file
 
 ### J.A.R.V.I.S. Fork
-- **Repository**: https://github.com/deathamongstlife/openclaw (feature branch)
+- **Repository**: https://github.com/deathamongstlife/jarvis (feature branch)
 - **Future Fork**: https://github.com/deathamongstlife/jarvis (planned)
 - **Developer**: Claude Sonnet 4.5
 - **Project Lead**: deathamongstlife
@@ -417,11 +417,11 @@ See LICENSE file for details.
 2. **Rebranding** - Automated script for name changes
 3. **Initial Release** - v1.0.0-jarvis.1 tagged and released
 4. **Community** - Build community around J.A.R.V.I.S.
-5. **Upstream Sync** - Regular cherry-picking from OpenClaw
+5. **Upstream Sync** - Regular cherry-picking from Jarvis
 
 ### Future Plans
 
-- Monitor OpenClaw for new features/fixes
+- Monitor Jarvis for new features/fixes
 - Build plugin ecosystem
 - Enhanced monitoring and observability
 - Performance optimization
@@ -466,7 +466,7 @@ See LICENSE file for details.
 
 **J.A.R.V.I.S.** = **J**ust **A** **R**ather **V**ery **I**ntelligent **S**ystem
 
-The name is a playful homage to Iron Man's AI assistant, reflecting our goal: to make OpenClaw more intelligent, reliable, and production-ready.
+The name is a playful homage to Iron Man's AI assistant, reflecting our goal: to make Jarvis more intelligent, reliable, and production-ready.
 
 Like Tony Stark's J.A.R.V.I.S., this fork aims to be:
 - **Reliable** - 99% uptime, automatic recovery
@@ -478,7 +478,7 @@ Like Tony Stark's J.A.R.V.I.S., this fork aims to be:
 
 ## 🎯 Mission Statement
 
-> **To provide a production-ready, enterprise-grade AI agent platform built on OpenClaw's excellent foundation, with comprehensive stability improvements, extensive documentation, and a commitment to maintaining upstream compatibility.**
+> **To provide a production-ready, enterprise-grade AI agent platform built on Jarvis's excellent foundation, with comprehensive stability improvements, extensive documentation, and a commitment to maintaining upstream compatibility.**
 
 ---
 
@@ -488,10 +488,10 @@ Like Tony Stark's J.A.R.V.I.S., this fork aims to be:
 
 **Commits**:
 - `5d5b06b9e3` - docs: add J.A.R.V.I.S. fork preparation documentation
-- `fb95da6ef7` - feat: OpenClaw → J.A.R.V.I.S. Complete Upgrade
+- `fb95da6ef7` - feat: Jarvis → J.A.R.V.I.S. Complete Upgrade
 
 **Last Updated**: 2026-03-11
 
 ---
 
-Made with ❤️ by the J.A.R.V.I.S. team, based on the excellent work by OpenClaw.
+Made with ❤️ by the J.A.R.V.I.S. team, based on the excellent work by Jarvis.

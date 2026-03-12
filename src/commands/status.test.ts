@@ -307,7 +307,7 @@ vi.mock("../gateway/session-utils.js", async (importOriginal) => {
   };
 });
 vi.mock("../infra/openclaw-root.js", () => ({
-  resolveOpenClawPackageRoot: vi.fn().mockResolvedValue("/tmp/openclaw"),
+  resolveJarvisPackageRoot: vi.fn().mockResolvedValue("/tmp/openclaw"),
 }));
 vi.mock("../infra/os-summary.js", () => ({
   resolveOsSummary: () => ({
@@ -441,7 +441,7 @@ describe("statusCommand", () => {
   it("prints formatted lines otherwise", async () => {
     const logs = await runStatusAndGetLogs();
     for (const token of [
-      "OpenClaw status",
+      "Jarvis status",
       "Overview",
       "Security audit",
       "Summary:",
@@ -466,7 +466,7 @@ describe("statusCommand", () => {
     expect(
       logs.some(
         (line) =>
-          line.includes("openclaw status --all") ||
+          line.includes("jarvis status --all") ||
           line.includes("openclaw --profile isolated status --all"),
       ),
     ).toBe(true);

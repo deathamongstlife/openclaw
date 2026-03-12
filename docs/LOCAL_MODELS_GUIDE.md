@@ -1,10 +1,10 @@
 # Local Models Guide
 
-Run AI models completely offline on your own hardware with OpenClaw's local model support.
+Run AI models completely offline on your own hardware with Jarvis's local model support.
 
 ## Overview
 
-OpenClaw supports running AI models locally on your machine, providing:
+Jarvis supports running AI models locally on your machine, providing:
 
 - **🔒 Complete Privacy**: All inference happens on your hardware
 - **💰 Zero API Costs**: No per-token charges
@@ -24,7 +24,7 @@ This script will:
 1. Install Ollama (if not present)
 2. Detect your system resources
 3. Recommend and install an appropriate model
-4. Configure OpenClaw automatically
+4. Configure Jarvis automatically
 5. Test the installation
 
 ### Manual Installation
@@ -61,21 +61,21 @@ This script will:
    ollama pull deepseek-r1:8b
    ```
 
-4. **Configure OpenClaw**
+4. **Configure Jarvis**
 
    ```bash
-   openclaw config set agents.defaults.model ollama/llama3.2:3b
+   jarvis config set agents.defaults.model ollama/llama3.2:3b
    ```
 
 5. **Test It**
 
    ```bash
-   openclaw message send "Hello! Are you running locally?"
+   jarvis message send "Hello! Are you running locally?"
    ```
 
 ## Supported Models
 
-OpenClaw includes pre-configured support for popular local models:
+Jarvis includes pre-configured support for popular local models:
 
 ### Small Models (4-8GB RAM)
 
@@ -124,7 +124,7 @@ OpenClaw includes pre-configured support for popular local models:
 
 ### GPU Support
 
-OpenClaw automatically detects and uses GPU acceleration when available:
+Jarvis automatically detects and uses GPU acceleration when available:
 
 **Supported GPUs:**
 - NVIDIA (CUDA) - RTX 3090/4090, A100, H100
@@ -166,7 +166,7 @@ ollama pull llama3.3:70b-q8_0    // 8-bit quantized
 
 ## Backends
 
-OpenClaw supports multiple local model backends:
+Jarvis supports multiple local model backends:
 
 ### Ollama (Primary)
 
@@ -220,7 +220,7 @@ curl http://localhost:11434/api/tags
 
 ## Configuration
 
-### OpenClaw Config
+### Jarvis Config
 
 Configure local models in `~/.openclaw/config.json`:
 
@@ -278,10 +278,10 @@ export OLLAMA_KEEP_ALIVE=5m
 ollama run llama3.2:3b --num-ctx 32768
 
 # Set temperature
-openclaw config set agents.defaults.temperature 0.7
+jarvis config set agents.defaults.temperature 0.7
 
 # Enable reasoning mode
-openclaw config set agents.defaults.reasoning true
+jarvis config set agents.defaults.reasoning true
 ```
 
 ## Advanced Usage
@@ -292,10 +292,10 @@ Run different models for different tasks:
 
 ```bash
 # Fast model for quick tasks
-openclaw config set agents.defaults.model ollama/llama3.2:3b
+jarvis config set agents.defaults.model ollama/llama3.2:3b
 
 # Large model for complex tasks
-openclaw config set agents.defaults.model.fallback ollama/llama3.3:70b
+jarvis config set agents.defaults.model.fallback ollama/llama3.3:70b
 ```
 
 ### Custom Models
@@ -315,8 +315,8 @@ EOF
 # Create the model
 ollama create my-custom-model -f Modelfile
 
-# Use in OpenClaw
-openclaw config set agents.defaults.model ollama/my-custom-model
+# Use in Jarvis
+jarvis config set agents.defaults.model ollama/my-custom-model
 ```
 
 ### Performance Tuning
@@ -427,25 +427,25 @@ df -h
 
 ```bash
 # System info and recommendations
-openclaw local-models info
+jarvis local-models info
 
 # Install recommended model
-openclaw local-models quick-install
+jarvis local-models quick-install
 
 # Install specific model
-openclaw local-models install llama3.3:70b
+jarvis local-models install llama3.3:70b
 
 # List installed models
-openclaw local-models list
+jarvis local-models list
 
 # Uninstall a model
-openclaw local-models uninstall llama3.2:3b
+jarvis local-models uninstall llama3.2:3b
 
 # Test a model
-openclaw local-models test llama3.2:3b
+jarvis local-models test llama3.2:3b
 
 # Check backend status
-openclaw local-models status
+jarvis local-models status
 ```
 
 ## Resources

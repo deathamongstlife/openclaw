@@ -1,4 +1,4 @@
-# OpenClaw Dashboard Quick Reference
+# Jarvis Dashboard Quick Reference
 
 ## 📁 File Structure
 

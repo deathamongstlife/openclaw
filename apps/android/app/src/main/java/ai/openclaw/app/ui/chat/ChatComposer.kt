@@ -1,4 +1,4 @@
-package ai.openclaw.app.ui.chat
+package ai.jarvis.app.ui.chat
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.horizontalScroll
@@ -46,17 +46,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ai.openclaw.app.ui.mobileAccent
-import ai.openclaw.app.ui.mobileAccentSoft
-import ai.openclaw.app.ui.mobileBorder
-import ai.openclaw.app.ui.mobileBorderStrong
-import ai.openclaw.app.ui.mobileCallout
-import ai.openclaw.app.ui.mobileCaption1
-import ai.openclaw.app.ui.mobileHeadline
-import ai.openclaw.app.ui.mobileSurface
-import ai.openclaw.app.ui.mobileText
-import ai.openclaw.app.ui.mobileTextSecondary
-import ai.openclaw.app.ui.mobileTextTertiary
+import ai.jarvis.app.ui.mobileAccent
+import ai.jarvis.app.ui.mobileAccentSoft
+import ai.jarvis.app.ui.mobileBorder
+import ai.jarvis.app.ui.mobileBorderStrong
+import ai.jarvis.app.ui.mobileCallout
+import ai.jarvis.app.ui.mobileCaption1
+import ai.jarvis.app.ui.mobileHeadline
+import ai.jarvis.app.ui.mobileSurface
+import ai.jarvis.app.ui.mobileText
+import ai.jarvis.app.ui.mobileTextSecondary
+import ai.jarvis.app.ui.mobileTextTertiary
 
 @Composable
 fun ChatComposer(
@@ -148,7 +148,7 @@ fun ChatComposer(
       Text(
         text = "Gateway is offline. Connect first in the Connect tab.",
         style = mobileCallout,
-        color = ai.openclaw.app.ui.mobileWarning,
+        color = ai.jarvis.app.ui.mobileWarning,
       )
     }
 
@@ -346,7 +346,7 @@ private fun chatTextFieldColors() =
 @Composable
 private fun mobileBodyStyle() =
   MaterialTheme.typography.bodyMedium.copy(
-    fontFamily = ai.openclaw.app.ui.mobileFontFamily,
+    fontFamily = ai.jarvis.app.ui.mobileFontFamily,
     fontWeight = FontWeight.Medium,
     fontSize = 15.sp,
     lineHeight = 22.sp,

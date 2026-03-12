@@ -35,7 +35,7 @@ describe("ircPlugin gateway.startAccount", () => {
       tls: true,
       nick: "openclaw",
       username: "openclaw",
-      realname: "OpenClaw",
+      realname: "Jarvis",
       password: "",
       passwordSource: "none",
       config: {} as ResolvedIrcAccount["config"],

@@ -1,6 +1,6 @@
 import CoreGraphics
 import Foundation
-import OpenClawKit
+import JarvisKit
 
 enum SystemPresenceInfo {
     static func lastInputSeconds() -> Int? {

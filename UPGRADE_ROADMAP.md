@@ -1,4 +1,4 @@
-# OpenClaw Platform Upgrade Roadmap
+# Jarvis Platform Upgrade Roadmap
 
 **Status**: Planning Phase
 **Owner**: deathamongstlife
@@ -9,7 +9,7 @@
 
 ## Overview
 
-This roadmap outlines a comprehensive upgrade to maximize OpenClaw's capabilities with:
+This roadmap outlines a comprehensive upgrade to maximize Jarvis's capabilities with:
 - **Enhanced Dashboard** - Modern, comprehensive control UI
 - **Better Channel Connections** - Stronger, smarter, more reliable
 - **Extended Features** - More commands, capabilities, and automation
@@ -157,18 +157,18 @@ This roadmap outlines a comprehensive upgrade to maximize OpenClaw's capabilitie
 **New Commands**:
 ```bash
 # Session management
-openclaw sessions export <session-key> [--format json|markdown|html]
-openclaw sessions import <file>
-openclaw sessions merge <key1> <key2>
-openclaw sessions delete <session-key> [--confirm]
-openclaw sessions archive <session-key>
-openclaw sessions search <query>
-openclaw sessions stats [--channel] [--agent]
+jarvis sessions export <session-key> [--format json|markdown|html]
+jarvis sessions import <file>
+jarvis sessions merge <key1> <key2>
+jarvis sessions delete <session-key> [--confirm]
+jarvis sessions archive <session-key>
+jarvis sessions search <query>
+jarvis sessions stats [--channel] [--agent]
 
 # Session operations
-openclaw sessions replay <session-key> [--speed 1-10]
-openclaw sessions fork <session-key> [--message]
-openclaw sessions summarize <session-key>
+jarvis sessions replay <session-key> [--speed 1-10]
+jarvis sessions fork <session-key> [--message]
+jarvis sessions summarize <session-key>
 ```
 
 ### 3.2 Enhanced Debugging Tools
@@ -178,18 +178,18 @@ openclaw sessions summarize <session-key>
 **New Commands**:
 ```bash
 # Debugging commands
-openclaw debug gateway [--verbose]
-openclaw debug channel <channel-id> [--state]
-openclaw debug session <session-key> [--full]
-openclaw debug config [--validate]
-openclaw debug plugins [--list]
-openclaw debug network [--trace]
-openclaw debug logs [--tail] [--filter]
+jarvis debug gateway [--verbose]
+jarvis debug channel <channel-id> [--state]
+jarvis debug session <session-key> [--full]
+jarvis debug config [--validate]
+jarvis debug plugins [--list]
+jarvis debug network [--trace]
+jarvis debug logs [--tail] [--filter]
 
 # Performance profiling
-openclaw profile gateway [--duration 60]
-openclaw profile channel <channel-id>
-openclaw profile session <session-key>
+jarvis profile gateway [--duration 60]
+jarvis profile channel <channel-id>
+jarvis profile session <session-key>
 ```
 
 ### 3.3 Automation & Scheduling
@@ -199,16 +199,16 @@ openclaw profile session <session-key>
 **New Commands**:
 ```bash
 # Cron and scheduling
-openclaw cron add <schedule> <command>
-openclaw cron list
-openclaw cron remove <id>
-openclaw cron run <id> [--now]
+jarvis cron add <schedule> <command>
+jarvis cron list
+jarvis cron remove <id>
+jarvis cron run <id> [--now]
 
 # Automation rules
-openclaw rules add <name> <condition> <action>
-openclaw rules list
-openclaw rules enable/disable <name>
-openclaw rules test <name>
+jarvis rules add <name> <condition> <action>
+jarvis rules list
+jarvis rules enable/disable <name>
+jarvis rules test <name>
 ```
 
 ### 3.4 Enhanced Admin Commands
@@ -218,16 +218,16 @@ openclaw rules test <name>
 **New Commands**:
 ```bash
 # Admin operations
-openclaw admin users list
-openclaw admin users add <user> [--channels]
-openclaw admin users remove <user>
-openclaw admin permissions set <user> <permissions>
+jarvis admin users list
+jarvis admin users add <user> [--channels]
+jarvis admin users remove <user>
+jarvis admin permissions set <user> <permissions>
 
 # System management
-openclaw admin backup [--full]
-openclaw admin restore <backup-file>
-openclaw admin clean [--sessions] [--logs] [--cache]
-openclaw admin migrate [--from <version>]
+jarvis admin backup [--full]
+jarvis admin restore <backup-file>
+jarvis admin clean [--sessions] [--logs] [--cache]
+jarvis admin migrate [--from <version>]
 ```
 
 ### 3.5 Media & File Handling
@@ -261,12 +261,12 @@ openclaw admin migrate [--from <version>]
 
 **New Commands**:
 ```bash
-openclaw plugins search <query>
-openclaw plugins install <plugin-name>
-openclaw plugins update [plugin-name]
-openclaw plugins remove <plugin-name>
-openclaw plugins list [--enabled] [--available]
-openclaw plugins info <plugin-name>
+jarvis plugins search <query>
+jarvis plugins install <plugin-name>
+jarvis plugins update [plugin-name]
+jarvis plugins remove <plugin-name>
+jarvis plugins list [--enabled] [--available]
+jarvis plugins info <plugin-name>
 ```
 
 ### 4.2 Plugin Development Tools
@@ -281,10 +281,10 @@ openclaw plugins info <plugin-name>
 
 **New Commands**:
 ```bash
-openclaw plugin create <name> [--template]
-openclaw plugin test [--watch]
-openclaw plugin build [--watch]
-openclaw plugin publish [--registry]
+jarvis plugin create <name> [--template]
+jarvis plugin test [--watch]
+jarvis plugin build [--watch]
+jarvis plugin publish [--registry]
 ```
 
 ---
@@ -433,7 +433,7 @@ openclaw plugin publish [--registry]
 - **UI Framework**: Continue with Lit (Web Components) for consistency
 - **Build System**: Keep Vite for fast development
 - **Testing**: Vitest for unit/integration tests
-- **Documentation**: Update docs.openclaw.ai in parallel
+- **Documentation**: Update docs.jarvis.ai in parallel
 - **Backwards Compatibility**: Maintain for at least 2 major versions
 
 ---

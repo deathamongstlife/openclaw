@@ -8,7 +8,7 @@ import {
 import { listPairingChannels } from "../../channels/plugins/pairing.js";
 import type { ChannelId } from "../../channels/plugins/types.js";
 import { normalizeChannelId } from "../../channels/registry.js";
-import type { OpenClawConfig } from "../../config/config.js";
+import type { JarvisConfig } from "../../config/config.js";
 import {
   readConfigFileSnapshot,
   validateConfigObjectWithPlugins,
@@ -158,7 +158,7 @@ function parseAllowlistCommand(raw: string): AllowlistCommand | null {
 }
 
 function normalizeAllowFrom(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   channelId: ChannelId;
   accountId?: string | null;
   values: Array<string | number>;
@@ -367,7 +367,7 @@ function mapResolvedAllowlistNames(entries: ResolvedAllowlistName[]): Map<string
 }
 
 async function resolveSlackNames(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   accountId?: string | null;
   entries: string[];
 }) {
@@ -381,7 +381,7 @@ async function resolveSlackNames(params: {
 }
 
 async function resolveDiscordNames(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   accountId?: string | null;
   entries: string[];
 }) {

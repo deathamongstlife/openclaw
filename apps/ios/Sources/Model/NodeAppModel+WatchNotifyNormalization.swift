@@ -1,5 +1,5 @@
 import Foundation
-import OpenClawKit
+import JarvisKit
 
 extension NodeAppModel {
     static func normalizeWatchNotifyParams(_ params: OpenClawWatchNotifyParams) -> OpenClawWatchNotifyParams {

@@ -1,4 +1,4 @@
-package ai.openclaw.app.gateway
+package ai.jarvis.app.gateway
 
 import android.util.Log
 import java.util.Locale

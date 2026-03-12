@@ -1,6 +1,6 @@
 ---
 name: voice-call
-description: Start voice calls via the OpenClaw voice-call plugin.
+description: Start voice calls via the Jarvis voice-call plugin.
 metadata:
   {
     "openclaw":
@@ -19,8 +19,8 @@ Use the voice-call plugin to start or inspect calls (Twilio, Telnyx, Plivo, or m
 ## CLI
 
 ```bash
-openclaw voicecall call --to "+15555550123" --message "Hello from OpenClaw"
-openclaw voicecall status --call-id <id>
+jarvis voicecall call --to "+15555550123" --message "Hello from Jarvis"
+jarvis voicecall status --call-id <id>
 ```
 
 ## Tool

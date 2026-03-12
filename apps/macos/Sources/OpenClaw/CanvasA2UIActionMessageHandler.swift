@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 import OpenClawIPC
-import OpenClawKit
+import JarvisKit
 import WebKit
 
 final class CanvasA2UIActionMessageHandler: NSObject, WKScriptMessageHandler {
@@ -112,5 +112,5 @@ final class CanvasA2UIActionMessageHandler: NSObject, WKScriptMessageHandler {
         LocalNetworkURLSupport.isLocalNetworkHTTPURL(url)
     }
 
-    // Formatting helpers live in OpenClawKit (`OpenClawCanvasA2UIAction`).
+    // Formatting helpers live in JarvisKit (`OpenClawCanvasA2UIAction`).
 }

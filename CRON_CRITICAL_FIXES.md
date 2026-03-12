@@ -1,8 +1,8 @@
-# OpenClaw Cron System - Critical Bug Fixes
+# Jarvis Cron System - Critical Bug Fixes
 
 ## Executive Summary
 
-Fixed CRITICAL bugs in the OpenClaw cron system that prevented jobs from executing:
+Fixed CRITICAL bugs in the Jarvis cron system that prevented jobs from executing:
 1. **Timer Death Loop** - Fixed stuck running markers causing permanent scheduler failure
 2. **Manual Trigger Deadlock** - Removed nested lane enqueueing that caused deadlocks
 3. **Stuck Marker Threshold** - Reduced cleanup threshold from 2 hours to 5 minutes
@@ -206,7 +206,7 @@ if (plan.restartCron) {
 ### Test 2: Manual Trigger During Timer Execution
 1. Create a long-running cron job (30+ seconds)
 2. Let timer trigger the job
-3. While job is running, manually trigger same job via CLI: `openclaw cron run <job-id>`
+3. While job is running, manually trigger same job via CLI: `jarvis cron run <job-id>`
 4. Verify: Manual trigger executes immediately (doesn't deadlock)
 5. Verify: Both executions complete successfully
 

@@ -1,10 +1,10 @@
 # Model and Provider Integration Fixes
 
-This document describes the fixes applied to resolve model and provider integration issues in OpenClaw.
+This document describes the fixes applied to resolve model and provider integration issues in Jarvis.
 
 ## Overview
 
-OpenClaw has been updated to fix 17 critical issues affecting OpenAI, Gemini, Anthropic, and other AI providers. These fixes improve stability, add support for new models, and enhance error handling across all providers.
+Jarvis has been updated to fix 17 critical issues affecting OpenAI, Gemini, Anthropic, and other AI providers. These fixes improve stability, add support for new models, and enhance error handling across all providers.
 
 ## Fixed Issues
 
@@ -303,4 +303,4 @@ See GitHub issue links for original bug reports and discussions.
 For issues related to these fixes, please open a GitHub issue with:
 - Provider and model being used
 - Error message or unexpected behavior
-- Relevant logs from OpenClaw gateway
+- Relevant logs from Jarvis gateway

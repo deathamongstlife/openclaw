@@ -2,7 +2,7 @@
 
 ## Repository Status
 
-**Working Directory:** `/workspace/claude-workspace/r79767525_gmail.com/deathamongstlife/openclaw`
+**Working Directory:** `/workspace/claude-workspace/r79767525_gmail.com/deathamongstlife/jarvis`
 
 **Current Branch:** `feature/jarvis-upgrade-complete`
 
@@ -14,7 +14,7 @@
 
 ### 5 Commits Created
 
-1. **fb95da6ef7** - feat: OpenClaw → J.A.R.V.I.S. Complete Upgrade
+1. **fb95da6ef7** - feat: Jarvis → J.A.R.V.I.S. Complete Upgrade
 2. **5d5b06b9e3** - docs: add J.A.R.V.I.S. fork preparation documentation
 3. **fa579180eb** - docs: add comprehensive J.A.R.V.I.S. README
 4. **a85e62ffbf** - docs: add final J.A.R.V.I.S. fork preparation report
@@ -247,24 +247,24 @@ test-dashboard-server.js
 ### Visual Assets (16 PNG files)
 
 Located in `docs/assets/architecture/`:
-- openclaw-agents.png (24.6 KB)
-- openclaw-channels.png (44.0 KB)
-- openclaw-collapsed-sidebar.png (52.1 KB)
-- openclaw-config.png (27.6 KB)
-- openclaw-cron.png (93.2 KB)
-- openclaw-dark-theme.png (31.6 KB)
-- openclaw-dashboard-homepage.png (29.5 KB)
-- openclaw-debug.png (31.3 KB)
-- openclaw-final-overview.png (76.1 KB)
-- openclaw-instances.png (48.7 KB)
-- openclaw-light-theme.png (76.1 KB)
-- openclaw-logs.png (55.7 KB)
-- openclaw-mobile-view.png (56.8 KB)
-- openclaw-nodes.png (77.0 KB)
-- openclaw-overview.png (50.5 KB)
-- openclaw-sessions.png (32.6 KB)
-- openclaw-skills.png (49.2 KB)
-- openclaw-usage.png (78.4 KB)
+- jarvis-agents.png (24.6 KB)
+- jarvis-channels.png (44.0 KB)
+- jarvis-collapsed-sidebar.png (52.1 KB)
+- jarvis-config.png (27.6 KB)
+- jarvis-cron.png (93.2 KB)
+- jarvis-dark-theme.png (31.6 KB)
+- jarvis-dashboard-homepage.png (29.5 KB)
+- jarvis-debug.png (31.3 KB)
+- jarvis-final-overview.png (76.1 KB)
+- jarvis-instances.png (48.7 KB)
+- jarvis-light-theme.png (76.1 KB)
+- jarvis-logs.png (55.7 KB)
+- jarvis-mobile-view.png (56.8 KB)
+- jarvis-nodes.png (77.0 KB)
+- jarvis-overview.png (50.5 KB)
+- jarvis-sessions.png (32.6 KB)
+- jarvis-skills.png (49.2 KB)
+- jarvis-usage.png (78.4 KB)
 
 **Total Visual Assets:** 894 KB
 
@@ -328,7 +328,7 @@ git push -u origin feature/jarvis-upgrade-complete
 # Writing objects: 100% (XXX/XXX), XXX.XX MiB | XXX.XX MiB/s, done.
 # Total XXX (delta XXX), reused XXX (delta XXX), pack-reused 0
 # remote: Resolving deltas: 100% (XXX/XXX), done.
-# To https://github.com/YOUR_USERNAME/openclaw.git
+# To https://github.com/YOUR_USERNAME/jarvis.git
 #  * [new branch]      feature/jarvis-upgrade-complete -> feature/jarvis-upgrade-complete
 ```
 
@@ -339,15 +339,15 @@ git push -u origin feature/jarvis-upgrade-complete
 gh pr create \
   --base main \
   --head feature/jarvis-upgrade-complete \
-  --title "feat: OpenClaw → J.A.R.V.I.S. Complete Upgrade - 102+ Critical Fixes" \
+  --title "feat: Jarvis → J.A.R.V.I.S. Complete Upgrade - 102+ Critical Fixes" \
   --body "$(cat COMMIT_MESSAGE.txt)"
 ```
 
 **Option B: Via GitHub Web UI**
-1. Go to https://github.com/YOUR_USERNAME/openclaw
+1. Go to https://github.com/YOUR_USERNAME/jarvis
 2. Click "Compare & pull request"
 3. Set base: `main`, compare: `feature/jarvis-upgrade-complete`
-4. Title: `feat: OpenClaw → J.A.R.V.I.S. Complete Upgrade - 102+ Critical Fixes`
+4. Title: `feat: Jarvis → J.A.R.V.I.S. Complete Upgrade - 102+ Critical Fixes`
 5. Copy content from `COMMIT_MESSAGE.txt` into description
 6. Click "Create pull request"
 
@@ -358,7 +358,7 @@ Follow the comprehensive guide in **FORK_STRATEGY.md**:
 **Quick Start:**
 ```bash
 # 1. Fork on GitHub
-# Go to: https://github.com/openclaw/openclaw
+# Go to: https://github.com/deathamongstlife/jarvis
 # Click "Fork" → Create organization "jarvis-ai"
 
 # 2. Clone fork
@@ -366,7 +366,7 @@ git clone https://github.com/jarvis-ai/jarvis.git
 cd jarvis
 
 # 3. Add upstream
-git remote add upstream https://github.com/openclaw/openclaw.git
+git remote add upstream https://github.com/deathamongstlife/jarvis.git
 
 # 4. Run rebranding script
 bash scripts/rebrand-to-jarvis.sh
@@ -420,7 +420,7 @@ git push origin v2026.3.15-jarvis.1
    - package.json
    - apps/android/app/build.gradle.kts
    - apps/ios/Sources/Info.plist
-   - apps/macos/Sources/OpenClaw/Resources/Info.plist
+   - apps/macos/Sources/Jarvis/Resources/Info.plist
 
 4. **Build release artifacts**
    ```bash
@@ -515,7 +515,7 @@ The new **FORK_STRATEGY.md** document provides:
 
 ## Repository Information
 
-**Repository:** OpenClaw → J.A.R.V.I.S. Fork
+**Repository:** Jarvis → J.A.R.V.I.S. Fork
 **Branch:** feature/jarvis-upgrade-complete
 **Base:** main
 **Commits:** 5 commits ahead of main
@@ -578,7 +578,7 @@ pnpm check && pnpm tsgo && pnpm test && pnpm build
 ## Summary
 
 This comprehensive upgrade represents:
-- **102+ critical bug fixes** from OpenClaw
+- **102+ critical bug fixes** from Jarvis
 - **108 files changed** (92 new, 16 modified)
 - **21,576 lines added** vs 80 deleted
 - **92+ KB of documentation**

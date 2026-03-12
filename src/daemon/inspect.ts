@@ -85,7 +85,7 @@ function hasGatewayServiceMarker(content: string): boolean {
   );
 }
 
-function isOpenClawGatewayLaunchdService(label: string, contents: string): boolean {
+function isJarvisGatewayLaunchdService(label: string, contents: string): boolean {
   if (hasGatewayServiceMarker(contents)) {
     return true;
   }
@@ -96,23 +96,23 @@ function isOpenClawGatewayLaunchdService(label: string, contents: string): boole
   return label.startsWith("ai.openclaw.");
 }
 
-function isOpenClawGatewaySystemdService(name: string, contents: string): boolean {
+function isJarvisGatewaySystemdService(name: string, contents: string): boolean {
   if (hasGatewayServiceMarker(contents)) {
     return true;
   }
-  if (!name.startsWith("openclaw-gateway")) {
+  if (!name.startsWith("jarvis-gateway")) {
     return false;
   }
   return contents.toLowerCase().includes("gateway");
 }
 
-function isOpenClawGatewayTaskName(name: string): boolean {
+function isJarvisGatewayTaskName(name: string): boolean {
   const normalized = name.trim().toLowerCase();
   if (!normalized) {
     return false;
   }
   const defaultName = resolveGatewayWindowsTaskName().toLowerCase();
-  return normalized === defaultName || normalized.startsWith("openclaw gateway");
+  return normalized === defaultName || normalized.startsWith("jarvis gateway");
 }
 
 function tryExtractPlistLabel(contents: string): string | null {
@@ -216,7 +216,7 @@ async function scanLaunchdDir(params: {
     if (isIgnoredLaunchdLabel(label)) {
       continue;
     }
-    if (marker === "openclaw" && isOpenClawGatewayLaunchdService(label, contents)) {
+    if (marker === "openclaw" && isJarvisGatewayLaunchdService(label, contents)) {
       continue;
     }
     results.push({
@@ -248,7 +248,7 @@ async function scanSystemdDir(params: {
     if (!marker) {
       continue;
     }
-    if (marker === "openclaw" && isOpenClawGatewaySystemdService(name, contents)) {
+    if (marker === "openclaw" && isJarvisGatewaySystemdService(name, contents)) {
       continue;
     }
     results.push({
@@ -401,7 +401,7 @@ export async function findExtraGatewayServices(
       if (!name) {
         continue;
       }
-      if (isOpenClawGatewayTaskName(name)) {
+      if (isJarvisGatewayTaskName(name)) {
         continue;
       }
       const lowerName = name.toLowerCase();

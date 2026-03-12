@@ -38,7 +38,7 @@ import {
   supportsXHighThinking,
 } from "../../auto-reply/thinking.js";
 import type { CliDeps } from "../../cli/outbound-send-deps.js";
-import type { OpenClawConfig } from "../../config/config.js";
+import type { JarvisConfig } from "../../config/config.js";
 import {
   resolveSessionTranscriptPath,
   setSessionRuntimeModel,
@@ -164,7 +164,7 @@ function resolveCronToolPolicy(params: {
 }
 
 async function resolveCronDeliveryContext(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   job: CronJob;
   agentId: string;
   deliveryContract: IsolatedDeliveryContract;
@@ -199,7 +199,7 @@ function appendCronDeliveryInstruction(params: {
 }
 
 export async function runCronIsolatedAgentTurn(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   deps: CliDeps;
   job: CronJob;
   message: string;
@@ -239,7 +239,7 @@ export async function runCronIsolatedAgentTurn(params: {
     defaults: params.cfg.agents?.defaults,
     agentConfigOverride,
   });
-  const cfgWithAgentDefaults: OpenClawConfig = {
+  const cfgWithAgentDefaults: JarvisConfig = {
     ...params.cfg,
     agents: Object.assign({}, params.cfg.agents, { defaults: agentCfg }),
   };
@@ -601,7 +601,7 @@ export async function runCronIsolatedAgentTurn(params: {
             agentId,
             trigger: "cron",
             // Cron jobs are trusted local automation, so isolated runs should
-            // inherit owner-only tooling like local `openclaw agent` runs.
+            // inherit owner-only tooling like local `jarvis agent` runs.
             senderIsOwner: true,
             messageChannel,
             agentAccountId: resolvedDelivery.accountId,

@@ -279,7 +279,7 @@ describe("browser config", () => {
   });
 
   describe("default profile preference", () => {
-    it("defaults to openclaw profile when defaultProfile is not configured", () => {
+    it("defaults to jarvis profile when defaultProfile is not configured", () => {
       const resolved = resolveBrowserConfig({
         headless: false,
         noSandbox: false,
@@ -287,21 +287,21 @@ describe("browser config", () => {
       expect(resolved.defaultProfile).toBe("openclaw");
     });
 
-    it("keeps openclaw default when headless=true", () => {
+    it("keeps jarvis default when headless=true", () => {
       const resolved = resolveBrowserConfig({
         headless: true,
       });
       expect(resolved.defaultProfile).toBe("openclaw");
     });
 
-    it("keeps openclaw default when noSandbox=true", () => {
+    it("keeps jarvis default when noSandbox=true", () => {
       const resolved = resolveBrowserConfig({
         noSandbox: true,
       });
       expect(resolved.defaultProfile).toBe("openclaw");
     });
 
-    it("keeps openclaw default when both headless and noSandbox are true", () => {
+    it("keeps jarvis default when both headless and noSandbox are true", () => {
       const resolved = resolveBrowserConfig({
         headless: true,
         noSandbox: true,

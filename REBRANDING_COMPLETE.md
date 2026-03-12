@@ -2,33 +2,33 @@
 
 ## ✅ What Was Done
 
-The complete rebranding from OpenClaw to J.A.R.V.I.S. has been successfully completed. This document summarizes all changes made.
+The complete rebranding from Jarvis to J.A.R.V.I.S. has been successfully completed. This document summarizes all changes made.
 
 ---
 
 ## 📦 Core Changes
 
 ### 1. Binary & Package Name
-- **Binary renamed**: `openclaw.mjs` → `jarvis.mjs`
-- **Environment file renamed**: `openclaw.podman.env` → `jarvis.podman.env`
-- **NPM package name**: `openclaw` → `jarvis`
+- **Binary renamed**: `jarvis.mjs` → `jarvis.mjs`
+- **Environment file renamed**: `jarvis.podman.env` → `jarvis.podman.env`
+- **NPM package name**: `jarvis` → `jarvis`
 - **Package bin entry**: Updated to reference `jarvis.mjs`
 
 ### 2. Repository URLs
-- **Homepage**: `https://github.com/openclaw/openclaw` → `https://git.allyapp.cc/everest/j.a.r.v.i.s`
+- **Homepage**: `https://github.com/deathamongstlife/jarvis` → `https://git.allyapp.cc/everest/j.a.r.v.i.s`
 - **Issues**: GitHub → GitLab
 - **Repository URL**: GitHub → GitLab
 
 ### 3. Mobile Apps
 
 #### Android
-- **Package name**: `ai.openclaw.app` → `ai.jarvis.app`
+- **Package name**: `ai.jarvis.app` → `ai.jarvis.app`
 - **Files updated**:
   - `apps/android/app/build.gradle.kts` (namespace + applicationId)
   - `package.json` android:run script
 
 #### iOS
-- **Bundle ID prefix**: `ai.openclaw` → `ai.jarvis`
+- **Bundle ID prefix**: `ai.jarvis` → `ai.jarvis`
 - **Files updated**:
   - `apps/ios/project.yml` (bundleIdPrefix)
   - `package.json` ios:run script
@@ -36,7 +36,7 @@ The complete rebranding from OpenClaw to J.A.R.V.I.S. has been successfully comp
 ### 4. Configuration
 - **.pre-commit-config.yaml**:
   - Header comment updated
-  - Cache path: `/var/tmp/openclaw-compile-cache` → `/var/tmp/jarvis-compile-cache`
+  - Cache path: `/var/tmp/jarvis-compile-cache` → `/var/tmp/jarvis-compile-cache`
 
 ---
 
@@ -106,31 +106,31 @@ As requested, the following were **kept unchanged** to preserve proper attributi
 ```markdown
 ## 🙏 Acknowledgments
 
-### Built on OpenClaw
+### Built on Jarvis
 
-J.A.R.V.I.S. is a fork of the excellent **OpenClaw** project...
+J.A.R.V.I.S. is a fork of the excellent **Jarvis** project...
 
-**Upstream**: [openclaw/openclaw](https://github.com/openclaw/openclaw)
+**Upstream**: [jarvis/jarvis](https://github.com/deathamongstlife/jarvis)
 ```
 
 ### Historical References
 - Git commit history (unchanged)
 - CHANGELOG.md entries (historical accuracy)
-- Any references to the upstream OpenClaw project
+- Any references to the upstream Jarvis project
 
 ---
 
 ## ⚠️ Breaking Changes
 
-Users upgrading from OpenClaw will experience:
+Users upgrading from Jarvis will experience:
 
 ### 1. Package Name Change
-- Old: `npm install -g openclaw`
+- Old: `npm install -g jarvis`
 - New: `npm install -g jarvis`
 - **Impact**: Users must reinstall
 
 ### 2. Command Name Change
-- Old: `openclaw [command]`
+- Old: `jarvis [command]`
 - New: `jarvis [command]`
 - **Impact**: All scripts/aliases must update
 
@@ -140,7 +140,7 @@ Users upgrading from OpenClaw will experience:
 - **Impact**: Cannot update existing installations; must reinstall
 
 ### 4. Configuration Path (Future Breaking Change)
-- Current: `~/.openclaw/`
+- Current: `~/.jarvis/`
 - Future: `~/.jarvis/`
 - **Status**: Not yet implemented (low priority)
 - **Migration**: Will need `jarvis migrate-config` command
@@ -156,8 +156,8 @@ Users upgrading from OpenClaw will experience:
 - `apps/ios/project.yml` (bundle ID)
 
 ### Binary Files
-- `openclaw.mjs` → `jarvis.mjs`
-- `openclaw.podman.env` → `jarvis.podman.env`
+- `jarvis.mjs` → `jarvis.mjs`
+- `jarvis.podman.env` → `jarvis.podman.env`
 
 ### Documentation (Created)
 - `INSTALL_FROM_SOURCE.md` (733 lines)
@@ -215,26 +215,26 @@ After installation, verify:
 These items have **not** been rebranded yet (low impact):
 
 ### 1. AGENTS.md
-- Contains ~50 CLI command examples with `openclaw`
-- Contains documentation URLs: `docs.openclaw.ai`
+- Contains ~50 CLI command examples with `jarvis`
+- Contains documentation URLs: `docs.jarvis.ai`
 - **Impact**: Internal documentation only
 - **Priority**: Low (doesn't affect functionality)
 
 ### 2. Config Directory Migration
-- Current: `~/.openclaw/`
+- Current: `~/.jarvis/`
 - Future: `~/.jarvis/`
 - **Status**: Not implemented
 - **Priority**: Low (can coexist)
 - **Future**: Create migration command
 
 ### 3. Environment Variables
-- Many `OPENCLAW_*` environment variables in codebase
-- Examples: `OPENCLAW_TEST_WORKERS`, `OPENCLAW_ANDROID_STORE_FILE`
+- Many `JARVIS_*` environment variables in codebase
+- Examples: `JARVIS_TEST_WORKERS`, `JARVIS_ANDROID_STORE_FILE`
 - **Impact**: Internal/development only
 - **Priority**: Very Low (backwards compatible)
 
 ### 4. Internal Comments/Docs
-- Various source code comments may reference "OpenClaw"
+- Various source code comments may reference "Jarvis"
 - **Impact**: None (code comments)
 - **Priority**: Very Low
 
@@ -262,7 +262,7 @@ These items have **not** been rebranded yet (low impact):
 - All documented in this file
 
 ### Attribution: ✅ Preserved
-- OpenClaw credits in README.md
+- Jarvis credits in README.md
 - Historical references intact
 - Upstream links maintained
 
@@ -305,4 +305,4 @@ These items have **not** been rebranded yet (low impact):
 
 Built with ❤️ by the J.A.R.V.I.S. team
 
-**Based on OpenClaw** - https://github.com/openclaw/openclaw
+**Based on Jarvis** - https://github.com/deathamongstlife/jarvis

@@ -3,7 +3,7 @@ import Foundation
 import Observation
 import OpenClawDiscovery
 import OpenClawIPC
-import OpenClawKit
+import JarvisKit
 import OpenClawProtocol
 import OSLog
 import UserNotifications

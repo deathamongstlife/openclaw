@@ -171,7 +171,7 @@ describe("runDaemonRestart health checks", () => {
     mockSpawnSync.mockReturnValue({
       error: null,
       status: 0,
-      stdout: "openclaw gateway --port 18789",
+      stdout: "jarvis gateway --port 18789",
       stderr: "",
     });
   });
@@ -215,7 +215,7 @@ describe("runDaemonRestart health checks", () => {
 
     await expect(runDaemonRestart({ json: true })).rejects.toMatchObject({
       message: "Gateway restart timed out after 60s waiting for health checks.",
-      hints: ["openclaw gateway status --deep", "openclaw doctor"],
+      hints: ["jarvis gateway status --deep", "jarvis doctor"],
     });
     expect(terminateStaleGatewayPids).not.toHaveBeenCalled();
     expect(renderRestartDiagnostics).toHaveBeenCalledTimes(1);
@@ -229,7 +229,7 @@ describe("runDaemonRestart health checks", () => {
       error: null,
       status: 0,
       stdout:
-        'CommandLine="C:\\\\Program Files\\\\OpenClaw\\\\openclaw.exe" gateway --port 18789\r\n',
+        'CommandLine="C:\\\\Program Files\\\\Jarvis\\\\openclaw.exe" gateway --port 18789\r\n',
       stderr: "",
     });
     runServiceStop.mockImplementation(async (params: { onNotLoaded?: () => Promise<unknown> }) => {
@@ -251,7 +251,7 @@ describe("runDaemonRestart health checks", () => {
       error: null,
       status: 0,
       stdout:
-        'CommandLine="C:\\\\Program Files\\\\OpenClaw\\\\openclaw.exe" gateway --port 18789\r\n',
+        'CommandLine="C:\\\\Program Files\\\\Jarvis\\\\openclaw.exe" gateway --port 18789\r\n',
       stderr: "",
     });
     runServiceRestart.mockImplementation(
@@ -287,7 +287,7 @@ describe("runDaemonRestart health checks", () => {
       error: null,
       status: 0,
       stdout:
-        'CommandLine="C:\\\\Program Files\\\\OpenClaw\\\\openclaw.exe" gateway --port 18789\r\n',
+        'CommandLine="C:\\\\Program Files\\\\Jarvis\\\\openclaw.exe" gateway --port 18789\r\n',
       stderr: "",
     });
     runServiceRestart.mockImplementation(

@@ -203,7 +203,7 @@ const TalkSchema = z
     }
   });
 
-export const OpenClawSchema = z
+export const JarvisSchema = z
   .object({
     $schema: z.string().optional(),
     meta: z

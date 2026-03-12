@@ -6,7 +6,7 @@
 #   ./scripts/run-openclaw-podman.sh launch           # Start gateway
 #   ./scripts/run-openclaw-podman.sh launch setup      # Onboarding wizard
 #
-# As the openclaw user (no repo needed):
+# As the jarvis user (no repo needed):
 #   sudo -u openclaw /home/openclaw/run-openclaw-podman.sh
 #   sudo -u openclaw /home/openclaw/run-openclaw-podman.sh setup
 #
@@ -47,18 +47,18 @@ if [[ "${1:-}" == "setup-host" ]]; then
   exit 1
 fi
 
-# --- Step 2: launch (from repo: re-exec as openclaw in safe cwd; from openclaw home: run container) ---
+# --- Step 2: launch (from repo: re-exec as jarvis in safe cwd; from jarvis home: run container) ---
 if [[ "${1:-}" == "launch" ]]; then
   shift
   if [[ -n "${OPENCLAW_UID:-}" && "$(id -u)" -ne "$OPENCLAW_UID" ]]; then
-    # Exec as openclaw with cwd=/tmp so a nologin user never inherits an invalid cwd.
+    # Exec as jarvis with cwd=/tmp so a nologin user never inherits an invalid cwd.
     exec sudo -u "$OPENCLAW_USER" env HOME="$OPENCLAW_HOME" PATH="$PATH" TERM="${TERM:-}" \
       bash -c 'cd /tmp && exec '"$LAUNCH_SCRIPT"' "$@"' _ "$@"
   fi
   # Already openclaw; fall through to container run (with remaining args, e.g. "setup")
 fi
 
-# --- Container run (script in openclaw home, run as openclaw) ---
+# --- Container run (script in jarvis home, run as openclaw) ---
 EFFECTIVE_HOME="${HOME:-}"
 if [[ -n "${OPENCLAW_UID:-}" && "$(id -u)" -eq "$OPENCLAW_UID" ]]; then
   EFFECTIVE_HOME="$OPENCLAW_HOME"
@@ -76,7 +76,7 @@ PODMAN_PULL="${OPENCLAW_PODMAN_PULL:-never}"
 HOST_GATEWAY_PORT="${OPENCLAW_PODMAN_GATEWAY_HOST_PORT:-${OPENCLAW_GATEWAY_PORT:-18789}}"
 HOST_BRIDGE_PORT="${OPENCLAW_PODMAN_BRIDGE_HOST_PORT:-${OPENCLAW_BRIDGE_PORT:-18790}}"
 
-# Safe cwd for podman (openclaw is nologin; avoid inherited cwd from sudo)
+# Safe cwd for podman (jarvis is nologin; avoid inherited cwd from sudo)
 cd "$EFFECTIVE_HOME" 2>/dev/null || cd /tmp 2>/dev/null || true
 
 RUN_SETUP=false

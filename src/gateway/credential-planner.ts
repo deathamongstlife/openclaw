@@ -1,4 +1,4 @@
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { containsEnvVarReference } from "../config/env-substitution.js";
 import { hasConfiguredSecretInput, resolveSecretInputRef } from "../config/types.secrets.js";
 
@@ -40,7 +40,7 @@ export type GatewayCredentialPlan = {
   remotePasswordActive: boolean;
 };
 
-type GatewaySecretDefaults = NonNullable<OpenClawConfig["secrets"]>["defaults"];
+type GatewaySecretDefaults = NonNullable<JarvisConfig["secrets"]>["defaults"];
 
 function readGatewayEnv(
   env: NodeJS.ProcessEnv,
@@ -135,7 +135,7 @@ function resolveConfiguredGatewayCredentialInput(params: {
 }
 
 export function createGatewayCredentialPlan(params: {
-  config: OpenClawConfig;
+  config: JarvisConfig;
   env?: NodeJS.ProcessEnv;
   includeLegacyEnv?: boolean;
   defaults?: GatewaySecretDefaults;

@@ -1,6 +1,6 @@
-# OpenClaw Dashboard Integration Guide
+# Jarvis Dashboard Integration Guide
 
-This guide walks you through integrating the new dashboard components into the OpenClaw application.
+This guide walks you through integrating the new dashboard components into the Jarvis application.
 
 ## Table of Contents
 1. [Installation](#installation)

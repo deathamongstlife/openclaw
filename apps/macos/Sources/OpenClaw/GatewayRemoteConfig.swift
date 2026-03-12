@@ -1,5 +1,5 @@
 import Foundation
-import OpenClawKit
+import JarvisKit
 
 enum GatewayRemoteConfig {
     enum TokenValue: Equatable {

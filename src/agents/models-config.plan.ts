@@ -1,4 +1,4 @@
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { isRecord } from "../utils.js";
 import {
   mergeProviders,
@@ -11,7 +11,7 @@ import {
   type ProviderConfig,
 } from "./models-config.providers.js";
 
-type ModelsConfig = NonNullable<OpenClawConfig["models"]>;
+type ModelsConfig = NonNullable<JarvisConfig["models"]>;
 
 export type ModelsJsonPlan =
   | {
@@ -26,7 +26,7 @@ export type ModelsJsonPlan =
     };
 
 async function resolveProvidersForModelsJson(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   agentDir: string;
   env: NodeJS.ProcessEnv;
 }): Promise<Record<string, ProviderConfig>> {
@@ -45,7 +45,7 @@ async function resolveProvidersForModelsJson(params: {
 }
 
 function resolveExplicitBaseUrlProviders(
-  providers: OpenClawConfig["models"] | undefined,
+  providers: JarvisConfig["models"] | undefined,
 ): ReadonlySet<string> {
   return new Set(
     Object.entries(providers?.providers ?? {})
@@ -84,8 +84,8 @@ async function resolveProvidersForMode(params: {
   });
 }
 
-export async function planOpenClawModelsJson(params: {
-  cfg: OpenClawConfig;
+export async function planJarvisModelsJson(params: {
+  cfg: JarvisConfig;
   agentDir: string;
   env: NodeJS.ProcessEnv;
   existingRaw: string;

@@ -1,7 +1,7 @@
 import AVFoundation
 import Foundation
 import OpenClawChatUI
-import OpenClawKit
+import JarvisKit
 import OSLog
 import Speech
 

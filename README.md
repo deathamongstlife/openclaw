@@ -15,7 +15,7 @@
 
 ## What is J.A.R.V.I.S.?
 
-**J.A.R.V.I.S.** is a production-ready, self-hosted AI assistant that runs entirely on your infrastructure. It's a comprehensive fork of OpenClaw with **102+ critical bug fixes**, enhanced stability, and powerful new features including full offline AI model support.
+**J.A.R.V.I.S.** is a production-ready, self-hosted AI assistant that runs entirely on your infrastructure. It's a comprehensive fork of Jarvis with **102+ critical bug fixes**, enhanced stability, and powerful new features including full offline AI model support.
 
 Unlike cloud-based assistants, J.A.R.V.I.S. gives you complete control:
 
@@ -988,11 +988,11 @@ SOFTWARE.
 
 ## 🙏 Acknowledgments
 
-### Built on OpenClaw
+### Built on Jarvis
 
-J.A.R.V.I.S. is a fork of the excellent **OpenClaw** project. All credit for the original architecture, design, and implementation goes to the OpenClaw team and contributors.
+J.A.R.V.I.S. is a fork of the excellent **Jarvis** project. All credit for the original architecture, design, and implementation goes to the Jarvis team and contributors.
 
-**Upstream**: [openclaw/openclaw](https://github.com/openclaw/openclaw)
+**Upstream**: [jarvis/jarvis](https://github.com/deathamongstlife/jarvis)
 
 ### What J.A.R.V.I.S. Adds
 
@@ -1004,7 +1004,7 @@ J.A.R.V.I.S. is a fork of the excellent **OpenClaw** project. All credit for the
 
 ### Special Thanks
 
-- **OpenClaw Team**: For creating an amazing foundation
+- **Jarvis Team**: For creating an amazing foundation
 - **Ollama**: For making local AI models accessible
 - **The Open Source Community**: For all the libraries and tools
 - **Contributors**: Everyone who reported bugs, submitted fixes, and improved J.A.R.V.I.S.
@@ -1017,7 +1017,7 @@ J.A.R.V.I.S. is a fork of the excellent **OpenClaw** project. All credit for the
 - **Documentation**: [docs.jarvis-ai.dev](https://docs.jarvis-ai.dev)
 - **Issue Tracker**: [git.allyapp.cc/everest/j.a.r.v.i.s/issues](https://git.allyapp.cc/everest/j.a.r.v.i.s/issues)
 - **Changelog**: [CHANGELOG_JARVIS.md](CHANGELOG_JARVIS.md)
-- **Original Project**: [openclaw/openclaw](https://github.com/openclaw/openclaw)
+- **Original Project**: [jarvis/jarvis](https://github.com/deathamongstlife/jarvis)
 
 ---
 

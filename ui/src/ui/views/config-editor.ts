@@ -198,7 +198,7 @@ export function renderConfigEditor(host: AppViewState) {
         <div>
           <h1 style="margin: 0 0 0.5rem 0; font-size: 1.75rem;">Configuration Editor</h1>
           <p style="margin: 0; color: var(--color-text-secondary);">
-            Edit your OpenClaw gateway configuration
+            Edit your Jarvis gateway configuration
           </p>
         </div>
         <div style="display: flex; gap: 0.5rem;">

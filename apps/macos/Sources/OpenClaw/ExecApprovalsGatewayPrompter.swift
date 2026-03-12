@@ -1,6 +1,6 @@
 import CoreGraphics
 import Foundation
-import OpenClawKit
+import JarvisKit
 import OpenClawProtocol
 import OSLog
 

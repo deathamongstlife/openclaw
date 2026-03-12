@@ -1,10 +1,10 @@
 import type { ReplyPayload } from "../auto-reply/types.js";
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { getExecApprovalReplyMetadata } from "../infra/exec-approval-reply.js";
 import { resolveDiscordAccount } from "./accounts.js";
 
 export function isDiscordExecApprovalClientEnabled(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   accountId?: string | null;
 }): boolean {
   const config = resolveDiscordAccount(params).config.execApprovals;
@@ -12,7 +12,7 @@ export function isDiscordExecApprovalClientEnabled(params: {
 }
 
 export function shouldSuppressLocalDiscordExecApprovalPrompt(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   accountId?: string | null;
   payload: ReplyPayload;
 }): boolean {

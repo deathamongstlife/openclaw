@@ -122,7 +122,7 @@ describe("configureProgramHelp", () => {
 
     const program = makeProgramWithCommands();
     expect(() => configureProgramHelp(program, testProgramContext)).toThrow("exit:0");
-    expect(logSpy).toHaveBeenCalledWith("OpenClaw 9.9.9-test (abc1234)");
+    expect(logSpy).toHaveBeenCalledWith("Jarvis 9.9.9-test (abc1234)");
     expect(exitSpy).toHaveBeenCalledWith(0);
 
     logSpy.mockRestore();
@@ -140,7 +140,7 @@ describe("configureProgramHelp", () => {
 
     const program = makeProgramWithCommands();
     expect(() => configureProgramHelp(program, testProgramContext)).toThrow("exit:0");
-    expect(logSpy).toHaveBeenCalledWith("OpenClaw 9.9.9-test");
+    expect(logSpy).toHaveBeenCalledWith("Jarvis 9.9.9-test");
     expect(exitSpy).toHaveBeenCalledWith(0);
 
     logSpy.mockRestore();

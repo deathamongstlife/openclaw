@@ -1,4 +1,4 @@
-import type { OpenClawConfig } from "../config/config.js";
+import type { JarvisConfig } from "../config/config.js";
 import { normalizeAgentId, parseAgentSessionKey } from "../routing/session-key.js";
 import { resolveAgentWorkspaceDir } from "./agent-scope.js";
 
@@ -57,7 +57,7 @@ export function mapToolContextToSpawnedRunMetadata(
 }
 
 export function resolveSpawnedWorkspaceInheritance(params: {
-  config: OpenClawConfig;
+  config: JarvisConfig;
   requesterSessionKey?: string;
   explicitWorkspaceDir?: string | null;
 }): string | undefined {

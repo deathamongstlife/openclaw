@@ -1,9 +1,9 @@
 ---
 read_when:
-  - 在 Raspberry Pi 上设置 OpenClaw 时
-  - 在 ARM 设备上运行 OpenClaw 时
+  - 在 Raspberry Pi 上设置 Jarvis 时
+  - 在 ARM 设备上运行 Jarvis 时
   - 构建低成本常驻个人 AI 时
-summary: 在 Raspberry Pi 上运行 OpenClaw（低成本自托管设置）
+summary: 在 Raspberry Pi 上运行 Jarvis（低成本自托管设置）
 title: Raspberry Pi
 x-i18n:
   generated_at: "2026-02-03T07:53:30Z"
@@ -14,11 +14,11 @@ x-i18n:
   workflow: 15
 ---
 
-# 在 Raspberry Pi 上运行 OpenClaw
+# 在 Raspberry Pi 上运行 Jarvis
 
 ## 目标
 
-在 Raspberry Pi 上运行持久、常驻的 OpenClaw Gateway 网关，**一次性成本约 $35-80**（无月费）。
+在 Raspberry Pi 上运行持久、常驻的 Jarvis Gateway 网关，**一次性成本约 $35-80**（无月费）。
 
 适用于：
 
@@ -114,7 +114,7 @@ echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 ```
 
-## 6) 安装 OpenClaw
+## 6) 安装 Jarvis
 
 ### 选项 A：标准安装（推荐）
 
@@ -137,7 +137,7 @@ npm link
 ## 7) 运行新手引导
 
 ```bash
-openclaw onboard --install-daemon
+jarvis onboard --install-daemon
 ```
 
 按照向导操作：
@@ -151,7 +151,7 @@ openclaw onboard --install-daemon
 
 ```bash
 # 检查状态
-openclaw status
+jarvis status
 
 # 检查服务
 sudo systemctl status openclaw
@@ -180,7 +180,7 @@ curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
 
 # 更新配置
-openclaw config set gateway.bind tailnet
+jarvis config set gateway.bind tailnet
 sudo systemctl restart openclaw
 ```
 
@@ -228,7 +228,7 @@ htop
 
 ### 二进制兼容性
 
-大多数 OpenClaw 功能在 ARM64 上可用，但某些外部二进制文件可能需要 ARM 构建：
+大多数 Jarvis 功能在 ARM64 上可用，但某些外部二进制文件可能需要 ARM 构建：
 
 | 工具               | ARM64 状态 | 说明                                |
 | ------------------ | ---------- | ----------------------------------- |

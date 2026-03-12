@@ -1,4 +1,4 @@
-package ai.openclaw.app.node
+package ai.jarvis.app.node
 
 import android.content.Context
 import kotlinx.serialization.json.Json

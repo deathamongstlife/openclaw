@@ -8,7 +8,7 @@ import {
   initializeGlobalHookRunner,
   resetGlobalHookRunner,
 } from "../plugins/hook-runner-global.js";
-import { loadOpenClawPlugins } from "../plugins/loader.js";
+import { loadJarvisPlugins } from "../plugins/loader.js";
 import { guardSessionManager } from "./session-tool-result-guard-wrapper.js";
 
 const EMPTY_PLUGIN_SCHEMA = { type: "object", additionalProperties: false, properties: {} };
@@ -104,7 +104,7 @@ describe("tool_result_persist hook", () => {
 } };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       workspaceDir: tmp,
       config: {
@@ -147,7 +147,7 @@ describe("before_message_write hook", () => {
 } };`,
     });
 
-    const registry = loadOpenClawPlugins({
+    const registry = loadJarvisPlugins({
       cache: false,
       workspaceDir: tmp,
       config: {

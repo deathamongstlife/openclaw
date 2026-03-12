@@ -1,5 +1,5 @@
 import Foundation
-import OpenClawKit
+import JarvisKit
 import OSLog
 import WebKit
 
@@ -222,7 +222,7 @@ final class CanvasSchemeHandler: NSObject, WKURLSchemeHandler {
         let name = fileURL.deletingPathExtension().lastPathComponent
         guard !name.isEmpty, !ext.isEmpty else { return nil }
 
-        let bundle = OpenClawKitResources.bundle
+        let bundle = JarvisKitResources.bundle
         let resourceURL =
             bundle.url(forResource: name, withExtension: ext, subdirectory: subdirectory)
             ?? bundle.url(forResource: name, withExtension: ext)

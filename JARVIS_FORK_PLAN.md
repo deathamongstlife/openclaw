@@ -2,12 +2,12 @@
 
 ## Overview
 
-This document outlines the steps to create a hard fork of OpenClaw as "J.A.R.V.I.S." (Just A Rather Very Intelligent System) with all stability improvements from the comprehensive upgrade campaign.
+This document outlines the steps to create a hard fork of Jarvis as "J.A.R.V.I.S." (Just A Rather Very Intelligent System) with all stability improvements from the comprehensive upgrade campaign.
 
 ## Current Status
 
 ✅ **Branch Created**: `feature/jarvis-upgrade-complete`
-✅ **Commit Created**: `fb95da6ef7` - feat: OpenClaw → J.A.R.V.I.S. Complete Upgrade
+✅ **Commit Created**: `fb95da6ef7` - feat: Jarvis → J.A.R.V.I.S. Complete Upgrade
 ✅ **Changes Staged**: 98 files changed, 17,603 insertions(+), 80 deletions(-)
 ✅ **Issues Fixed**: 102+ critical bugs across all major components
 ✅ **Documentation**: 17 comprehensive guides (1.1 MB)
@@ -28,14 +28,14 @@ This document outlines the steps to create a hard fork of OpenClaw as "J.A.R.V.I
 git clone git@github.com:deathamongstlife/jarvis.git
 cd jarvis
 
-# Add OpenClaw as upstream remote
-git remote add openclaw git@github.com:openclaw/openclaw.git
+# Add Jarvis as upstream remote
+git remote add jarvis git@github.com:jarvis/jarvis.git
 
 # Fetch all branches
-git fetch openclaw
+git fetch jarvis
 
 # Create main branch from our feature branch
-git checkout -b main openclaw/feature/jarvis-upgrade-complete
+git checkout -b main jarvis/feature/jarvis-upgrade-complete
 ```
 
 ## Phase 2: Rebranding (Critical Files)
@@ -43,7 +43,7 @@ git checkout -b main openclaw/feature/jarvis-upgrade-complete
 ### 2.1 Package Configuration
 
 Files to update:
-- [ ] `package.json` - Change name: "openclaw" → "jarvis"
+- [ ] `package.json` - Change name: "jarvis" → "jarvis"
 - [ ] `package.json` - Update description, author, repository URLs
 - [ ] `apps/*/package.json` - Update all app package names
 - [ ] `extensions/*/package.json` - Update extension package names
@@ -55,26 +55,26 @@ Files to update:
 - [ ] `CONTRIBUTING.md` - Update contribution guidelines
 - [ ] `SECURITY.md` - Update security policy
 - [ ] `CHANGELOG.md` - Add fork notice at top
-- [ ] `docs/**/*.md` - Update all references to OpenClaw → J.A.R.V.I.S.
+- [ ] `docs/**/*.md` - Update all references to Jarvis → J.A.R.V.I.S.
 
 ### 2.3 Code References
 
 Search and replace in code files:
-- [ ] `openclaw` → `jarvis` (package imports)
-- [ ] `OpenClaw` → `J.A.R.V.I.S.` (UI text, logs)
-- [ ] `OPENCLAW_` → `JARVIS_` (environment variables)
+- [ ] `jarvis` → `jarvis` (package imports)
+- [ ] `Jarvis` → `J.A.R.V.I.S.` (UI text, logs)
+- [ ] `JARVIS_` → `JARVIS_` (environment variables)
 - [ ] Repository URLs in all files
 
 Files to search:
 ```bash
-# Find all TypeScript/JavaScript files with "openclaw"
-grep -r "openclaw" src/ --include="*.ts" --include="*.js" | wc -l
+# Find all TypeScript/JavaScript files with "jarvis"
+grep -r "jarvis" src/ --include="*.ts" --include="*.js" | wc -l
 
-# Find all documentation files with "OpenClaw"
-grep -r "OpenClaw" docs/ --include="*.md" | wc -l
+# Find all documentation files with "Jarvis"
+grep -r "Jarvis" docs/ --include="*.md" | wc -l
 
 # Find environment variable references
-grep -r "OPENCLAW_" src/ --include="*.ts" | wc -l
+grep -r "JARVIS_" src/ --include="*.ts" | wc -l
 ```
 
 ### 2.4 Configuration
@@ -204,7 +204,7 @@ Update API references:
 Initial J.A.R.V.I.S. release:
 - Version: `1.0.0-jarvis.1`
 - Tag: `v1.0.0-jarvis.1`
-- Based on: OpenClaw commit `daf8afc954` + J.A.R.V.I.S. improvements
+- Based on: Jarvis commit `daf8afc954` + J.A.R.V.I.S. improvements
 
 ### 7.2 Changelog
 
@@ -214,10 +214,10 @@ Create J.A.R.V.I.S. changelog:
 
 ## About J.A.R.V.I.S.
 
-J.A.R.V.I.S. (Just A Rather Very Intelligent System) is a hard fork of OpenClaw,
+J.A.R.V.I.S. (Just A Rather Very Intelligent System) is a hard fork of Jarvis,
 enhanced with 102+ critical bug fixes and reliability improvements.
 
-## What's Improved from OpenClaw
+## What's Improved from Jarvis
 
 - Gateway stability fixes (5 critical issues)
 - Cron system reliability (15+ issues fixed)
@@ -235,7 +235,7 @@ For detailed list of fixes, see CAMPAIGN_SUMMARY.md
 Prepare comprehensive release notes:
 - [ ] Feature highlights
 - [ ] Breaking changes (none expected)
-- [ ] Migration guide from OpenClaw
+- [ ] Migration guide from Jarvis
 - [ ] Known issues
 - [ ] Future roadmap
 
@@ -244,9 +244,9 @@ Prepare comprehensive release notes:
 ### 8.1 GitHub Settings
 
 Configure repository:
-- [ ] Description: "J.A.R.V.I.S. - Just A Rather Very Intelligent System (Enhanced OpenClaw fork)"
-- [ ] Topics: `ai`, `agent`, `chatbot`, `typescript`, `openclaw-fork`
-- [ ] License: Maintain OpenClaw license
+- [ ] Description: "J.A.R.V.I.S. - Just A Rather Very Intelligent System (Enhanced Jarvis fork)"
+- [ ] Topics: `ai`, `agent`, `chatbot`, `typescript`, `jarvis-fork`
+- [ ] License: Maintain Jarvis license
 - [ ] Branch protection rules
 - [ ] Issue templates
 - [ ] PR templates
@@ -280,7 +280,7 @@ Add/update:
 - [ ] Version numbers updated
 - [ ] Changelog complete
 - [ ] License file present
-- [ ] Attribution to OpenClaw clear
+- [ ] Attribution to Jarvis clear
 
 ### 9.2 Tag and Release
 
@@ -315,8 +315,8 @@ npm publish --access public
 
 Setup upstream sync:
 ```bash
-# Add OpenClaw as upstream
-git remote add upstream git@github.com:openclaw/openclaw.git
+# Add Jarvis as upstream
+git remote add upstream git@github.com:jarvis/jarvis.git
 
 # Fetch upstream changes periodically
 git fetch upstream
@@ -330,7 +330,7 @@ git cherry-pick <commit-hash>
 - [ ] Announce fork on social media
 - [ ] Create Discord/Slack community
 - [ ] Write blog post about improvements
-- [ ] Reach out to OpenClaw community
+- [ ] Reach out to Jarvis community
 - [ ] Maintain good relationship with upstream
 
 ### 10.3 Documentation Maintenance
@@ -357,7 +357,7 @@ CHANGELOG.md                          # Add fork notice
 ### Medium Priority (Should Change)
 
 ```
-apps/macos/Sources/OpenClaw/Info.plist          # macOS app metadata
+apps/macos/Sources/Jarvis/Info.plist          # macOS app metadata
 apps/ios/Sources/Info.plist                     # iOS app metadata
 apps/android/app/build.gradle.kts               # Android app metadata
 ui/src/**/*.ts                                  # UI text references
@@ -378,27 +378,27 @@ scripts/**/*                          # Script comments
 
 ### Pattern 1: Package Name
 ```bash
-find . -type f \( -name "*.json" -o -name "*.ts" -o -name "*.js" \) -exec grep -l "openclaw" {} \;
+find . -type f \( -name "*.json" -o -name "*.ts" -o -name "*.js" \) -exec grep -l "jarvis" {} \;
 ```
 
 ### Pattern 2: Display Name
 ```bash
-find . -type f \( -name "*.md" -o -name "*.ts" -o -name "*.js" \) -exec grep -l "OpenClaw" {} \;
+find . -type f \( -name "*.md" -o -name "*.ts" -o -name "*.js" \) -exec grep -l "Jarvis" {} \;
 ```
 
 ### Pattern 3: Environment Variables
 ```bash
-find . -type f \( -name "*.ts" -o -name "*.js" -o -name "*.sh" \) -exec grep -l "OPENCLAW_" {} \;
+find . -type f \( -name "*.ts" -o -name "*.js" -o -name "*.sh" \) -exec grep -l "JARVIS_" {} \;
 ```
 
 ### Pattern 4: URLs
 ```bash
-find . -type f -exec grep -l "github.com/openclaw/openclaw" {} \;
+find . -type f -exec grep -l "github.com/deathamongstlife/jarvis" {} \;
 ```
 
 ### Pattern 5: CLI Commands
 ```bash
-find . -type f \( -name "*.md" -o -name "*.sh" \) -exec grep -l "openclaw gateway\|openclaw cron\|openclaw config" {} \;
+find . -type f \( -name "*.md" -o -name "*.sh" \) -exec grep -l "jarvis gateway\|jarvis cron\|jarvis config" {} \;
 ```
 
 ## Estimated Effort
@@ -441,7 +441,7 @@ find . -type f \( -name "*.md" -o -name "*.sh" \) -exec grep -l "openclaw gatewa
 - **Fallback**: Fresh npm install in clean environment
 
 ### Risk 4: License Issues
-- **Mitigation**: Maintain OpenClaw attribution
+- **Mitigation**: Maintain Jarvis attribution
 - **Fallback**: Consult legal if needed
 
 ### Risk 5: Community Backlash
@@ -454,7 +454,7 @@ find . -type f \( -name "*.md" -o -name "*.sh" \) -exec grep -l "openclaw gatewa
 ✅ All tests passing
 ✅ Build succeeds on all platforms
 ✅ Documentation complete and accurate
-✅ No OpenClaw references (except attribution)
+✅ No Jarvis references (except attribution)
 ✅ Initial release published
 ✅ Community informed
 ✅ Upstream relationship maintained
@@ -472,7 +472,7 @@ find . -type f \( -name "*.md" -o -name "*.sh" \) -exec grep -l "openclaw gatewa
 ## Notes
 
 - This is a **hard fork**, not a temporary branch
-- Maintain clear attribution to OpenClaw project
+- Maintain clear attribution to Jarvis project
 - Keep good relationship with upstream
 - Focus on stability improvements as key differentiator
 - Consider eventual upstream contribution of fixes
@@ -480,9 +480,9 @@ find . -type f \( -name "*.md" -o -name "*.sh" \) -exec grep -l "openclaw gatewa
 
 ## Attribution
 
-J.A.R.V.I.S. is based on OpenClaw by the OpenClaw team.
-All original work remains under OpenClaw's license.
+J.A.R.V.I.S. is based on Jarvis by the Jarvis team.
+All original work remains under Jarvis's license.
 Improvements and enhancements are contributed by the J.A.R.V.I.S. team.
 
-GitHub: https://github.com/openclaw/openclaw
+GitHub: https://github.com/deathamongstlife/jarvis
 License: See LICENSE file for details

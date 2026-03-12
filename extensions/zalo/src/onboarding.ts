@@ -1,7 +1,7 @@
 import type {
   ChannelOnboardingAdapter,
   ChannelOnboardingDmPolicy,
-  OpenClawConfig,
+  JarvisConfig,
   SecretInput,
   WizardPrompter,
 } from "openclaw/plugin-sdk/zalo";
@@ -23,24 +23,24 @@ const channel = "zalo" as const;
 type UpdateMode = "polling" | "webhook";
 
 function setZaloDmPolicy(
-  cfg: OpenClawConfig,
+  cfg: JarvisConfig,
   dmPolicy: "pairing" | "allowlist" | "open" | "disabled",
 ) {
   return setTopLevelChannelDmPolicyWithAllowFrom({
     cfg,
     channel: "zalo",
     dmPolicy,
-  }) as OpenClawConfig;
+  }) as JarvisConfig;
 }
 
 function setZaloUpdateMode(
-  cfg: OpenClawConfig,
+  cfg: JarvisConfig,
   accountId: string,
   mode: UpdateMode,
   webhookUrl?: string,
   webhookSecret?: SecretInput,
   webhookPath?: string,
-): OpenClawConfig {
+): JarvisConfig {
   const isDefault = accountId === DEFAULT_ACCOUNT_ID;
   if (mode === "polling") {
     if (isDefault) {
@@ -56,7 +56,7 @@ function setZaloUpdateMode(
           ...cfg.channels,
           zalo: rest,
         },
-      } as OpenClawConfig;
+      } as JarvisConfig;
     }
     const accounts = { ...cfg.channels?.zalo?.accounts } as Record<string, Record<string, unknown>>;
     const existing = accounts[accountId] ?? {};
@@ -71,7 +71,7 @@ function setZaloUpdateMode(
           accounts,
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
   }
 
   if (isDefault) {
@@ -86,7 +86,7 @@ function setZaloUpdateMode(
           webhookPath,
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
   }
 
   const accounts = { ...cfg.channels?.zalo?.accounts } as Record<string, Record<string, unknown>>;
@@ -105,7 +105,7 @@ function setZaloUpdateMode(
         accounts,
       },
     },
-  } as OpenClawConfig;
+  } as JarvisConfig;
 }
 
 async function noteZaloTokenHelp(prompter: WizardPrompter): Promise<void> {
@@ -122,10 +122,10 @@ async function noteZaloTokenHelp(prompter: WizardPrompter): Promise<void> {
 }
 
 async function promptZaloAllowFrom(params: {
-  cfg: OpenClawConfig;
+  cfg: JarvisConfig;
   prompter: WizardPrompter;
   accountId: string;
-}): Promise<OpenClawConfig> {
+}): Promise<JarvisConfig> {
   const { cfg, prompter, accountId } = params;
   const resolved = resolveZaloAccount({ cfg, accountId });
   const existingAllowFrom = resolved.config.allowFrom ?? [];
@@ -159,7 +159,7 @@ async function promptZaloAllowFrom(params: {
           allowFrom: unique,
         },
       },
-    } as OpenClawConfig;
+    } as JarvisConfig;
   }
 
   return {
@@ -180,7 +180,7 @@ async function promptZaloAllowFrom(params: {
         },
       },
     },
-  } as OpenClawConfig;
+  } as JarvisConfig;
 }
 
 const dmPolicy: ChannelOnboardingDmPolicy = {
@@ -281,7 +281,7 @@ export const zaloOnboardingAdapter: ChannelOnboardingAdapter = {
                   enabled: true,
                 },
               },
-            } as OpenClawConfig)
+            } as JarvisConfig)
           : cfg,
       applySet: async (cfg, value) =>
         zaloAccountId === DEFAULT_ACCOUNT_ID
@@ -295,7 +295,7 @@ export const zaloOnboardingAdapter: ChannelOnboardingAdapter = {
                   botToken: value,
                 },
               },
-            } as OpenClawConfig)
+            } as JarvisConfig)
           : ({
               ...cfg,
               channels: {
@@ -313,7 +313,7 @@ export const zaloOnboardingAdapter: ChannelOnboardingAdapter = {
                   },
                 },
               },
-            } as OpenClawConfig),
+            } as JarvisConfig),
     });
     next = tokenStep.cfg;
 

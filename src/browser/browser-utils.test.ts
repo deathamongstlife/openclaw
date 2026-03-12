@@ -248,7 +248,7 @@ describe("browser server-context listKnownProfileNames", () => {
     });
     const openclaw = resolveProfile(resolved, "openclaw");
     if (!openclaw) {
-      throw new Error("expected openclaw profile");
+      throw new Error("expected jarvis profile");
     }
 
     const state: BrowserServerState = {

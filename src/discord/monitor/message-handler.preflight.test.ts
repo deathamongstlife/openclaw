@@ -22,7 +22,7 @@ import {
 } from "./thread-bindings.js";
 
 type DiscordConfig = NonNullable<
-  import("../../config/config.js").OpenClawConfig["channels"]
+  import("../../config/config.js").JarvisConfig["channels"]
 >["discord"];
 type DiscordMessageEvent = import("./listeners.js").DiscordMessageEvent;
 type DiscordClient = import("@buape/carbon").Client;
@@ -32,7 +32,7 @@ const DEFAULT_CFG = {
     mainKey: "main",
     scope: "per-sender",
   },
-} as import("../../config/config.js").OpenClawConfig;
+} as import("../../config/config.js").JarvisConfig;
 
 function createThreadBinding(
   overrides?: Partial<
@@ -62,7 +62,7 @@ function createThreadBinding(
 }
 
 function createPreflightArgs(params: {
-  cfg: import("../../config/config.js").OpenClawConfig;
+  cfg: import("../../config/config.js").JarvisConfig;
   discordConfig: DiscordConfig;
   data: DiscordMessageEvent;
   client: DiscordClient;
@@ -218,7 +218,7 @@ async function runGuildPreflight(params: {
   guildId: string;
   message: import("@buape/carbon").Message;
   discordConfig: DiscordConfig;
-  cfg?: import("../../config/config.js").OpenClawConfig;
+  cfg?: import("../../config/config.js").JarvisConfig;
   guildEntries?: Parameters<typeof preflightDiscordMessage>[0]["guildEntries"];
 }) {
   return preflightDiscordMessage({
@@ -287,7 +287,7 @@ describe("preflightDiscordMessage", () => {
       author: {
         id: "relay-bot-1",
         bot: true,
-        username: "OpenClaw",
+        username: "Jarvis",
       },
     });
 
@@ -364,7 +364,7 @@ describe("preflightDiscordMessage", () => {
       createPreflightArgs({
         cfg: {
           ...DEFAULT_CFG,
-        } as import("../../config/config.js").OpenClawConfig,
+        } as import("../../config/config.js").JarvisConfig,
         discordConfig: {
           allowBots: true,
         } as DiscordConfig,
@@ -574,7 +574,7 @@ describe("preflightDiscordMessage", () => {
               mentionPatterns: ["openclaw"],
             },
           },
-        } as import("../../config/config.js").OpenClawConfig,
+        } as import("../../config/config.js").JarvisConfig,
         discordConfig: {} as DiscordConfig,
         data: createGuildEvent({
           channelId,

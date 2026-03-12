@@ -1,6 +1,6 @@
 import CoreLocation
 import OpenClawIPC
-import OpenClawKit
+import JarvisKit
 import SwiftUI
 
 struct PermissionsSettings: View {

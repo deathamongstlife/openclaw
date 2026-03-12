@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Agent Progress Monitor for OpenClaw Bug Fix Campaign
+# Agent Progress Monitor for Jarvis Bug Fix Campaign
 
 AGENT_IDS=(
   "a5a649f"  # Gateway Stability
@@ -23,10 +23,10 @@ AGENT_NAMES=(
   "Docs/Enhancements"
 )
 
-OUTPUT_DIR="/tmp/claude/---modal-volumes-vo-pkwyL871BwojYJgLZ0F1rM-claude-workspace-r79767525-gmail-com-deathamongstlife-openclaw/tasks"
+OUTPUT_DIR="/tmp/claude/---modal-volumes-vo-pkwyL871BwojYJgLZ0F1rM-claude-workspace-r79767525-gmail-com-deathamongstlife-jarvis/tasks"
 
 echo "╔════════════════════════════════════════════════════════════╗"
-echo "║   OpenClaw Bug Fix Campaign - Agent Monitor                ║"
+echo "║   Jarvis Bug Fix Campaign - Agent Monitor                ║"
 echo "╚════════════════════════════════════════════════════════════╝"
 echo ""
 echo "Monitoring $(${#AGENT_IDS[@]}) agents..."
@@ -90,7 +90,7 @@ check_agent_status() {
 while true; do
   clear
   echo "╔════════════════════════════════════════════════════════════╗"
-  echo "║   OpenClaw Bug Fix Campaign - Agent Monitor                ║"
+  echo "║   Jarvis Bug Fix Campaign - Agent Monitor                ║"
   echo "╚════════════════════════════════════════════════════════════╝"
   echo ""
   echo "Last check: $(date '+%Y-%m-%d %H:%M:%S')"

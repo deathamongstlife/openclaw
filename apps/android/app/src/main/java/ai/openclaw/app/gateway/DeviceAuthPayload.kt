@@ -1,4 +1,4 @@
-package ai.openclaw.app.gateway
+package ai.jarvis.app.gateway
 
 internal object DeviceAuthPayload {
   fun buildV3(

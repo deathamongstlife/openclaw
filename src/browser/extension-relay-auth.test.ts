@@ -2,7 +2,7 @@ import { createServer, type IncomingMessage, type ServerResponse } from "node:ht
 import type { AddressInfo } from "node:net";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
-  probeAuthenticatedOpenClawRelay,
+  probeAuthenticatedJarvisRelay,
   resolveRelayAcceptedTokensForPort,
   resolveRelayAuthTokenForPort,
 } from "./extension-relay-auth.js";
@@ -36,7 +36,7 @@ function handleNonVersionRequest(req: IncomingMessage, res: ServerResponse): boo
 }
 
 async function probeRelay(baseUrl: string, relayAuthToken: string): Promise<boolean> {
-  return await probeAuthenticatedOpenClawRelay({
+  return await probeAuthenticatedJarvisRelay({
     baseUrl,
     relayAuthHeader: "x-openclaw-relay-token",
     relayAuthToken,
@@ -76,7 +76,7 @@ describe("extension-relay-auth", () => {
     expect(tokens[0]).toBe(await resolveRelayAuthTokenForPort(18790));
   });
 
-  it("accepts authenticated openclaw relay probe responses", async () => {
+  it("accepts authenticated jarvis relay probe responses", async () => {
     let seenToken: string | undefined;
     await withRelayServer(
       (req, res) => {
@@ -86,7 +86,7 @@ describe("extension-relay-auth", () => {
         const header = req.headers["x-openclaw-relay-token"];
         seenToken = Array.isArray(header) ? header[0] : header;
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ Browser: "OpenClaw/extension-relay" }));
+        res.end(JSON.stringify({ Browser: "Jarvis/extension-relay" }));
       },
       async ({ port }) => {
         const token = await resolveRelayAuthTokenForPort(port);

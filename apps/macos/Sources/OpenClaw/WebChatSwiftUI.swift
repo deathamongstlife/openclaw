@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 import OpenClawChatUI
-import OpenClawKit
+import JarvisKit
 import OpenClawProtocol
 import OSLog
 import QuartzCore

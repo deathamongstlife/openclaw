@@ -1,7 +1,7 @@
 import type {
   ChannelAccountSnapshot,
   ChannelPlugin,
-  OpenClawConfig,
+  JarvisConfig,
 } from "openclaw/plugin-sdk/bluebubbles";
 import {
   applyAccountNameToChannelSection,
