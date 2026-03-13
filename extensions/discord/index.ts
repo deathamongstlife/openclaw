@@ -32,7 +32,7 @@ const plugin = {
   configSchema: emptyPluginConfigSchema(),
   register(api: JarvisPluginApi) {
     setDiscordRuntime(api.runtime);
-    api.registerChannel({ plugin: discordPlugin });
+    api.registerChannel(discordPlugin);
     registerDiscordSubagentHooks(api);
 
     // Initialize bot features using the existing SQLite database (if available)
@@ -48,7 +48,7 @@ const plugin = {
 
     // Login the bot client with the Discord token from config
     const getToken = () => {
-      const config = api.runtime.getConfig();
+      const config = api.config;
       const discordConfig = config.channels?.discord;
       const token = discordConfig?.token ?? process.env.DISCORD_BOT_TOKEN;
       return token?.trim();
