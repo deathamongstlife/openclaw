@@ -447,6 +447,10 @@ export const discordPlugin: ChannelPlugin<ResolvedDiscordAccount> = {
         }
       }
       ctx.log?.info(`[${account.accountId}] starting provider${discordBotLabel}`);
+
+      // Initialize custom bot features (music, voice, threading, tools)
+      await initializeCustomFeatures(token, ctx.cfg, ctx.log);
+
       return getDiscordRuntime().channel.discord.monitorDiscordProvider({
         token,
         accountId: account.accountId,
@@ -460,3 +464,127 @@ export const discordPlugin: ChannelPlugin<ResolvedDiscordAccount> = {
     },
   },
 };
+
+/**
+ * Initialize custom Discord bot features (music, voice, threading, slash commands, tools)
+ */
+async function initializeCustomFeatures(
+  token: string,
+  config: any,
+  logger?: {
+    info: (msg: string) => void;
+    warn: (msg: string) => void;
+    error: (msg: string) => void;
+  },
+): Promise<void> {
+  try {
+    // Dynamically import custom features to avoid loading them if not needed
+    const { DiscordBotClient } = await import("../bot-client.js");
+    const { DiscordBotStoreAdapter } = await import("../database/store-adapter.js");
+    const { getStoreInstance } = await import("../database/store-bridge.js");
+    const { MusicManager } = await import("../music/manager.js");
+    const { MusicService } = await import("../music/service.js");
+    const { VoiceTTSManager } = await import("../voice/tts.js");
+    const { UserIdentityManager } = await import("../identity/profiles.js");
+    const { OnboardingManager } = await import("../identity/onboarding.js");
+    const { AutoThreadManager } = await import("../threading/auto-threads.js");
+    const { ConversationRouter } = await import("../threading/conversation-router.js");
+    const { SlashCommandRegistry, chatCommand, lookupCommand, musicCommand, profileCommand } =
+      await import("../commands/slash/index.js");
+    const { createDiscordBotTools } = await import("../tools/index.js");
+
+    // Initialize bot features using SQLite database (if available)
+    let store: InstanceType<typeof DiscordBotStoreAdapter> | null = null;
+    try {
+      store = new DiscordBotStoreAdapter();
+    } catch (error) {
+      logger?.warn?.(`SQLite not available, some features will be disabled: ${String(error)}`);
+    }
+
+    // Create bot client (will be used by tools) - only if store available
+    const botClient = store ? new DiscordBotClient(store) : null;
+
+    // Login the bot client
+    if (token && botClient) {
+      await botClient.login(token).catch((error) => {
+        logger?.error?.(`Failed to login Discord bot client: ${String(error)}`);
+      });
+    } else if (!botClient) {
+      logger?.warn?.("Discord bot client not available: SQLite database initialization failed");
+    }
+
+    if (!botClient) {
+      logger?.warn?.("Skipping custom features initialization: bot client not available");
+      return;
+    }
+
+    // Initialize music system
+    const musicManager = new MusicManager(botClient.client);
+    const musicService = new MusicService(musicManager);
+
+    // Initialize voice TTS
+    const voiceTTS = new VoiceTTSManager();
+
+    // Initialize user identity system
+    const identityManager = new UserIdentityManager();
+    const onboardingManager = new OnboardingManager(identityManager);
+
+    // Get the store instance for thread and slash command features
+    const storeInstance = store ? getStoreInstance() : null;
+
+    // Initialize thread management for multi-user conversations
+    const threadManager =
+      storeInstance && botClient ? new AutoThreadManager(storeInstance, botClient.client) : null;
+    const conversationRouter = threadManager ? new ConversationRouter(threadManager) : null;
+
+    // Initialize slash command system (user-installable)
+    if (token && botClient && storeInstance) {
+      const slashRegistry = new SlashCommandRegistry(botClient.client, storeInstance, token);
+
+      // Register all slash commands
+      slashRegistry.registerCommand(chatCommand);
+      slashRegistry.registerCommand(lookupCommand);
+      slashRegistry.registerCommand(musicCommand);
+      slashRegistry.registerCommand(profileCommand);
+
+      // Setup interaction handler
+      slashRegistry.setupInteractionHandler();
+
+      // Deploy commands when bot is ready
+      botClient.client.once("ready", () => {
+        void slashRegistry.deployCommands();
+      });
+    } else {
+      logger?.warn?.("Slash commands not registered: missing requirements");
+    }
+
+    // Initialize message handler for natural language commands
+    if (botClient && musicService) {
+      const { MessageHandler } = await import("../handler.js");
+      const messageHandler = new MessageHandler(botClient.client, musicService);
+      messageHandler.register();
+      logger?.info?.("✨ Natural language message handler registered!");
+    }
+
+    // Initialize music manager with Lavalink
+    await musicManager.initialize();
+    if (musicManager.isAvailable()) {
+      logger?.info?.("🎵 Music system initialized with Lavalink!");
+    } else {
+      logger?.warn?.("Music system disabled (no Lavalink nodes configured)");
+    }
+
+    // Register all bot tools (including music tools)
+    if (store && botClient && musicService) {
+      const tools = createDiscordBotTools(store, botClient.client, musicService);
+      // Tools will be registered via runtime (need to inject runtime reference)
+      logger?.info?.(`⚡ ${tools.length} Discord bot tools ready!`);
+    } else {
+      logger?.warn?.("Bot tools not registered: SQLite database or bot client not available");
+    }
+
+    logger?.info?.("⚡ Discord Advanced AI Bot custom features loaded! Ready to cause chaos! ✨");
+  } catch (error) {
+    logger?.error?.(`Failed to initialize custom Discord features: ${String(error)}`);
+  }
+}
