@@ -1,14 +1,11 @@
-import os from "node:os";
-// Bridge to provide DiscordBotStore instance for thread management
-import path from "node:path";
-import { DiscordBotStore } from "./store.js";
+// Bridge to provide DiscordBotStoreAdapter instance for thread management
+import { DiscordBotStoreAdapter } from "./store-adapter.js";
 
-let storeInstance: DiscordBotStore | null = null;
+let storeInstance: DiscordBotStoreAdapter | null = null;
 
-export function getStoreInstance(): DiscordBotStore {
+export function getStoreInstance(): DiscordBotStoreAdapter {
   if (!storeInstance) {
-    const baseDir = path.join(os.homedir(), ".jarvis", "extensions", "discord");
-    storeInstance = new DiscordBotStore(baseDir);
+    storeInstance = new DiscordBotStoreAdapter();
   }
   return storeInstance;
 }
