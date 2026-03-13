@@ -1,8 +1,19 @@
 {
   "name": "@jarvis/discord",
   "version": "2026.3.9",
-  "description": "Jarvis Discord channel plugin",
+  "description": "Advanced AI-powered Discord bot with natural language processing, music, voice TTS, moderation, and chaos gremlin personality",
   "type": "module",
+  "dependencies": {
+    "@discordjs/voice": "^0.19.0",
+    "better-sqlite3": "^11.7.0",
+    "discord-tts": "^1.2.0",
+    "discord.js": "^14.16.3",
+    "shoukaku": "^4.3.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11"
+  },
   "jarvis": {
     "extensions": [
       "./index.ts"

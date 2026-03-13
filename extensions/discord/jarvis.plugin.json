@@ -5,5 +5,19 @@
     "type": "object",
     "additionalProperties": false,
     "properties": {}
+  },
+  "integration_types_config": {
+    "0": {
+      "oauth2_install_params": {
+        "scopes": ["bot", "applications.commands"],
+        "permissions": "412317240384"
+      }
+    },
+    "1": {
+      "oauth2_install_params": {
+        "scopes": ["applications.commands"],
+        "permissions": "0"
+      }
+    }
   }
 }
