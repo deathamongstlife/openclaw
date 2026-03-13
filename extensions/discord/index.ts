@@ -32,6 +32,13 @@ const plugin = {
   configSchema: emptyPluginConfigSchema(),
   register(api: JarvisPluginApi) {
     setDiscordRuntime(api.runtime);
+
+    // Debug: Check if discordPlugin loaded
+    if (!discordPlugin || !discordPlugin.id) {
+      api.logger.error(`Discord channel plugin failed to load: ${JSON.stringify(discordPlugin)}`);
+      throw new Error("Discord channel plugin is undefined or missing id");
+    }
+
     api.registerChannel({ plugin: discordPlugin });
     registerDiscordSubagentHooks(api);
 
@@ -309,7 +316,7 @@ Always inject personality into responses:
     }));
 
     // Cleanup on shutdown
-    api.on("gateway_stopping", async () => {
+    api.on("gateway_stop", async () => {
       if (botClient) await botClient.destroy();
       if (musicService) await musicService.cleanup();
       if (voiceTTS) voiceTTS.cleanup();
