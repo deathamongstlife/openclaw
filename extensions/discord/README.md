@@ -1,8 +1,14 @@
+<div align="center">
+
+![JARVIS Logo](./assets/jarvis-logo.png)
+
 # Discord Advanced AI Bot Extension
 
 **THE MOST ADVANCED NATURAL LANGUAGE AI DISCORD BOT** 🦞✨💅
 
-A comprehensive Discord bot extension for Jarvis with natural language understanding, music playback, voice TTS, moderation, and a **fruity chaos gremlin personality**.
+A comprehensive Discord bot extension for JARVIS with natural language understanding, music playback, voice TTS, moderation, and a **fruity chaos gremlin personality**.
+
+</div>
 
 ## ✨ Features Overview
 

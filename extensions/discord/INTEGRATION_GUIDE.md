@@ -1,6 +1,12 @@
+<div align="center">
+
+![JARVIS Logo](./assets/jarvis-logo.png)
+
 # Discord Bot Integration Guide
 
-Complete guide for integrating and using the advanced Discord bot features.
+Complete guide for integrating and using the advanced JARVIS Discord bot features.
+
+</div>
 
 ## 🎯 Quick Start
 

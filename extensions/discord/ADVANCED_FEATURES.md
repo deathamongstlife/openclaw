@@ -1,4 +1,10 @@
+<div align="center">
+
+![JARVIS Logo](./assets/jarvis-logo.png)
+
 # Advanced Discord Bot Features
+
+</div>
 
 This document covers the two major advanced features added to the JARVIS Discord bot:
 
