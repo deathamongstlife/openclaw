@@ -1,5 +1,6 @@
 import type { Guild, GuildMember, VoiceBasedChannel, TextBasedChannel } from "discord.js";
 import { ChannelType } from "discord.js";
+import type { PresenceManager } from "../presence/manager.js";
 import { MusicManager } from "./manager.js";
 import { MusicPlayer } from "./player.js";
 
@@ -9,7 +10,10 @@ import { MusicPlayer } from "./player.js";
 export class MusicService {
   private players = new Map<string, MusicPlayer>();
 
-  constructor(private musicManager: MusicManager) {}
+  constructor(
+    private musicManager: MusicManager,
+    private presenceManager?: PresenceManager,
+  ) {}
 
   /**
    * Get or create player for a guild
@@ -120,6 +124,11 @@ export class MusicService {
         }
         await player.addTrack(track, member.id);
         message = `Now serving: **${track.info.title}** by **${track.info.author}**! 🎵✨`;
+
+        // Update presence to show playing music
+        if (this.presenceManager) {
+          this.presenceManager.setPlayingMusic(track.info.title, track.info.author);
+        }
       }
 
       return { success: true, message };
@@ -191,6 +200,11 @@ export class MusicService {
 
     await player.stop();
     await this.destroyPlayer(guildId);
+
+    // Return to idle presence when music stops
+    if (this.presenceManager) {
+      this.presenceManager.returnToIdle();
+    }
 
     return { success: true, message: "Stopped the music and cleared the queue! ⏹️✨" };
   }

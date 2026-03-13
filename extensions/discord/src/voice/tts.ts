@@ -11,6 +11,7 @@ import {
 } from "@discordjs/voice";
 import { getVoiceStream } from "discord-tts";
 import type { VoiceBasedChannel, Guild } from "discord.js";
+import type { PresenceManager } from "../presence/manager.js";
 
 /**
  * Voice TTS manager for speaking in voice channels
@@ -18,6 +19,11 @@ import type { VoiceBasedChannel, Guild } from "discord.js";
 export class VoiceTTSManager {
   private connections = new Map<string, VoiceConnection>();
   private players = new Map<string, AudioPlayer>();
+  private presenceManager?: PresenceManager;
+
+  setPresenceManager(presenceManager: PresenceManager): void {
+    this.presenceManager = presenceManager;
+  }
 
   /**
    * Join a voice channel
@@ -37,6 +43,12 @@ export class VoiceTTSManager {
     try {
       await entersState(connection, VoiceConnectionStatus.Ready, 30_000);
       this.connections.set(channel.guild.id, connection);
+
+      // Update presence to show in voice channel
+      if (this.presenceManager && channel.members) {
+        const memberCount = channel.members.filter((m) => !m.user.bot).size;
+        this.presenceManager.setInVoice(channel.name, memberCount);
+      }
 
       connection.on(VoiceConnectionStatus.Disconnected, async () => {
         try {
@@ -70,6 +82,11 @@ export class VoiceTTSManager {
     if (player) {
       player.stop();
       this.players.delete(guildId);
+    }
+
+    // Return to idle presence when leaving voice
+    if (this.presenceManager) {
+      this.presenceManager.returnToIdle();
     }
   }
 

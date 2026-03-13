@@ -41,6 +41,9 @@ import { getDiscordRuntime } from "./runtime.js";
 
 const meta = getChatChannelMeta("discord");
 
+// Store presence managers by account ID for cleanup
+const presenceManagers = new Map<string, any>();
+
 const discordMessageActions: ChannelMessageActionAdapter = {
   listActions: (ctx) =>
     getDiscordRuntime().channel.discord.messageActions?.listActions?.(ctx) ?? [],
@@ -449,7 +452,7 @@ export const discordPlugin: ChannelPlugin<ResolvedDiscordAccount> = {
       ctx.log?.info(`[${account.accountId}] starting provider${discordBotLabel}`);
 
       // Initialize custom bot features (music, voice, threading, tools)
-      await initializeCustomFeatures(token, ctx.cfg, ctx.log);
+      await initializeCustomFeatures(token, ctx.cfg, account.accountId, ctx.log);
 
       return getDiscordRuntime().channel.discord.monitorDiscordProvider({
         token,
@@ -471,6 +474,7 @@ export const discordPlugin: ChannelPlugin<ResolvedDiscordAccount> = {
 async function initializeCustomFeatures(
   token: string,
   config: any,
+  accountId: string,
   logger?: {
     info: (msg: string) => void;
     warn: (msg: string) => void;
@@ -492,6 +496,7 @@ async function initializeCustomFeatures(
     const { SlashCommandRegistry, chatCommand, lookupCommand, musicCommand, profileCommand } =
       await import("../commands/slash/index.js");
     const { createDiscordBotTools } = await import("../tools/index.js");
+    const { PresenceManager } = await import("../presence/manager.js");
 
     // Initialize bot features using SQLite database (if available)
     let store: InstanceType<typeof DiscordBotStoreAdapter> | null = null;
@@ -520,10 +525,19 @@ async function initializeCustomFeatures(
 
     // Initialize music system
     const musicManager = new MusicManager(botClient.client);
-    const musicService = new MusicService(musicManager);
+    const musicService = new MusicService(musicManager, presenceManager);
 
     // Initialize voice TTS
     const voiceTTS = new VoiceTTSManager();
+
+    // Initialize presence manager for dynamic status
+    const presenceManager = new PresenceManager(botClient.client);
+
+    // Link presence manager to voice TTS
+    voiceTTS.setPresenceManager(presenceManager);
+
+    // Store presence manager for cleanup
+    presenceManagers.set(accountId, presenceManager);
 
     // Initialize user identity system
     const identityManager = new UserIdentityManager();
@@ -553,15 +567,22 @@ async function initializeCustomFeatures(
       // Deploy commands when bot is ready
       botClient.client.once("ready", () => {
         void slashRegistry.deployCommands();
+        presenceManager.startIdleRotation();
+        logger?.info?.("⚡ Dynamic presence system started!");
       });
     } else {
       logger?.warn?.("Slash commands not registered: missing requirements");
+      // Start presence system even if slash commands aren't available
+      botClient.client.once("ready", () => {
+        presenceManager.startIdleRotation();
+        logger?.info?.("⚡ Dynamic presence system started!");
+      });
     }
 
     // Initialize message handler for natural language commands
     if (botClient && musicService) {
       const { MessageHandler } = await import("../handler.js");
-      const messageHandler = new MessageHandler(botClient.client, musicService);
+      const messageHandler = new MessageHandler(botClient.client, musicService, presenceManager);
       messageHandler.register();
       logger?.info?.("✨ Natural language message handler registered!");
     }
@@ -586,5 +607,16 @@ async function initializeCustomFeatures(
     logger?.info?.("⚡ Discord Advanced AI Bot custom features loaded! Ready to cause chaos! ✨");
   } catch (error) {
     logger?.error?.(`Failed to initialize custom Discord features: ${String(error)}`);
+  }
+}
+
+/**
+ * Cleanup custom features for an account
+ */
+function cleanupCustomFeatures(accountId: string): void {
+  const presenceManager = presenceManagers.get(accountId);
+  if (presenceManager) {
+    presenceManager.cleanup();
+    presenceManagers.delete(accountId);
   }
 }

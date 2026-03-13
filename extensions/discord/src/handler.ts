@@ -8,6 +8,7 @@ import { UtilityModule } from "./modules/utility/index.js";
 import type { MusicService } from "./music/service.js";
 import type { Intent } from "./nlp/intents.js";
 import { parseCommand, looksLikeCommand, removeBotMention } from "./nlp/parser.js";
+import type { PresenceManager } from "./presence/manager.js";
 
 export class MessageHandler {
   private moderation: ModerationModule;
@@ -20,6 +21,7 @@ export class MessageHandler {
   constructor(
     private client: Client,
     private musicService: MusicService,
+    private presenceManager?: PresenceManager,
   ) {
     this.moderation = new ModerationModule();
     this.utility = new UtilityModule();
@@ -59,6 +61,11 @@ export class MessageHandler {
 
     // Parse the command
     const parsed = parseCommand(cleanedMessage);
+
+    // Update presence to show processing
+    if (this.presenceManager) {
+      this.presenceManager.setProcessingCommand(parsed.intent.split(".")[0] || "command");
+    }
 
     // Route to appropriate module
     try {
