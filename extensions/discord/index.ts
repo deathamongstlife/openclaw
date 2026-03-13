@@ -1,6 +1,6 @@
 import os from "node:os";
 import path from "node:path";
-import type { ChannelPlugin, JarvisPluginApi } from "jarvis/plugin-sdk/discord";
+import type { JarvisPluginApi } from "jarvis/plugin-sdk/discord";
 import { emptyPluginConfigSchema } from "jarvis/plugin-sdk/discord";
 import { DiscordBotClient } from "./src/bot-client.js";
 import { discordPlugin } from "./src/channel.js";
@@ -32,14 +32,7 @@ const plugin = {
   configSchema: emptyPluginConfigSchema(),
   register(api: JarvisPluginApi) {
     setDiscordRuntime(api.runtime);
-
-    // Verify discordPlugin is loaded before registration
-    if (!discordPlugin) {
-      api.logger.error("discordPlugin is undefined - channel.ts import failed");
-      throw new Error("Failed to load Discord channel plugin");
-    }
-
-    api.registerChannel({ plugin: discordPlugin as ChannelPlugin });
+    api.registerChannel({ plugin: discordPlugin });
     registerDiscordSubagentHooks(api);
 
     // Initialize bot features using the existing SQLite database (if available)
