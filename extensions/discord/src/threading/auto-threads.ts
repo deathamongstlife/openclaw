@@ -137,7 +137,7 @@ export class AutoThreadManager {
 
       // Send welcome message to the thread
       await thread.send(
-        `Hey ${message.author.username}! ✨ Since multiple people are chatting with me in this channel, I created this thread just for us! This way our conversation stays organized, bestie! 🦞💅`,
+        `Hey ${message.author.username}! ✨ Since multiple people are chatting with me in this channel, I created this thread just for us! This way our conversation stays organized, bestie! ⚡💅`,
       );
 
       return thread;

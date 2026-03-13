@@ -74,7 +74,7 @@ jarvis gateway run
 Expected output:
 
 ```
-🦞 Discord Advanced AI Bot loaded! Ready to cause chaos! ✨
+⚡ Discord Advanced AI Bot loaded! Ready to cause chaos! ✨
 ✨ Natural language message handler registered!
 🎵 Music system initialized with Lavalink!
 🔄 Deploying 4 slash commands...
@@ -103,7 +103,7 @@ Expected output:
   ```
   Hey User A! ✨ Since multiple people are chatting with me in this channel,
   I created this thread just for us! This way our conversation stays organized,
-  bestie! 🦞💅
+  bestie! ⚡💅
 
   Omg yasss! Playing lofi hip hop for you! 🎵💅✨
   ```
@@ -122,7 +122,7 @@ Expected output:
   ```
   Hey User B! ✨ Since multiple people are chatting with me in this channel,
   I created this thread just for us! This way our conversation stays organized,
-  bestie! 🦞💅
+  bestie! ⚡💅
 
   The weather is sunny today! ☀️
   ```
@@ -192,7 +192,7 @@ I can:
 🔍 Look up information (use `/lookup`)
 💬 Chat about anything right here!
 
-Just ask me anything, bestie! 🦞
+Just ask me anything, bestie! ⚡
 ```
 
 **In a DM:**
@@ -204,9 +204,9 @@ Just ask me anything, bestie! 🦞
 Bot responds (ephemeral):
 
 ```
-Why did the lobster blush? 🦞
+Why did the lightning bolt get promoted? ⚡
 
-Because it saw the ocean's bottom! 😂✨
+Because it was positively charged! 😂✨
 ```
 
 **In a Group DM:**
@@ -222,7 +222,7 @@ Omg bestie, this is causing DRAMA! 🍕✨
 
 The objectively correct answer is pineapple 🍍 (fight me, haters! 💅)
 
-But honestly, all pizza is valid pizza, hunty! 🦞
+But honestly, all pizza is valid pizza, hunty! ⚡
 ```
 
 #### `/lookup` - Information Search
@@ -282,7 +282,7 @@ Bot responds with embed:
 │ 2. Next Song - Artist                       │
 │ 3. Another Bop - Artist                     │
 │                                             │
-│ 🦞 JARVIS Music System                      │
+│ ⚡ JARVIS Music System                      │
 └─────────────────────────────────────────────┘
 ```
 
@@ -321,7 +321,7 @@ Bot responds (always ephemeral):
 │ Default Volume: 75%                         │
 │ DM Notifications: ✅ Enabled                │
 │                                             │
-│ Member since 2024-01-15 🦞                  │
+│ Member since 2024-01-15 ⚡                  │
 └─────────────────────────────────────────────┘
 ```
 
@@ -341,7 +341,7 @@ Bot responds (ephemeral):
 │ Pronouns: she/her                           │
 │ Favorite Color: #FF69B4                     │
 │                                             │
-│ Member since 2024-02-20 🦞                  │
+│ Member since 2024-02-20 ⚡                  │
 └─────────────────────────────────────────────┘
 ```
 
@@ -396,7 +396,7 @@ async function generateChatResponse(
   }
 
   // Default response
-  return `Great question, ${userName}! 🦞`;
+  return `Great question, ${userName}! ⚡`;
 }
 ```
 
@@ -702,7 +702,7 @@ tar -xzf discord-bot-backup.tar.gz -C ~/
 
 ---
 
-## 🦞 Support
+## ⚡ Support
 
 Questions? Issues? Improvements?
 

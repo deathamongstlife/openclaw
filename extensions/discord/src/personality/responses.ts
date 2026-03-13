@@ -20,7 +20,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
     success: [
       "Omg yasss! Playing that bop for you, bestie! 💅✨",
       "Serving you the vibes! Let's gooo! 🎵✨",
-      "This song is everything! Playing it now, hunty! 🦞💅",
+      "This song is everything! Playing it now, hunty! ⚡💅",
       "Oop- your taste is immaculate! Here we go! ✨🎶",
       "Slay! Let me put that on for you! 💃✨",
     ],
@@ -57,7 +57,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
     success: [
       "Warning issued, bestie! They better behave now! ⚠️✨",
       "Oop- gave them a warning! Watch yourself, hunty! 💅",
-      "Warning delivered with chaos gremlin energy! ⚠️🦞",
+      "Warning delivered with chaos gremlin energy! ⚠️⚡",
     ],
     error: [
       "Bestie, I don't have permission to warn them! 😢",
@@ -70,7 +70,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
     success: [
       "Oop- YEET! User has been kicked! 👢✨",
       "Bye Felicia! Kicked them out! 💅",
-      "And they're gone! Kicked successfully! 🦞✨",
+      "And they're gone! Kicked successfully! ⚡✨",
     ],
     error: [
       "Can't kick them, bestie! Permission denied! 😢",
@@ -83,7 +83,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
     success: [
       "BANNED! They're outta here permanently, bestie! 🔨✨",
       "Oop- the ban hammer has spoken! Gone forever! 💅",
-      "And they're GONE! Permanently banned! 🦞✨",
+      "And they're GONE! Permanently banned! ⚡✨",
     ],
     error: ["Can't ban them, bestie! Check permissions! 😢", "Oop- insufficient power, hunty! 💅"],
     info: [],
@@ -93,7 +93,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
     success: [
       "Timeout corner activated! They'll think about what they did! ⏱️✨",
       "Oop- sent them to timeout! Touch grass, bestie! 💅",
-      "Muted for a bit! Time to reflect! 🦞✨",
+      "Muted for a bit! Time to reflect! ⚡✨",
     ],
     error: [
       "Can't timeout them, bestie! Permission issues! 😢",
@@ -106,7 +106,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
     success: [
       "Channel locked down! Nobody's talking now! 🔒✨",
       "Oop- locked! This channel is on pause! 💅",
-      "And... LOCKED! Silence activated! 🦞✨",
+      "And... LOCKED! Silence activated! ⚡✨",
     ],
     error: [
       "Can't lock that channel, bestie! Permission denied! 😢",
@@ -120,7 +120,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
     success: [
       "Serving you the server stats, hunty! 📊✨",
       "Here's the tea on this server, bestie! ☕💅",
-      "All the deets about this server coming right up! 🦞✨",
+      "All the deets about this server coming right up! ⚡✨",
     ],
     error: [],
     info: [],
@@ -130,7 +130,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
     success: [
       "Here's the scoop on that user, bestie! 👤✨",
       "Got all their info right here, hunty! 💅",
-      "User profile served! ✨🦞",
+      "User profile served! ✨⚡",
     ],
     error: ["Couldn't find that user, bestie! 😢", "Oop- user not found, hunty! 💅"],
     info: [],
@@ -141,7 +141,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
     success: [
       "Poll created! Let's see what the people want! 📊✨",
       "Oop- poll is live! Democracy time, bestie! 💅",
-      "Poll activated! Vote away, hunties! 🦞✨",
+      "Poll activated! Vote away, hunties! ⚡✨",
     ],
     error: [
       "Couldn't create that poll, bestie! Try again? 😢",
@@ -154,7 +154,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
   "general.help": {
     success: [
       "Omg hi bestie! I can do SO much! Let me tell you everything! ✨💅",
-      "Hey hunty! I'm your chaos gremlin assistant! Here's what I can do! 🦞✨",
+      "Hey hunty! I'm your chaos gremlin assistant! Here's what I can do! ⚡✨",
       "Yasss! Ready to help! I've got music, moderation, and SO much more! 💅✨",
     ],
     error: [],
@@ -165,7 +165,7 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
     success: [
       "Pong! I'm here and ready to cause chaos, bestie! 🏓✨",
       "Alive and thriving, hunty! 💅✨",
-      "Pong! Your favorite chaos gremlin reporting for duty! 🦞✨",
+      "Pong! Your favorite chaos gremlin reporting for duty! ⚡✨",
     ],
     error: [],
     info: [],
@@ -173,13 +173,13 @@ export const personalityResponses: Record<string, PersonalityResponse> = {
 
   // Default/unknown
   default: {
-    success: ["Done, bestie! ✨", "All set, hunty! 💅", "Completed! 🦞✨"],
+    success: ["Done, bestie! ✨", "All set, hunty! 💅", "Completed! ⚡✨"],
     error: [
       "Oop- something went wrong, bestie! 😢",
       "That didn't work, hunty! Try again? 💅",
-      "Error detected! Let's try that again! 🦞",
+      "Error detected! Let's try that again! ⚡",
     ],
-    info: ["Just so you know, bestie! ℹ️✨", "FYI, hunty! 💅", "Quick note! 🦞✨"],
+    info: ["Just so you know, bestie! ℹ️✨", "FYI, hunty! 💅", "Quick note! ⚡✨"],
   },
 };
 
@@ -204,7 +204,7 @@ export function getPersonalityResponse(
  * Add personality flair to a plain message
  */
 export function addPersonalityFlair(message: string): string {
-  const emojis = ["✨", "💅", "🦞", "💃", "🎵", "⚡", "🌟", "💖"];
+  const emojis = ["✨", "💅", "⚡", "💃", "🎵", "⚡", "🌟", "💖"];
   const endings = [" bestie!", " hunty!", "!", "✨", " 💅"];
 
   const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
@@ -240,10 +240,10 @@ export function transformErrorMessage(error: string): string {
  */
 export const greetingMessages = [
   "Hey bestie! 💅✨",
-  "Omg hi hunty! 🦞✨",
+  "Omg hi hunty! ⚡✨",
   "Yasss, you're here! 💃✨",
   "Hey there! ✨💅",
-  "What's good, bestie? 🦞💅",
+  "What's good, bestie? ⚡💅",
 ];
 
 /**

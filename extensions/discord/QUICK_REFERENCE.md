@@ -120,7 +120,7 @@ console.log(voiceChannel ? "In voice" : "Not in voice");
 
 ---
 
-## 🦞 Quick Links
+## ⚡ Quick Links
 
 - Full docs: `ADVANCED_FEATURES.md`
 - Setup guide: `INTEGRATION_GUIDE.md`

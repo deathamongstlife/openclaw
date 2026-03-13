@@ -30,7 +30,7 @@ async function performLookup(
     return {
       title: "JARVIS AI Assistant",
       description:
-        "JARVIS is an advanced natural language AI assistant with fruity chaos gremlin personality. Available as a Discord bot with music, moderation, and automation features! 🦞✨",
+        "JARVIS is an advanced natural language AI assistant with fruity chaos gremlin personality. Available as a Discord bot with music, moderation, and automation features! ⚡✨",
     };
   }
 

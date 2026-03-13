@@ -206,7 +206,7 @@ Both features keep the **fruity chaos gremlin** energy:
 
 **Thread welcome:**
 
-> "Hey bestie! ✨ Since multiple people are chatting with me, I created this thread just for us! 🦞💅"
+> "Hey bestie! ✨ Since multiple people are chatting with me, I created this thread just for us! ⚡💅"
 
 **Command responses:**
 
@@ -352,7 +352,7 @@ Both features keep the **fruity chaos gremlin** energy:
 
 ---
 
-## 🦞 Bottom Line
+## ⚡ Bottom Line
 
 **JARVIS is now the ULTIMATE multi-use natural-language Discord bot!**
 
@@ -363,4 +363,4 @@ Both features keep the **fruity chaos gremlin** energy:
 ✅ Keeps fruity chaos gremlin personality intact
 ✅ Production-ready with full documentation
 
-**Made with chaos gremlin energy! 🦞✨💅**
+**Made with chaos gremlin energy! ⚡✨💅**

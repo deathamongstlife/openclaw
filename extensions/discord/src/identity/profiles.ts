@@ -127,10 +127,10 @@ export class UserIdentityManager {
 
     const greetings = [
       `Hey ${name}! 💅✨`,
-      `Omg hi ${name}, bestie! 🦞✨`,
+      `Omg hi ${name}, bestie! ⚡✨`,
       `Yasss, ${name} is here! 💃✨`,
       `What's good, ${name}? ✨💅`,
-      `Hey there ${name}, hunty! 🦞💅`,
+      `Hey there ${name}, hunty! ⚡💅`,
     ];
 
     return greetings[Math.floor(Math.random() * greetings.length)] ?? `Hey ${name}!`;

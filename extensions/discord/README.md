@@ -4,7 +4,7 @@
 
 # Discord Advanced AI Bot Extension
 
-**THE MOST ADVANCED NATURAL LANGUAGE AI DISCORD BOT** 🦞✨💅
+**THE MOST ADVANCED NATURAL LANGUAGE AI DISCORD BOT** ⚡✨💅
 
 A comprehensive Discord bot extension for JARVIS with natural language understanding, music playback, voice TTS, moderation, and a **fruity chaos gremlin personality**.
 
@@ -115,8 +115,8 @@ Bot: "Perfect, Alex! We're all set! 💅✨"
 
 Fruity, gay, playful, chaotic energy with technical competence:
 
-- **Responses**: "Omg yasss!", "Oop-", "bestie", "hunty" 💅✨🦞
-- **Emojis**: Strategic use of ✨💅🦞💃🎵
+- **Responses**: "Omg yasss!", "Oop-", "bestie", "hunty" 💅✨⚡
+- **Emojis**: Strategic use of ✨💅⚡💃🎵
 - **Helpful**: Combines fun personality with JARVIS-level competence
 
 **Example Responses:**
@@ -125,7 +125,7 @@ Fruity, gay, playful, chaotic energy with technical competence:
 Success: "Omg bestie, playing that bop for you! 💅✨"
 Error: "Oop- something went wrong, hunty! 😢"
 Music: "Now serving: Lofi Beats! 🎵✨"
-Moderation: "Oop- let me yeet that user into the timeout corner 🦞"
+Moderation: "Oop- let me yeet that user into the timeout corner ⚡"
 ```
 
 ### 🎮 Components V2 UI
@@ -145,9 +145,25 @@ Rich interactive Discord components:
 
 1. **Lavalink Server** (for music features):
 
+   **Quick Install (Recommended):**
+
+   ```bash
+   # One-liner installer (installs Lavalink, ffmpeg, and systemd service)
+   sudo bash extensions/discord/scripts/install-lavalink.sh
+   ```
+
+   This script will:
+   - Install Java 17+, ffmpeg, and all dependencies
+   - Download Lavalink 4.0.7
+   - Create systemd service for automatic startup
+   - Configure Lavalink for JARVIS integration
+   - Start service immediately
+
+   **Manual Install:**
+
    ```bash
    # Download Lavalink
-   wget https://github.com/lavalink-devs/Lavalink/releases/download/4.0.0/Lavalink.jar
+   wget https://github.com/lavalink-devs/Lavalink/releases/download/4.0.7/Lavalink.jar
 
    # Run Lavalink
    java -jar Lavalink.jar
@@ -448,8 +464,8 @@ Contributions welcome! Please:
 1. Follow TypeScript best practices
 2. Add tests for new features
 3. Update this README
-4. Keep the chaos gremlin energy! 🦞✨💅
+4. Keep the chaos gremlin energy! ⚡✨💅
 
 ---
 
-**Built with chaos, powered by vibes!** ✨🦞💅
+**Built with chaos, powered by vibes!** ✨⚡💅

@@ -24,7 +24,7 @@ async function generateChatResponse(
   const lowerQuestion = question.toLowerCase();
 
   if (lowerQuestion.includes("hello") || lowerQuestion.includes("hi")) {
-    return `Hey ${userName}! ✨ What's up, hunty? 🦞`;
+    return `Hey ${userName}! ✨ What's up, hunty? ⚡`;
   }
 
   if (lowerQuestion.includes("help")) {
@@ -36,7 +36,7 @@ I can:
 🔍 Look up information (use \`/lookup\`)
 💬 Chat about anything right here!
 
-Just ask me anything, ${userName}! 🦞`;
+Just ask me anything, ${userName}! ⚡`;
   }
 
   if (lowerQuestion.includes("music") || lowerQuestion.includes("song")) {
@@ -48,7 +48,7 @@ Just ask me anything, ${userName}! 🦞`;
 
 That's a great topic to chat about! Right now I'm showing you my slash command powers, but I have full natural language processing when you mention me in a server!
 
-Try asking me more specific questions, or use my other commands like \`/lookup\` for information search! 🦞💅`;
+Try asking me more specific questions, or use my other commands like \`/lookup\` for information search! ⚡💅`;
 }
 
 export const chatCommand: SlashCommandDefinition = {

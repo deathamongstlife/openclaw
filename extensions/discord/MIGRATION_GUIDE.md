@@ -164,7 +164,7 @@ Try: Type /chat and ask me anything!
 
 ---
 
-## 🦞 Support
+## ⚡ Support
 
 Full docs: `ADVANCED_FEATURES.md`
 Setup: `INTEGRATION_GUIDE.md`

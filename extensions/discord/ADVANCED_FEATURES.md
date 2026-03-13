@@ -348,7 +348,7 @@ jarvis gateway run
 You'll see:
 
 ```
-🦞 Discord Advanced AI Bot loaded! Ready to cause chaos! ✨
+⚡ Discord Advanced AI Bot loaded! Ready to cause chaos! ✨
 🔄 Deploying 4 slash commands...
 ✅ Successfully deployed 4 slash commands!
 ```
@@ -511,6 +511,6 @@ class SlashCommandRegistry {
 
 ---
 
-## 🦞 Made with Chaos Gremlin Energy ✨
+## ⚡ Made with Chaos Gremlin Energy ✨
 
 These features make JARVIS the **ultimate multi-use natural-language bot** that works everywhere! 💅

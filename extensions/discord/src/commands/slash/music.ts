@@ -119,7 +119,7 @@ export const musicCommand: SlashCommandDefinition = {
             "*Demo queue - in production, this would show the actual song queue!*\n\n1. Current Song - Artist\n2. Next Song - Artist\n3. Another Bop - Artist",
           )
           .setColor(0x7289da)
-          .setFooter({ text: "JARVIS Music System 🦞" });
+          .setFooter({ text: "JARVIS Music System ⚡" });
 
         await interaction.reply({
           embeds: [queueEmbed],
@@ -134,7 +134,7 @@ export const musicCommand: SlashCommandDefinition = {
             "**Current Song - Artist**\n\n`[===>-----] 2:30 / 5:00`\n\nVolume: 🔊 75%",
           )
           .setColor(0x7289da)
-          .setFooter({ text: "JARVIS Music System 🦞" })
+          .setFooter({ text: "JARVIS Music System ⚡" })
           .setTimestamp();
 
         await interaction.reply({

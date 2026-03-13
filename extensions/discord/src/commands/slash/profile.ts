@@ -113,7 +113,7 @@ export const profileCommand: SlashCommandDefinition = {
     // Add footer
     embed.setFooter({
       text: profile.onboarded
-        ? `Member since ${new Date(profile.createdAt).toLocaleDateString()} 🦞`
+        ? `Member since ${new Date(profile.createdAt).toLocaleDateString()} ⚡`
         : "Not onboarded yet",
     });
 
