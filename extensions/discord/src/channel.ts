@@ -523,15 +523,15 @@ async function initializeCustomFeatures(
       return;
     }
 
+    // Initialize presence manager for dynamic status
+    const presenceManager = new PresenceManager(botClient.client);
+
     // Initialize music system
     const musicManager = new MusicManager(botClient.client);
     const musicService = new MusicService(musicManager, presenceManager);
 
     // Initialize voice TTS
     const voiceTTS = new VoiceTTSManager();
-
-    // Initialize presence manager for dynamic status
-    const presenceManager = new PresenceManager(botClient.client);
 
     // Link presence manager to voice TTS
     voiceTTS.setPresenceManager(presenceManager);
